@@ -7,15 +7,21 @@ const props = defineProps({
 });
 
 const form = useForm({
-    bride_name: props.settings.bride_name || 'Pooja',
-    groom_name: props.settings.groom_name || 'Rahul',
-    bride_parents: props.settings.bride_parents || 'Mr. & Mrs. Sharma',
-    groom_parents: props.settings.groom_parents || 'Mr. & Mrs. Verma',
-    wedding_title: props.settings.wedding_title || 'The Wedding Celebration',
-    wedding_date: props.settings.wedding_date || '2026-12-18 10:30:00',
-    venue_name: props.settings.venue_name || 'The Grand Palace Banquet',
-    venue_address: props.settings.venue_address || 'Palace Road, City Center',
-    venue_map_url: props.settings.venue_map_url || 'https://maps.google.com',
+    bride_name: props.settings.bride_name || 'Shenali',
+    groom_name: props.settings.groom_name || 'Dilan',
+    bride_full_name: props.settings.bride_full_name || 'Shenali Marie Fernando',
+    groom_full_name: props.settings.groom_full_name || 'Dilan Jude Perera',
+    bride_parents: props.settings.bride_parents || 'Mr. Anthony & Mrs. Nirmala Fernando',
+    groom_parents: props.settings.groom_parents || 'Mr. Rohan & Mrs. Dilrukshi Perera',
+    wedding_title: props.settings.wedding_title || 'The Nuptial Blessing & Wedding Celebration',
+    wedding_date: props.settings.wedding_date || '2026-12-19 15:30:00',
+    scripture_verse: props.settings.scripture_verse || 'Therefore what God has joined together, let no one separate. — Matthew 19:6',
+    church_name: props.settings.church_name || "St. Mary's Church",
+    church_address: props.settings.church_address || 'Nayakakanda, Hendala, Sri Lanka',
+    church_time: props.settings.church_time || '03:30 PM',
+    venue_name: props.settings.venue_name || 'The Grand Ballroom, Galle Face Hotel',
+    venue_address: props.settings.venue_address || '2 Galle Road, Colombo 03, Sri Lanka',
+    venue_map_url: props.settings.venue_map_url || 'https://maps.google.com/?q=Galle+Face+Hotel+Colombo',
     our_story: props.settings.our_story || '',
     music_url: props.settings.music_url || '',
     whatsapp_template: props.settings.whatsapp_template || '',
@@ -24,12 +30,12 @@ const form = useForm({
 
 const addEvent = () => {
     form.events.push({
-        name: 'New Ceremony',
-        date: 'Dec 18, 2026',
-        time: '04:00 PM',
+        name: 'New Ceremony / Event',
+        date: 'Saturday, 19th December 2026',
+        time: '06:00 PM',
         venue: form.venue_name,
-        dress_code: 'Festive Ethnic',
-        icon: 'ring',
+        dress_code: 'Formal / Evening Wear',
+        tag: 'Celebration',
     });
 };
 
@@ -45,17 +51,17 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Wedding Settings &amp; Schedule" />
+    <Head title="Wedding Settings &amp; Liturgy" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 class="font-serif text-2xl font-bold leading-tight text-stone-900">
-                        Wedding Details &amp; Configuration
+                        Wedding Configuration &amp; Details
                     </h2>
                     <p class="text-xs text-stone-500 mt-0.5">
-                        Customize couple names, venue, dates, ceremonies, and WhatsApp message templates
+                        Sri Lankan Catholic Holy Matrimony, church liturgy, Poruwa &amp; reception settings
                     </p>
                 </div>
                 <div>
@@ -63,9 +69,9 @@ const submit = () => {
                         type="button"
                         @click="submit"
                         :disabled="form.processing"
-                        class="px-5 py-2.5 rounded-xl bg-amber-600 text-white font-medium text-xs shadow hover:bg-amber-700 disabled:opacity-50 transition-all"
+                        class="px-5 py-2.5 rounded-xl bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs tracking-wider shadow disabled:opacity-50 transition-all"
                     >
-                        {{ form.processing ? 'Saving...' : '💾 Save All Changes' }}
+                        {{ form.processing ? 'Saving...' : '💾 Save Settings' }}
                     </button>
                 </div>
             </div>
@@ -78,30 +84,50 @@ const submit = () => {
                     <div class="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-sm space-y-5">
                         <div class="border-b border-stone-100 pb-3">
                             <h3 class="font-serif text-lg font-bold text-stone-900">
-                                Couple &amp; Family Information
+                                Bride, Groom &amp; Family Information
                             </h3>
                             <p class="text-xs text-stone-500">
-                                Appears prominently across the invitation card, countdown, and WhatsApp greetings
+                                Appears across the bespoke invitation suite, envelopes, and WhatsApp messages
                             </p>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                             <div>
-                                <label class="block font-semibold text-stone-700 mb-1">Bride's Name *</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Bride's Call Name *</label>
                                 <input
                                     type="text"
                                     v-model="form.bride_name"
                                     required
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="e.g. Shenali"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div>
-                                <label class="block font-semibold text-stone-700 mb-1">Groom's Name *</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Groom's Call Name *</label>
                                 <input
                                     type="text"
                                     v-model="form.groom_name"
                                     required
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="e.g. Dilan"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-stone-700 mb-1">Bride's Full Formal Name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.bride_full_name"
+                                    placeholder="e.g. Shenali Marie Fernando"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-stone-700 mb-1">Groom's Full Formal Name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.groom_full_name"
+                                    placeholder="e.g. Dilan Jude Perera"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div>
@@ -109,8 +135,8 @@ const submit = () => {
                                 <input
                                     type="text"
                                     v-model="form.bride_parents"
-                                    placeholder="e.g. Mr. &amp; Mrs. Sharma"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="e.g. Mr. Anthony &amp; Mrs. Nirmala Fernando"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div>
@@ -118,37 +144,38 @@ const submit = () => {
                                 <input
                                     type="text"
                                     v-model="form.groom_parents"
-                                    placeholder="e.g. Mr. &amp; Mrs. Verma"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="e.g. Mr. Rohan &amp; Mrs. Dilrukshi Perera"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div class="sm:col-span-2">
-                                <label class="block font-semibold text-stone-700 mb-1">Wedding Main Title</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Scripture Verse / Motto</label>
                                 <input
                                     type="text"
-                                    v-model="form.wedding_title"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    v-model="form.scripture_verse"
+                                    placeholder="e.g. Therefore what God has joined together, let no one separate. — Matthew 19:6"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div class="sm:col-span-2">
-                                <label class="block font-semibold text-stone-700 mb-1">Our Story / Family Blessing Note</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Our Journey / Personal Blessing Note</label>
                                 <textarea
                                     v-model="form.our_story"
                                     rows="3"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 ></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Date, Time & Venue -->
+                    <!-- Church & Reception Venues -->
                     <div class="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-sm space-y-5">
                         <div class="border-b border-stone-100 pb-3">
                             <h3 class="font-serif text-lg font-bold text-stone-900">
-                                Wedding Date &amp; Venue Location
+                                Church Nuptial Mass &amp; Reception Venues
                             </h3>
                             <p class="text-xs text-stone-500">
-                                Drives the live countdown timer and Google Maps direction button
+                                Locations, service times, and directions
                             </p>
                         </div>
 
@@ -159,49 +186,70 @@ const submit = () => {
                                     type="text"
                                     v-model="form.wedding_date"
                                     required
-                                    placeholder="2026-12-18 10:30:00"
-                                    class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="2026-12-19 15:30:00"
+                                    class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                            </div>
+
+                            <!-- Church Info -->
+                            <div>
+                                <label class="block font-semibold text-stone-700 mb-1">Church Name</label>
+                                <input
+                                    type="text"
+                                    v-model="form.church_name"
+                                    placeholder="e.g. St. Mary's Church"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div>
-                                <label class="block font-semibold text-stone-700 mb-1">Venue Name *</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Church Service Time</label>
+                                <input
+                                    type="text"
+                                    v-model="form.church_time"
+                                    placeholder="03:30 PM (Guests seated by 03:00 PM)"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block font-semibold text-stone-700 mb-1">Church Full Address</label>
+                                <input
+                                    type="text"
+                                    v-model="form.church_address"
+                                    placeholder="Nayakakanda, Hendala, Sri Lanka"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                            </div>
+
+                            <!-- Reception Info -->
+                            <div>
+                                <label class="block font-semibold text-stone-700 mb-1">Reception Venue Name *</label>
                                 <input
                                     type="text"
                                     v-model="form.venue_name"
                                     required
-                                    placeholder="e.g. The Grand Palace Banquet &amp; Lawns"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="e.g. The Grand Ballroom, Galle Face Hotel"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div>
-                                <label class="block font-semibold text-stone-700 mb-1">Google Maps Link *</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Reception Google Maps URL *</label>
                                 <input
                                     type="url"
                                     v-model="form.venue_map_url"
                                     required
                                     placeholder="https://maps.google.com/?q=..."
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
                             <div class="sm:col-span-2">
-                                <label class="block font-semibold text-stone-700 mb-1">Full Venue Address *</label>
+                                <label class="block font-semibold text-stone-700 mb-1">Reception Full Address *</label>
                                 <input
                                     type="text"
                                     v-model="form.venue_address"
                                     required
-                                    placeholder="Palace Road, Near Heritage Club, City Center"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                    placeholder="2 Galle Road, Colombo 03, Sri Lanka"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label class="block font-semibold text-stone-700 mb-1">Background Music Audio URL (.mp3)</label>
-                                <input
-                                    type="url"
-                                    v-model="form.music_url"
-                                    placeholder="https://.../wedding-audio.mp3"
-                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                                />
-                                <p class="text-[10px] text-stone-400 mt-1">Leave as default or provide direct link to your preferred romantic flute/shehnai/music.</p>
                             </div>
                         </div>
                     </div>
@@ -211,18 +259,18 @@ const submit = () => {
                         <div class="flex items-center justify-between border-b border-stone-100 pb-3">
                             <div>
                                 <h3 class="font-serif text-lg font-bold text-stone-900">
-                                    Wedding Program &amp; Ceremonies
+                                    Liturgy &amp; Order of Events
                                 </h3>
                                 <p class="text-xs text-stone-500">
-                                    Haldi, Mehendi, Sangeet, Muhurtham, Reception, etc.
+                                    Nuptial Mass, Poruwa, Cocktails, Dinner &amp; Dancing
                                 </p>
                             </div>
                             <button
                                 type="button"
                                 @click="addEvent"
-                                class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-300 text-xs font-semibold hover:bg-amber-100"
+                                class="px-3 py-1.5 rounded-lg bg-[#faf8f4] text-stone-800 border border-[#d8b878] text-xs font-semibold hover:bg-stone-100"
                             >
-                                + Add Ceremony
+                                + Add Event
                             </button>
                         </div>
 
@@ -230,11 +278,11 @@ const submit = () => {
                             <div
                                 v-for="(ev, idx) in form.events"
                                 :key="idx"
-                                class="p-4 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3 relative group"
+                                class="p-4 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3 relative"
                             >
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-xs text-amber-800">
-                                        Ceremony #{{ idx + 1 }}
+                                    <span class="font-bold text-xs text-gold-800">
+                                        Event #{{ idx + 1 }}
                                     </span>
                                     <button
                                         type="button"
@@ -247,12 +295,12 @@ const submit = () => {
 
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                                     <div>
-                                        <label class="block font-semibold text-stone-600 mb-1">Ceremony Name</label>
+                                        <label class="block font-semibold text-stone-600 mb-1">Event Name</label>
                                         <input
                                             type="text"
                                             v-model="ev.name"
                                             required
-                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-amber-500 focus:ring-amber-500"
+                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-[#c5a059] focus:ring-[#c5a059]"
                                         />
                                     </div>
                                     <div>
@@ -261,8 +309,7 @@ const submit = () => {
                                             type="text"
                                             v-model="ev.date"
                                             required
-                                            placeholder="Dec 17, 2026"
-                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-amber-500 focus:ring-amber-500"
+                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-[#c5a059] focus:ring-[#c5a059]"
                                         />
                                     </div>
                                     <div>
@@ -271,18 +318,16 @@ const submit = () => {
                                             type="text"
                                             v-model="ev.time"
                                             required
-                                            placeholder="03:30 PM Onwards"
-                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-amber-500 focus:ring-amber-500"
+                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-[#c5a059] focus:ring-[#c5a059]"
                                         />
                                     </div>
                                     <div>
-                                        <label class="block font-semibold text-stone-600 mb-1">Venue / Hall</label>
+                                        <label class="block font-semibold text-stone-600 mb-1">Venue Location</label>
                                         <input
                                             type="text"
                                             v-model="ev.venue"
                                             required
-                                            placeholder="Poolside Lawn"
-                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-amber-500 focus:ring-amber-500"
+                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-[#c5a059] focus:ring-[#c5a059]"
                                         />
                                     </div>
                                     <div class="sm:col-span-2">
@@ -290,8 +335,8 @@ const submit = () => {
                                         <input
                                             type="text"
                                             v-model="ev.dress_code"
-                                            placeholder="Sunshine Yellow &amp; Floral Festive"
-                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-amber-500 focus:ring-amber-500"
+                                            placeholder="e.g. Formal Church Attire / Sri Lankan National / Black Tie"
+                                            class="w-full text-xs rounded-xl border-stone-200 bg-white focus:border-[#c5a059] focus:ring-[#c5a059]"
                                         />
                                     </div>
                                 </div>
@@ -303,19 +348,19 @@ const submit = () => {
                     <div class="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-sm space-y-4">
                         <div class="border-b border-stone-100 pb-3">
                             <h3 class="font-serif text-lg font-bold text-stone-900">
-                                WhatsApp Invitation Message Template
+                                WhatsApp Message Template
                             </h3>
                             <p class="text-xs text-stone-500">
-                                Used by the one-click "Send via WhatsApp" button on the guest list.
+                                Sent via the one-click WhatsApp button on the guest list
                             </p>
                         </div>
 
-                        <div class="text-xs text-stone-600 bg-amber-50 p-3 rounded-xl border border-amber-200">
-                            <strong>Dynamic Placeholders:</strong>
-                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-amber-300">:greeting</code> (Guest's custom salutation or name),
-                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-amber-300">:bride</code> (Bride name),
-                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-amber-300">:groom</code> (Groom name),
-                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-amber-300">:link</code> (Unique invitation URL).
+                        <div class="text-xs text-stone-600 bg-amber-50/50 p-3 rounded-xl border border-amber-200/80">
+                            <strong>Placeholders:</strong>
+                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-stone-300">:greeting</code>,
+                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-stone-300">:bride</code>,
+                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-stone-300">:groom</code>,
+                            <code class="mx-1 px-1.5 py-0.5 bg-white rounded border border-stone-300">:link</code>
                         </div>
 
                         <div>
@@ -323,7 +368,7 @@ const submit = () => {
                                 v-model="form.whatsapp_template"
                                 rows="6"
                                 required
-                                class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                             ></textarea>
                         </div>
                     </div>
@@ -333,7 +378,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-8 py-3 rounded-xl bg-amber-600 text-white font-semibold text-sm shadow-md hover:bg-amber-700 disabled:opacity-50 transition-all active:scale-95"
+                            class="px-8 py-3 rounded-xl bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-sm tracking-wider shadow disabled:opacity-50 transition-all active:scale-95"
                         >
                             {{ form.processing ? 'Saving...' : 'Save All Wedding Settings' }}
                         </button>
@@ -343,4 +388,3 @@ const submit = () => {
         </div>
     </AuthenticatedLayout>
 </template>
-

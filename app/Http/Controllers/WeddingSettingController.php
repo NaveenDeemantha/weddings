@@ -27,10 +27,16 @@ class WeddingSettingController extends Controller
         $validated = $request->validate([
             'bride_name' => 'required|string|max:100',
             'groom_name' => 'required|string|max:100',
+            'bride_full_name' => 'nullable|string|max:200',
+            'groom_full_name' => 'nullable|string|max:200',
             'bride_parents' => 'nullable|string|max:200',
             'groom_parents' => 'nullable|string|max:200',
             'wedding_date' => 'required|string',
             'wedding_title' => 'required|string|max:200',
+            'scripture_verse' => 'nullable|string|max:500',
+            'church_name' => 'nullable|string|max:200',
+            'church_address' => 'nullable|string|max:500',
+            'church_time' => 'nullable|string|max:100',
             'venue_name' => 'required|string|max:200',
             'venue_address' => 'required|string|max:500',
             'venue_map_url' => 'required|url|max:500',
@@ -43,13 +49,13 @@ class WeddingSettingController extends Controller
             'events.*.time' => 'required|string|max:50',
             'events.*.venue' => 'required|string|max:100',
             'events.*.dress_code' => 'nullable|string|max:100',
-            'events.*.icon' => 'nullable|string|max:50',
+            'events.*.tag' => 'nullable|string|max:50',
         ]);
 
         foreach ($validated as $key => $value) {
             WeddingSetting::set($key, $value);
         }
 
-        return back()->with('success', 'Wedding details and schedule successfully updated!');
+        return back()->with('success', 'Wedding details and liturgy schedule successfully updated!');
     }
 }

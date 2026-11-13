@@ -1,68 +1,65 @@
 <template>
-    <div id="rsvp" class="w-full max-w-2xl mx-auto my-12 px-4 scroll-mt-10">
-        <div class="relative bg-white rounded-3xl p-6 sm:p-10 border-2 border-amber-300 shadow-xl overflow-hidden">
-            <!-- Decorative Top Border Foil Accent -->
-            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600"></div>
-
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 text-amber-900 text-xs font-serif uppercase tracking-widest font-semibold mb-2">
-                    <span>💌</span> Kindly Respond
+    <div id="rsvp" class="w-full max-w-2xl mx-auto my-10 sm:my-14 px-2 sm:px-4 scroll-mt-10">
+        <div class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-10 border border-[#d8b878]/60 shadow-lg text-center">
+            <!-- Header -->
+            <div class="mb-6 sm:mb-8">
+                <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
+                    <span class="text-gold-500 text-xs">✝</span>
+                    <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold">Response Requested</span>
+                    <span class="text-gold-500 text-xs">✝</span>
                 </div>
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
-                    RSVP to the Wedding
+                <h2 class="font-serif text-2xl sm:text-4xl font-normal text-stone-900 leading-snug">
+                    Répondez S'il Vous Plaît
                 </h2>
-                <p class="text-stone-600 text-sm mt-1">
-                    Please let us know if you can join us for this blessed occasion
+                <p class="text-stone-500 text-xs sm:text-sm font-serif italic mt-1 px-2">
+                    Kindly reply on or before 1st December 2026 to assist us with reception seating
                 </p>
 
-                <!-- Current Guest Greeting -->
-                <div class="mt-4 p-3 bg-amber-50/70 rounded-xl border border-amber-200/80 inline-block">
-                    <p class="text-xs text-amber-800 font-semibold uppercase tracking-wider">
-                        Invitation For:
+                <!-- Guest Greeting Badge -->
+                <div class="mt-3.5 p-2.5 sm:p-3 bg-[#faf8f4] rounded-xl border border-[#e5dfcd] inline-block max-w-full">
+                    <p class="text-[8px] sm:text-[9px] uppercase tracking-wider font-sans font-semibold text-gold-700">
+                        Invitation Extended To:
                     </p>
-                    <p class="font-serif text-base sm:text-lg font-bold text-stone-800">
+                    <p class="font-serif text-sm sm:text-lg font-semibold text-stone-800 break-words">
                         {{ guestGreeting || guestName }}
                     </p>
                 </div>
             </div>
 
-            <!-- If already responded and not editing -->
+            <!-- Responded Status Display -->
             <div
                 v-if="guestStatus !== 'pending' && !isEditing"
-                class="p-6 rounded-2xl text-center border"
-                :class="guestStatus === 'attending' ? 'bg-emerald-50/80 border-emerald-300 text-emerald-950' : 'bg-stone-50 border-stone-200 text-stone-800'"
+                class="p-5 sm:p-6 rounded-xl border text-center"
+                :class="guestStatus === 'attending' ? 'bg-[#f6f9f5] border-[#c2dbbd] text-stone-900' : 'bg-[#faf8f8] border-stone-200 text-stone-800'"
             >
-                <div class="text-3xl mb-2">
-                    {{ guestStatus === 'attending' ? '🎉' : '🕊️' }}
-                </div>
-                <h3 class="font-serif text-xl font-bold mb-1">
-                    {{ guestStatus === 'attending' ? 'Thank You for Confirming!' : 'We Will Miss You!' }}
+                <h3 class="font-serif text-lg sm:text-xl font-semibold mb-1">
+                    {{ guestStatus === 'attending' ? 'Thank You For Your Gracious Confirmation' : 'Thank You For Letting Us Know' }}
                 </h3>
-                <p class="text-sm max-w-md mx-auto mb-4">
+                <p class="text-xs sm:text-sm max-w-md mx-auto mb-4 text-stone-600 font-serif leading-relaxed">
                     <span v-if="guestStatus === 'attending'">
-                        Your presence has been confirmed for <strong>{{ attendingCount }}</strong> guest(s). We look forward to celebrating together!
+                        Your seats have been confirmed for <strong>{{ attendingCount }}</strong> guest(s). We eagerly look forward to having you share in our Holy Matrimony!
                     </span>
                     <span v-else>
-                        We regret that you won’t be able to join us in person, but your warm wishes will remain in our hearts.
+                        We regret that you won’t be able to be with us in person. We keep you in our prayers and value your warm blessings.
                     </span>
                 </p>
 
                 <button
                     type="button"
                     @click="isEditing = true"
-                    class="text-xs font-semibold text-amber-700 underline hover:text-amber-900"
+                    class="text-xs font-serif italic text-gold-700 underline hover:text-gold-900 py-1"
                 >
-                    Need to change your response? Click here
+                    Wish to change your response? Click here
                 </button>
             </div>
 
             <!-- RSVP Form -->
-            <form v-else @submit.prevent="submitRsvp" class="space-y-6">
-                <!-- Attendance Choice Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form v-else @submit.prevent="submitRsvp" class="space-y-5 text-left">
+                <!-- Response Choice Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <label
-                        class="relative flex flex-col items-center p-5 rounded-2xl border-2 cursor-pointer transition-all text-center"
-                        :class="form.status === 'attending' ? 'border-amber-500 bg-amber-50/80 shadow-md' : 'border-stone-200 bg-white hover:border-amber-300'"
+                        class="relative flex flex-col p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all active:scale-98"
+                        :class="form.status === 'attending' ? 'border-[#c5a059] bg-[#faf8f4] shadow-sm' : 'border-stone-200 bg-white hover:border-[#d8b878]'"
                     >
                         <input
                             type="radio"
@@ -70,18 +67,17 @@
                             v-model="form.status"
                             class="sr-only"
                         />
-                        <span class="text-3xl mb-1">✨</span>
-                        <span class="font-serif font-bold text-base text-stone-900">
-                            Joyfully Accept
+                        <span class="font-serif font-semibold text-sm sm:text-base text-stone-900">
+                            Graciously Accepts
                         </span>
-                        <span class="text-xs text-stone-500 mt-1">
-                            Can't wait to celebrate with you!
+                        <span class="text-[11px] sm:text-xs text-stone-500 mt-0.5 font-serif italic">
+                            Joyfully attending with prayers
                         </span>
                     </label>
 
                     <label
-                        class="relative flex flex-col items-center p-5 rounded-2xl border-2 cursor-pointer transition-all text-center"
-                        :class="form.status === 'declined' ? 'border-rose-400 bg-rose-50/60 shadow-md' : 'border-stone-200 bg-white hover:border-stone-300'"
+                        class="relative flex flex-col p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all active:scale-98"
+                        :class="form.status === 'declined' ? 'border-stone-400 bg-stone-50 shadow-sm' : 'border-stone-200 bg-white hover:border-stone-300'"
                     >
                         <input
                             type="radio"
@@ -89,72 +85,71 @@
                             v-model="form.status"
                             class="sr-only"
                         />
-                        <span class="text-3xl mb-1">🕊️</span>
-                        <span class="font-serif font-bold text-base text-stone-900">
-                            Regretfully Decline
+                        <span class="font-serif font-semibold text-sm sm:text-base text-stone-900">
+                            Regretfully Declines
                         </span>
-                        <span class="text-xs text-stone-500 mt-1">
-                            Sending love from afar
+                        <span class="text-[11px] sm:text-xs text-stone-500 mt-0.5 font-serif italic">
+                            Unable to attend, sending love
                         </span>
                     </label>
                 </div>
 
-                <!-- If Attending: Headcount & Dietary Needs -->
-                <div v-if="form.status === 'attending'" class="space-y-5 p-5 bg-amber-50/50 rounded-2xl border border-amber-200">
-                    <!-- Headcount selector -->
+                <!-- Attending details -->
+                <div v-if="form.status === 'attending'" class="space-y-4 p-4 sm:p-5 bg-[#faf8f4] rounded-xl border border-[#e5dfcd]">
+                    <!-- Headcount selector with touch friendly targets -->
                     <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-stone-700 mb-2">
-                            Number of Guests Attending (Up to {{ maxGuests }}):
+                        <label class="block text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-2">
+                            Number of Attending Guests (Reserved up to {{ maxGuests }}):
                         </label>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-3">
                             <button
                                 type="button"
                                 @click="form.attending_count = Math.max(1, form.attending_count - 1)"
-                                class="w-10 h-10 rounded-xl bg-white border border-amber-300 font-bold text-lg text-amber-800 shadow-sm flex items-center justify-center hover:bg-amber-100"
+                                class="w-11 h-11 rounded-xl bg-white border border-[#d8b878] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
                             >
                                 -
                             </button>
-                            <span class="w-16 text-center font-display text-2xl font-bold text-amber-900">
+                            <span class="w-12 text-center font-serif text-2xl font-semibold text-stone-900">
                                 {{ form.attending_count }}
                             </span>
                             <button
                                 type="button"
                                 @click="form.attending_count = Math.min(maxGuests, form.attending_count + 1)"
-                                class="w-10 h-10 rounded-xl bg-white border border-amber-300 font-bold text-lg text-amber-800 shadow-sm flex items-center justify-center hover:bg-amber-100"
+                                class="w-11 h-11 rounded-xl bg-white border border-[#d8b878] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
                             >
                                 +
                             </button>
                         </div>
                     </div>
 
-                    <!-- Dietary Restrictions -->
+                    <!-- Dietary Notes -->
                     <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-stone-700 mb-1">
-                            Dietary Preferences or Notes (Optional):
+                        <label class="block text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-1">
+                            Dietary Preference / Allergies (Optional):
                         </label>
                         <input
                             type="text"
                             v-model="form.dietary_notes"
-                            placeholder="e.g. Vegetarian, Jain food, No onion/garlic, Vegan..."
-                            class="w-full text-sm rounded-xl border-amber-200 focus:border-amber-500 focus:ring-amber-500 bg-white"
+                            placeholder="e.g. Non-Veg (Fish/Chicken), Vegetarian, No Pork/Beef..."
+                            class="w-full text-xs rounded-lg border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059] bg-white py-2.5"
                         />
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="flex items-center justify-center gap-3">
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white font-medium text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95 disabled:opacity-50"
+                        class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs sm:text-sm tracking-wider shadow-md hover:shadow-lg transition-all transform active:scale-95 disabled:opacity-50 text-center"
                     >
-                        {{ form.processing ? 'Submitting...' : 'Confirm RSVP' }}
+                        {{ form.processing ? 'Submitting...' : 'Confirm Response' }}
                     </button>
                     <button
                         v-if="isEditing"
                         type="button"
                         @click="isEditing = false"
-                        class="px-5 py-3 rounded-full text-xs font-semibold text-stone-600 hover:text-stone-900"
+                        class="w-full sm:w-auto px-4 py-2 text-xs font-serif text-stone-500 hover:text-stone-800 text-center"
                     >
                         Cancel
                     </button>
@@ -189,7 +184,7 @@ const form = useForm({
 
 const submitRsvp = () => {
     if (props.isPreview) {
-        alert('Preview Mode: RSVP submission simulated successfully!');
+        alert('Preview Mode: RSVP submission simulated successfully.');
         isEditing.value = false;
         return;
     }
@@ -202,4 +197,3 @@ const submitRsvp = () => {
     });
 };
 </script>
-

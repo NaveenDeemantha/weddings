@@ -13,32 +13,30 @@
                 opacity: petal.opacity,
             }"
         >
-            <!-- Marigold / Gold leaf petal SVG -->
+            <!-- White Araliya / Temple Flower petal -->
             <svg
-                v-if="petal.type === 'marigold'"
-                class="w-5 h-5 text-amber-500 drop-shadow-sm"
+                v-if="petal.type === 'araliya'"
+                class="w-6 h-6 drop-shadow-sm"
                 viewBox="0 0 24 24"
-                fill="currentColor"
+                fill="none"
             >
-                <path d="M12 2C8 6 6 10 6 14a6 6 0 0 0 12 0c0-4-2-8-6-12z" />
+                <path
+                    d="M12 2C8 6 6 11 6 15a6 6 0 0 0 12 0c0-4-2-9-6-13z"
+                    fill="#ffffff"
+                    stroke="#e5dfcd"
+                    stroke-width="0.5"
+                />
+                <!-- Subtle warm yellow glow at petal base -->
+                <circle cx="12" cy="17" r="3.5" fill="#fef08a" opacity="0.85" />
             </svg>
-            <!-- Golden sparkle -->
-            <svg
-                v-else-if="petal.type === 'sparkle'"
-                class="w-4 h-4 text-yellow-400 drop-shadow-sm"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-            >
-                <path d="M12 0l2.5 8.5L23 11l-8.5 2.5L12 22l-2.5-8.5L1 11l8.5-2.5z" />
-            </svg>
-            <!-- Rose petal -->
+            <!-- Delicate white jasmine bloom -->
             <svg
                 v-else
-                class="w-5 h-5 text-rose-400 drop-shadow-sm"
+                class="w-4 h-4 drop-shadow-sm text-amber-100"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
-                <path d="M12 3c-3 4-5 7-5 10a5 5 0 0 0 10 0c0-3-2-6-5-10z" />
+                <path d="M12 4C9 8 8 11 8 14a4 4 0 0 0 8 0c0-3-1-6-4-10z" />
             </svg>
         </div>
     </div>
@@ -50,18 +48,17 @@ import { ref, onMounted } from 'vue';
 const petals = ref([]);
 
 onMounted(() => {
-    const types = ['marigold', 'sparkle', 'rose', 'marigold'];
     const generated = [];
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 18; i++) {
         generated.push({
             id: i,
-            left: Math.random() * 96 + 2,
-            duration: Math.random() * 8 + 8, // 8-16s
+            left: Math.random() * 94 + 3,
+            duration: Math.random() * 8 + 10, // 10-18s gentle floating
             delay: Math.random() * 8,
-            scale: Math.random() * 0.5 + 0.6, // 0.6 - 1.1
+            scale: Math.random() * 0.4 + 0.65,
             rotation: Math.random() * 360,
-            opacity: Math.random() * 0.4 + 0.35,
-            type: types[i % types.length],
+            opacity: Math.random() * 0.35 + 0.3,
+            type: i % 2 === 0 ? 'araliya' : 'jasmine',
         });
     }
     petals.value = generated;
@@ -70,24 +67,23 @@ onMounted(() => {
 
 <style scoped>
 .petal {
-    animation-name: fallDown;
+    animation-name: gentleDrift;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
 
-@keyframes fallDown {
+@keyframes gentleDrift {
     0% {
         transform: translateY(-20px) rotate(0deg) translateX(0);
     }
-    30% {
-        transform: translateY(30vh) rotate(90deg) translateX(25px);
+    35% {
+        transform: translateY(35vh) rotate(80deg) translateX(20px);
     }
-    60% {
-        transform: translateY(65vh) rotate(200deg) translateX(-20px);
+    70% {
+        transform: translateY(70vh) rotate(190deg) translateX(-15px);
     }
     100% {
-        transform: translateY(105vh) rotate(360deg) translateX(30px);
+        transform: translateY(105vh) rotate(320deg) translateX(25px);
     }
 }
 </style>
-

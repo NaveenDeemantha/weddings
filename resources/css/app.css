@@ -4,26 +4,23 @@
 
 @layer utilities {
     .text-gold-foil {
-        background: linear-gradient(135deg, #996515 0%, #daa520 25%, #f7e28b 50%, #b8860b 75%, #8b6508 100%);
+        background: linear-gradient(135deg, #8c6d37 0%, #c5a059 25%, #f2e2ad 50%, #c5a059 75%, #7a5d2c 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow: 0 1px 1px rgba(255,255,255,0.3);
     }
 
-    .bg-gold-gradient {
-        background: linear-gradient(135deg, #fceec5 0%, #edd382 30%, #fef3cd 60%, #e0be5b 100%);
+    .border-gold-accent {
+        border-color: #d8b878;
     }
 
-    .border-gold-foil {
-        border-image: linear-gradient(to right, #cf9d34, #f9e289, #b98725, #f3d778, #b07e1e) 1;
+    .paper-texture {
+        background-color: #fbfaf6;
+        background-image: radial-gradient(#e5dfcd 0.65px, transparent 0.65px);
+        background-size: 13px 13px;
     }
 
-    .gold-box-shadow {
-        box-shadow: 0 10px 30px -5px rgba(212, 171, 30, 0.15), 0 0 0 1px rgba(212, 171, 30, 0.25);
-    }
-
-    .luxury-card-shadow {
-        box-shadow: 0 20px 40px -15px rgba(184, 137, 21, 0.18), 0 0 0 1px rgba(212, 171, 30, 0.2), inset 0 0 20px rgba(254, 243, 199, 0.5);
+    .card-deckled {
+        box-shadow: 0 15px 35px -5px rgba(23, 37, 84, 0.06), 0 0 0 1px rgba(197, 160, 89, 0.28);
     }
 }
 
@@ -31,17 +28,17 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Subtle elegant scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #faf6ea;
+    background: #f8f6f0;
 }
 ::-webkit-scrollbar-thumb {
-    background: #d8b86d;
-    border-radius: 4px;
+    background: #c5a059;
+    border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #b88f3e;
+    background: #a7823b;
 }

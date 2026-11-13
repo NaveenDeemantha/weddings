@@ -1,56 +1,79 @@
 <template>
-    <div class="w-full max-w-3xl mx-auto my-12 px-4">
-        <div class="relative bg-gradient-to-b from-amber-50 via-white to-amber-50 rounded-3xl p-8 sm:p-10 border-2 border-amber-300 shadow-xl text-center overflow-hidden">
-            <!-- Background Mandala Glow -->
-            <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-amber-200/40 blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-yellow-200/40 blur-2xl pointer-events-none"></div>
+    <div class="w-full max-w-4xl mx-auto my-10 sm:my-14 px-2 sm:px-4">
+        <div class="text-center mb-6 sm:mb-10">
+            <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
+                <span class="text-gold-500 text-xs">✝</span>
+                <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold">Venues &amp; Directions</span>
+                <span class="text-gold-500 text-xs">✝</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-4xl text-stone-900 font-normal">
+                Where We Celebrate
+            </h2>
+        </div>
 
-            <div class="relative z-10">
-                <!-- Venue Badge -->
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 text-amber-900 text-xs font-serif uppercase tracking-widest font-semibold mb-3">
-                    <span>🏛️</span> The Wedding Destination
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <!-- Church Venue -->
+            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8b878]/60 shadow-sm flex flex-col justify-between text-left">
+                <div>
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#f6f2e8] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
+                        Church Ceremony
+                    </span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-semibold text-stone-900 mb-1.5 leading-snug">
+                        {{ churchName }}
+                    </h3>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-3">
+                        {{ churchAddress }}
+                    </p>
+                    <p class="text-[11px] sm:text-xs text-gold-800 font-serif italic mb-5 leading-normal">
+                        Service commences promptly at {{ churchTime }}. Guests are kindly requested to be seated by 3:00 PM.
+                    </p>
                 </div>
 
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-2">
-                    {{ venueName }}
-                </h2>
+                <div class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                    <a
+                        :href="`https://maps.google.com/?q=${encodeURIComponent(churchName + ' ' + churchAddress)}`"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
+                    >
+                        <span>Maps Directions</span> ↗
+                    </a>
+                </div>
+            </div>
 
-                <p class="text-stone-600 text-sm sm:text-base max-w-lg mx-auto mb-6 leading-relaxed">
-                    {{ venueAddress }}
-                </p>
+            <!-- Reception Venue -->
+            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8b878]/60 shadow-sm flex flex-col justify-between text-left">
+                <div>
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#f6f2e8] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
+                        Poruwa &amp; Reception
+                    </span>
+                    <h3 class="font-serif text-xl sm:text-2xl font-semibold text-stone-900 mb-1.5 leading-snug">
+                        {{ venueName }}
+                    </h3>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-3">
+                        {{ venueAddress }}
+                    </p>
+                    <p class="text-[11px] sm:text-xs text-gold-800 font-serif italic mb-5 leading-normal">
+                        Followed by Cocktails on the Jubilee Lawn, Dinner &amp; Dancing into the night.
+                    </p>
+                </div>
 
-                <!-- Action Buttons: Google Maps & Add to Calendar -->
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                    <!-- Google Maps Button -->
+                <div class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                     <a
                         :href="venueMapUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-700 text-white font-medium text-sm shadow-md hover:shadow-lg hover:from-amber-700 hover:to-amber-800 transition-all transform active:scale-95"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
                     >
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <span>Open in Google Maps</span>
+                        <span>Maps Directions</span> ↗
                     </a>
-
-                    <!-- Copy Address Button -->
-                    <button
-                        type="button"
-                        @click="copyAddress"
-                        class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-stone-700 border border-amber-300 font-medium text-sm shadow-sm hover:bg-amber-50 hover:border-amber-400 transition-all"
-                    >
-                        <span>{{ copied ? '✓ Address Copied!' : '📋 Copy Address' }}</span>
-                    </button>
-
-                    <!-- Add to Calendar Button -->
                     <a
                         :href="googleCalendarLink"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-amber-800 border border-amber-300 font-medium text-sm shadow-sm hover:bg-amber-50 hover:border-amber-400 transition-all"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-full bg-[#faf8f4] hover:bg-[#f3ede1] text-stone-700 border border-[#d8b878] font-serif text-xs text-center transition-colors active:scale-95"
                     >
-                        <span>📅 Add to Calendar</span>
+                        Add to Calendar
                     </a>
                 </div>
             </div>
@@ -59,37 +82,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
-    venueName: { type: String, default: 'The Grand Palace Banquet' },
-    venueAddress: { type: String, default: 'Palace Road, City Center' },
-    venueMapUrl: { type: String, default: 'https://maps.google.com' },
-    weddingDate: { type: String, default: '2026-12-18 10:30:00' },
-    brideName: { type: String, default: 'Pooja' },
-    groomName: { type: String, default: 'Rahul' },
+    churchName: { type: String, default: "St. Mary's Church" },
+    churchAddress: { type: String, default: 'Nayakakanda, Hendala, Sri Lanka' },
+    churchTime: { type: String, default: '03:30 PM' },
+    venueName: { type: String, default: 'The Grand Ballroom, Galle Face Hotel' },
+    venueAddress: { type: String, default: '2 Galle Road, Colombo 03, Sri Lanka' },
+    venueMapUrl: { type: String, default: 'https://maps.google.com/?q=Galle+Face+Hotel+Colombo' },
+    weddingDate: { type: String, default: '2026-12-19 15:30:00' },
+    brideName: { type: String, default: 'Shenali' },
+    groomName: { type: String, default: 'Dilan' },
 });
-
-const copied = ref(false);
-
-const copyAddress = () => {
-    navigator.clipboard.writeText(`${props.venueName}, ${props.venueAddress}`).then(() => {
-        copied.value = true;
-        setTimeout(() => (copied.value = false), 2500);
-    });
-};
 
 const googleCalendarLink = computed(() => {
     try {
         const title = encodeURIComponent(`The Wedding of ${props.brideName} & ${props.groomName}`);
-        const details = encodeURIComponent(`We cordially invite you to celebrate the wedding ceremony of ${props.brideName} & ${props.groomName}. Venue: ${props.venueName}, ${props.venueAddress}`);
-        const location = encodeURIComponent(`${props.venueName}, ${props.venueAddress}`);
-        // Format to YYYYMMDDTHHMMSSZ roughly
-        const cleanDate = props.weddingDate.replace(/[- :]/g, '');
+        const details = encodeURIComponent(`Holy Matrimony at ${props.churchName} followed by Poruwa & Reception at ${props.venueName}.`);
+        const location = encodeURIComponent(`${props.churchName}, Sri Lanka`);
         return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
     } catch {
         return '#';
     }
 });
 </script>
-

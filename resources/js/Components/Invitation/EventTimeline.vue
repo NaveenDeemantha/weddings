@@ -1,72 +1,69 @@
 <template>
-    <div class="w-full max-w-4xl mx-auto my-12 px-4">
-        <!-- Section Title with Gold Accents -->
-        <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 text-amber-600 mb-2">
-                <span class="text-amber-500">✦</span>
-                <span class="font-serif text-xs uppercase tracking-widest font-semibold">Program & Itinerary</span>
-                <span class="text-amber-500">✦</span>
+    <div class="w-full max-w-4xl mx-auto my-10 sm:my-14 px-2 sm:px-4">
+        <!-- Section Title with Artisan Gold Accent -->
+        <div class="text-center mb-8 sm:mb-12">
+            <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
+                <span class="text-gold-500 text-xs">✝</span>
+                <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold">Liturgy &amp; Order of Events</span>
+                <span class="text-gold-500 text-xs">✝</span>
             </div>
-            <h2 class="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">
-                Wedding Celebrations
+            <h2 class="font-serif text-2xl sm:text-4xl text-stone-900 font-normal">
+                Order of Celebrations
             </h2>
-            <div class="mt-3 flex items-center justify-center gap-3">
-                <div class="h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent w-24"></div>
-                <span class="text-amber-600 text-lg">𑁍</span>
-                <div class="h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent w-24"></div>
+            <div class="mt-2.5 flex items-center justify-center gap-2.5">
+                <div class="h-px bg-gradient-to-r from-transparent via-[#d8b878] to-transparent w-20 sm:w-24"></div>
+                <span class="text-gold-600 text-xs sm:text-sm">❦</span>
+                <div class="h-px bg-gradient-to-r from-transparent via-[#d8b878] to-transparent w-20 sm:w-24"></div>
             </div>
-            <p class="mt-2 text-stone-600 font-serif italic text-sm">
-                Each celebration is incomplete without your presence and blessings
+            <p class="mt-1.5 text-stone-600 font-serif italic text-xs sm:text-sm">
+                Saturday, 19th December 2026 • Colombo, Sri Lanka
             </p>
         </div>
 
-        <!-- Events Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Events List with Haute Editorial Design -->
+        <div class="space-y-4 sm:space-y-6">
             <div
                 v-for="(event, idx) in events"
                 :key="idx"
-                class="relative bg-gradient-to-br from-white via-amber-50/50 to-yellow-50/30 rounded-2xl p-6 sm:p-7 border border-amber-300/80 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
+                class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8b878]/60 shadow-sm hover:border-[#c5a059] transition-all duration-300"
             >
-                <!-- Corner Motif -->
-                <div class="absolute top-3 right-3 text-amber-400/40 text-xs font-serif select-none">
-                    0{{ idx + 1 }}
-                </div>
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <!-- Roman Numeral Pill -->
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#faf8f4] border border-[#d8b878] text-gold-800 flex items-center justify-center font-serif font-bold text-xs sm:text-sm shrink-0 mt-0.5">
+                            {{ toRoman(idx + 1) }}
+                        </div>
 
-                <div class="flex items-start gap-4">
-                    <!-- Event Icon Circle -->
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 text-white flex items-center justify-center text-xl shadow-md shrink-0 group-hover:scale-110 transition-transform">
-                        <span v-if="event.icon === 'sun' || idx === 0">🌼</span>
-                        <span v-else-if="event.icon === 'music' || idx === 1">🪕</span>
-                        <span v-else-if="event.icon === 'ring' || idx === 2">💍</span>
-                        <span v-else>🥂</span>
+                        <div>
+                            <div class="inline-block px-2 py-0.5 rounded-full bg-[#f6f2e8] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-1">
+                                {{ event.tag || (idx === 0 ? 'Sacred Service' : (idx === 1 ? 'Traditional Blessing' : 'Reception & Dance')) }}
+                            </div>
+
+                            <h3 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900 leading-snug">
+                                {{ event.name }}
+                            </h3>
+
+                            <!-- Venue & Address -->
+                            <p class="mt-1.5 text-xs sm:text-sm text-stone-700 flex items-center gap-1.5 font-medium">
+                                <span class="text-gold-600">📍</span>
+                                <span>{{ event.venue }}</span>
+                            </p>
+
+                            <!-- Dress Code -->
+                            <p v-if="event.dress_code" class="mt-1 text-[11px] sm:text-xs text-stone-500 font-serif italic">
+                                Recommended Attire: <span class="text-stone-700 not-italic font-medium">{{ event.dress_code }}</span>
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="flex-1">
-                        <h3 class="font-serif text-lg sm:text-xl font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
-                            {{ event.name }}
-                        </h3>
-
-                        <!-- Date & Time Pills -->
-                        <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 font-medium">
-                                📅 {{ event.date }}
-                            </span>
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 font-medium">
-                                ⏰ {{ event.time }}
-                            </span>
-                        </div>
-
-                        <!-- Venue Details -->
-                        <div class="mt-3 flex items-start gap-1.5 text-xs text-stone-700">
-                            <span class="text-amber-600 mt-0.5">📍</span>
-                            <span class="font-medium">{{ event.venue }}</span>
-                        </div>
-
-                        <!-- Dress Code -->
-                        <div v-if="event.dress_code" class="mt-2.5 pt-2.5 border-t border-amber-200/60 flex items-center gap-1.5 text-xs text-amber-800">
-                            <span class="font-semibold">Attire:</span>
-                            <span class="italic text-stone-600">{{ event.dress_code }}</span>
-                        </div>
+                    <!-- Date & Time Column -->
+                    <div class="sm:text-right shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-stone-100 pl-11 sm:pl-0">
+                        <span class="block font-serif text-xs sm:text-sm font-semibold text-stone-900">
+                            {{ event.time }}
+                        </span>
+                        <span class="block text-[11px] sm:text-xs text-stone-500 mt-0.5">
+                            {{ event.date }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -81,5 +78,9 @@ defineProps({
         default: () => [],
     },
 });
-</script>
 
+const toRoman = (num) => {
+    const romans = ['I', 'II', 'III', 'IV', 'V'];
+    return romans[num - 1] || `${num}`;
+};
+</script>

@@ -1,23 +1,25 @@
 <template>
-    <div id="wishes" class="w-full max-w-3xl mx-auto my-12 px-4 scroll-mt-10">
-        <div class="relative bg-gradient-to-b from-amber-50/70 via-white to-amber-50/70 rounded-3xl p-6 sm:p-10 border border-amber-300 shadow-lg">
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 text-amber-900 text-xs font-serif uppercase tracking-widest font-semibold mb-2">
-                    <span>✨</span> Blessings & Messages
-                </div>
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
-                    Wishes for the Couple
-                </h2>
-                <p class="text-stone-600 text-sm mt-1">
-                    Leave your sweet thoughts and blessings for {{ brideName }} & {{ groomName }}
-                </p>
+    <div id="wishes" class="my-10 sm:my-14 px-4 sm:px-6 scroll-mt-10">
+        <div class="text-center mb-6">
+            <div class="inline-flex items-center gap-2 text-gold-700 mb-1.5">
+                <span class="text-gold-500 text-xs">✝</span>
+                <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.25em] font-semibold">Guestbook</span>
+                <span class="text-gold-500 text-xs">✝</span>
             </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b]">
+                Blessings &amp; Prayers
+            </h2>
+            <p class="text-stone-500 text-xs font-serif italic mt-1 max-w-sm mx-auto">
+                Leave your heartfelt wishes and prayers for {{ groomName }} &amp; {{ brideName }}
+            </p>
+        </div>
 
+        <div class="max-w-md mx-auto">
             <!-- Leave a Wish Form -->
-            <form @submit.prevent="submitWish" class="mb-10 bg-white p-5 sm:p-6 rounded-2xl border border-amber-200/90 shadow-sm">
-                <div class="grid grid-cols-1 gap-4">
+            <form @submit.prevent="submitWish" class="mb-8 bg-[#faf8f4] p-4 sm:p-5 rounded-2xl border border-[#e5dfcd] text-left">
+                <div class="space-y-3">
                     <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-stone-700 mb-1">
+                        <label class="block text-[9px] sm:text-[10px] uppercase tracking-widest font-sans font-semibold text-stone-600 mb-1">
                             Your Name:
                         </label>
                         <input
@@ -25,61 +27,61 @@
                             v-model="form.guest_name"
                             required
                             placeholder="Enter your name..."
-                            class="w-full text-sm rounded-xl border-amber-200 focus:border-amber-500 focus:ring-amber-500 bg-amber-50/20"
+                            class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059] bg-white py-2.5 px-3"
                         />
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider font-bold text-stone-700 mb-1">
-                            Your Heartfelt Message:
+                        <label class="block text-[9px] sm:text-[10px] uppercase tracking-widest font-sans font-semibold text-stone-600 mb-1">
+                            Your Blessing or Message:
                         </label>
                         <textarea
                             v-model="form.message"
                             required
                             rows="3"
-                            placeholder="May your married life be filled with laughter, endless love, and joy..."
-                            class="w-full text-sm rounded-xl border-amber-200 focus:border-amber-500 focus:ring-amber-500 bg-amber-50/20"
+                            placeholder="May the Lord abundantly bless your marriage with endless love, peace, and health..."
+                            class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059] bg-white p-3"
                         ></textarea>
                     </div>
                 </div>
 
-                <div class="mt-4 flex items-center justify-end">
+                <div class="mt-3.5 flex items-center justify-end">
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-medium text-xs shadow hover:shadow-md transition-all active:scale-95 disabled:opacity-50"
+                        class="px-6 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs uppercase tracking-widest transition-all transform active:scale-95 disabled:opacity-50 shadow"
                     >
-                        {{ form.processing ? 'Posting...' : '💖 Send Blessings' }}
+                        {{ form.processing ? 'Submitting...' : 'Send Blessings' }}
                     </button>
                 </div>
             </form>
 
             <!-- Wishes List -->
-            <div class="space-y-4">
+            <div class="space-y-3">
                 <div
                     v-for="wish in wishes"
                     :key="wish.id"
-                    class="p-4 sm:p-5 rounded-2xl bg-white/90 border border-amber-200/70 shadow-sm flex items-start gap-3.5 hover:border-amber-300 transition-colors"
+                    class="p-4 rounded-xl bg-[#faf8f4] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
                 >
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-rose-400 to-amber-300 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
-                        {{ wish.guest_name ? wish.guest_name.charAt(0).toUpperCase() : '♥' }}
+                    <div class="w-9 h-9 rounded-full bg-white border border-[#d8b878] text-gold-800 flex items-center justify-center font-serif font-bold text-xs shrink-0 shadow-sm">
+                        {{ wish.guest_name ? wish.guest_name.charAt(0).toUpperCase() : '✝' }}
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 text-left">
                         <div class="flex items-center justify-between gap-2">
-                            <h4 class="font-serif font-bold text-stone-800 text-sm">
+                            <h4 class="font-serif font-semibold text-stone-900 text-xs sm:text-sm">
                                 {{ wish.guest_name }}
                             </h4>
-                            <span class="text-[10px] text-stone-400">
+                            <span class="text-[9px] text-stone-400">
                                 {{ formatDate(wish.created_at) }}
                             </span>
                         </div>
-                        <p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
-                            {{ wish.message }}
+                        <p class="text-xs font-serif italic text-stone-600 mt-1 leading-relaxed">
+                            "{{ wish.message }}"
                         </p>
                     </div>
                 </div>
 
-                <div v-if="wishes.length === 0" class="text-center py-6 text-stone-400 text-xs italic">
-                    Be the first to shower the couple with your blessings!
+                <div v-if="wishes.length === 0" class="text-center py-6 text-stone-400 text-xs italic font-serif">
+                    Be the first to share your prayers and blessings.
                 </div>
             </div>
         </div>
@@ -93,8 +95,8 @@ const props = defineProps({
     wishes: { type: Array, default: () => [] },
     guestSlug: { type: String, default: '' },
     guestName: { type: String, default: '' },
-    brideName: { type: String, default: 'Pooja' },
-    groomName: { type: String, default: 'Rahul' },
+    brideName: { type: String, default: 'Shavindi' },
+    groomName: { type: String, default: 'Buddhima' },
     isPreview: { type: Boolean, default: false },
 });
 
@@ -134,4 +136,3 @@ const submitWish = () => {
     });
 };
 </script>
-

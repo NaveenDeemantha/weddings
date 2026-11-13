@@ -66,8 +66,8 @@ class Guest extends Model
     public function getWhatsappUrlAttribute(): string
     {
         $phone = preg_replace('/[^0-9]/', '', (string)$this->phone);
-        $bride = WeddingSetting::get('bride_name', 'Pooja');
-        $groom = WeddingSetting::get('groom_name', 'Rahul');
+        $bride = WeddingSetting::get('bride_name', 'Shavindi');
+        $groom = WeddingSetting::get('groom_name', 'Buddhima');
         $greeting = $this->custom_greeting ?: $this->name;
         
         $template = WeddingSetting::get('whatsapp_template', "Namaste :greeting! 🌸✨\n\nWith the blessings of our elders and the grace of the Almighty, we cordially invite you and your family to celebrate the wedding ceremony of our beloved sister :bride with :groom! 💍💖\n\nPlease find your exclusive, personalized invitation card here:\n:link\n\nWe look forward to celebrating this joyful milestone together!\n\nWarm regards,\nFamily");

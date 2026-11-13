@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .text-gold-foil {
+        background: linear-gradient(135deg, #996515 0%, #daa520 25%, #f7e28b 50%, #b8860b 75%, #8b6508 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+    }
+
+    .bg-gold-gradient {
+        background: linear-gradient(135deg, #fceec5 0%, #edd382 30%, #fef3cd 60%, #e0be5b 100%);
+    }
+
+    .border-gold-foil {
+        border-image: linear-gradient(to right, #cf9d34, #f9e289, #b98725, #f3d778, #b07e1e) 1;
+    }
+
+    .gold-box-shadow {
+        box-shadow: 0 10px 30px -5px rgba(212, 171, 30, 0.15), 0 0 0 1px rgba(212, 171, 30, 0.25);
+    }
+
+    .luxury-card-shadow {
+        box-shadow: 0 20px 40px -15px rgba(184, 137, 21, 0.18), 0 0 0 1px rgba(212, 171, 30, 0.2), inset 0 0 20px rgba(254, 243, 199, 0.5);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #faf6ea;
+}
+::-webkit-scrollbar-thumb {
+    background: #d8b86d;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b88f3e;
+}

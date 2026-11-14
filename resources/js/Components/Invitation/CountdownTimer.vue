@@ -2,7 +2,7 @@
     <div class="w-full max-w-xl mx-auto my-6 sm:my-8 px-2 sm:px-4">
         <div class="relative bg-[#ffffff] rounded-2xl p-4 sm:p-8 border border-[#d8b878]/60 shadow-sm text-center">
             <!-- Header -->
-            <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] font-sans font-semibold text-gold-700 mb-1">
+            <p class="text-sm sm:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] font-sans font-semibold text-gold-700 mb-1">
                 Solemn Celebration In
             </p>
             <h3 class="font-serif text-lg sm:text-2xl text-stone-900 font-normal mb-4 sm:mb-6 leading-tight">
@@ -15,7 +15,7 @@
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.days }}
                     </span>
-                    <span class="text-[8px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-500 mt-1">
+                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
                         Days
                     </span>
                 </div>
@@ -24,7 +24,7 @@
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.hours }}
                     </span>
-                    <span class="text-[8px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-500 mt-1">
+                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
                         Hours
                     </span>
                 </div>
@@ -33,7 +33,7 @@
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.minutes }}
                     </span>
-                    <span class="text-[8px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-500 mt-1">
+                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
                         Mins
                     </span>
                 </div>
@@ -42,13 +42,13 @@
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.seconds }}
                     </span>
-                    <span class="text-[8px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-500 mt-1">
+                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
                         Secs
                     </span>
                 </div>
             </div>
 
-            <p class="mt-4 sm:mt-5 text-[11px] sm:text-xs text-stone-500 font-serif italic px-2">
+            <p class="mt-4 sm:mt-5 text-[11px] sm:text-base text-stone-700 font-serif italic px-2">
                 "Two lives, two hearts, joined together in friendship, united forever in Christ."
             </p>
         </div>

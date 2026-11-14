@@ -32,9 +32,9 @@
         </div>
 
         <!-- Master Invitation Card (Optimized Luxury Stationery Proportions) -->
-        <main class="relative max-w-md sm:max-w-lg md:max-w-xl mx-auto px-3 sm:px-4 pt-4 sm:pt-8">
+        <main class="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 pt-4 sm:pt-8">
             <!-- The Elegant Off-White Wedding Card with Rounded Top & Subtle Gold Border -->
-            <div class="relative bg-[#ffffff] rounded-3xl border border-[#d8b878]/70 shadow-2xl overflow-hidden card-deckled">
+            <div class="relative bg-[#fffdf8] rounded-3xl border border-[#d8b878]/70 shadow-2xl overflow-hidden card-deckled [&>div]:lg:my-0 [&>div]:lg:py-14">
                 <!-- 1. Master Header: Stained Glass Arch, Holy Matrimony, Names, Date, Cute Catholic Couple & Candelabras -->
                 <MasterInvitationHeader
                     :bride-name="settings.bride_name"

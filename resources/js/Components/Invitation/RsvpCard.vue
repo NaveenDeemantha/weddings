@@ -2,24 +2,24 @@
     <div id="rsvp" class="my-10 sm:my-14 px-4 sm:px-6 scroll-mt-10">
         <!-- Section Header -->
         <div class="text-center mb-6">
-            <p class="font-sans text-[9px] uppercase tracking-[0.25em] font-semibold text-gold-700">
+            <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
                 Kindly Reply
             </p>
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
                 Will You Join Us?
             </h2>
-            <div class="my-2.5 text-gold-600 text-xs">✝</div>
+            <div class="my-2.5 text-gold-600 text-sm">✝</div>
 
-            <p class="font-serif text-xs sm:text-sm text-stone-600 max-w-sm mx-auto leading-relaxed mt-2">
+            <p class="font-serif text-sm sm:text-base text-stone-700 max-w-sm mx-auto leading-relaxed mt-2">
                 We joyfully await your presence. Please let us know if you will be celebrating with us.
             </p>
-            <p class="font-serif italic text-xs text-stone-900 font-semibold mt-1">
+            <p class="font-serif italic text-sm text-stone-900 font-semibold mt-1">
                 Kindly respond by 1st December 2026
             </p>
         </div>
 
         <!-- RSVP Form Card matching screenshot 12 -->
-        <div class="max-w-md mx-auto p-5 sm:p-6 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm text-left">
+        <div class="max-w-md lg:max-w-xl mx-auto p-5 sm:p-8 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm text-left">
             <!-- Confirmed State -->
             <div
                 v-if="guestStatus !== 'pending' && !isEditing"
@@ -31,7 +31,7 @@
                 <h3 class="font-serif text-lg font-bold text-[#15253b]">
                     {{ guestStatus === 'attending' ? 'Response Confirmed: Joyfully Accepting' : 'Response Confirmed: Regretfully Declining' }}
                 </h3>
-                <p class="text-xs text-stone-600 font-serif mt-1 max-w-sm mx-auto">
+                <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
                     <span v-if="guestStatus === 'attending'">
                         Attending count: <strong>{{ attendingCount }}</strong> guest(s). We look forward to celebrating together in God's grace!
                     </span>
@@ -42,7 +42,7 @@
                 <button
                     type="button"
                     @click="isEditing = true"
-                    class="mt-4 text-xs font-serif italic text-gold-700 underline hover:text-gold-900"
+                    class="mt-4 text-sm font-serif italic text-gold-700 underline hover:text-gold-900"
                 >
                     Change RSVP response
                 </button>
@@ -52,27 +52,27 @@
             <form v-else @submit.prevent="submitRsvp" class="space-y-4">
                 <!-- Full Name -->
                 <div>
-                    <label class="block font-serif font-bold text-xs text-stone-800 mb-1">
+                    <label class="block font-serif font-bold text-sm text-stone-800 mb-1">
                         Full Name / Guest Greeting
                     </label>
                     <input
                         type="text"
                         v-model="guestDisplayName"
                         readonly
-                        class="w-full text-xs font-serif font-medium rounded-xl border-stone-200 bg-white py-3 px-3.5 shadow-inner text-stone-800 focus:outline-none"
+                        class="w-full text-sm font-serif font-medium rounded-xl border-stone-200 bg-white py-3 px-3.5 shadow-inner text-stone-800 focus:outline-none"
                     />
                 </div>
 
                 <!-- Will you be attending? -->
                 <div>
-                    <label class="block font-serif font-bold text-xs text-stone-800 mb-1">
+                    <label class="block font-serif font-bold text-sm text-stone-800 mb-1">
                         Will you be attending?
                     </label>
                     <div class="grid grid-cols-2 gap-3">
                         <button
                             type="button"
                             @click="form.status = 'attending'"
-                            class="py-3 px-2 rounded-xl border text-center font-serif text-xs font-semibold transition-all transform active:scale-95"
+                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
                             :class="form.status === 'attending' ? 'bg-[#15253b] text-amber-50 border-[#15253b] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
                             Joyfully Accept
@@ -80,7 +80,7 @@
                         <button
                             type="button"
                             @click="form.status = 'declined'"
-                            class="py-3 px-2 rounded-xl border text-center font-serif text-xs font-semibold transition-all transform active:scale-95"
+                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
                             :class="form.status === 'declined' ? 'bg-[#15253b] text-amber-50 border-[#15253b] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
                             Regretfully Decline
@@ -90,7 +90,7 @@
 
                 <!-- Number of Guests -->
                 <div v-if="form.status === 'attending'" class="bg-white/70 p-3 rounded-xl border border-stone-200/60">
-                    <label class="block font-serif font-bold text-xs text-stone-800 mb-1 text-center">
+                    <label class="block font-serif font-bold text-sm text-stone-800 mb-1 text-center">
                         Total Number of Attending Guests
                     </label>
                     <div class="flex items-center justify-center gap-6 py-1">
@@ -112,7 +112,7 @@
                             +
                         </button>
                     </div>
-                    <p class="text-[10px] text-stone-500 font-serif italic text-center mt-1">
+                    <p class="text-sm text-stone-700 font-serif italic text-center mt-1">
                         Allocated seats for your invitation: {{ maxGuests }}
                     </p>
                 </div>
@@ -122,7 +122,7 @@
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#15253b] text-xs uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#15253b] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                         <span>✈</span>
                         <span>{{ form.processing ? 'Recording RSVP...' : 'Send RSVP' }}</span>

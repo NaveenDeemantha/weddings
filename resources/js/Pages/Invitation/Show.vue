@@ -4,6 +4,8 @@
     <div class="relative min-h-screen bg-gradient-to-b from-[#fff0f5] via-white to-[#ffe4ee] text-stone-800 font-sans selection:bg-[#ffd9e6] selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
         <!-- Floating Falling White Araliya & Jasmine Petals -->
         <PetalRain />
+        <SideVines />
+        <ClickBurst />
 
         <!-- Screen 1 & 2: Architectural Cathedral Door Entrance with 3D Open Animation (Responsive Desktop & Mobile) -->
         <CathedralDoorCover
@@ -44,31 +46,40 @@
                 />
 
                 <!-- 2. Our Story & Journey Milestones Timeline & Countdown -->
-                <OurStoryTimeline
+                <FloralSection side="left">
+                    <OurStoryTimeline
                     :wedding-date="settings.wedding_date"
                 />
+                </FloralSection>
 
                 <!-- 3. Wedding Events (Registration, Nuptial Mass, Poruwa & Reception) -->
-                <WeddingEventsList
+                <FloralSection side="both">
+                    <WeddingEventsList
                     :events="settings.events"
                 />
+                </FloralSection>
 
                 <!-- 4. Captured Moments Gallery & Calendar Banner -->
-                <WeddingGallery
+                <FloralSection side="right">
+                    <WeddingGallery
                     :wedding-date="settings.wedding_date"
                     :bride-name="settings.bride_name"
                     :groom-name="settings.groom_name"
                 />
+                </FloralSection>
 
                 <!-- 5. The Setting - Wedding Venue & Google Maps -->
-                <VenueSection
+                <FloralSection side="left">
+                    <VenueSection
                     :venue-name="settings.venue_name"
                     :venue-address="settings.venue_address"
                     :venue-map-url="settings.venue_map_url"
                 />
+                </FloralSection>
 
                 <!-- 6. Kindly Reply - RSVP Form -->
-                <RsvpCard
+                <FloralSection side="both" top>
+                    <RsvpCard
                     :guest-slug="guest.slug"
                     :guest-name="guest.name"
                     :guest-greeting="guest.custom_greeting"
@@ -77,9 +88,11 @@
                     :max-guests="guest.max_guests"
                     :is-preview="isPreview"
                 />
+                </FloralSection>
 
                 <!-- 7. Wishes & Blessings Guestbook -->
-                <WishesGuestbook
+                <FloralSection side="right">
+                    <WishesGuestbook
                     :wishes="wishes"
                     :guest-slug="guest.slug"
                     :guest-name="guest.name"
@@ -87,6 +100,7 @@
                     :groom-name="settings.groom_name"
                     :is-preview="isPreview"
                 />
+                </FloralSection>
 
                 <!-- 8. Midnight Navy Gothic Rose Window Footer (Screen 13) -->
                 <NavySaveTheDateFooter
@@ -102,6 +116,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
+import FloralSection from '@/Components/Invitation/FloralSection.vue';
+import SideVines from '@/Components/Invitation/SideVines.vue';
+import ClickBurst from '@/Components/Invitation/ClickBurst.vue';
 import PetalRain from '@/Components/Invitation/PetalRain.vue';
 import CathedralDoorCover from '@/Components/Invitation/CathedralDoorCover.vue';
 import MasterInvitationHeader from '@/Components/Invitation/MasterInvitationHeader.vue';

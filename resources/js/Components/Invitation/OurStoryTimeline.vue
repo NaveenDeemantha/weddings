@@ -1,166 +1,62 @@
 <template>
-    <div id="story" class="relative my-10 sm:my-14 scroll-mt-10 px-4 sm:px-6">
-        <!-- Story Section Header -->
-        <div class="text-center mb-8 px-2">
-            <p class="font-sans text-sm sm:text-base uppercase tracking-[0.25em] font-semibold text-gold-700">
-                Our Story
-            </p>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
-                Two Hearts, One Faith
-            </h2>
-            <div class="my-2.5 text-gold-600 text-sm">✝</div>
+    <div id="story" class="relative my-10 sm:my-16 scroll-mt-10 px-5 sm:px-8 lg:px-12">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            <!-- Left: invitation wording -->
+            <div class="text-center lg:text-left lg:sticky lg:top-10">
+                <p class="font-display text-sm sm:text-base tracking-[0.35em] font-semibold text-gold-600">OUR STORY</p>
+                <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#ad2c51] mt-2 leading-tight">Two Hearts,<br class="hidden lg:block" /> One Faith</h2>
+                <div class="lg:[&>button]:mx-0"><FlowerDivider /></div>
 
-            <p class="font-serif text-sm sm:text-base text-stone-700 max-w-md mx-auto leading-relaxed mt-2">
-                We are delighted to invite you to the church as we exchange our vows before God and the people we love. Your presence and your prayers will make our special day even more memorable.
-            </p>
-
-            <div class="my-5">
-                <p class="font-serif italic text-base sm:text-lg text-stone-900 font-semibold">
-                    Saturday, 12th December 2026
+                <p class="font-serif text-xl sm:text-2xl text-stone-800 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    We are delighted to invite you to the church as we exchange our vows before God and the people we love. Your presence and your prayers will make our special day even more memorable.
                 </p>
-                <p class="text-sm text-stone-700 font-serif italic mt-1 max-w-md mx-auto leading-relaxed">
+
+                <p class="mt-7 font-serif italic text-2xl sm:text-3xl font-semibold text-[#ad2c51]">Tuesday, 29th December 2026</p>
+                <p class="mt-2 font-serif italic text-lg sm:text-xl text-stone-700 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Together with their families request the honour of your presence at the Nuptial Mass and at the celebration of their marriage.
                 </p>
+
+                <div class="mt-7 inline-block py-4 px-8 rounded-2xl bg-[#fff7fa] border-2 border-[#F678A4]/70 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <h4 class="font-serif font-bold text-lg sm:text-xl tracking-wider text-[#ad2c51] uppercase">St. Mary's Church</h4>
+                    <p class="font-display text-sm tracking-[0.25em] font-semibold text-gold-600 mt-1">MORATUWA, SRI LANKA</p>
+                </div>
             </div>
 
-            <!-- St. Mary's Church Negombo Highlight Box -->
-            <div class="my-3 py-3 px-6 rounded-2xl bg-[#fff7fa] border border-[#f8d3e0] inline-block shadow-sm">
-                <h4 class="font-serif font-bold text-sm sm:text-base tracking-wider text-[#ad2c51] uppercase">
-                    St. Mary's Church
-                </h4>
-                <p class="text-sm sm:text-base font-sans uppercase tracking-[0.2em] font-semibold text-gold-700 mt-0.5">
-                    Negombo, Sri Lanka
-                </p>
-            </div>
-        </div>
-
-        <!-- A Journey Together - Milestones Timeline -->
-        <div class="max-w-md lg:max-w-2xl mx-auto my-8 px-2 sm:px-4">
-            <div class="text-center mb-6">
-                <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-stone-700">
-                    A Journey Together
-                </p>
-            </div>
-
-            <div class="relative border-l border-[#F678A4]/60 ml-10 sm:ml-12 pl-6 sm:pl-7 space-y-6">
-                <!-- 2019 -->
-                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
-                        2019
-                    </span>
-                    <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
-                        The Beginning
-                    </h4>
-                    <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
-                        Two paths crossed on an ordinary day, and somehow nothing felt ordinary after that.
-                    </p>
-                </div>
-
-                <!-- 2021 -->
-                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
-                        2021
-                    </span>
-                    <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
-                        Growing Together
-                    </h4>
-                    <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
-                        Through seasons of laughter and quiet moments alike, a friendship blossomed into something deeper.
-                    </p>
-                </div>
-
-                <!-- 2023 -->
-                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
-                        2023
-                    </span>
-                    <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
-                        The Promise
-                    </h4>
-                    <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
-                        Under a sky full of stars, one question changed everything, and the answer was yes.
-                    </p>
-                </div>
-
-                <!-- 2025 -->
-                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
-                        2025
-                    </span>
-                    <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
-                        Building a Home
-                    </h4>
-                    <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
-                        Side by side, we turned shared dreams into plans and plans into a life we cherish.
-                    </p>
-                </div>
-
-                <!-- 2026 -->
-                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-gold-400 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
-                        2026
-                    </span>
-                    <div class="w-3 h-3 rounded-full bg-[#ad2c51] border-2 border-[#F678A4] absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
-                        Forever Begins
-                    </h4>
-                    <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
-                        Now, surrounded by the people we love, we are ready for our most beautiful chapter yet: Becoming husband and wife.
-                    </p>
+            <!-- Right: journey timeline -->
+            <div>
+                <p class="text-center lg:text-left font-display text-sm sm:text-base tracking-[0.35em] font-semibold text-gold-600 mb-6">A JOURNEY TOGETHER</p>
+                <div class="relative border-l-2 border-[#F678A4]/60 ml-14 sm:ml-16 pl-6 sm:pl-8 space-y-5">
+                    <div
+                        v-for="m in milestones"
+                        :key="m.year"
+                        class="milestone relative p-5 rounded-2xl bg-[#fff7fa] border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#ad2c51]"
+                        :class="m.last ? 'border-[#ad2c51] bg-white shadow-md' : 'border-[#F678A4]/50'"
+                    >
+                        <span class="absolute -left-[4.9rem] sm:-left-[5.4rem] top-4 font-serif italic font-bold text-xl text-[#ad2c51] w-14 text-right">{{ m.year }}</span>
+                        <span class="absolute -left-[2.2rem] sm:-left-[2.65rem] top-5 w-5 h-5 rounded-full border-2 border-white shadow bg-[#ad2c51] flex items-center justify-center">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                        </span>
+                        <h4 class="font-display font-bold text-base tracking-[0.15em] text-[#ad2c51] uppercase">{{ m.title }}</h4>
+                        <p class="font-serif text-lg sm:text-xl text-stone-800 mt-1 leading-relaxed">{{ m.text }}</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- The Big Day Awaits - Counting Down -->
-        <div class="max-w-md lg:max-w-2xl mx-auto my-8 px-2 text-center">
-            <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
-                The Big Day Awaits
-            </p>
-            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
-                Counting Down
-            </h3>
-            <div class="my-2.5 text-gold-600 text-sm">✝</div>
+        <!-- Countdown -->
+        <div class="max-w-3xl mx-auto mt-16 sm:mt-20 text-center">
+            <p class="font-display text-sm sm:text-base tracking-[0.35em] font-semibold text-gold-600">THE BIG DAY AWAITS</p>
+            <h3 class="font-serif text-4xl sm:text-5xl font-semibold text-[#ad2c51] mt-2">Counting Down</h3>
+            <FlowerDivider />
 
-            <!-- 4 Rounded Squircle Countdown Cards -->
-            <div class="grid grid-cols-4 gap-2 sm:gap-3 max-w-xs sm:max-w-sm lg:max-w-xl mx-auto my-5">
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
-                        {{ timeLeft.days }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
-                        Days
-                    </span>
-                </div>
-
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
-                        {{ timeLeft.hours }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
-                        Hours
-                    </span>
-                </div>
-
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
-                        {{ timeLeft.minutes }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
-                        Minutes
-                    </span>
-                </div>
-
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
-                        {{ timeLeft.seconds }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
-                        Seconds
-                    </span>
+            <div class="grid grid-cols-4 gap-3 sm:gap-5 max-w-xl lg:max-w-3xl mx-auto mt-6">
+                <div
+                    v-for="u in units"
+                    :key="u.label"
+                    class="count-card p-3 sm:p-5 lg:p-7 rounded-3xl bg-gradient-to-b from-white to-[#ffe9f1] border-2 border-[#F678A4]/70 shadow-md flex flex-col items-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                >
+                    <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#ad2c51] leading-none tabular-nums">{{ String(timeLeft[u.key]).padStart(2, '0') }}</span>
+                    <span class="font-display text-xs sm:text-sm tracking-[0.2em] font-semibold text-stone-700 mt-3 uppercase">{{ u.label }}</span>
                 </div>
             </div>
         </div>
@@ -169,18 +65,33 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 
 const props = defineProps({
-    weddingDate: { type: String, default: '2026-12-12 09:00:00' },
+    weddingDate: { type: String, default: '2026-12-29 09:00:00' },
 });
+
+const milestones = [
+    { year: '2019', title: 'The Beginning', text: 'Two paths crossed on an ordinary day, and somehow nothing felt ordinary after that.' },
+    { year: '2021', title: 'Growing Together', text: 'Through seasons of laughter and quiet moments alike, a friendship blossomed into something deeper.' },
+    { year: '2023', title: 'The Promise', text: 'Under a sky full of stars, one question changed everything, and the answer was yes.' },
+    { year: '2025', title: 'Building a Home', text: 'Side by side, we turned shared dreams into plans and plans into a life we cherish.' },
+    { year: '2026', title: 'Forever Begins', text: 'Now, surrounded by the people we love, we are ready for our most beautiful chapter yet: becoming husband and wife.', last: true },
+];
+
+const units = [
+    { key: 'days', label: 'Days' },
+    { key: 'hours', label: 'Hours' },
+    { key: 'minutes', label: 'Minutes' },
+    { key: 'seconds', label: 'Seconds' },
+];
 
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 let timer = null;
 
 const calculateTime = () => {
     const target = new Date(props.weddingDate.replace(/-/g, '/')).getTime();
-    const now = new Date().getTime();
-    const diff = target - now;
+    const diff = target - new Date().getTime();
 
     if (diff <= 0) {
         timeLeft.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -204,4 +115,3 @@ onUnmounted(() => {
     if (timer) clearInterval(timer);
 });
 </script>
-

@@ -8,7 +8,7 @@
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Wedding Venue
             </h2>
-            <div class="my-2.5 text-gold-600 text-sm">✝</div>
+            <FlowerDivider />
         </div>
 
         <div class="max-w-md lg:max-w-6xl mx-auto space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-stretch">
@@ -34,7 +34,7 @@
                     </p>
 
                     <p class="text-sm font-serif text-stone-700 leading-relaxed mb-4 border-l-2 border-gold-500 pl-3">
-                        Built in 1874, St. Mary's Church Grand Street is one of the most venerated Catholic landmarks in Sri Lanka, renowned for its inspiring neoclassical nave and ceiling frescoes.
+                        We warmly welcome you to St. Mary's Church in Moratuwa, where we will exchange our vows before God, our families and our dearest friends.
                     </p>
 
                     <!-- Etiquette & Guest Amenities -->
@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex items-center gap-2 text-sm font-serif text-stone-700 bg-white/70 p-2.5 rounded-xl border border-stone-200/60">
                             <span>🚗</span>
-                            <span><strong>Parking:</strong> Church premises parking available on Grand Street</span>
+                            <span><strong>Parking:</strong> Parking is available near the church premises</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                 <!-- Map Header Link -->
                 <div class="p-3 bg-white border-b border-stone-100 flex items-center justify-between">
                     <span class="text-sm font-serif font-bold text-[#ad2c51]">
-                        St. Mary's Church Grand Street Negombo
+                        St. Mary's Church Moratuwa
                     </span>
                     <a
                         :href="venueMapUrl"
@@ -87,7 +87,7 @@
                         loading="lazy"
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
-                        src="https://maps.google.com/maps?q=St.+Mary's+Church+Grand+Street+Negombo+Sri+Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        src="https://maps.google.com/maps?q=St.+Mary's+Church+Moratuwa+Sri+Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"
                     ></iframe>
                 </div>
 
@@ -109,10 +109,11 @@
 </template>
 
 <script setup>
+import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 defineProps({
     venueName: { type: String, default: "St. Mary's Church" },
-    venueAddress: { type: String, default: 'Negombo, Sri Lanka' },
-    venueMapUrl: { type: String, default: "https://maps.google.com/?q=St.+Mary%27s+Church+Grand+Street+Negombo" },
+    venueAddress: { type: String, default: 'Moratuwa, Sri Lanka' },
+    venueMapUrl: { type: String, default: "https://maps.google.com/?q=St.+Mary%27s+Church+Moratuwa+Sri+Lanka" },
 });
 </script>
 

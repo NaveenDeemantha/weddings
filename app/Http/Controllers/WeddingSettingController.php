@@ -41,7 +41,7 @@ class WeddingSettingController extends Controller
             'venue_address' => 'required|string|max:500',
             'venue_map_url' => 'required|url|max:500',
             'our_story' => 'required|string|max:2000',
-            'music_url' => 'nullable|url|max:500',
+            'music_url' => 'nullable|string|max:500',
             'whatsapp_template' => 'required|string|max:2000',
             'events' => 'required|array',
             'events.*.name' => 'required|string|max:100',

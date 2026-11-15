@@ -59,7 +59,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
-    weddingDate: { type: String, default: '2026-12-19 15:30:00' },
+    weddingDate: { type: String, default: '2026-12-29 09:00:00' },
 });
 
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });

@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="!hasFinishedIntro"
-        class="fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-700"
+        data-no-burst class="fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-700"
         :class="{ 'opacity-0 pointer-events-none': isFadingOut }"
         style="background: radial-gradient(ellipse at 50% 40%, #C8636F 0%, #ad2c51 55%, #6e1a34 100%);"
         @mousemove="onMove"
@@ -12,16 +12,16 @@
 
         <!-- Corner flowers with mouse parallax -->
         <div class="absolute bottom-0 left-0 pointer-events-none" :style="par(-26)">
-            <FlowerCluster class="w-56 sm:w-80 lg:w-[26rem] -translate-x-4 translate-y-4" />
+            <FlowerCluster class="w-28 sm:w-80 lg:w-[26rem] -translate-x-3 translate-y-6 sm:-translate-x-4 sm:translate-y-4" />
         </div>
         <div class="absolute bottom-0 right-0 pointer-events-none" :style="par(26)">
-            <FlowerCluster class="w-56 sm:w-80 lg:w-[26rem] translate-x-4 translate-y-4 -scale-x-100" />
+            <FlowerCluster class="w-28 sm:w-80 lg:w-[26rem] translate-x-3 translate-y-6 sm:translate-x-4 sm:translate-y-4 -scale-x-100" />
         </div>
         <div class="absolute top-0 left-0 pointer-events-none" :style="par(-18)">
-            <FlowerCluster class="w-44 sm:w-64 lg:w-80 -translate-x-4 -translate-y-4 -scale-y-100" />
+            <FlowerCluster class="w-24 sm:w-64 lg:w-80 -translate-x-5 -translate-y-6 sm:-translate-x-4 sm:-translate-y-4 -scale-y-100" />
         </div>
         <div class="absolute top-0 right-0 pointer-events-none" :style="par(18)">
-            <FlowerCluster class="w-44 sm:w-64 lg:w-80 translate-x-4 -translate-y-4 rotate-180" />
+            <FlowerCluster class="w-24 sm:w-64 lg:w-80 translate-x-5 -translate-y-6 sm:translate-x-4 sm:-translate-y-4 rotate-180" />
         </div>
 
         <!-- Ambient floating petals -->
@@ -35,11 +35,11 @@
         </div>
 
         <!-- Main stage -->
-        <div class="relative z-10 h-full flex flex-col items-center justify-between px-4 py-6 sm:py-8 text-center text-white" :class="{ 'stage-out': isEntering }">
+        <div class="relative z-10 h-full flex flex-col items-center justify-between px-4 pt-28 pb-32 sm:pt-8 sm:pb-8 text-center text-white" :class="{ 'stage-out': isEntering }">
             <!-- Top: names -->
             <div class="enter-up">
                 <p class="font-display text-xs sm:text-sm tracking-[0.4em] text-pink-100 font-semibold">THE WEDDING OF</p>
-                <h1 class="mt-2 font-serif font-semibold leading-none text-5xl sm:text-6xl lg:text-7xl drop-shadow-[0_4px_18px_rgba(110,26,52,.55)]">
+                <h1 class="mt-2 font-serif font-semibold leading-none text-[2.6rem] sm:text-6xl lg:text-7xl drop-shadow-[0_4px_18px_rgba(110,26,52,.55)]">
                     {{ groomName }}
                     <span class="font-script font-normal text-pink-200 text-4xl sm:text-5xl lg:text-6xl mx-1 sm:mx-2 align-middle">&amp;</span>
                     {{ brideName }}
@@ -93,11 +93,11 @@
             </div>
 
             <!-- Bottom: prompt / details + enter -->
-            <div class="min-h-[8.5rem] sm:min-h-[9rem] flex flex-col items-center justify-start">
+            <div class="min-h-[7.5rem] sm:min-h-[9rem] flex flex-col items-center justify-start">
                 <p v-if="!bloomed" class="font-display text-sm sm:text-base tracking-[0.35em] text-white font-semibold animate-pulse">TAP THE FLOWER TO BLOOM</p>
                 <div v-else class="reveal-in-up flex flex-col items-center">
-                    <p class="font-serif text-2xl sm:text-3xl italic font-medium">Saturday, 12th December 2026</p>
-                    <p class="mt-1 font-display text-xs sm:text-sm tracking-[0.3em] text-pink-100">ST. MARY'S CHURCH · NEGOMBO</p>
+                    <p class="font-serif text-2xl sm:text-3xl italic font-medium">Tuesday, 29th December 2026</p>
+                    <p class="mt-1 font-display text-xs sm:text-sm tracking-[0.3em] text-pink-100">ST. MARY'S CHURCH · MORATUWA</p>
                     <button
                         type="button"
                         @click.stop="enter"
@@ -154,7 +154,7 @@ const petals = rings.flatMap((r, ri) =>
 const size = ref(420);
 const k = computed(() => size.value / 560);
 const resize = () => {
-    size.value = Math.max(240, Math.min(window.innerWidth * 0.92, window.innerHeight * 0.44, 560));
+    size.value = Math.max(240, Math.min(window.innerWidth * 0.92, window.innerHeight * 0.36, 560));
 };
 
 // Mouse parallax
@@ -192,6 +192,7 @@ const bloom = (e) => {
 };
 
 const enter = () => {
+    emit('opened');
     isEntering.value = true;
     setTimeout(() => { isFadingOut.value = true; }, 900);
     setTimeout(() => { hasFinishedIntro.value = true; }, 1600);

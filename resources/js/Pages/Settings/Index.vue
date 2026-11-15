@@ -7,21 +7,21 @@ const props = defineProps({
 });
 
 const form = useForm({
-    bride_name: props.settings.bride_name || 'Shenali',
-    groom_name: props.settings.groom_name || 'Dilan',
-    bride_full_name: props.settings.bride_full_name || 'Shenali Marie Fernando',
-    groom_full_name: props.settings.groom_full_name || 'Dilan Jude Perera',
-    bride_parents: props.settings.bride_parents || 'Mr. Anthony & Mrs. Nirmala Fernando',
-    groom_parents: props.settings.groom_parents || 'Mr. Rohan & Mrs. Dilrukshi Perera',
-    wedding_title: props.settings.wedding_title || 'The Nuptial Blessing & Wedding Celebration',
-    wedding_date: props.settings.wedding_date || '2026-12-19 15:30:00',
+    bride_name: props.settings.bride_name || 'Shavindi',
+    groom_name: props.settings.groom_name || 'Buddhima',
+    bride_full_name: props.settings.bride_full_name || 'Shavindi',
+    groom_full_name: props.settings.groom_full_name || 'Buddhima',
+    bride_parents: props.settings.bride_parents || 'Mr. & Mrs. Perera',
+    groom_parents: props.settings.groom_parents || 'Mr. & Mrs. Fernando',
+    wedding_title: props.settings.wedding_title || 'Holy Matrimony - Buddhima & Shavindi',
+    wedding_date: props.settings.wedding_date || '2026-12-29 09:00:00',
     scripture_verse: props.settings.scripture_verse || 'Therefore what God has joined together, let no one separate. — Matthew 19:6',
     church_name: props.settings.church_name || "St. Mary's Church",
-    church_address: props.settings.church_address || 'Nayakakanda, Hendala, Sri Lanka',
-    church_time: props.settings.church_time || '03:30 PM',
-    venue_name: props.settings.venue_name || 'The Grand Ballroom, Galle Face Hotel',
-    venue_address: props.settings.venue_address || '2 Galle Road, Colombo 03, Sri Lanka',
-    venue_map_url: props.settings.venue_map_url || 'https://maps.google.com/?q=Galle+Face+Hotel+Colombo',
+    church_address: props.settings.church_address || 'Moratuwa, Sri Lanka',
+    church_time: props.settings.church_time || '09:00 AM',
+    venue_name: props.settings.venue_name || "St. Mary's Church",
+    venue_address: props.settings.venue_address || 'Moratuwa, Sri Lanka',
+    venue_map_url: props.settings.venue_map_url || 'https://maps.google.com/?q=St.+Mary%27s+Church+Moratuwa+Sri+Lanka',
     our_story: props.settings.our_story || '',
     music_url: props.settings.music_url || '',
     whatsapp_template: props.settings.whatsapp_template || '',
@@ -31,7 +31,7 @@ const form = useForm({
 const addEvent = () => {
     form.events.push({
         name: 'New Ceremony / Event',
-        date: 'Saturday, 19th December 2026',
+        date: 'Tuesday, 29th December 2026',
         time: '06:00 PM',
         venue: form.venue_name,
         dress_code: 'Formal / Evening Wear',
@@ -98,7 +98,7 @@ const submit = () => {
                                     type="text"
                                     v-model="form.bride_name"
                                     required
-                                    placeholder="e.g. Shenali"
+                                    placeholder="e.g. Shavindi"
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
@@ -108,7 +108,7 @@ const submit = () => {
                                     type="text"
                                     v-model="form.groom_name"
                                     required
-                                    placeholder="e.g. Dilan"
+                                    placeholder="e.g. Buddhima"
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
@@ -117,7 +117,7 @@ const submit = () => {
                                 <input
                                     type="text"
                                     v-model="form.bride_full_name"
-                                    placeholder="e.g. Shenali Marie Fernando"
+                                    placeholder="e.g. Shavindi"
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
@@ -126,7 +126,7 @@ const submit = () => {
                                 <input
                                     type="text"
                                     v-model="form.groom_full_name"
-                                    placeholder="e.g. Dilan Jude Perera"
+                                    placeholder="e.g. Buddhima"
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
@@ -135,7 +135,7 @@ const submit = () => {
                                 <input
                                     type="text"
                                     v-model="form.bride_parents"
-                                    placeholder="e.g. Mr. Anthony &amp; Mrs. Nirmala Fernando"
+                                    placeholder="e.g. Mr. &amp; Mrs. Perera"
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>
@@ -165,6 +165,18 @@ const submit = () => {
                                     class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 ></textarea>
                             </div>
+                            <div class="sm:col-span-2">
+                                <label class="block font-semibold text-stone-700 mb-1">Background Music URL or Path (MP3)</label>
+                                <input
+                                    type="text"
+                                    v-model="form.music_url"
+                                    placeholder="e.g. /music/wedding.mp3 or https://example.com/audio.mp3"
+                                    class="w-full text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
+                                />
+                                <p class="text-[11px] text-stone-500 mt-1">
+                                    Place an audio file in <code>public/music/wedding.mp3</code> and set <code>/music/wedding.mp3</code>, or paste any direct online MP3 link.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -186,7 +198,7 @@ const submit = () => {
                                     type="text"
                                     v-model="form.wedding_date"
                                     required
-                                    placeholder="2026-12-19 15:30:00"
+                                    placeholder="2026-12-29 09:00:00"
                                     class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059]"
                                 />
                             </div>

@@ -8,7 +8,7 @@
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Will You Join Us?
             </h2>
-            <div class="my-2.5 text-gold-600 text-sm">✝</div>
+            <FlowerDivider />
 
             <p class="font-serif text-sm sm:text-base text-stone-700 max-w-sm mx-auto leading-relaxed mt-2">
                 We joyfully await your presence. Please let us know if you will be celebrating with us.
@@ -71,7 +71,7 @@
                     <div class="grid grid-cols-2 gap-3">
                         <button
                             type="button"
-                            @click="form.status = 'attending'"
+                            @click="form.status = 'attending'; burstAt($event, 36)"
                             class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
                             :class="form.status === 'attending' ? 'bg-[#ad2c51] text-gold-50 border-[#ad2c51] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
@@ -120,7 +120,7 @@
                 <!-- Submit Button matching screenshot 12 -->
                 <div class="pt-2">
                     <button
-                        type="submit"
+                        type="submit" @click="burstAt($event, 48)"
                         :disabled="form.processing"
                         class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
                     >
@@ -134,6 +134,7 @@
 </template>
 
 <script setup>
+import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
@@ -148,6 +149,7 @@ const props = defineProps({
 });
 
 const isEditing = ref(false);
+const burstAt = (e, count = 30) => window.dispatchEvent(new CustomEvent('bloom-burst', { detail: { x: e.clientX, y: e.clientY, count } }));
 const guestDisplayName = ref(props.guestGreeting || props.guestName);
 
 const form = useForm({

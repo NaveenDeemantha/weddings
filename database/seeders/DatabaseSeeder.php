@@ -83,14 +83,14 @@ class DatabaseSeeder extends Seeder
         Wish::create([
             'guest_id' => $guest1->id,
             'guest_name' => 'Mr & Mrs Silva',
-            'message' => 'May the Lord abundantly bless your marriage with endless joy, peace, and health! Shenali & Rovan, you both look so radiant together.',
+            'message' => 'May the Lord abundantly bless your marriage with endless joy, peace, and health! Buddhima & Shavindi, you both look so radiant together.',
             'is_approved' => true,
         ]);
 
         Wish::create([
             'guest_id' => $guest3->id,
             'guest_name' => 'Rev. Fr. Jude Peiris',
-            'message' => 'May God unite your hearts in Holy Matrimony and guide your steps every day of your shared life. Prayers and blessings for Shenali and Rovan.',
+            'message' => 'May God unite your hearts in Holy Matrimony and guide your steps every day of your shared life. Prayers and blessings for Buddhima and Shavindi.',
             'is_approved' => true,
         ]);
     }

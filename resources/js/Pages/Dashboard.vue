@@ -36,6 +36,13 @@ const formatDate = (dateStr) => {
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
+                    <a
+                        :href="route('invitation.print')"
+                        target="_blank"
+                        class="px-3.5 py-2 rounded-xl bg-pink-50 border border-pink-200 text-[#ad2c51] font-semibold text-xs shadow-sm hover:bg-pink-100 transition-colors flex items-center gap-1.5"
+                    >
+                        <span>🖨️ Print Wedding Card</span>
+                    </a>
                     <Link
                         :href="route('guests.index')"
                         class="px-4 py-2 rounded-xl bg-amber-600 text-white font-medium text-xs shadow hover:bg-amber-700 transition-colors"

@@ -26,9 +26,12 @@
         <BottomFloatingDock />
 
         <!-- Preview Mode Banner (If in Preview) -->
-        <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2.5 px-4 text-center font-serif shadow-inner flex items-center justify-center gap-2">
+        <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2 px-4 text-center font-serif shadow-inner flex flex-wrap items-center justify-center gap-3">
             <span>✨ Previewing Invitation Mode</span>
-            <Link :href="route('dashboard')" class="underline hover:text-white ml-2">
+            <Link :href="route('invitation.print')" class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-sans text-[11px] font-semibold transition-colors">
+                <span>🖨️ Print Wedding Card</span>
+            </Link>
+            <Link :href="route('dashboard')" class="underline hover:text-white text-[11px] font-sans">
                 Host Portal ↗
             </Link>
         </div>

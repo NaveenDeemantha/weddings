@@ -69,6 +69,25 @@ class InvitationController extends Controller
     }
 
     /**
+     * Render the luxury printable wedding card for physical print and PDF export.
+     */
+    public function printCard(?string $slug = null): Response
+    {
+        $guest = $slug ? Guest::where('slug', $slug)->first() : null;
+        $settings = WeddingSetting::getAll();
+        $invitationUrl = $guest 
+            ? route('invitation.show', ['slug' => $guest->slug]) 
+            : route('invitation.preview');
+
+        return Inertia::render('Invitation/PrintCard', [
+            'settings' => $settings,
+            'guest' => $guest,
+            'invitationUrl' => $invitationUrl,
+            'backUrl' => $guest ? route('invitation.show', ['slug' => $guest->slug]) : route('invitation.preview'),
+        ]);
+    }
+
+    /**
      * Submit RSVP.
      */
     public function rsvp(Request $request, string $slug)

@@ -5,16 +5,16 @@
 
         <div class="relative max-w-xs sm:max-w-sm mx-auto mb-4 flex flex-col items-center justify-center">
             <!-- Bespoke Floral Rose Medallion (Pure SVG, absolutely no baked-in photo text) -->
-            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-2 border-[#F678A4]/60 shadow-2xl flex items-center justify-center bg-gradient-to-br from-[#9c2447] via-[#ad2c51] to-[#6e1a34]">
-                <!-- Delicate Geometric Rose Rosette in Pure Vector SVG -->
-                <svg class="absolute inset-0 w-full h-full opacity-25 pointer-events-none select-none" viewBox="0 0 200 200" fill="none">
-                    <circle cx="100" cy="100" r="92" stroke="#F678A4" stroke-width="1.2" stroke-dasharray="3 3" />
-                    <circle cx="100" cy="100" r="80" stroke="#ffd9e6" stroke-width="1" />
-                    <circle cx="100" cy="100" r="48" stroke="#F678A4" stroke-width="1" />
-                    <circle cx="100" cy="100" r="28" stroke="#ffd9e6" stroke-width="0.8" />
+            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-2 border-[#d8ab43]/70 shadow-2xl flex items-center justify-center bg-gradient-to-br from-[#9c2447] via-[#ad2c51] to-[#6e1a34]">
+                <!-- Delicate Geometric Rose Rosette in Gold Foil Vector SVG -->
+                <svg class="absolute inset-0 w-full h-full opacity-35 pointer-events-none select-none" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="92" stroke="#f5dc8a" stroke-width="1.2" stroke-dasharray="3 3" />
+                    <circle cx="100" cy="100" r="80" stroke="#e8c86d" stroke-width="1" />
+                    <circle cx="100" cy="100" r="48" stroke="#f5dc8a" stroke-width="1" />
+                    <circle cx="100" cy="100" r="28" stroke="#fff2bd" stroke-width="0.8" />
                     <g v-for="i in 12" :key="i" :transform="`rotate(${i * 30} 100 100)`">
-                        <line x1="100" y1="8" x2="100" y2="192" stroke="#F678A4" stroke-width="0.75" />
-                        <ellipse cx="100" cy="38" rx="8" ry="16" stroke="#ffd9e6" stroke-width="0.75" fill="none" />
+                        <line x1="100" y1="8" x2="100" y2="192" stroke="#e8c86d" stroke-width="0.75" />
+                        <ellipse cx="100" cy="38" rx="8" ry="16" stroke="#f5dc8a" stroke-width="0.75" fill="none" />
                     </g>
                 </svg>
 

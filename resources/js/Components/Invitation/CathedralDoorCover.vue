@@ -78,12 +78,12 @@
                                     zIndex: p.z,
                                 }"
                             >
-                                <div class="w-full h-full" :style="{ background: p.bg, borderRadius: '50% 50% 46% 46% / 88% 88% 14% 14%', boxShadow: 'inset 0 -14px 24px rgba(173,44,81,.25), 0 2px 10px rgba(110,26,52,.25)', border: '1px solid rgba(255,255,255,.55)' }"></div>
+                                <div class="w-full h-full" :style="{ background: p.bg, borderRadius: '50% 50% 46% 46% / 88% 88% 14% 14%', boxShadow: 'inset 0 -14px 24px rgba(173,44,81,.28), 0 0 14px rgba(232, 200, 109, 0.3)', border: '1.5px solid rgba(245, 220, 138, 0.85)' }"></div>
                             </div>
 
                             <!-- centre -->
-                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[60] transition-transform duration-1000" :class="bloomed ? 'scale-100' : 'scale-75'" style="width:70px;height:70px;background: radial-gradient(circle at 35% 35%, #fff6d8, #f7d27a 55%, #c8636f);box-shadow:0 0 24px rgba(255,235,170,.9);"></div>
-                            <div v-for="n in 9" :key="'s' + n" class="absolute left-1/2 top-1/2 rounded-full z-[61] transition-all duration-1000" :style="{ width: '7px', height: '7px', background: '#ad2c51', transform: `translate(-50%,-50%) rotate(${n * 40}deg) translateY(${bloomed ? -40 : -8}px)` }"></div>
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[60] transition-transform duration-1000" :class="bloomed ? 'scale-100' : 'scale-75'" style="width:72px;height:72px;background: radial-gradient(circle at 35% 35%, #fffde8, #f7d472 45%, #c99b2e 75%, #8a5c10);box-shadow:0 0 32px rgba(247,212,114,.95), inset 0 2px 6px rgba(255,255,255,.9);"></div>
+                            <div v-for="n in 9" :key="'s' + n" class="absolute left-1/2 top-1/2 rounded-full z-[61] transition-all duration-1000" :style="{ width: '8px', height: '8px', background: '#d8ab43', boxShadow: '0 0 6px #ffe58f', transform: `translate(-50%,-50%) rotate(${n * 40}deg) translateY(${bloomed ? -42 : -8}px)` }"></div>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@ const par = (f) => ({ transform: `translate(${mx.value * f}px, ${my.value * f}px
 // Petal bursts on every click/tap
 const bursts = ref([]);
 let bid = 0;
-const colors = ['#ffffff', '#ffe4ee', '#F678A4', '#fbb1cb', '#ffffff'];
+const colors = ['#ffffff', '#ffe4ee', '#F678A4', '#f5dc8a', '#e8c86d', '#ffffff'];
 const burst = (e, count = 14) => {
     const fresh = Array.from({ length: count }, () => {
         const ang = Math.random() * Math.PI * 2;

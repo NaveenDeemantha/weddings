@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [InvitationController::class, 'preview'])->name('home');
 Route::get('/preview', [InvitationController::class, 'preview'])->name('invitation.preview');
+Route::get('/print/card', [InvitationController::class, 'printCard'])->name('invitation.print');
 Route::get('/invite/{slug}', [InvitationController::class, 'show'])->name('invitation.show');
+Route::get('/invite/{slug}/print', [InvitationController::class, 'printCard'])->name('invitation.guest.print');
 Route::post('/invite/{slug}/rsvp', [InvitationController::class, 'rsvp'])->name('invitation.rsvp');
 Route::post('/invite/{slug}/wish', [InvitationController::class, 'wish'])->name('invitation.wish');
 

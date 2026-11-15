@@ -28,6 +28,24 @@ class InvitationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_print_card_page_is_accessible(): void
+    {
+        $response = $this->get('/print/card');
+        $response->assertStatus(200);
+    }
+
+    public function test_guest_specific_print_card_page_is_accessible(): void
+    {
+        $guest = Guest::create([
+            'name' => 'Dilshan & Family',
+            'slug' => 'dilshan-family',
+            'max_guests' => 2,
+        ]);
+
+        $response = $this->get("/invite/{$guest->slug}/print");
+        $response->assertStatus(200);
+    }
+
     public function test_guest_invitation_page_can_be_viewed(): void
     {
         $guest = Guest::create([

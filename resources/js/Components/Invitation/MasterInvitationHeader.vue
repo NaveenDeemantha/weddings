@@ -14,7 +14,7 @@
                             v-for="i in 18"
                             :key="i"
                             class="absolute left-1/2 top-1/2 block w-5 h-8 sm:w-6 sm:h-10 rounded-[50%_50%_46%_46%/88%_88%_14%_14%]"
-                            :style="{ background: i % 3 === 0 ? 'linear-gradient(to top,#ad2c51,#C8636F)' : (i % 3 === 1 ? 'linear-gradient(to top,#F678A4,#ffd0e1)' : 'linear-gradient(to top,#fbb1cb,#fff)'), transform: `rotate(${i * 20}deg) translateY(calc(-1 * var(--r)))`, transformOrigin: '0 0', marginLeft: '-0.6rem' }"
+                            :style="{ background: i % 3 === 0 ? 'linear-gradient(to top,#ad2c51,#C8636F)' : (i % 3 === 1 ? 'linear-gradient(to top,#F678A4,#ffd0e1)' : 'linear-gradient(to top,#fbb1cb,#fff)'), border: '1px solid rgba(245,220,138,0.7)', boxShadow: '0 0 6px rgba(216,171,67,0.25)', transform: `rotate(${i * 20}deg) translateY(calc(-1 * var(--r)))`, transformOrigin: '0 0', marginLeft: '-0.6rem' }"
                         ></span>
                     </div>
                     <!-- photo medallion -->

@@ -11,9 +11,9 @@
 
             <radialGradient :id="`cfWash-${uid}`" cx="45%" cy="40%" r="65%">
                 <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
-                <stop offset="45%" stop-color="#ffd5e5" stop-opacity="0.5" />
-                <stop offset="80%" stop-color="#F678A4" stop-opacity="0.35" />
-                <stop offset="100%" stop-color="#ad2c51" stop-opacity="0.15" />
+                <stop offset="45%" stop-color="#fff8e7" stop-opacity="0.5" />
+                <stop offset="80%" stop-color="#f5dc8a" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#d8ab43" stop-opacity="0.15" />
             </radialGradient>
 
             <linearGradient :id="`cfLWash-${uid}`" x1="0%" y1="0%" x2="100%" y2="100%">

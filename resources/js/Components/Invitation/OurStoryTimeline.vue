@@ -16,7 +16,7 @@
                     Together with their families request the honour of your presence at the Nuptial Mass and at the celebration of their marriage.
                 </p>
 
-                <div class="mt-7 inline-block py-4 px-8 rounded-2xl bg-[#fff7fa] border-2 border-[#F678A4]/70 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <div class="mt-7 inline-block py-4 px-8 rounded-2xl bg-[#faf8f2] border-2 border-[#d8ab43]/50 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                     <h4 class="font-serif font-bold text-lg sm:text-xl tracking-wider text-[#ad2c51] uppercase">St. Sebastian's Church</h4>
                     <p class="font-display text-sm tracking-[0.25em] font-semibold text-gold-600 mt-1">MORATUWA, SRI LANKA</p>
                 </div>
@@ -25,12 +25,12 @@
             <!-- Right: journey timeline -->
             <div>
                 <p class="text-center lg:text-left font-display text-sm sm:text-base tracking-[0.35em] font-semibold text-gold-600 mb-6">A JOURNEY TOGETHER</p>
-                <div class="relative border-l-2 border-[#F678A4]/60 ml-14 sm:ml-16 pl-6 sm:pl-8 space-y-5">
+                <div class="relative border-l-2 border-[#d8ab43]/50 ml-14 sm:ml-16 pl-6 sm:pl-8 space-y-5">
                     <div
                         v-for="m in milestones"
                         :key="m.year"
-                        class="milestone relative p-5 rounded-2xl bg-[#fff7fa] border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#ad2c51]"
-                        :class="m.last ? 'border-[#ad2c51] bg-white shadow-md' : 'border-[#F678A4]/50'"
+                        class="milestone relative p-5 rounded-2xl bg-[#faf8f2] border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#ad2c51]"
+                        :class="m.last ? 'border-[#ad2c51] bg-white shadow-md' : 'border-[#d8ab43]/40'"
                     >
                         <span class="absolute -left-[4.9rem] sm:-left-[5.4rem] top-4 font-serif italic font-bold text-xl text-[#ad2c51] w-14 text-right">{{ m.year }}</span>
                         <span class="absolute -left-[2.2rem] sm:-left-[2.65rem] top-5 w-5 h-5 rounded-full border-2 border-white shadow bg-[#ad2c51] flex items-center justify-center">
@@ -53,7 +53,7 @@
                 <div
                     v-for="u in units"
                     :key="u.label"
-                    class="count-card p-3 sm:p-5 lg:p-7 rounded-3xl bg-gradient-to-b from-white to-[#ffe9f1] border-2 border-[#F678A4]/70 shadow-md flex flex-col items-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                    class="count-card p-3 sm:p-5 lg:p-7 rounded-3xl bg-gradient-to-b from-white to-[#faf6ec] border-2 border-[#d8ab43]/50 shadow-md flex flex-col items-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
                 >
                     <span class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#ad2c51] leading-none tabular-nums">{{ String(timeLeft[u.key]).padStart(2, '0') }}</span>
                     <span class="font-display text-xs sm:text-sm tracking-[0.2em] font-semibold text-stone-700 mt-3 uppercase">{{ u.label }}</span>

@@ -17,8 +17,8 @@
                     <stop offset="100%" stop-color="#9d7318" />
                 </linearGradient>
                 <radialGradient :id="`fdWash-${uid}`" cx="50%" cy="40%" r="60%">
-                    <stop offset="0%" stop-color="#ffd5e5" stop-opacity="0.6" />
-                    <stop offset="100%" stop-color="#F678A4" stop-opacity="0.2" />
+                    <stop offset="0%" stop-color="#fff8e7" stop-opacity="0.6" />
+                    <stop offset="100%" stop-color="#f5dc8a" stop-opacity="0.25" />
                 </radialGradient>
             </defs>
 

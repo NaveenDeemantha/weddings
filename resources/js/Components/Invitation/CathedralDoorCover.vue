@@ -1,236 +1,488 @@
 <template>
     <div
         v-if="!hasFinishedIntro"
-        data-no-burst class="fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-700"
+        data-no-burst
+        class="fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-1000 flex flex-col items-center justify-between bg-[#cbb8a3]"
         :class="{ 'opacity-0 pointer-events-none': isFadingOut }"
-        style="background: radial-gradient(ellipse at 50% 40%, #C8636F 0%, #ad2c51 55%, #6e1a34 100%);"
-        @mousemove="onMove"
-        @click="burst($event)"
+        @mousemove="onMouseMove"
     >
-        <!-- soft light pools -->
-        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 20% 15%, rgba(246,120,164,.45), transparent 45%), radial-gradient(circle at 85% 85%, rgba(246,120,164,.35), transparent 45%);"></div>
+        <!-- ================= SKIP VIDEO BUTTON (TOP RIGHT) ================= -->
+        <button
+            v-if="isOpening && !isFadingOut"
+            type="button"
+            @click.stop="skipIntro"
+            class="fixed top-4 right-16 sm:right-20 z-[70] inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white/95 hover:text-white font-sans text-xs tracking-wider uppercase font-semibold backdrop-blur-md border border-white/30 shadow-2xl transition-all transform active:scale-95 cursor-pointer"
+            aria-label="Skip video"
+            title="Skip Video"
+        >
+            <span>Skip</span>
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <path d="M5.5 4.5l8 6.5-8 6.5V4.5zM15.5 4.5h2v13h-2v-13z" />
+            </svg>
+        </button>
 
-        <!-- Corner flowers with mouse parallax -->
-        <div class="absolute bottom-0 left-0 pointer-events-none" :style="par(-26)">
-            <FlowerCluster class="w-28 sm:w-80 lg:w-[26rem] -translate-x-3 translate-y-6 sm:-translate-x-4 sm:translate-y-4" />
-        </div>
-        <div class="absolute bottom-0 right-0 pointer-events-none" :style="par(26)">
-            <FlowerCluster class="w-28 sm:w-80 lg:w-[26rem] translate-x-3 translate-y-6 sm:translate-x-4 sm:translate-y-4 -scale-x-100" />
-        </div>
-        <div class="absolute top-0 left-0 pointer-events-none" :style="par(-18)">
-            <FlowerCluster class="w-24 sm:w-64 lg:w-80 -translate-x-5 -translate-y-6 sm:-translate-x-4 sm:-translate-y-4 -scale-y-100" />
-        </div>
-        <div class="absolute top-0 right-0 pointer-events-none" :style="par(18)">
-            <FlowerCluster class="w-24 sm:w-64 lg:w-80 translate-x-5 -translate-y-6 sm:translate-x-4 sm:-translate-y-4 rotate-180" />
+        <!-- ================= FULLSCREEN CATHEDRAL FACADE ARCHITECTURAL BACKGROUND ================= -->
+        <!-- Authentic French Limestone Cathedral Facade Surround (User Provided Asset) -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+            <!-- Ambient blurred stone texture to seamlessly fill ultra-wide displays -->
+            <div
+                class="absolute inset-0 bg-cover bg-center filter blur-xl scale-110 opacity-70"
+                style="background-image: url('/images/invitation/cathedral_facade_surround.jpg');"
+            ></div>
+
+            <!-- Crisp Full Cathedral Facade Image (Centered, majestic) -->
+            <img
+                src="/images/invitation/cathedral_facade_surround.jpg"
+                alt="Cathedral Facade Surroundings"
+                class="w-full h-full object-cover object-center select-none"
+            />
+
+            <!-- Soft ambient twilight vignette -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/35 pointer-events-none"></div>
         </div>
 
-        <!-- Ambient floating petals -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <span
-                v-for="i in 22"
-                :key="i"
-                class="amb-petal"
-                :style="{ left: ((i * 4.7) % 100) + '%', animationDuration: (9 + (i % 6) * 1.6) + 's', animationDelay: (-(i % 9) * 1.3) + 's', width: (10 + (i % 4) * 4) + 'px', height: (14 + (i % 4) * 5) + 'px', opacity: .55 + (i % 3) * .15 }"
-            ></span>
-        </div>
+        <!-- ================= MAIN CATHEDRAL PORTAL STAGE ================= -->
+        <!-- Center Stage: The Grand Cathedral Entrance & Double Doors (Directly filling mobile screens) -->
+        <main
+            class="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-4 transition-transform duration-1000 ease-out"
+            :class="{ 'chapel-camera-zoom': isZoomingIn }"
+            :style="mouseParallaxStyle"
+        >
+            <!-- The Cathedral Portal Structure (Direct mobile edge-to-edge layout, majestic on desktop) -->
+            <div
+                class="relative cathedral-portal-frame group overflow-hidden"
+                @mouseenter="isHovered = true"
+                @mouseleave="isHovered = false"
+                @click="openChapelDoors"
+                title="Push or Click the Cathedral Doors to Open"
+            >
+                <!-- ================= THE DOORWAY APERTURE ================= -->
+                <!-- Contains the Revealed Sanctuary behind, the Video Player, and the 3D Doors in front -->
+                <div class="relative w-full h-full overflow-hidden shadow-2xl bg-[#1f0a14]">
+                    
+                    <!-- ================= BEHIND DOORS: THE ILLUMINATED CATHEDRAL SANCTUARY ================= -->
+                    <div class="absolute inset-0 z-0 bg-[#2b101c] overflow-hidden flex flex-col items-center justify-between p-4 pointer-events-none select-none">
+                        <!-- Divine Golden God-Rays bursting outward -->
+                        <div
+                            class="absolute inset-0 divine-light-flood transition-all duration-1000"
+                            :class="isOpening ? 'opacity-100 scale-125' : 'opacity-0 scale-95'"
+                            style="background: radial-gradient(ellipse at 50% 45%, rgba(255, 248, 225, 0.98) 0%, rgba(245, 220, 138, 0.8) 40%, rgba(216, 171, 67, 0.4) 75%, #180f08 100%);"
+                        ></div>
 
-        <!-- Main stage -->
-        <div class="relative z-10 h-full flex flex-col items-center justify-between px-4 pt-28 pb-32 sm:pt-8 sm:pb-8 text-center text-white" :class="{ 'stage-out': isEntering }">
-            <!-- Top: names -->
-            <div class="enter-up">
-                <p class="font-display text-xs sm:text-sm tracking-[0.4em] text-pink-100 font-semibold">THE WEDDING OF</p>
-                <h1 class="mt-2 font-serif font-semibold leading-none text-[2.6rem] sm:text-6xl lg:text-7xl drop-shadow-[0_4px_18px_rgba(110,26,52,.55)]">
-                    {{ groomName }}
-                    <span class="font-script font-normal text-pink-200 text-4xl sm:text-5xl lg:text-6xl mx-1 sm:mx-2 align-middle">&amp;</span>
-                    {{ brideName }}
-                </h1>
-                <p class="mt-3 font-serif italic text-lg sm:text-xl text-pink-50">
-                    Dear <span class="font-semibold not-italic text-white">{{ guestGreeting || guestName || 'Respected Guest' }}</span>, you are invited
-                </p>
-            </div>
-
-            <!-- Middle: the interactive bloom -->
-            <div class="relative flex items-center justify-center" :style="{ width: size + 'px', height: size + 'px' }">
-                <button
-                    type="button"
-                    @click.stop="bloom($event)"
-                    class="relative block cursor-pointer outline-none"
-                    :style="{ width: size + 'px', height: size + 'px' }"
-                    aria-label="Tap the flower to open the invitation"
-                >
-                    <div class="absolute left-0 top-0 origin-top-left" :style="{ width: '560px', height: '560px', transform: `scale(${k})` }">
-                        <div class="bloom-float absolute inset-0" :class="{ 'bloom-zoom': isEntering }">
-                            <!-- glow -->
-                            <div class="absolute inset-[18%] rounded-full blur-3xl transition-opacity duration-1000" :class="bloomed ? 'opacity-90' : 'opacity-40'" style="background: radial-gradient(circle, #ffe4ee, #F678A4 60%, transparent 75%);"></div>
-
-                            <!-- petals -->
-                            <div
-                                v-for="p in petals"
-                                :key="p.id"
-                                class="absolute"
-                                :style="{
-                                    left: '50%', top: '50%',
-                                    width: p.w + 'px', height: p.h + 'px',
-                                    marginLeft: (-p.w / 2) + 'px', marginTop: (-p.h) + 'px',
-                                    transformOrigin: '50% 100%',
-                                    transform: bloomed ? `rotate(${p.a}deg) scale(1)` : `rotate(${p.a * 0.1}deg) scale(.42)`,
-                                    transition: `transform 1.7s cubic-bezier(.2,.9,.25,1.15) ${p.delay}s`,
-                                    zIndex: p.z,
-                                }"
-                            >
-                                <div class="w-full h-full" :style="{ background: p.bg, borderRadius: '50% 50% 46% 46% / 88% 88% 14% 14%', boxShadow: 'inset 0 -14px 24px rgba(173,44,81,.28), 0 0 14px rgba(232, 200, 109, 0.3)', border: '1.5px solid rgba(245, 220, 138, 0.85)' }"></div>
+                        <!-- Sanctuary Aisle & Altar Visuals -->
+                        <div class="relative z-10 w-full h-full flex flex-col items-center justify-between pt-8 pb-10 text-center text-white">
+                            <!-- High Altar & Catholic Crucifix in the distance -->
+                            <div class="flex flex-col items-center pt-8">
+                                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-b from-[#fff6d6] to-[#d4af37] text-[#451020] font-serif font-bold text-lg sm:text-xl flex items-center justify-center shadow-[0_0_25px_#fff] mb-2">
+                                    ✝
+                                </div>
+                                <p class="font-serif italic text-base sm:text-xl text-[#fff7d6] drop-shadow-md">
+                                    St. Sebastian's Church
+                                </p>
+                                <p class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-xs text-[#f5dc8a] font-bold mt-0.5">
+                                    The Nuptial Mass · 4:00 PM
+                                </p>
                             </div>
 
-                            <!-- centre -->
-                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full z-[60] transition-transform duration-1000" :class="bloomed ? 'scale-100' : 'scale-75'" style="width:72px;height:72px;background: radial-gradient(circle at 35% 35%, #fffde8, #f7d472 45%, #c99b2e 75%, #8a5c10);box-shadow:0 0 32px rgba(247,212,114,.95), inset 0 2px 6px rgba(255,255,255,.9);"></div>
-                            <div v-for="n in 9" :key="'s' + n" class="absolute left-1/2 top-1/2 rounded-full z-[61] transition-all duration-1000" :style="{ width: '8px', height: '8px', background: '#d8ab43', boxShadow: '0 0 6px #ffe58f', transform: `translate(-50%,-50%) rotate(${n * 40}deg) translateY(${bloomed ? -42 : -8}px)` }"></div>
+                            <!-- Perspective Church Aisle with Candlelight -->
+                            <div class="relative w-52 sm:w-72 h-40 sm:h-52 flex items-end justify-center">
+                                <!-- Central Red Carpet Aisle Runner -->
+                                <div class="w-full h-full [clip-path:polygon(40%_0%,60%_0%,88%_100%,12%_100%)] bg-gradient-to-t from-[#ad2c51] via-[#8c2240] to-[#5a1227] shadow-2xl flex items-center justify-center">
+                                    <div class="w-[85%] h-full [clip-path:polygon(40%_0%,60%_0%,88%_100%,12%_100%)] border-x-2 border-[#f5dc8a]/80"></div>
+                                </div>
+
+                                <!-- Glowing Pew Candles (Professional Fine SVG) -->
+                                <div class="absolute bottom-2 left-2 flex items-end gap-1.5 opacity-90">
+                                    <svg class="w-2.5 h-6 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
+                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
+                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
+                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
+                                    </svg>
+                                    <svg class="w-2 h-4 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
+                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
+                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
+                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
+                                    </svg>
+                                </div>
+                                <div class="absolute bottom-2 right-2 flex items-end gap-1.5 opacity-90">
+                                    <svg class="w-2 h-4 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
+                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
+                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
+                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
+                                    </svg>
+                                    <svg class="w-2.5 h-6 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
+                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
+                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
+                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <p class="font-script text-2xl sm:text-3xl text-[#fff9df] drop-shadow-lg pb-4">
+                                Walking down the aisle…
+                            </p>
+                        </div>
+
+                        <!-- Ambient Floating Jasmine & White Petals -->
+                        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+                            <span
+                                v-for="i in 18"
+                                :key="i"
+                                class="sanctuary-petal"
+                                :style="{
+                                    left: ((i * 5.8) % 100) + '%',
+                                    animationDuration: (7 + (i % 4) * 1.5) + 's',
+                                    animationDelay: (-(i % 6) * 1.2) + 's',
+                                }"
+                            ></span>
                         </div>
                     </div>
 
-                    <!-- tap hint ring -->
-                    <span v-if="!bloomed" class="pointer-events-none absolute inset-[30%] rounded-full border-2 border-white/80 hint-ring"></span>
-                </button>
-            </div>
+                    <!-- Center Seam God-Ray Leak (Pulsing Light between the doors) -->
+                    <div
+                        v-if="!isOpening"
+                        class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-4 z-20 pointer-events-none transition-all duration-300"
+                        :class="isHovered ? 'opacity-100 scale-x-150' : 'opacity-70'"
+                        style="background: radial-gradient(ellipse at 50% 50%, rgba(255,248,220,0.95), rgba(247,212,114,0.6) 45%, transparent 80%);"
+                    ></div>
 
-            <!-- Bottom: prompt / details + enter -->
-            <div class="min-h-[7.5rem] sm:min-h-[9rem] flex flex-col items-center justify-start">
-                <p v-if="!bloomed" class="font-display text-sm sm:text-base tracking-[0.35em] text-white font-semibold animate-pulse">TAP THE FLOWER TO BLOOM</p>
-                <div v-else class="reveal-in-up flex flex-col items-center">
-                    <p class="font-serif text-2xl sm:text-3xl italic font-medium">Tuesday, 29th December 2026</p>
-                    <p class="mt-1 font-display text-xs sm:text-sm tracking-[0.3em] text-pink-100">ST. SEBASTIAN'S CHURCH · MORATUWA</p>
-                    <button
-                        type="button"
-                        @click.stop="enter"
-                        class="mt-5 px-10 sm:px-12 py-3.5 sm:py-4 rounded-full bg-white text-[#ad2c51] font-display text-sm sm:text-base tracking-[0.25em] font-bold shadow-[0_10px_40px_rgba(110,26,52,.5)] hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                    <!-- ================= THE VIDEO LAYER (PLAYED WHEN DOOR IS OPENED) ================= -->
+                    <video
+                        ref="doorVideoRef"
+                        src="/videos/walkdown.mp4"
+                        class="absolute inset-0 w-full h-full object-cover z-30 transition-opacity duration-1000"
+                        :class="isOpening ? 'opacity-100 pointer-events-auto cursor-pointer' : 'opacity-0 pointer-events-none'"
+                        playsinline
+                        muted
+                        preload="auto"
+                        @click.stop="skipIntro"
+                        @ended="onVideoEnded"
+                        title="Click or tap to skip video"
+                    ></video>
+
+                    <!-- ================= 3D DOUBLE DOORS VIEWPORT ================= -->
+                    <div class="absolute inset-0 z-10 flex [perspective:1400px] pointer-events-auto">
+                        
+                        <!-- ================= LEFT CATHEDRAL DOOR LEAF ================= -->
+                        <div
+                            class="relative w-1/2 h-full [transform-origin:left_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            :class="[
+                                isOpening ? 'door-left-open' : (isHovered ? 'door-left-ajar' : '')
+                            ]"
+                        >
+                            <img
+                                src="/images/invitation/door_left.jpg"
+                                alt="Cathedral Left Door"
+                                class="w-full h-full object-cover object-left select-none pointer-events-none"
+                                draggable="false"
+                            />
+                            <!-- Dynamic 3D depth shadow on door swing -->
+                            <div
+                                class="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/50 to-transparent pointer-events-none transition-opacity duration-1000"
+                                :class="isOpening ? 'opacity-100' : 'opacity-0'"
+                            ></div>
+                        </div>
+
+                        <!-- ================= RIGHT CATHEDRAL DOOR LEAF ================= -->
+                        <div
+                            class="relative w-1/2 h-full [transform-origin:right_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            :class="[
+                                isOpening ? 'door-right-open' : (isHovered ? 'door-right-ajar' : '')
+                            ]"
+                        >
+                            <img
+                                src="/images/invitation/door_right.jpg"
+                                alt="Cathedral Right Door"
+                                class="w-full h-full object-cover object-right select-none pointer-events-none"
+                                draggable="false"
+                            />
+                            <!-- Dynamic 3D depth shadow on door swing -->
+                            <div
+                                class="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/50 to-transparent pointer-events-none transition-opacity duration-1000"
+                                :class="isOpening ? 'opacity-100' : 'opacity-0'"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                    <!-- ================= TYPOGRAPHY & INTERACTIVE ACTION OVERLAY ================= -->
+                    <div
+                        class="absolute inset-0 z-20 flex flex-col items-center justify-between pt-[17%] pb-[29%] px-6 text-center pointer-events-none transition-all duration-700 select-none"
+                        :class="{ 'opacity-0 scale-95': isOpening }"
                     >
-                        ENTER INVITATION
-                    </button>
+                        <!-- Top Section: THE WEDDING OF + Delicate Cross -->
+                        <div class="flex flex-col items-center">
+                            <p class="font-serif tracking-[0.45em] text-[10px] sm:text-[11.5px] uppercase font-semibold text-[#8a724d] drop-shadow-xs">
+                                The Wedding Of
+                            </p>
+                            
+                            <!-- Delicate Gold Cross with Starlight Glow -->
+                            <div class="my-1.5 flex items-center justify-center">
+                                <span class="text-[#c4a35a] text-sm sm:text-base leading-none drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]">✝</span>
+                            </div>
+                        </div>
+
+                        <!-- Middle Section: Couple's Names, Date & Interactive Open Button -->
+                        <div class="flex flex-col items-center -mt-1 sm:-mt-2">
+                            <!-- Buddhima & Shavindi -->
+                            <h1 class="font-serif text-[26px] sm:text-[34px] md:text-[38px] leading-tight font-normal text-[#16253d] tracking-normal drop-shadow-xs">
+                                {{ groomName }}
+                                <span class="font-script text-[32px] sm:text-[42px] text-[#ad2c51] mx-1 align-baseline">&amp;</span>
+                                {{ brideName }}
+                            </h1>
+
+                            <!-- Date -->
+                            <p class="font-serif italic text-xs sm:text-sm text-[#3d3733] mt-1 tracking-wide">
+                                {{ weddingDateText }}
+                            </p>
+
+                            <!-- Prominent Interactive Open Button with Golden Glow -->
+                            <div class="mt-4 sm:mt-5 pointer-events-auto">
+                                <button
+                                    type="button"
+                                    @click.stop="openChapelDoors"
+                                    class="group relative inline-flex items-center gap-2.5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white/95 hover:bg-white border-2 border-[#2a3442]/80 text-[#1a2536] font-serif text-[10.5px] sm:text-[12px] tracking-[0.22em] font-bold uppercase shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer"
+                                    aria-label="Push doors to open the Catholic wedding invitation"
+                                >
+                                    <!-- Animated Church Icon -->
+                                    <svg class="w-4 h-4 stroke-current fill-none group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-width="1.8">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v4m-2-2h4M12 6L4 12v9h16v-9l-8-6z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 21v-5a2 2 0 014 0v5" />
+                                    </svg>
+                                    <span>Push to Open Doors</span>
+                                    <span class="text-[#c4a35a] group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Section: DEAR [GUEST NAME] -->
+                        <div class="flex flex-col items-center pt-2">
+                            <p class="font-serif tracking-[0.4em] text-[9.5px] sm:text-[11px] uppercase text-[#8a724d] font-semibold">
+                                Dear
+                            </p>
+                            <p class="font-serif font-bold text-sm sm:text-base md:text-lg text-[#16253d] uppercase tracking-[0.12em] mt-1 max-w-[290px] drop-shadow-xs">
+                                {{ guestGreeting || guestName || 'Mr & Mrs Silva' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ================= INTERACTIVE KNOCKER HINT RIPPLE ================= -->
+                    <div
+                        v-if="!isOpening"
+                        class="absolute bottom-[24%] left-1/2 -translate-x-1/2 pointer-events-none z-30 flex flex-col items-center"
+                    >
+                        <div class="w-12 h-12 rounded-full border border-[#c4a35a]/60 knocker-hint-pulse flex items-center justify-center">
+                            <span class="text-[10px] text-[#8a724d] font-serif bg-white/80 px-2 py-0.5 rounded-full shadow-xs">
+                                Knock
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-
-        <!-- Click bursts -->
-        <span
-            v-for="b in bursts"
-            :key="b.id"
-            class="burst-petal pointer-events-none fixed z-[70]"
-            :style="{ left: b.x + 'px', top: b.y + 'px', '--dx': b.dx + 'px', '--dy': b.dy + 'px', '--rot': b.rot + 'deg', background: b.color, width: b.s + 'px', height: b.s * 1.4 + 'px' }"
-        ></span>
+        </main>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import FlowerCluster from '@/Components/Invitation/FlowerCluster.vue';
+import { ref, computed } from 'vue';
 
-defineProps({
-    guestName: { type: String, default: 'Respected Guest' },
+const props = defineProps({
+    guestName: { type: String, default: 'Mr & Mrs Silva' },
     guestGreeting: { type: String, default: '' },
     brideName: { type: String, default: 'Shavindi' },
     groomName: { type: String, default: 'Buddhima' },
+    churchName: { type: String, default: "St. Sebastian's Church, Moratuwa" },
+    churchAddress: { type: String, default: 'Moratuwa, Sri Lanka' },
+    weddingDate: { type: String, default: '2026-12-29 16:00:00' },
 });
 
 const emit = defineEmits(['opened']);
 
-const bloomed = ref(false);
-const isEntering = ref(false);
+const doorVideoRef = ref(null);
+const isOpening = ref(false);
+const isHovered = ref(false);
+const isZoomingIn = ref(false);
 const isFadingOut = ref(false);
 const hasFinishedIntro = ref(false);
+const isPlayingMusic = ref(false);
 
-// Bloom geometry (designed on a 560px canvas, scaled to fit)
-const rings = [
-    { n: 12, w: 150, h: 250, off: 0,  bg: 'linear-gradient(to top, #F678A4, #ffe4ee 70%, #ffffff)', z: 1, d: 0 },
-    { n: 10, w: 130, h: 205, off: 18, bg: 'linear-gradient(to top, #C8636F, #F678A4 60%, #ffc8dc)', z: 2, d: .12 },
-    { n: 8,  w: 112, h: 160, off: 0,  bg: 'linear-gradient(to top, #ad2c51, #C8636F 65%, #F678A4)', z: 3, d: .24 },
-    { n: 6,  w: 90,  h: 112, off: 30, bg: 'linear-gradient(to top, #8a2342, #ad2c51 70%, #C8636F)', z: 4, d: .36 },
-];
-const petals = rings.flatMap((r, ri) =>
-    Array.from({ length: r.n }, (_, i) => ({
-        id: `${ri}-${i}`, w: r.w, h: r.h, a: (360 / r.n) * i + r.off, bg: r.bg, z: r.z, delay: r.d + i * 0.025,
-    })),
-);
+const weddingDateText = computed(() => {
+    return 'Tuesday, 29th December 2026';
+});
 
-// Responsive size
-const size = ref(420);
-const k = computed(() => size.value / 560);
-const resize = () => {
-    size.value = Math.max(240, Math.min(window.innerWidth * 0.92, window.innerHeight * 0.36, 560));
+// Interactive subtle mouse parallax across the facade
+const mouseX = ref(0);
+const mouseY = ref(0);
+
+const onMouseMove = (e) => {
+    if (isOpening.value) return;
+    mouseX.value = (e.clientX / window.innerWidth - 0.5) * 10;
+    mouseY.value = (e.clientY / window.innerHeight - 0.5) * 6;
 };
 
-// Mouse parallax
-const mx = ref(0), my = ref(0);
-const onMove = (e) => {
-    mx.value = e.clientX / window.innerWidth - 0.5;
-    my.value = e.clientY / window.innerHeight - 0.5;
-};
-const par = (f) => ({ transform: `translate(${mx.value * f}px, ${my.value * f}px)`, transition: 'transform .25s ease-out' });
+const mouseParallaxStyle = computed(() => {
+    if (isOpening.value) return {};
+    return {
+        transform: `translate(${mouseX.value}px, ${mouseY.value}px)`,
+        transition: 'transform 0.25s ease-out',
+    };
+});
 
-// Petal bursts on every click/tap
-const bursts = ref([]);
-let bid = 0;
-const colors = ['#ffffff', '#ffe4ee', '#F678A4', '#f5dc8a', '#e8c86d', '#ffffff'];
-const burst = (e, count = 14) => {
-    const fresh = Array.from({ length: count }, () => {
-        const ang = Math.random() * Math.PI * 2;
-        const dist = 80 + Math.random() * 160;
-        return {
-            id: ++bid, x: e.clientX, y: e.clientY,
-            dx: Math.cos(ang) * dist, dy: Math.sin(ang) * dist + 60,
-            rot: Math.random() * 540 - 270, s: 9 + Math.random() * 9,
-            color: colors[Math.floor(Math.random() * colors.length)],
-        };
-    });
-    bursts.value.push(...fresh);
-    setTimeout(() => { bursts.value = bursts.value.filter((b) => !fresh.includes(b)); }, 1600);
-};
-
-const bloom = (e) => {
-    if (bloomed.value) return;
-    bloomed.value = true;
-    burst(e, 34);
+// Sound toggle
+const toggleSound = () => {
+    isPlayingMusic.value = !isPlayingMusic.value;
     emit('opened');
 };
 
-const enter = () => {
+// Grand Catholic Door Opening Sequence
+const openChapelDoors = () => {
+    if (isOpening.value) return;
+
+    // 1. Immediately emit 'opened' so the background music auto-plays on user interaction
     emit('opened');
-    isEntering.value = true;
-    setTimeout(() => { isFadingOut.value = true; }, 900);
-    setTimeout(() => { hasFinishedIntro.value = true; }, 1600);
+    isPlayingMusic.value = true;
+
+    // 2. Start the door opening sequence
+    isOpening.value = true;
+
+    // 3. Play the walkdown video provided by the user (muted inbuilt audio, playing app background music)
+    if (doorVideoRef.value) {
+        doorVideoRef.value.currentTime = 0;
+        doorVideoRef.value.muted = true;
+        doorVideoRef.value.volume = 0;
+        const playPromise = doorVideoRef.value.play();
+        if (playPromise !== undefined) {
+            playPromise.catch((err) => {
+                console.warn('Video auto-playback fallback:', err);
+                // Fallback timeout in case video can't play on older browsers
+                setTimeout(() => {
+                    onVideoEnded();
+                }, 10500);
+            });
+        }
+    } else {
+        setTimeout(() => {
+            onVideoEnded();
+        }, 10500);
+    }
 };
 
-onMounted(() => { resize(); window.addEventListener('resize', resize); });
-onUnmounted(() => window.removeEventListener('resize', resize));
+// When the full video finishes playing, smoothly reveal the master invitation in a luxurious transition
+const onVideoEnded = () => {
+    // Hold the final view momentarily, then smoothly dissolve into the master invitation card
+    setTimeout(() => {
+        isFadingOut.value = true;
+        setTimeout(() => {
+            hasFinishedIntro.value = true;
+        }, 1200);
+    }, 600);
+};
+
+// Skip directly into the invitation
+const skipIntro = () => {
+    emit('opened');
+    if (doorVideoRef.value) {
+        doorVideoRef.value.pause();
+    }
+    isFadingOut.value = true;
+    setTimeout(() => {
+        hasFinishedIntro.value = true;
+    }, 400);
+};
 </script>
 
 <style scoped>
-.enter-up { animation: fadeUp 1s ease-out both; }
-.reveal-in-up { animation: fadeUp .9s ease-out .6s both; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-
-.bloom-float { animation: bob 6s ease-in-out infinite; }
-@keyframes bob { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(1.5deg); } }
-.bloom-zoom { animation: none; transform: scale(5); opacity: 0; transition: transform 1.3s ease-in, opacity 1.1s ease-in; }
-.stage-out > :not(:nth-child(2)) { opacity: 0; transition: opacity .5s; }
-
-.hint-ring { animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
-@keyframes ping { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
-
-.amb-petal {
-    position: absolute; top: -30px; border-radius: 50% 50% 46% 46% / 88% 88% 14% 14%;
-    background: linear-gradient(to top, #F678A4, #fff); animation: fall linear infinite;
-}
-@keyframes fall {
-    0% { transform: translate(0, -30px) rotate(0deg); }
-    50% { transform: translate(40px, 55vh) rotate(200deg); }
-    100% { transform: translate(-20px, 108vh) rotate(400deg); }
+/* ================= RESPONSIVE CATHEDRAL PORTAL FRAME ================= */
+/* Mobile First: The door fills mobile screens directly edge-to-edge */
+.cathedral-portal-frame {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+    transition: transform 0.4s ease;
 }
 
-.burst-petal {
+@media (min-width: 640px) {
+    .cathedral-portal-frame {
+        width: 440px;
+        height: 918px;
+        max-width: 92vw;
+        max-height: 94vh;
+        border-radius: 200px 200px 0 0;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+}
+
+/* ================= TACTILE HOVER / AJAR STATE ================= */
+/* Subtle unlatching feedback when the user hovers over the doors */
+.door-left-ajar {
+    transform: rotateY(-3.5deg) !important;
+}
+
+.door-right-ajar {
+    transform: rotateY(3.5deg) !important;
+}
+
+/* ================= 3D DOOR SWING ANIMATIONS ================= */
+.door-left-open {
+    transform: rotateY(-112deg) !important;
+}
+
+.door-right-open {
+    transform: rotateY(112deg) !important;
+}
+
+/* Camera walk-through zoom into the church sanctuary */
+.chapel-camera-zoom {
+    transform: scale(2.4) translateY(6%) !important;
+    opacity: 0 !important;
+    transition: transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 1.3s ease-in !important;
+}
+
+/* Floating white flower petals in sanctuary */
+.sanctuary-petal {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 14px;
     border-radius: 50% 50% 46% 46% / 88% 88% 14% 14%;
-    animation: burst 1.5s cubic-bezier(.2,.7,.3,1) forwards;
+    background: linear-gradient(to top, #fff8e7, #ffffff);
+    animation: petalFall linear infinite;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
 }
-@keyframes burst {
-    0% { transform: translate(-50%, -50%) rotate(0deg) scale(.4); opacity: 1; }
-    100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(1); opacity: 0; }
+
+@keyframes petalFall {
+    0% {
+        transform: translateY(-20px) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(105vh) rotate(380deg) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Knocker Hint Pulse */
+.knocker-hint-pulse {
+    animation: ringPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ringPing {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 </style>

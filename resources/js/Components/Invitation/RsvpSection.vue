@@ -1,6 +1,6 @@
 <template>
     <div id="rsvp" class="w-full max-w-2xl mx-auto my-10 sm:my-14 px-2 sm:px-4 scroll-mt-10">
-        <div class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-10 border border-[#F678A4]/60 shadow-lg text-center">
+        <div class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-10 border border-[#d8ab43]/50 shadow-lg text-center">
             <!-- Header -->
             <div class="mb-6 sm:mb-8">
                 <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
@@ -16,7 +16,7 @@
                 </p>
 
                 <!-- Guest Greeting Badge -->
-                <div class="mt-3.5 p-2.5 sm:p-3 bg-[#fff7fa] rounded-xl border border-[#f8d3e0] inline-block max-w-full">
+                <div class="mt-3.5 p-2.5 sm:p-3 bg-[#faf8f2] rounded-xl border border-[#e8c86d]/40 inline-block max-w-full">
                     <p class="text-[8px] sm:text-[9px] uppercase tracking-wider font-sans font-semibold text-gold-700">
                         Invitation Extended To:
                     </p>
@@ -59,7 +59,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <label
                         class="relative flex flex-col p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all active:scale-98"
-                        :class="form.status === 'attending' ? 'border-[#C8636F] bg-[#fff7fa] shadow-sm' : 'border-stone-200 bg-white hover:border-[#F678A4]'"
+                        :class="form.status === 'attending' ? 'border-[#d8ab43] bg-[#faf8f2] shadow-sm' : 'border-stone-200 bg-white hover:border-[#d8ab43]'"
                     >
                         <input
                             type="radio"
@@ -95,7 +95,7 @@
                 </div>
 
                 <!-- Attending details -->
-                <div v-if="form.status === 'attending'" class="space-y-4 p-4 sm:p-5 bg-[#fff7fa] rounded-xl border border-[#f8d3e0]">
+                <div v-if="form.status === 'attending'" class="space-y-4 p-4 sm:p-5 bg-[#faf8f2] rounded-xl border border-[#e8c86d]/40">
                     <!-- Headcount selector with touch friendly targets -->
                     <div>
                         <label class="block text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold text-stone-600 mb-2">
@@ -105,7 +105,7 @@
                             <button
                                 type="button"
                                 @click="form.attending_count = Math.max(1, form.attending_count - 1)"
-                                class="w-11 h-11 rounded-xl bg-white border border-[#F678A4] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
+                                class="w-11 h-11 rounded-xl bg-white border border-[#d8ab43] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
                             >
                                 -
                             </button>
@@ -115,7 +115,7 @@
                             <button
                                 type="button"
                                 @click="form.attending_count = Math.min(maxGuests, form.attending_count + 1)"
-                                class="w-11 h-11 rounded-xl bg-white border border-[#F678A4] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
+                                class="w-11 h-11 rounded-xl bg-white border border-[#d8ab43] font-bold text-lg text-stone-700 shadow-sm flex items-center justify-center hover:bg-stone-50 active:scale-95"
                             >
                                 +
                             </button>

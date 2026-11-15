@@ -16,7 +16,7 @@
 
         <div class="max-w-md mx-auto">
             <!-- Leave a Wish Form -->
-            <form @submit.prevent="submitWish" class="mb-8 bg-[#fff7fa] p-4 sm:p-5 rounded-2xl border border-[#f8d3e0] text-left">
+            <form @submit.prevent="submitWish" class="mb-8 bg-[#faf8f2] p-4 sm:p-5 rounded-2xl border border-[#d8ab43]/40 text-left">
                 <div class="space-y-3">
                     <div>
                         <label class="block text-sm sm:text-base uppercase tracking-widest font-sans font-semibold text-stone-700 mb-1">
@@ -27,7 +27,7 @@
                             v-model="form.guest_name"
                             required
                             placeholder="Enter your name..."
-                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#C8636F] focus:ring-[#C8636F] bg-white py-2.5 px-3"
+                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#d8ab43] focus:ring-[#d8ab43] bg-white py-2.5 px-3"
                         />
                     </div>
                     <div>
@@ -39,7 +39,7 @@
                             required
                             rows="3"
                             placeholder="May the Lord abundantly bless your marriage with endless love, peace, and health..."
-                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#C8636F] focus:ring-[#C8636F] bg-white p-3"
+                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#d8ab43] focus:ring-[#d8ab43] bg-white p-3"
                         ></textarea>
                     </div>
                 </div>
@@ -60,9 +60,9 @@
                 <div
                     v-for="wish in wishes"
                     :key="wish.id"
-                    class="p-4 rounded-xl bg-[#fff7fa] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
+                    class="p-4 rounded-xl bg-[#faf8f2] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
                 >
-                    <div class="w-9 h-9 rounded-full bg-white border border-[#F678A4] text-gold-800 flex items-center justify-center font-serif font-bold text-sm shrink-0 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-white border border-[#d8ab43] text-gold-800 flex items-center justify-center font-serif font-bold text-sm shrink-0 shadow-sm">
                         {{ wish.guest_name ? wish.guest_name.charAt(0).toUpperCase() : '✝' }}
                     </div>
                     <div class="flex-1 text-left">

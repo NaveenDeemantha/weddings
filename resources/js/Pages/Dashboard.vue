@@ -39,9 +39,14 @@ const formatDate = (dateStr) => {
                     <a
                         :href="route('invitation.print')"
                         target="_blank"
-                        class="px-3.5 py-2 rounded-xl bg-pink-50 border border-pink-200 text-[#ad2c51] font-semibold text-xs shadow-sm hover:bg-pink-100 transition-colors flex items-center gap-1.5"
+                        class="px-3.5 py-2 rounded-xl bg-amber-50 border border-amber-200 text-[#8c6d37] font-semibold text-xs shadow-sm hover:bg-amber-100 transition-colors flex items-center gap-1.5"
                     >
-                        <span>🖨️ Print Wedding Card</span>
+                        <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        <span>Print Wedding Card</span>
                     </a>
                     <Link
                         :href="route('guests.index')"

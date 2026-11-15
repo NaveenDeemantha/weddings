@@ -8,8 +8,8 @@
 <script setup>
 const foilBloom = (cx, cy, s) => {
     let g = `<g transform="translate(${cx} ${cy}) scale(${s})">`;
-    // Soft blush wash
-    g += `<circle cx="0" cy="0" r="14" fill="#ffd5e5" opacity="0.45" />`;
+    // Soft warm champagne wash
+    g += `<circle cx="0" cy="0" r="14" fill="#fff8e7" opacity="0.45" />`;
     // Gold foil outer petals
     for (let i = 0; i < 8; i++) {
         g += `<path d="M0 0C-5-3-7-9-3-13C1-15 5-14 7-10C8-6 5-2 0 0Z" stroke="#e8c86d" stroke-width="0.9" fill="none" transform="rotate(${i * 45})"/>`;

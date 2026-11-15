@@ -11,9 +11,9 @@
                 Order of Celebrations
             </h2>
             <div class="mt-2.5 flex items-center justify-center gap-2.5">
-                <div class="h-px bg-gradient-to-r from-transparent via-[#F678A4] to-transparent w-20 sm:w-24"></div>
+                <div class="h-px bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent w-20 sm:w-24"></div>
                 <span class="text-gold-600 text-xs sm:text-sm">❦</span>
-                <div class="h-px bg-gradient-to-r from-transparent via-[#F678A4] to-transparent w-20 sm:w-24"></div>
+                <div class="h-px bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent w-20 sm:w-24"></div>
             </div>
             <p class="mt-1.5 text-stone-600 font-serif italic text-xs sm:text-sm">
                 Saturday, 19th December 2026 • Colombo, Sri Lanka
@@ -25,17 +25,17 @@
             <div
                 v-for="(event, idx) in events"
                 :key="idx"
-                class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#F678A4]/60 shadow-sm hover:border-[#C8636F] transition-all duration-300"
+                class="relative bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8ab43]/50 shadow-sm hover:border-[#d8ab43] transition-all duration-300"
             >
                 <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
                     <div class="flex items-start gap-3 sm:gap-4">
                         <!-- Roman Numeral Pill -->
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#fff7fa] border border-[#F678A4] text-gold-800 flex items-center justify-center font-serif font-bold text-xs sm:text-sm shrink-0 mt-0.5">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#faf8f2] border border-[#d8ab43] text-gold-800 flex items-center justify-center font-serif font-bold text-xs sm:text-sm shrink-0 mt-0.5">
                             {{ toRoman(idx + 1) }}
                         </div>
 
                         <div>
-                            <div class="inline-block px-2 py-0.5 rounded-full bg-[#fff0f5] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-1">
+                            <div class="inline-block px-2 py-0.5 rounded-full bg-[#faf8f2] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-1">
                                 {{ event.tag || (idx === 0 ? 'Sacred Service' : (idx === 1 ? 'Traditional Blessing' : 'Reception & Dance')) }}
                             </div>
 
@@ -45,7 +45,10 @@
 
                             <!-- Venue & Address -->
                             <p class="mt-1.5 text-xs sm:text-sm text-stone-700 flex items-center gap-1.5 font-medium">
-                                <span class="text-gold-600">📍</span>
+                                <svg class="w-3.5 h-3.5 text-gold-600 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
                                 <span>{{ event.venue }}</span>
                             </p>
 

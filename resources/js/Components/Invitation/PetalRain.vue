@@ -18,7 +18,7 @@
 import { ref, onMounted } from 'vue';
 
 const petals = ref([]);
-const colors = ['#F678A4', '#ffffff', '#C8636F', '#fbb1cb', '#ffffff', '#ffd9e6'];
+const colors = ['#ffffff', '#fffef7', '#fdfbf0', '#f5dc8a', '#ffffff', '#e8c86d'];
 
 onMounted(() => {
     petals.value = Array.from({ length: 22 }, (_, i) => ({

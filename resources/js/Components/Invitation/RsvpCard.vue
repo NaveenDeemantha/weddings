@@ -19,14 +19,24 @@
         </div>
 
         <!-- RSVP Form Card matching screenshot 12 -->
-        <div class="max-w-md lg:max-w-xl mx-auto p-5 sm:p-8 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm text-left">
+        <div class="max-w-md lg:max-w-xl mx-auto p-5 sm:p-8 rounded-2xl bg-[#faf8f2] border border-[#d8ab43]/50 shadow-sm text-left">
             <!-- Confirmed State -->
             <div
                 v-if="guestStatus !== 'pending' && !isEditing"
                 class="text-center py-4"
             >
-                <div class="w-12 h-12 rounded-full bg-[#ad2c51] text-gold-100 flex items-center justify-center text-xl mx-auto mb-3 shadow">
-                    {{ guestStatus === 'attending' ? '✓' : '🕊️' }}
+                <div class="w-12 h-12 rounded-full bg-[#ad2c51] text-gold-100 flex items-center justify-center mx-auto mb-3 shadow">
+                    <!-- Checkmark Icon for Attending -->
+                    <svg v-if="guestStatus === 'attending'" class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <!-- Dove / Peace Icon for Declining -->
+                    <svg v-else class="w-6 h-6 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                        <path d="M2 2l7.586 7.586" />
+                        <circle cx="11" cy="11" r="2" />
+                    </svg>
                 </div>
                 <h3 class="font-serif text-lg font-bold text-[#ad2c51]">
                     {{ guestStatus === 'attending' ? 'Response Confirmed: Joyfully Accepting' : 'Response Confirmed: Regretfully Declining' }}

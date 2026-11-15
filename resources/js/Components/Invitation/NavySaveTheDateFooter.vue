@@ -20,33 +20,37 @@
 
                 <!-- Foreground Text Content: Dynamic Props Only -->
                 <div class="relative z-10 flex flex-col items-center justify-center text-center px-4">
-                    <p class="font-display text-xs sm:text-sm uppercase tracking-[0.35em] font-semibold text-pink-200">
+                    <p class="font-display text-xs sm:text-sm uppercase tracking-[0.35em] font-semibold text-gold-200">
                         SAVE THE DATE
                     </p>
 
-                    <h3 class="font-serif text-3xl sm:text-4xl font-normal tracking-widest text-[#fff0f5] my-2 drop-shadow">
+                    <h3 class="font-serif text-3xl sm:text-4xl font-normal tracking-widest text-[#fffdf5] my-2 drop-shadow">
                         29 . 12 . 26
                     </h3>
 
-                    <p class="font-serif italic text-sm text-pink-100/90 max-w-[210px] leading-relaxed">
+                    <p class="font-serif italic text-sm text-amber-100/90 max-w-[210px] leading-relaxed">
                         Thank you for being part of our special day.
                     </p>
 
-                    <!-- Delicate Heart -->
-                    <div class="my-2 text-pink-200 text-sm">🤍</div>
+                    <!-- Delicate Heart Icon -->
+                    <div class="my-2 text-gold-300 flex items-center justify-center">
+                        <svg class="w-4 h-4 fill-current drop-shadow-xs" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
 
                     <p class="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-white">
-                        {{ groomName }} <span class="font-script text-2xl text-pink-200 font-normal italic">&amp;</span> {{ brideName }}
+                        {{ groomName }} <span class="font-script text-2xl text-gold-200 font-normal italic">&amp;</span> {{ brideName }}
                     </p>
 
-                    <p class="text-xs sm:text-sm font-display uppercase tracking-[0.25em] font-semibold text-pink-200/90 mt-1">
+                    <p class="text-xs sm:text-sm font-display uppercase tracking-[0.25em] font-semibold text-gold-200/90 mt-1">
                         {{ venueName }}
                     </p>
                 </div>
             </div>
         </div>
 
-        <p class="text-xs sm:text-sm text-pink-100/80 font-serif italic mt-4">
+        <p class="text-xs sm:text-sm text-stone-600 font-serif italic mt-4">
             With blessings and gratitude · {{ groomName }} &amp; {{ brideName }}
         </p>
     </div>

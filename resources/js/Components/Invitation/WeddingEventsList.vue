@@ -16,10 +16,10 @@
             <div
                 v-for="(event, idx) in defaultEvents"
                 :key="idx"
-                class="p-5 sm:p-6 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm text-center flex flex-col items-center hover:border-[#C8636F] transition-all hover:-translate-y-2 hover:shadow-[0_18px_40px_-12px_rgba(173,44,81,.35)] duration-500 group cursor-pointer"
+                class="p-5 sm:p-6 rounded-2xl bg-[#faf8f2] border border-[#d8ab43]/50 shadow-sm text-center flex flex-col items-center hover:border-[#d8ab43] transition-all hover:-translate-y-2 hover:shadow-[0_18px_40px_-12px_rgba(216,171,67,.3)] duration-500 group cursor-pointer"
             >
                 <!-- Circular Dark Navy Badge with Gold Rim & Icon -->
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ad2c51] border-2 border-[#F678A4] flex items-center justify-center text-gold-200 text-lg mb-3 shadow-md group-hover:rotate-[360deg] group-hover:scale-110 transition-transform duration-700">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ad2c51] border-2 border-[#d8ab43] flex items-center justify-center text-gold-200 text-lg mb-3 shadow-md group-hover:rotate-[360deg] group-hover:scale-110 transition-transform duration-700">
                     <!-- Icon 1: Registration Quill / Monogram -->
                     <svg v-if="idx === 0" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -41,19 +41,30 @@
 
                 <!-- Date -->
                 <div class="mt-2 text-sm font-serif text-stone-700 flex items-center justify-center gap-1.5 font-medium">
-                    <span class="text-gold-700">📅</span>
+                    <svg class="w-4 h-4 text-gold-700 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                     <span>{{ event.date || '29th December 2026' }}</span>
                 </div>
 
                 <!-- Time -->
                 <div class="mt-1 text-sm font-serif text-stone-700 flex items-center justify-center gap-1.5 font-medium">
-                    <span class="text-gold-700">🕒</span>
+                    <svg class="w-4 h-4 text-gold-700 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
                     <span>{{ event.time }}</span>
                 </div>
 
                 <!-- Venue -->
                 <div class="mt-1 text-sm font-serif text-stone-700 flex items-center justify-center gap-1.5">
-                    <span class="text-gold-700">📍</span>
+                    <svg class="w-4 h-4 text-gold-700 fill-none stroke-current shrink-0" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
                     <span>{{ event.venue }}</span>
                 </div>
             </div>

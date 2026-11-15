@@ -12,7 +12,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const bursts = ref([]);
 let id = 0;
-const colors = ['#ffffff', '#ffe4ee', '#F678A4', '#fbb1cb', '#C8636F'];
+const colors = ['#ffffff', '#fffef7', '#f5dc8a', '#e8c86d', '#fff9e6'];
 
 const spawn = (x, y, count = 12) => {
     const fresh = Array.from({ length: count }, () => {

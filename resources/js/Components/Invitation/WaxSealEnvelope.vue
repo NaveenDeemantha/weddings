@@ -18,7 +18,7 @@
             <!-- Heavy Linen Envelope Outer Card -->
             <div class="relative bg-[#f7f5ef] rounded-2xl shadow-2xl border border-stone-300/80 p-1.5 sm:p-2 overflow-hidden card-deckled">
                 <!-- Inner Parchment Layer with Fine Gold Inset Rule -->
-                <div class="relative bg-[#ffffff] rounded-xl p-5 sm:p-10 border border-[#F678A4]/60 text-center flex flex-col items-center">
+                <div class="relative bg-[#ffffff] rounded-xl p-5 sm:p-10 border border-[#d8ab43]/50 text-center flex flex-col items-center">
                     <!-- Subtle Cross / Sacred Symbol -->
                     <div class="mb-2 text-gold-700 font-serif text-sm tracking-widest flex items-center gap-1.5">
                         <span class="text-gold-500 text-xs">✝</span>
@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Dedicated Personalized Name Tag -->
-                    <div class="w-full my-2 sm:my-3 p-3.5 sm:p-5 rounded-xl bg-[#fff7fa] border border-[#f8d3e0] shadow-inner text-center">
+                    <div class="w-full my-2 sm:my-3 p-3.5 sm:p-5 rounded-xl bg-[#faf8f2] border border-[#e8c86d]/40 shadow-inner text-center">
                         <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-sans font-semibold text-gold-700 mb-1">
                             Cordially Invited
                         </p>
@@ -81,8 +81,11 @@
                         </div>
 
                         <!-- Tap hint -->
-                        <p class="mt-2.5 text-[10px] sm:text-[11px] uppercase tracking-widest font-sans font-semibold text-stone-600 group-hover:text-stone-900 flex items-center gap-1 animate-pulse">
-                            <span>👆 Tap wax seal to open</span>
+                        <p class="mt-2.5 text-[10px] sm:text-[11px] uppercase tracking-widest font-sans font-semibold text-stone-600 group-hover:text-stone-900 flex items-center gap-1.5 animate-pulse">
+                            <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v10M18 12a6 6 0 0 1-12 0v-2"></path>
+                            </svg>
+                            <span>Tap wax seal to open</span>
                         </p>
                     </div>
 

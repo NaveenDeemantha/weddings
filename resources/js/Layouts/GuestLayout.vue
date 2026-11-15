@@ -35,32 +35,32 @@ import ClickBurst from '@/Components/Invitation/ClickBurst.vue';
             </div>
 
             <!-- Card -->
-            <div class="rounded-3xl border-2 border-[#F678A4]/70 bg-white/95 px-6 py-7 sm:px-9 sm:py-9 shadow-[0_30px_80px_rgba(74,20,40,.55)] backdrop-blur">
+            <div class="rounded-3xl border-2 border-[#d8ab43]/70 bg-white/95 px-6 py-7 sm:px-9 sm:py-9 shadow-[0_30px_80px_rgba(30,20,15,.55)] backdrop-blur">
                 <FlowerDivider />
                 <div class="mt-4">
                     <slot />
                 </div>
             </div>
 
-            <p class="mt-5 text-center font-display text-xs tracking-[0.3em] text-pink-100/90">WITH LOVE &amp; BLESSINGS</p>
+            <p class="mt-5 text-center font-display text-xs tracking-[0.3em] text-amber-100/90">WITH LOVE &amp; BLESSINGS</p>
         </div>
     </div>
 </template>
 
 <style>
-.auth-theme label { color: #ad2c51; font-weight: 600; }
+.auth-theme label { color: #8c6d37; font-weight: 600; }
 .auth-theme input[type='email'],
 .auth-theme input[type='text'],
 .auth-theme input[type='password'] {
-    border-radius: 0.9rem; border: 1.5px solid #f8c9d9; background: #fff7fa; padding: 0.75rem 1rem; color: #44172a;
+    border-radius: 0.9rem; border: 1.5px solid #e8c86d; background: #faf8f2; padding: 0.75rem 1rem; color: #1c1917;
     transition: box-shadow .2s, border-color .2s;
 }
 .auth-theme input[type='email']:focus,
 .auth-theme input[type='text']:focus,
-.auth-theme input[type='password']:focus { border-color: #ad2c51; box-shadow: 0 0 0 4px rgba(246,120,164,.3); outline: none; }
-.auth-theme input[type='checkbox'] { color: #ad2c51; border-color: #C8636F; border-radius: 0.35rem; }
-.auth-theme input[type='checkbox']:focus { --tw-ring-color: #F678A4; }
-.auth-theme a:not(:first-child) { color: #ad2c51; }
+.auth-theme input[type='password']:focus { border-color: #8c6d37; box-shadow: 0 0 0 4px rgba(216,171,67,.3); outline: none; }
+.auth-theme input[type='checkbox'] { color: #8c6d37; border-color: #b88f32; border-radius: 0.35rem; }
+.auth-theme input[type='checkbox']:focus { --tw-ring-color: #d8ab43; }
+.auth-theme a:not(:first-child) { color: #8c6d37; }
 .auth-theme .enter-up { animation: authUp .9s ease-out both; }
 @keyframes authUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 w-auto">
-        <div class="flex items-center gap-4 sm:gap-6 md:gap-7 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-[#F678A4]/60 shadow-2xl text-stone-700">
+        <div class="flex items-center gap-4 sm:gap-6 md:gap-7 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-[#d8ab43]/50 shadow-2xl text-stone-700">
             <!-- Home -->
             <a
                 href="#hero"

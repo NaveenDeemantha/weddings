@@ -29,19 +29,19 @@
                     <stop offset="100%" stop-color="#6e4f12" />
                 </linearGradient>
 
-                <!-- Translucent Blush Watercolor Wash (Handmade Cotton Paper Wash) -->
+                <!-- Translucent Champagne Watercolor Wash (Handmade Cotton Paper Wash) -->
                 <radialGradient :id="`blushWash-${uid}`" cx="45%" cy="40%" r="65%">
                     <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
-                    <stop offset="40%" stop-color="#ffd5e5" stop-opacity="0.5" />
-                    <stop offset="75%" stop-color="#F678A4" stop-opacity="0.32" />
-                    <stop offset="100%" stop-color="#ad2c51" stop-opacity="0.15" />
+                    <stop offset="40%" stop-color="#fff8e7" stop-opacity="0.5" />
+                    <stop offset="75%" stop-color="#f5dc8a" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#d8ab43" stop-opacity="0.15" />
                 </radialGradient>
 
-                <!-- Deeper Burgundy Watercolor Heart -->
+                <!-- Deeper Warm Gold Watercolor Heart -->
                 <radialGradient :id="`burgundyWash-${uid}`" cx="40%" cy="35%" r="60%">
-                    <stop offset="0%" stop-color="#F678A4" stop-opacity="0.45" />
-                    <stop offset="55%" stop-color="#ad2c51" stop-opacity="0.4" />
-                    <stop offset="100%" stop-color="#64152c" stop-opacity="0.25" />
+                    <stop offset="0%" stop-color="#f5dc8a" stop-opacity="0.45" />
+                    <stop offset="55%" stop-color="#d8ab43" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#9d7318" stop-opacity="0.25" />
                 </radialGradient>
 
                 <!-- Sage Green Translucent Leaf Wash -->

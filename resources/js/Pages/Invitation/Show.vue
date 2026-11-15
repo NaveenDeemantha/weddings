@@ -1,7 +1,7 @@
 <template>
     <Head :title="`${settings.wedding_title || 'Holy Matrimony'} - ${settings.groom_name} & ${settings.bride_name}`" />
 
-    <div class="relative min-h-screen bg-gradient-to-b from-[#fff0f5] via-white to-[#ffe4ee] text-stone-800 font-sans selection:bg-[#ffd9e6] selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
+    <div class="relative min-h-screen bg-gradient-to-b from-[#faf8f5] via-[#f7f4ed] to-[#f2ece1] text-stone-800 font-sans selection:bg-[#f5dc8a]/60 selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
         <!-- Floating Falling White Araliya & Jasmine Petals -->
         <PetalRain />
         <SideVines />
@@ -13,6 +13,9 @@
             :guest-greeting="guest.custom_greeting"
             :bride-name="settings.bride_name"
             :groom-name="settings.groom_name"
+            :church-name="settings.church_name"
+            :church-address="settings.church_address"
+            :wedding-date="settings.wedding_date"
             @opened="onDoorsOpened"
         />
 
@@ -28,8 +31,13 @@
         <!-- Preview Mode Banner (If in Preview) -->
         <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2 px-4 text-center font-serif shadow-inner flex flex-wrap items-center justify-center gap-3">
             <span>✨ Previewing Invitation Mode</span>
-            <Link :href="route('invitation.print')" class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-sans text-[11px] font-semibold transition-colors">
-                <span>🖨️ Print Wedding Card</span>
+            <Link :href="route('invitation.print')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-sans text-[11px] font-semibold transition-colors">
+                <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Print Wedding Card</span>
             </Link>
             <Link :href="route('dashboard')" class="underline hover:text-white text-[11px] font-sans">
                 Host Portal ↗
@@ -39,7 +47,7 @@
         <!-- Master Invitation Card (Optimized Luxury Stationery Proportions) -->
         <main class="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 pt-4 sm:pt-8">
             <!-- The Elegant Off-White Wedding Card with Rounded Top & Subtle Gold Border -->
-            <div ref="cardRef" class="relative bg-[#ffffff] rounded-3xl border border-[#F678A4]/70 shadow-2xl overflow-hidden card-deckled">
+            <div ref="cardRef" class="relative bg-[#ffffff] rounded-3xl border border-[#d8ab43]/50 shadow-2xl overflow-hidden card-deckled">
                 <!-- 1. Master Header: Stained Glass Arch, Holy Matrimony, Names, Date, Cute Catholic Couple & Candelabras -->
                 <MasterInvitationHeader
                     :bride-name="settings.bride_name"

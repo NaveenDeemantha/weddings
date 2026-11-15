@@ -13,8 +13,8 @@
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <!-- Outer delicate circle ring -->
-                <circle cx="120" cy="120" r="102" stroke="#F678A4" stroke-width="0.75" stroke-dasharray="3 4" opacity="0.6" />
-                <circle cx="120" cy="120" r="95" stroke="#C8636F" stroke-width="1.2" opacity="0.8" />
+                <circle cx="120" cy="120" r="102" stroke="#d8ab43" stroke-width="0.75" stroke-dasharray="3 4" opacity="0.6" />
+                <circle cx="120" cy="120" r="95" stroke="#b88f32" stroke-width="1.2" opacity="0.8" />
 
                 <!-- Catholic Cross Emblem at Top of Wreath -->
                 <g transform="translate(120, 26)">
@@ -66,10 +66,10 @@
                 </g>
 
                 <!-- Olive leaves details along the wreath -->
-                <path d="M 62 70 Q 52 64 56 55 Q 65 60 62 70 Z" fill="#f8c9d9" opacity="0.8" />
-                <path d="M 178 70 Q 188 64 184 55 Q 175 60 178 70 Z" fill="#f8c9d9" opacity="0.8" />
-                <path d="M 55 160 Q 45 168 50 176 Q 60 170 55 160 Z" fill="#f8c9d9" opacity="0.8" />
-                <path d="M 185 160 Q 195 168 190 176 Q 180 170 185 160 Z" fill="#f8c9d9" opacity="0.8" />
+                <path d="M 62 70 Q 52 64 56 55 Q 65 60 62 70 Z" fill="#e8c86d" opacity="0.8" />
+                <path d="M 178 70 Q 188 64 184 55 Q 175 60 178 70 Z" fill="#e8c86d" opacity="0.8" />
+                <path d="M 55 160 Q 45 168 50 176 Q 60 170 55 160 Z" fill="#e8c86d" opacity="0.8" />
+                <path d="M 185 160 Q 195 168 190 176 Q 180 170 185 160 Z" fill="#e8c86d" opacity="0.8" />
             </svg>
 
             <!-- Center Monogram inside Wreath -->

@@ -6,10 +6,17 @@
                 :href="calendarLink"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm hover:border-[#C8636F] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group"
+                class="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-[#faf8f2] border border-[#d8ab43]/50 shadow-sm hover:border-[#d8ab43] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group"
             >
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-[#ad2c51] text-gold-200 flex items-center justify-center text-sm shrink-0 shadow-sm group-hover:rotate-[360deg] transition-transform duration-700">📅</div>
+                    <div class="w-10 h-10 rounded-full bg-[#ad2c51] text-gold-200 flex items-center justify-center text-sm shrink-0 shadow-sm group-hover:rotate-[360deg] transition-transform duration-700">
+                        <svg class="w-5 h-5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
                     <div>
                         <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">Save the Date</h4>
                         <p class="text-sm text-stone-700 font-serif italic">Add the wedding to your calendar ↗</p>
@@ -29,22 +36,22 @@
 
         <!-- Photo grid -->
         <div class="max-w-md lg:max-w-4xl mx-auto grid grid-cols-2 gap-3 sm:gap-4">
-            <div class="photo-card rounded-2xl border border-[#F678A4]/60 bg-white p-1.5 shadow-md overflow-hidden group hover:border-[#C8636F] transition-all cursor-zoom-in" @click="openPhoto($event)">
-                <div class="w-full h-64 sm:h-72 lg:h-[26rem] rounded-xl overflow-hidden bg-pink-50">
+            <div class="photo-card rounded-2xl border border-[#d8ab43]/45 bg-[#fcfaf5] p-1.5 shadow-md overflow-hidden group hover:border-[#d8ab43] transition-all cursor-zoom-in" @click="openPhoto($event)">
+                <div class="w-full h-64 sm:h-72 lg:h-[26rem] rounded-xl overflow-hidden bg-stone-100">
                     <img src="/images/wedding/gallery_couple.jpg" :alt="`${groomName} & ${brideName}`" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <p class="text-sm font-serif italic text-stone-700 text-center py-1.5">"Two hearts, one blessed covenant"</p>
             </div>
 
             <div class="flex flex-col gap-3 sm:gap-4">
-                <div class="photo-card rounded-2xl border border-[#F678A4]/60 bg-white p-1.5 shadow-md overflow-hidden group hover:border-[#C8636F] transition-all cursor-zoom-in" @click="openPhoto($event)">
-                    <div class="w-full h-28 sm:h-32 lg:h-48 rounded-xl overflow-hidden bg-pink-50">
+                <div class="photo-card rounded-2xl border border-[#d8ab43]/45 bg-[#fcfaf5] p-1.5 shadow-md overflow-hidden group hover:border-[#d8ab43] transition-all cursor-zoom-in" @click="openPhoto($event)">
+                    <div class="w-full h-28 sm:h-32 lg:h-48 rounded-xl overflow-hidden bg-stone-100">
                         <img src="/images/wedding/gallery_bride.jpg" :alt="brideName" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <p class="text-sm font-serif italic text-stone-700 text-center py-1">{{ brideName }} · The Bride</p>
                 </div>
-                <div class="photo-card rounded-2xl border border-[#F678A4]/60 bg-white p-1.5 shadow-md overflow-hidden group hover:border-[#C8636F] transition-all cursor-zoom-in" @click="openPhoto($event)">
-                    <div class="w-full h-28 sm:h-32 lg:h-48 rounded-xl overflow-hidden bg-pink-50">
+                <div class="photo-card rounded-2xl border border-[#d8ab43]/45 bg-[#fcfaf5] p-1.5 shadow-md overflow-hidden group hover:border-[#d8ab43] transition-all cursor-zoom-in" @click="openPhoto($event)">
+                    <div class="w-full h-28 sm:h-32 lg:h-48 rounded-xl overflow-hidden bg-stone-100">
                         <img src="/images/wedding/gallery_groom.jpg" :alt="groomName" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <p class="text-sm font-serif italic text-stone-700 text-center py-1">{{ groomName }} · The Groom</p>
@@ -54,10 +61,10 @@
 
         <!-- Lightbox -->
         <Teleport to="body">
-            <div v-if="photo" class="fixed inset-0 z-[90] flex items-center justify-center p-6 bg-[#4a1428]/90 backdrop-blur-sm cursor-zoom-out" data-no-burst @click="photo = null">
+            <div v-if="photo" class="fixed inset-0 z-[90] flex items-center justify-center p-6 bg-stone-950/90 backdrop-blur-sm cursor-zoom-out" data-no-burst @click="photo = null">
                 <div class="relative text-center">
                     <img :src="photo" class="lightbox-in max-h-[78vh] max-w-[88vw] rounded-3xl border-4 border-white shadow-2xl" />
-                    <p class="text-pink-100 font-display tracking-[0.3em] text-xs mt-4">TAP ANYWHERE TO CLOSE</p>
+                    <p class="text-stone-300 font-display tracking-[0.3em] text-xs mt-4">TAP ANYWHERE TO CLOSE</p>
                 </div>
             </div>
         </Teleport>

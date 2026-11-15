@@ -17,7 +17,7 @@
                 </p>
 
                 <div class="mt-7 inline-block py-4 px-8 rounded-2xl bg-[#fff7fa] border-2 border-[#F678A4]/70 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                    <h4 class="font-serif font-bold text-lg sm:text-xl tracking-wider text-[#ad2c51] uppercase">St. Mary's Church</h4>
+                    <h4 class="font-serif font-bold text-lg sm:text-xl tracking-wider text-[#ad2c51] uppercase">St. Sebastian's Church</h4>
                     <p class="font-display text-sm tracking-[0.25em] font-semibold text-gold-600 mt-1">MORATUWA, SRI LANKA</p>
                 </div>
             </div>

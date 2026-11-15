@@ -86,8 +86,8 @@ const openPhoto = (e) => {
 const calendarLink = computed(() => {
     try {
         const title = encodeURIComponent(`The Wedding of ${props.groomName} & ${props.brideName}`);
-        const details = encodeURIComponent(`Holy Matrimony of ${props.groomName} & ${props.brideName} at St. Mary's Church, Moratuwa, Sri Lanka.`);
-        const location = encodeURIComponent("St. Mary's Church, Moratuwa, Sri Lanka");
+        const details = encodeURIComponent(`Holy Matrimony of ${props.groomName} & ${props.brideName} at St. Sebastian's Church, Moratuwa, Sri Lanka at 4:00 PM, followed by Reception at Vinrich Lake Resort, Piliyandala.`);
+        const location = encodeURIComponent("St. Sebastian's Church, Moratuwa, Sri Lanka");
         return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
     } catch {
         return '#';

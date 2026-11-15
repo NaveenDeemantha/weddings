@@ -63,12 +63,12 @@
                     <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">29</span>
                     <span class="font-display text-sm sm:text-base tracking-[0.25em] text-[#ad2c51] font-semibold border-y border-[#C8636F] py-2 px-3">2026</span>
                 </div>
-                <p class="mt-3 font-display text-xs sm:text-sm tracking-[0.3em] text-stone-700">TUESDAY · 9:00 AM</p>
+                <p class="mt-3 font-display text-xs sm:text-sm tracking-[0.3em] text-stone-700">TUESDAY · 4:00 PM</p>
 
-                <p class="mt-8 font-serif italic text-xl sm:text-2xl text-stone-800 max-w-md mx-auto leading-relaxed">
-                    “Therefore what God has joined together, let no one separate.”
+                <p class="mt-8 font-serif italic text-lg sm:text-xl text-stone-800 max-w-lg mx-auto leading-relaxed">
+                    “And now these three remain: faith, hope and love. But the greatest of these is love.”
                 </p>
-                <p class="mt-1 font-display text-xs tracking-[0.3em] text-[#ad2c51] font-semibold">MATTHEW 19:6</p>
+                <p class="mt-1 font-display text-xs tracking-[0.3em] text-[#ad2c51] font-semibold">1 CORINTHIANS 13:13</p>
             </div>
         </div>
     </div>

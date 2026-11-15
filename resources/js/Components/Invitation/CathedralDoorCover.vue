@@ -97,7 +97,7 @@
                 <p v-if="!bloomed" class="font-display text-sm sm:text-base tracking-[0.35em] text-white font-semibold animate-pulse">TAP THE FLOWER TO BLOOM</p>
                 <div v-else class="reveal-in-up flex flex-col items-center">
                     <p class="font-serif text-2xl sm:text-3xl italic font-medium">Tuesday, 29th December 2026</p>
-                    <p class="mt-1 font-display text-xs sm:text-sm tracking-[0.3em] text-pink-100">ST. MARY'S CHURCH · MORATUWA</p>
+                    <p class="mt-1 font-display text-xs sm:text-sm tracking-[0.3em] text-pink-100">ST. SEBASTIAN'S CHURCH · MORATUWA</p>
                     <button
                         type="button"
                         @click.stop="enter"

@@ -8,7 +8,7 @@
                 <div class="flex items-center gap-3">
                     <Link
                         :href="backUrl"
-                        class="p-2 rounded-full hover:bg-stone-100 text-stone-600 transition-colors"
+                        class="p-2 rounded-full hover:bg-stone-100 text-stone-600 transition-colors cursor-pointer"
                         title="Back"
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,79 +17,61 @@
                     </Link>
                     <div>
                         <h1 class="font-serif text-lg sm:text-xl font-bold text-[#ad2c51]">
-                            Printable Wedding Card
+                            Wedding Invitation Print Card
                         </h1>
                         <p class="text-xs text-stone-500">
-                            Bespoke Luxury Stationery · 300 DPI Vector Print Layout
+                            Single-Page Luxury Stationery · Gold Foil Line-Art Rose Theme
                         </p>
                     </div>
                 </div>
 
-                <!-- Customization Options -->
+                <!-- Customization Options Toolbar -->
                 <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs font-medium">
                     <!-- Format Toggle -->
                     <div class="inline-flex rounded-lg border border-stone-200 bg-stone-50 p-0.5">
                         <button
                             type="button"
                             @click="cardFormat = '5x7'"
-                            class="px-2.5 py-1.5 rounded-md transition-all"
+                            class="px-3 py-1.5 rounded-md transition-all cursor-pointer"
                             :class="cardFormat === '5x7' ? 'bg-white shadow text-[#ad2c51] font-semibold' : 'text-stone-600 hover:text-stone-900'"
                         >
-                            5" × 7" (A7)
+                            5" × 7" (A7 Classic)
                         </button>
                         <button
                             type="button"
                             @click="cardFormat = 'a5'"
-                            class="px-2.5 py-1.5 rounded-md transition-all"
+                            class="px-3 py-1.5 rounded-md transition-all cursor-pointer"
                             :class="cardFormat === 'a5' ? 'bg-white shadow text-[#ad2c51] font-semibold' : 'text-stone-600 hover:text-stone-900'"
                         >
                             A5 Sheet
                         </button>
                     </div>
 
-                    <!-- Side Toggle -->
-                    <div class="inline-flex rounded-lg border border-stone-200 bg-stone-50 p-0.5">
-                        <button
-                            type="button"
-                            @click="viewSide = 'both'"
-                            class="px-2 py-1.5 rounded-md transition-all"
-                            :class="viewSide === 'both' ? 'bg-white shadow text-[#ad2c51] font-semibold' : 'text-stone-600'"
-                        >
-                            Both Sides
-                        </button>
-                        <button
-                            type="button"
-                            @click="viewSide = 'front'"
-                            class="px-2 py-1.5 rounded-md transition-all"
-                            :class="viewSide === 'front' ? 'bg-white shadow text-[#ad2c51] font-semibold' : 'text-stone-600'"
-                        >
-                            Front Only
-                        </button>
-                        <button
-                            type="button"
-                            @click="viewSide = 'back'"
-                            class="px-2 py-1.5 rounded-md transition-all"
-                            :class="viewSide === 'back' ? 'bg-white shadow text-[#ad2c51] font-semibold' : 'text-stone-600'"
-                        >
-                            Back Only
-                        </button>
-                    </div>
-
-                    <!-- Paper Color Mode -->
+                    <!-- Paper Color Toggle -->
                     <button
                         type="button"
-                        @click="showIvoryBg = !showIvoryBg"
-                        class="px-3 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 flex items-center gap-1.5"
+                        @click="isIvory = !isIvory"
+                        class="px-3 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 flex items-center gap-1.5 cursor-pointer"
                     >
-                        <span class="w-3 h-3 rounded-full border border-stone-300" :style="{ backgroundColor: showIvoryBg ? '#FFFDF9' : '#ffffff' }"></span>
-                        <span>{{ showIvoryBg ? 'Ivory Card' : 'Pure White' }}</span>
+                        <span class="w-3 h-3 rounded-full border border-stone-300" :style="{ backgroundColor: isIvory ? '#FFFDF9' : '#ffffff' }"></span>
+                        <span>{{ isIvory ? 'Warm Ivory' : 'Pure White' }}</span>
+                    </button>
+
+                    <!-- QR Code Toggle -->
+                    <button
+                        type="button"
+                        @click="showQr = !showQr"
+                        class="px-3 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 cursor-pointer"
+                        :class="{ 'border-[#ad2c51] text-[#ad2c51] font-semibold': showQr }"
+                    >
+                        QR Code {{ showQr ? 'ON' : 'OFF' }}
                     </button>
 
                     <!-- Crop Marks Toggle -->
                     <button
                         type="button"
                         @click="showCropMarks = !showCropMarks"
-                        class="px-3 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700"
+                        class="px-3 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 cursor-pointer"
                         :class="{ 'border-[#ad2c51] text-[#ad2c51] font-semibold': showCropMarks }"
                     >
                         Crop Marks {{ showCropMarks ? 'ON' : 'OFF' }}
@@ -99,308 +81,257 @@
                     <button
                         type="button"
                         @click="triggerPrint"
-                        class="px-4 py-2 rounded-full bg-[#ad2c51] hover:bg-[#8e2442] text-white font-semibold shadow-md flex items-center gap-2 cursor-pointer transition-all transform hover:scale-105"
+                        class="px-5 py-2 rounded-full bg-[#ad2c51] hover:bg-[#8e2442] text-white font-semibold shadow-md flex items-center gap-2 cursor-pointer transition-all transform hover:scale-105"
                     >
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                             <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
                         </svg>
-                        <span>Print / Save PDF</span>
+                        <span>Print / Save PDF (1 Page)</span>
                     </button>
                 </div>
             </div>
         </header>
 
-        <!-- Print Tip Banner on Screen -->
+        <!-- Screen-only Helper Bar -->
         <div class="no-print max-w-4xl mx-auto mt-4 px-4">
-            <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 text-xs flex items-start gap-2.5">
-                <span class="text-base">💡</span>
-                <div>
-                    <strong>Printing Tip for Best Results:</strong> In the browser print dialog, choose <strong>Destination: Save as PDF</strong> (or your cardstock printer), set <strong>Margins: None</strong>, and ensure <strong>"Background graphics"</strong> is checked for crisp rose gold borders and floral colors.
+            <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 text-xs flex flex-wrap items-center justify-between gap-3 shadow-sm">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-base">✨</span>
+                    <div>
+                        <strong>Gold Foil Line-Art Rose Design:</strong> Single-page luxury layout framed with our site's signature gold-outlined roses, soft blush watercolor wash, and fine gold stationery border rules.
+                    </div>
+                </div>
+
+                <!-- Live Guest Name Input -->
+                <div class="flex items-center gap-2">
+                    <label for="customGuest" class="font-semibold text-stone-700">Guest Line:</label>
+                    <input
+                        id="customGuest"
+                        v-model="guestInput"
+                        type="text"
+                        placeholder="Leave blank for handwriting dots"
+                        class="px-2.5 py-1 text-xs border border-stone-300 rounded-md focus:ring-1 focus:ring-[#ad2c51] focus:border-[#ad2c51] bg-white w-48"
+                    />
                 </div>
             </div>
         </div>
 
-        <!-- Master Printable Container -->
-        <main class="py-6 px-4 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 print:p-0 print:m-0 print:gap-0 print:block">
+        <!-- Master Printable Container (STRICTLY ONE PAGE) -->
+        <main class="py-8 px-4 flex items-center justify-center print:p-0 print:m-0 print:block">
             
-            <!-- ================= FRONT SIDE (THE INVITATION) ================= -->
             <section
-                v-if="viewSide === 'both' || viewSide === 'front'"
-                class="card-wrapper print:page-break-after"
-                :class="[
-                    cardFormat === '5x7' ? 'card-5x7' : 'card-a5',
-                    { 'with-crop-marks': showCropMarks }
-                ]"
-            >
-                <!-- Crop Marks (for print trimming) -->
-                <div v-if="showCropMarks" class="crop-mark top-left"></div>
-                <div v-if="showCropMarks" class="crop-mark top-right"></div>
-                <div v-if="showCropMarks" class="crop-mark bottom-left"></div>
-                <div v-if="showCropMarks" class="crop-mark bottom-right"></div>
-
-                <div
-                    class="card-face relative overflow-hidden shadow-2xl print:shadow-none transition-colors"
-                    :style="{ backgroundColor: showIvoryBg ? '#FFFDF9' : '#ffffff' }"
-                >
-                    <!-- Ornate Floral Corner Clusters (SVG Vector) -->
-                    <div class="absolute -top-3 -left-3 w-28 h-28 pointer-events-none select-none opacity-90">
-                        <CornerFlower cluster="tl" />
-                    </div>
-                    <div class="absolute -top-3 -right-3 w-28 h-28 pointer-events-none select-none opacity-90 -scale-x-100">
-                        <CornerFlower cluster="tr" />
-                    </div>
-                    <div class="absolute -bottom-3 -left-3 w-28 h-28 pointer-events-none select-none opacity-90 -scale-y-100">
-                        <CornerFlower cluster="bl" />
-                    </div>
-                    <div class="absolute -bottom-3 -right-3 w-28 h-28 pointer-events-none select-none opacity-90 rotate-180">
-                        <CornerFlower cluster="br" />
-                    </div>
-
-                    <!-- Master Arch Framing (Double Line: Deep Burgundy Outer + Gold Foil Inner) -->
-                    <div class="absolute inset-4 sm:inset-5 rounded-t-[100px] rounded-b-2xl border-2 border-[#ad2c51] pointer-events-none">
-                        <div class="absolute inset-1.5 rounded-t-[94px] rounded-b-xl border border-[#d8ab43] opacity-85"></div>
-                    </div>
-
-                    <!-- Inner Invitation Content -->
-                    <div class="relative z-10 h-full flex flex-col items-center justify-between px-8 py-8 sm:py-10 text-center">
-                        
-                        <!-- Top Crest: Catholic Cross & Rose Radiance -->
-                        <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 rounded-full bg-[#ad2c51]/10 flex items-center justify-center mb-1">
-                                <svg class="w-4 h-4 fill-[#ad2c51]" viewBox="0 0 24 24">
-                                    <path d="M11 2v6H5v4h6v10h4V12h6V8h-6V2h-4z"/>
-                                </svg>
-                            </div>
-                            <p class="font-display text-[9px] sm:text-[10px] tracking-[0.35em] text-[#ad2c51] font-semibold uppercase">
-                                The Wedding Of
-                            </p>
-                        </div>
-
-                        <!-- Parents Blessing Invitation -->
-                        <div class="space-y-1 max-w-sm">
-                            <p class="font-serif italic text-stone-600 text-xs sm:text-sm">
-                                Together with their parents
-                            </p>
-                            <p class="font-serif text-stone-800 text-xs sm:text-sm font-semibold tracking-wide">
-                                {{ settings.bride_parents || 'Mr. & Mrs. Perera' }}
-                                <span class="font-normal italic text-stone-500 text-xs mx-1">&amp;</span>
-                                {{ settings.groom_parents || 'Mr. & Mrs. Fernando' }}
-                            </p>
-                            <p class="font-serif text-[11px] sm:text-xs text-stone-600 italic leading-relaxed pt-1">
-                                request the honour of your presence at the Nuptial Mass<br class="hidden sm:inline" />
-                                uniting their children in the Sacrament of Holy Matrimony
-                            </p>
-                        </div>
-
-                        <!-- Bride & Groom Couple Names -->
-                        <div class="py-1">
-                            <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-[#ad2c51] tracking-tight">
-                                {{ settings.groom_name || 'Buddhima' }}
-                            </h2>
-                            <div class="flex items-center justify-center gap-3 my-0.5">
-                                <span class="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#C8636F]"></span>
-                                <span class="font-script text-2xl sm:text-3xl text-[#F678A4] -translate-y-1">&amp;</span>
-                                <span class="h-[1px] w-10 bg-gradient-to-l from-transparent to-[#C8636F]"></span>
-                            </div>
-                            <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-[42px] leading-tight text-[#ad2c51] tracking-tight">
-                                {{ settings.bride_name || 'Shavindi' }}
-                            </h2>
-                        </div>
-
-                        <!-- Date & Ceremony Details -->
-                        <div class="space-y-1 border-t border-b border-[#C8636F]/30 py-2.5 w-full max-w-xs">
-                            <p class="font-serif italic text-stone-700 text-xs sm:text-sm">
-                                Tuesday, the Twenty-Ninth of December
-                            </p>
-                            <p class="font-display text-[10px] sm:text-[11px] font-bold text-[#ad2c51] tracking-[0.25em] uppercase">
-                                Two Thousand Twenty-Six
-                            </p>
-                            <p class="font-serif text-xs text-stone-600">
-                                at Nine o'clock in the morning
-                            </p>
-                        </div>
-
-                        <!-- Venue -->
-                        <div>
-                            <p class="font-serif font-bold text-sm sm:text-base text-stone-900 tracking-wide uppercase">
-                                St. Mary's Church
-                            </p>
-                            <p class="font-serif italic text-xs text-stone-600">
-                                Moratuwa, Sri Lanka
-                            </p>
-                        </div>
-
-                        <!-- Scripture / Blessing Footer -->
-                        <div class="pt-1">
-                            <p class="font-serif italic text-[10px] sm:text-[11px] text-[#ad2c51]/80 max-w-xs leading-normal">
-                                “Therefore what God has joined together, let no one separate.”
-                            </p>
-                            <p class="font-sans text-[8px] sm:text-[9px] tracking-widest uppercase text-stone-400 mt-0.5">
-                                Matthew 19:6
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Screen Label -->
-                <p class="no-print text-center text-xs text-stone-500 mt-2 font-medium">Front Side (Invitation)</p>
-            </section>
-
-            <!-- ================= BACK SIDE (DETAILS & PROGRAMME) ================= -->
-            <section
-                v-if="viewSide === 'both' || viewSide === 'back'"
                 class="card-wrapper"
                 :class="[
                     cardFormat === '5x7' ? 'card-5x7' : 'card-a5',
                     { 'with-crop-marks': showCropMarks }
                 ]"
             >
-                <!-- Crop Marks -->
+                <!-- Trimming Crop Marks -->
                 <div v-if="showCropMarks" class="crop-mark top-left"></div>
                 <div v-if="showCropMarks" class="crop-mark top-right"></div>
                 <div v-if="showCropMarks" class="crop-mark bottom-left"></div>
                 <div v-if="showCropMarks" class="crop-mark bottom-right"></div>
 
+                <!-- Card Face: High-End Stationery with Gold Outlined Roses & Fine Rectangular Borders -->
                 <div
                     class="card-face relative overflow-hidden shadow-2xl print:shadow-none transition-colors"
-                    :style="{ backgroundColor: showIvoryBg ? '#FFFDF9' : '#ffffff' }"
+                    :style="{ backgroundColor: isIvory ? '#FFFDF9' : '#ffffff' }"
                 >
-                    <!-- Corner Floral Accents -->
-                    <div class="absolute -top-3 -left-3 w-24 h-24 pointer-events-none select-none opacity-80">
-                        <CornerFlower cluster="tl" />
-                    </div>
-                    <div class="absolute -top-3 -right-3 w-24 h-24 pointer-events-none select-none opacity-80 -scale-x-100">
+                    <!-- ================= CORNER GOLD-OUTLINED ROSES ================= -->
+                    <!-- Top-Right Luxury Gold Foil Rose Spray -->
+                    <div class="absolute -top-3 -right-3 w-36 h-36 sm:w-44 sm:h-44 pointer-events-none select-none z-[1] -scale-x-100 opacity-95">
                         <CornerFlower cluster="tr" />
                     </div>
-                    <div class="absolute -bottom-3 -left-3 w-24 h-24 pointer-events-none select-none opacity-80 -scale-y-100">
+
+                    <!-- Bottom-Left Luxury Gold Foil Rose Spray -->
+                    <div class="absolute -bottom-3 -left-3 w-36 h-36 sm:w-44 sm:h-44 pointer-events-none select-none z-[1] -scale-y-100 opacity-95">
                         <CornerFlower cluster="bl" />
                     </div>
-                    <div class="absolute -bottom-3 -right-3 w-24 h-24 pointer-events-none select-none opacity-80 rotate-180">
+
+                    <!-- Top-Left Subtle Rose Accent -->
+                    <div class="absolute -top-4 -left-4 w-24 h-24 sm:w-28 sm:h-28 pointer-events-none select-none z-[1] opacity-75">
+                        <CornerFlower cluster="tl" />
+                    </div>
+
+                    <!-- Bottom-Right Subtle Rose Accent -->
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 sm:w-28 sm:h-28 pointer-events-none select-none z-[1] rotate-180 opacity-75">
                         <CornerFlower cluster="br" />
                     </div>
 
-                    <!-- Arch Framing -->
-                    <div class="absolute inset-4 sm:inset-5 rounded-t-[100px] rounded-b-2xl border-2 border-[#ad2c51] pointer-events-none">
-                        <div class="absolute inset-1.5 rounded-t-[94px] rounded-b-xl border border-[#d8ab43] opacity-85"></div>
+                    <!-- ================= FINE STATIONERY GOLD BORDER RULES ================= -->
+                    <!-- Outer Fine Gold Line -->
+                    <div class="absolute inset-3 sm:inset-4 border border-[#d8ab43]/50 pointer-events-none z-[2]">
+                        <!-- Inner Fine Gold Hairline with Corner Notch Accents -->
+                        <div class="absolute inset-1 sm:inset-1.5 border border-[#d8ab43]/30"></div>
+                        <!-- Delicate Corner Starburst Jewels -->
+                        <div class="absolute top-1 left-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
+                        <div class="absolute top-1 right-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
+                        <div class="absolute bottom-1 left-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
+                        <div class="absolute bottom-1 right-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
                     </div>
 
-                    <!-- Inner Details Content -->
-                    <div class="relative z-10 h-full flex flex-col items-center justify-between px-7 py-8 sm:py-9 text-center">
+                    <!-- ================= INNER STATIONERY CONTENT ================= -->
+                    <div class="relative z-10 w-full h-full flex flex-col justify-between px-7 sm:px-9 py-6 sm:py-7 text-center text-stone-800">
                         
-                        <!-- Top Header -->
-                        <div class="flex flex-col items-center">
-                            <span class="text-xs font-serif text-[#F678A4]">❦</span>
-                            <h3 class="font-display text-[10px] sm:text-[11px] tracking-[0.3em] text-[#ad2c51] font-bold uppercase mt-0.5">
-                                Celebration Programme
-                            </h3>
-                            <p class="font-serif italic text-xs text-stone-500">
-                                Tuesday, 29th December 2026
+                        <!-- Top Header: Catholic Cross & Holy Scripture (1 Corinthians 13:13) -->
+                        <div class="flex flex-col items-center pt-0.5">
+                            <div class="w-6 h-6 rounded-full bg-[#ad2c51]/10 border border-[#d8ab43]/70 flex items-center justify-center mb-1 shadow-xs">
+                                <svg class="w-3 h-3 fill-[#ad2c51]" viewBox="0 0 24 24">
+                                    <path d="M11 2v6H5v4h6v10h4V12h6V8h-6V2h-4z"/>
+                                </svg>
+                            </div>
+
+                            <p class="font-serif italic text-[10px] sm:text-[11.5px] leading-snug text-stone-700 max-w-sm">
+                                “And now these three remain: faith, hope and love.<br />
+                                But the greatest of these is love.”
+                            </p>
+                            <p class="font-display text-[8.5px] sm:text-[9.5px] tracking-[0.2em] font-semibold text-[#ad2c51] uppercase mt-0.5">
+                                1 Corinthians 13:13
                             </p>
                         </div>
 
-                        <!-- Schedule Timeline -->
-                        <div class="w-full max-w-xs space-y-2.5 my-1 text-left">
-                            
-                            <!-- 1. Registration -->
-                            <div class="flex items-start gap-3 bg-white/70 border border-[#F678A4]/30 rounded-xl p-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-[#ad2c51] text-white flex items-center justify-center shrink-0 text-xs shadow-sm">
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="font-sans font-bold text-xs text-[#ad2c51]">08:30 AM</span>
-                                        <span class="text-[10px] uppercase font-semibold tracking-wider text-stone-700">· Registration</span>
-                                    </div>
-                                    <p class="font-serif text-[11px] text-stone-500 leading-tight">
-                                        St. Mary's Church, Moratuwa
-                                    </p>
-                                </div>
+                        <!-- Parents Section (Rodrigo & Fernando Families) -->
+                        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 max-w-md mx-auto w-full pt-1">
+                            <div class="text-center font-serif text-[11px] sm:text-[12.5px] leading-tight font-semibold text-stone-900">
+                                <p>Mr. Sumith Rodrigo &amp;</p>
+                                <p>Mrs. Banduwathi</p>
                             </div>
-
-                            <!-- 2. Nuptial Mass -->
-                            <div class="flex items-start gap-3 bg-white/70 border border-[#F678A4]/30 rounded-xl p-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-[#ad2c51] text-white flex items-center justify-center shrink-0 text-xs shadow-sm">
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                        <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM4 13v8h16v-8H4zm14 6H6v-4h12v4z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="font-sans font-bold text-xs text-[#ad2c51]">09:00 AM</span>
-                                        <span class="text-[10px] uppercase font-semibold tracking-wider text-stone-700">· Nuptial Mass</span>
-                                    </div>
-                                    <p class="font-serif text-[11px] text-stone-500 leading-tight">
-                                        Holy Sacrament & Exchange of Vows
-                                    </p>
-                                </div>
+                            <div class="flex flex-col items-center justify-center px-1 text-stone-400 font-serif italic text-xs leading-none">
+                                <span class="h-3 w-[1px] bg-[#d8ab43]/60"></span>
+                                <span class="my-0.5 text-[10.5px] text-[#ad2c51] font-semibold">and</span>
+                                <span class="h-3 w-[1px] bg-[#d8ab43]/60"></span>
                             </div>
-
-                            <!-- 3. Reception & Poruwa -->
-                            <div class="flex items-start gap-3 bg-white/70 border border-[#F678A4]/30 rounded-xl p-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-[#ad2c51] text-white flex items-center justify-center shrink-0 text-xs shadow-sm">
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="font-sans font-bold text-xs text-[#ad2c51]">12:00 PM</span>
-                                        <span class="text-[10px] uppercase font-semibold tracking-wider text-stone-700">· Poruwa &amp; Reception</span>
-                                    </div>
-                                    <p class="font-serif text-[11px] text-stone-500 leading-tight">
-                                        The Grand Ballroom · Lunch &amp; Festivities
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Dress Code Pill -->
-                        <div class="px-3 py-1 rounded-full bg-[#ad2c51]/10 text-[#ad2c51] text-[10px] font-medium tracking-wide">
-                            <strong>Dress Code:</strong> Formal Church Attire / Elegant Evening Wear
-                        </div>
-
-                        <!-- RSVP Section & Interactive QR Code -->
-                        <div class="w-full max-w-xs border-t border-[#C8636F]/30 pt-2 flex items-center justify-between gap-3 text-left">
-                            <div class="flex-1">
-                                <p class="font-display text-[9px] font-bold text-[#ad2c51] tracking-wider uppercase">
-                                    Kindly RSVP
-                                </p>
-                                <p class="font-serif text-[11px] text-stone-700 font-semibold">
-                                    By 1st December 2026
-                                </p>
-                                <p class="font-serif text-[10px] text-stone-500 leading-tight mt-0.5">
-                                    Scan QR to confirm attendance &amp; view digital card
-                                </p>
-                            </div>
-
-                            <!-- Crisp Vector QR Code -->
-                            <div class="w-16 h-16 sm:w-18 sm:h-18 p-1 bg-white border border-[#C8636F]/40 rounded-lg shadow-sm shrink-0 flex items-center justify-center">
-                                <svg
-                                    v-if="qrData"
-                                    :viewBox="`0 0 ${qrData.size} ${qrData.size}`"
-                                    class="w-full h-full"
-                                    shape-rendering="crispEdges"
-                                >
-                                    <path :d="qrData.path" fill="#ad2c51" />
-                                </svg>
-                                <div v-else class="text-[9px] text-stone-400">QR Code</div>
+                            <div class="text-center font-serif text-[11px] sm:text-[12.5px] leading-tight font-semibold text-stone-900">
+                                <p>Mr. Lalith Fernando &amp;</p>
+                                <p>Mrs. Priska Pieris</p>
                             </div>
                         </div>
 
-                        <!-- Bottom Couple Blessings -->
-                        <p class="font-serif italic text-stone-500 text-[10px] pt-1">
-                            With love, blessings &amp; gratitude · Buddhima &amp; Shavindi
-                        </p>
+                        <!-- Formal Invitation Line -->
+                        <div class="pt-0.5">
+                            <p class="font-display uppercase tracking-[0.25em] text-[8.5px] sm:text-[10px] font-bold text-[#ad2c51]">
+                                Request the pleasure of the company of
+                            </p>
+                        </div>
+
+                        <!-- Guest Name Line (Dotted or Filled) -->
+                        <div class="w-full max-w-md mx-auto">
+                            <p class="font-serif text-[10px] sm:text-[12px] text-stone-700 tracking-wider">
+                                <span class="font-bold text-stone-900 uppercase">MR. &amp; MRS. / MISS. / FAMILY</span>
+                                <span v-if="guestInput.trim()" class="ml-2 font-serif font-bold text-[#ad2c51] underline underline-offset-4 decoration-[#d8ab43] uppercase tracking-wider">
+                                    {{ guestInput.trim() }}
+                                </span>
+                                <span v-else class="text-stone-400 tracking-widest pl-1 select-none">
+                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                </span>
+                            </p>
+                        </div>
+
+                        <!-- Connecting Subtitle -->
+                        <div>
+                            <p class="font-display uppercase tracking-[0.2em] text-[8px] sm:text-[9.5px] font-semibold text-stone-600">
+                                As we celebrate the marriage of
+                            </p>
+                        </div>
+
+                        <!-- The Couple's Calligraphy: Buddhima & Shavindi -->
+                        <div class="py-0.5">
+                            <h2 class="font-serif font-bold text-3xl sm:text-[40px] leading-none text-[#ad2c51] tracking-tight drop-shadow-xs">
+                                Buddhima
+                            </h2>
+                            <div class="flex items-center justify-center gap-3 my-0.5">
+                                <span class="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#d8ab43]"></span>
+                                <span class="font-script text-2xl sm:text-3xl text-[#d8ab43] -translate-y-0.5">&amp;</span>
+                                <span class="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#d8ab43]"></span>
+                            </div>
+                            <h2 class="font-serif font-bold text-3xl sm:text-[40px] leading-none text-[#ad2c51] tracking-tight drop-shadow-xs">
+                                Shavindi
+                            </h2>
+                        </div>
+
+                        <!-- Date Section: ——— TUESDAY | 29 | DECEMBER 2026 ——— -->
+                        <div class="flex items-center justify-center gap-2 sm:gap-3 my-0.5 w-full max-w-md mx-auto text-stone-800 border-y border-[#d8ab43]/40 py-1.5">
+                            <span class="h-[1px] w-6 sm:w-10 bg-[#ad2c51]/40"></span>
+                            <span class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-[11.5px] font-bold text-stone-800">
+                                TUESDAY
+                            </span>
+                            <span class="h-6 w-[1.5px] bg-[#d8ab43]"></span>
+                            <span class="font-serif text-3xl sm:text-4xl font-bold text-[#ad2c51] leading-none px-1">
+                                29
+                            </span>
+                            <span class="h-6 w-[1.5px] bg-[#d8ab43]"></span>
+                            <span class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-[11.5px] font-bold text-stone-800">
+                                DECEMBER 2026
+                            </span>
+                            <span class="h-[1px] w-6 sm:w-10 bg-[#ad2c51]/40"></span>
+                        </div>
+
+                        <!-- Nuptial Mass Ceremony -->
+                        <div class="space-y-0.5">
+                            <p class="font-display uppercase tracking-[0.22em] text-[10px] sm:text-[11.5px] font-bold text-[#ad2c51]">
+                                THE NUPTIAL MASS
+                            </p>
+                            <p class="font-serif text-[10.5px] sm:text-[12px] font-semibold text-stone-700">
+                                AT 4:00 PM
+                            </p>
+                            <p class="font-display uppercase tracking-[0.16em] text-[10px] sm:text-[11.5px] font-bold text-stone-900">
+                                AT ST SEBASTIAN'S CHURCH, MORATUWA
+                            </p>
+                        </div>
+
+                        <!-- Gold Filigree Divider -->
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="h-[1px] w-8 bg-[#d8ab43]/50"></span>
+                            <span class="text-[#d8ab43] text-xs">✦</span>
+                            <span class="h-[1px] w-8 bg-[#d8ab43]/50"></span>
+                        </div>
+
+                        <!-- Reception Section -->
+                        <div class="space-y-0.5">
+                            <p class="font-display uppercase tracking-[0.18em] text-[9px] sm:text-[10.5px] font-bold text-[#ad2c51]">
+                                FOLLOWED BY THE RECEPTION
+                            </p>
+                            <p class="font-serif text-[10.5px] sm:text-[12px] font-bold text-stone-900">
+                                FROM 6:30 PM TO 12.00 PM
+                            </p>
+                            <p class="font-display uppercase tracking-[0.16em] text-[9.5px] sm:text-[11px] font-bold text-stone-900">
+                                AT VINRICH LAKE RESORT
+                            </p>
+                            <p class="font-serif text-[9.5px] sm:text-[11px] text-stone-600 italic">
+                                No. 18/3, Duwawatta Road, Piliyandala
+                            </p>
+                        </div>
+
+                        <!-- Closing Sentiment & RSVP / QR Section -->
+                        <div class="flex items-end justify-between border-t border-[#d8ab43]/40 pt-2 pb-0.5">
+                            <!-- Left: Script Closing & RSVP Phone -->
+                            <div class="text-left">
+                                <p class="font-script text-xl sm:text-2xl text-[#ad2c51] font-normal">
+                                    We look forward to celebrating with you.
+                                </p>
+                                <p class="font-display text-[9.5px] sm:text-[11px] font-bold text-stone-800 tracking-wider mt-0.5">
+                                    RSVP: <span class="font-sans font-semibold text-[#ad2c51]">Buddhima - 0718626389</span>
+                                </p>
+                            </div>
+
+                            <!-- Right: Optional Digital RSVP QR Code -->
+                            <div v-if="showQr && qrData" class="flex flex-col items-center shrink-0">
+                                <div class="w-12 h-12 p-0.5 bg-white border border-[#d8ab43]/60 rounded-md shadow-xs">
+                                    <svg
+                                        :viewBox="`0 0 ${qrData.size} ${qrData.size}`"
+                                        class="w-full h-full"
+                                        shape-rendering="crispEdges"
+                                    >
+                                        <path :d="qrData.path" fill="#ad2c51" />
+                                    </svg>
+                                </div>
+                                <span class="text-[7.5px] font-display uppercase tracking-widest text-stone-500 mt-0.5">Scan to RSVP</span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
 
-                <!-- Screen Label -->
-                <p class="no-print text-center text-xs text-stone-500 mt-2 font-medium">Back Side (Details &amp; QR)</p>
             </section>
 
         </main>
@@ -408,7 +339,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import CornerFlower from '@/Components/Invitation/CornerFlower.vue';
 import { generateQrSvgPath } from '@/Utils/qrcode.js';
@@ -421,9 +352,10 @@ const props = defineProps({
 });
 
 const cardFormat = ref('5x7'); // '5x7' or 'a5'
-const viewSide = ref('both'); // 'both', 'front', 'back'
-const showIvoryBg = ref(true);
+const isIvory = ref(true);
+const showQr = ref(true);
 const showCropMarks = ref(false);
+const guestInput = ref(props.guest?.name || '');
 
 const fullUrl = computed(() => {
     if (props.invitationUrl) return props.invitationUrl;
@@ -437,7 +369,6 @@ const qrData = computed(() => {
     try {
         return generateQrSvgPath(fullUrl.value, 0);
     } catch (e) {
-        console.warn('QR code generation failed:', e);
         return null;
     }
 });
@@ -448,46 +379,47 @@ const triggerPrint = () => {
 </script>
 
 <style scoped>
-/* Screen Dimensions */
+/* Screen Proportions */
 .card-wrapper {
     position: relative;
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
 /* 5" x 7" Classic Wedding Stationery Proportions */
 .card-5x7 {
-    width: 360px;
-    height: 504px; /* 1:1.4 aspect ratio */
+    width: 380px;
+    height: 552px; /* 1 : 1.45 luxury card ratio */
 }
 
 @media (min-width: 640px) {
     .card-5x7 {
-        width: 390px;
-        height: 546px;
+        width: 440px;
+        height: 638px;
     }
 }
 
 /* A5 Stationery Proportions (148mm x 210mm) */
 .card-a5 {
-    width: 370px;
-    height: 523px; /* 1:1.414 aspect ratio */
+    width: 390px;
+    height: 566px;
 }
 
 @media (min-width: 640px) {
     .card-a5 {
-        width: 410px;
-        height: 580px;
+        width: 460px;
+        height: 668px;
     }
 }
 
 .card-face {
     width: 100%;
     height: 100%;
-    border-radius: 16px;
-    border: 1px solid rgba(246, 120, 164, 0.4);
+    border-radius: 8px;
+    border: 1px solid rgba(216, 171, 67, 0.45);
 }
 
-/* Crop Marks Styling */
+/* Trimming Crop Marks */
 .crop-mark {
     position: absolute;
     width: 14px;
@@ -520,7 +452,7 @@ const triggerPrint = () => {
     border-top: 1px solid #78716c;
 }
 
-/* ================= PRINT MEDIA QUERIES ================= */
+/* ================= STRICT SINGLE PAGE PRINT CSS ================= */
 @media print {
     .no-print {
         display: none !important;
@@ -530,39 +462,39 @@ const triggerPrint = () => {
         background: #ffffff !important;
         margin: 0 !important;
         padding: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
     @page {
         size: auto;
-        margin: 10mm;
+        margin: 0;
     }
 
     .card-wrapper {
         margin: 0 auto !important;
         page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        break-inside: avoid !important;
+        break-after: avoid !important;
     }
 
     .card-5x7 {
         width: 5in !important;
-        height: 7in !important;
+        height: 7.25in !important;
     }
 
     .card-a5 {
         width: 148mm !important;
-        height: 210mm !important;
+        height: 215mm !important;
     }
 
     .card-face {
         box-shadow: none !important;
-        border: 1px solid rgba(173, 44, 81, 0.25) !important;
-        border-radius: 12px !important;
-    }
-
-    .print\:page-break-after {
-        page-break-after: always !important;
-        break-after: page !important;
+        border: none !important;
+        border-radius: 0 !important;
     }
 }
 </style>

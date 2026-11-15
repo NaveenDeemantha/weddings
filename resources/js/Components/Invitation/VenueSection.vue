@@ -34,7 +34,7 @@
                     </p>
 
                     <p class="text-sm font-serif text-stone-700 leading-relaxed mb-4 border-l-2 border-gold-500 pl-3">
-                        We warmly welcome you to St. Mary's Church in Moratuwa, where we will exchange our vows before God, our families and our dearest friends.
+                        We warmly welcome you to St. Sebastian's Church in Moratuwa for the Nuptial Mass at 4:00 PM, followed by the Wedding Reception at Vinrich Lake Resort, Piliyandala from 6:30 PM to 12:00 AM.
                     </p>
 
                     <!-- Etiquette & Guest Amenities -->
@@ -68,7 +68,7 @@
                 <!-- Map Header Link -->
                 <div class="p-3 bg-white border-b border-stone-100 flex items-center justify-between">
                     <span class="text-sm font-serif font-bold text-[#ad2c51]">
-                        St. Mary's Church Moratuwa
+                        St. Sebastian's Church &amp; Vinrich Lake Resort
                     </span>
                     <a
                         :href="venueMapUrl"
@@ -87,7 +87,7 @@
                         loading="lazy"
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
-                        src="https://maps.google.com/maps?q=St.+Mary's+Church+Moratuwa+Sri+Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        src="https://maps.google.com/maps?q=St.+Sebastian%27s+Church+Moratuwa+Sri+Lanka&t=&z=15&ie=UTF8&iwloc=&output=embed"
                     ></iframe>
                 </div>
 
@@ -111,9 +111,9 @@
 <script setup>
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 defineProps({
-    venueName: { type: String, default: "St. Mary's Church" },
-    venueAddress: { type: String, default: 'Moratuwa, Sri Lanka' },
-    venueMapUrl: { type: String, default: "https://maps.google.com/?q=St.+Mary%27s+Church+Moratuwa+Sri+Lanka" },
+    venueName: { type: String, default: "St. Sebastian's Church & Vinrich Lake Resort" },
+    venueAddress: { type: String, default: 'Moratuwa & Piliyandala, Sri Lanka' },
+    venueMapUrl: { type: String, default: "https://maps.google.com/?q=St.+Sebastian%27s+Church+Moratuwa+Sri+Lanka" },
 });
 </script>
 

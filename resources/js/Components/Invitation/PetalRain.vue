@@ -1,42 +1,14 @@
 <template>
     <div class="pointer-events-none fixed inset-0 overflow-hidden z-10">
         <div
-            v-for="petal in petals"
-            :key="petal.id"
-            class="petal absolute select-none"
-            :style="{
-                left: petal.left + '%',
-                top: '-30px',
-                animationDuration: petal.duration + 's',
-                animationDelay: petal.delay + 's',
-                transform: `scale(${petal.scale}) rotate(${petal.rotation}deg)`,
-                opacity: petal.opacity,
-            }"
+            v-for="p in petals"
+            :key="p.id"
+            class="petal absolute"
+            :style="{ left: p.left + '%', top: '-30px', animationDuration: p.duration + 's', animationDelay: p.delay + 's', opacity: p.opacity }"
         >
-            <!-- White Araliya / Temple Flower petal -->
-            <svg
-                v-if="petal.type === 'araliya'"
-                class="w-6 h-6 drop-shadow-sm"
-                viewBox="0 0 24 24"
-                fill="none"
-            >
-                <path
-                    d="M12 2C8 6 6 11 6 15a6 6 0 0 0 12 0c0-4-2-9-6-13z"
-                    fill="#ffffff"
-                    stroke="#e5dfcd"
-                    stroke-width="0.5"
-                />
-                <!-- Subtle warm yellow glow at petal base -->
-                <circle cx="12" cy="17" r="3.5" fill="#fef08a" opacity="0.85" />
-            </svg>
-            <!-- Delicate white jasmine bloom -->
-            <svg
-                v-else
-                class="w-4 h-4 drop-shadow-sm text-amber-100"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-            >
-                <path d="M12 4C9 8 8 11 8 14a4 4 0 0 0 8 0c0-3-1-6-4-10z" />
+            <svg :style="{ width: p.size + 'px', height: p.size + 'px' }" viewBox="0 0 24 24" class="drop-shadow-sm">
+                <path d="M12 2C7 6 5 11 6 16c1 4 11 4 12 0 1-5-1-10-6-14z" :fill="p.color" />
+                <path d="M12 6c-1 3-1 7 0 11" stroke="#fff" stroke-opacity=".5" stroke-width=".8" fill="none" />
             </svg>
         </div>
     </div>
@@ -46,44 +18,28 @@
 import { ref, onMounted } from 'vue';
 
 const petals = ref([]);
+const colors = ['#F678A4', '#ffffff', '#C8636F', '#fbb1cb', '#ffffff', '#ffd9e6'];
 
 onMounted(() => {
-    const generated = [];
-    for (let i = 0; i < 18; i++) {
-        generated.push({
-            id: i,
-            left: Math.random() * 94 + 3,
-            duration: Math.random() * 8 + 10, // 10-18s gentle floating
-            delay: Math.random() * 8,
-            scale: Math.random() * 0.4 + 0.65,
-            rotation: Math.random() * 360,
-            opacity: Math.random() * 0.35 + 0.3,
-            type: i % 2 === 0 ? 'araliya' : 'jasmine',
-        });
-    }
-    petals.value = generated;
+    petals.value = Array.from({ length: 22 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 96 + 2,
+        duration: Math.random() * 8 + 11,
+        delay: Math.random() * 10,
+        size: Math.random() * 12 + 14,
+        opacity: Math.random() * 0.35 + 0.5,
+        color: colors[i % colors.length],
+    }));
 });
 </script>
 
 <style scoped>
-.petal {
-    animation-name: gentleDrift;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes gentleDrift {
-    0% {
-        transform: translateY(-20px) rotate(0deg) translateX(0);
-    }
-    35% {
-        transform: translateY(35vh) rotate(80deg) translateX(20px);
-    }
-    70% {
-        transform: translateY(70vh) rotate(190deg) translateX(-15px);
-    }
-    100% {
-        transform: translateY(105vh) rotate(320deg) translateX(25px);
-    }
+.petal { animation-name: drift; animation-iteration-count: infinite; animation-timing-function: linear; }
+@keyframes drift {
+    0%   { transform: translate(0, -20px) rotate(0deg); }
+    25%  { transform: translate(40px, 28vh) rotate(110deg); }
+    50%  { transform: translate(-30px, 55vh) rotate(220deg); }
+    75%  { transform: translate(35px, 82vh) rotate(300deg); }
+    100% { transform: translate(-10px, 108vh) rotate(380deg); }
 }
 </style>

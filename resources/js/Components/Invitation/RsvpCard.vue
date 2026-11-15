@@ -5,7 +5,7 @@
             <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
                 Kindly Reply
             </p>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Will You Join Us?
             </h2>
             <div class="my-2.5 text-gold-600 text-sm">✝</div>
@@ -19,16 +19,16 @@
         </div>
 
         <!-- RSVP Form Card matching screenshot 12 -->
-        <div class="max-w-md lg:max-w-xl mx-auto p-5 sm:p-8 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm text-left">
+        <div class="max-w-md lg:max-w-xl mx-auto p-5 sm:p-8 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm text-left">
             <!-- Confirmed State -->
             <div
                 v-if="guestStatus !== 'pending' && !isEditing"
                 class="text-center py-4"
             >
-                <div class="w-12 h-12 rounded-full bg-[#15253b] text-amber-100 flex items-center justify-center text-xl mx-auto mb-3 shadow">
+                <div class="w-12 h-12 rounded-full bg-[#ad2c51] text-gold-100 flex items-center justify-center text-xl mx-auto mb-3 shadow">
                     {{ guestStatus === 'attending' ? '✓' : '🕊️' }}
                 </div>
-                <h3 class="font-serif text-lg font-bold text-[#15253b]">
+                <h3 class="font-serif text-lg font-bold text-[#ad2c51]">
                     {{ guestStatus === 'attending' ? 'Response Confirmed: Joyfully Accepting' : 'Response Confirmed: Regretfully Declining' }}
                 </h3>
                 <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
@@ -73,7 +73,7 @@
                             type="button"
                             @click="form.status = 'attending'"
                             class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
-                            :class="form.status === 'attending' ? 'bg-[#15253b] text-amber-50 border-[#15253b] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
+                            :class="form.status === 'attending' ? 'bg-[#ad2c51] text-gold-50 border-[#ad2c51] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
                             Joyfully Accept
                         </button>
@@ -81,7 +81,7 @@
                             type="button"
                             @click="form.status = 'declined'"
                             class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
-                            :class="form.status === 'declined' ? 'bg-[#15253b] text-amber-50 border-[#15253b] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
+                            :class="form.status === 'declined' ? 'bg-[#ad2c51] text-gold-50 border-[#ad2c51] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
                             Regretfully Decline
                         </button>
@@ -101,7 +101,7 @@
                         >
                             -
                         </button>
-                        <span class="font-serif text-3xl font-bold text-[#15253b] w-14 text-center">
+                        <span class="font-serif text-3xl font-bold text-[#ad2c51] w-14 text-center">
                             {{ form.attending_count }}
                         </span>
                         <button
@@ -122,7 +122,7 @@
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#15253b] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                         <span>✈</span>
                         <span>{{ form.processing ? 'Recording RSVP...' : 'Send RSVP' }}</span>

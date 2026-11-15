@@ -1,7 +1,7 @@
 <template>
     <Head :title="`${settings.wedding_title || 'Holy Matrimony'} - ${settings.groom_name} & ${settings.bride_name}`" />
 
-    <div class="relative min-h-screen bg-[#f9f7f2] text-stone-800 font-sans selection:bg-[#f4e9c7] selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
+    <div class="relative min-h-screen bg-gradient-to-b from-[#fff0f5] via-white to-[#ffe4ee] text-stone-800 font-sans selection:bg-[#ffd9e6] selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
         <!-- Floating Falling White Araliya & Jasmine Petals -->
         <PetalRain />
 
@@ -24,7 +24,7 @@
         <BottomFloatingDock />
 
         <!-- Preview Mode Banner (If in Preview) -->
-        <div v-if="isPreview" class="bg-[#15253b] text-amber-100 text-xs py-2.5 px-4 text-center font-serif shadow-inner flex items-center justify-center gap-2">
+        <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2.5 px-4 text-center font-serif shadow-inner flex items-center justify-center gap-2">
             <span>✨ Previewing Invitation Mode</span>
             <Link :href="route('dashboard')" class="underline hover:text-white ml-2">
                 Host Portal ↗
@@ -34,7 +34,7 @@
         <!-- Master Invitation Card (Optimized Luxury Stationery Proportions) -->
         <main class="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 pt-4 sm:pt-8">
             <!-- The Elegant Off-White Wedding Card with Rounded Top & Subtle Gold Border -->
-            <div class="relative bg-[#fffdf8] rounded-3xl border border-[#d8b878]/70 shadow-2xl overflow-hidden card-deckled [&>div]:lg:my-0 [&>div]:lg:py-14">
+            <div ref="cardRef" class="relative bg-[#ffffff] rounded-3xl border border-[#F678A4]/70 shadow-2xl overflow-hidden card-deckled">
                 <!-- 1. Master Header: Stained Glass Arch, Holy Matrimony, Names, Date, Cute Catholic Couple & Candelabras -->
                 <MasterInvitationHeader
                     :bride-name="settings.bride_name"
@@ -100,7 +100,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import PetalRain from '@/Components/Invitation/PetalRain.vue';
 import CathedralDoorCover from '@/Components/Invitation/CathedralDoorCover.vue';
@@ -123,6 +123,16 @@ const props = defineProps({
 });
 
 const musicPlayerRef = ref(null);
+const cardRef = ref(null);
+
+onMounted(() => {
+    const els = Array.from(cardRef.value?.children || []).slice(1, -1);
+    els.forEach((el) => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+});
 
 const onDoorsOpened = () => {
     if (musicPlayerRef.value) {

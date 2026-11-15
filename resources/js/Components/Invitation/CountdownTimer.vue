@@ -1,6 +1,6 @@
 <template>
     <div class="w-full max-w-xl mx-auto my-6 sm:my-8 px-2 sm:px-4">
-        <div class="relative bg-[#ffffff] rounded-2xl p-4 sm:p-8 border border-[#d8b878]/60 shadow-sm text-center">
+        <div class="relative bg-[#ffffff] rounded-2xl p-4 sm:p-8 border border-[#F678A4]/60 shadow-sm text-center">
             <!-- Header -->
             <p class="text-sm sm:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] font-sans font-semibold text-gold-700 mb-1">
                 Solemn Celebration In
@@ -11,7 +11,7 @@
 
             <!-- Timer Grid with fine serif typography -->
             <div class="grid grid-cols-4 gap-1.5 sm:gap-4">
-                <div class="flex flex-col items-center bg-[#faf8f4] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e5dfcd]">
+                <div class="flex flex-col items-center bg-[#fff7fa] rounded-xl py-2.5 px-1 sm:p-4 border border-[#f8d3e0]">
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.days }}
                     </span>
@@ -20,7 +20,7 @@
                     </span>
                 </div>
 
-                <div class="flex flex-col items-center bg-[#faf8f4] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e5dfcd]">
+                <div class="flex flex-col items-center bg-[#fff7fa] rounded-xl py-2.5 px-1 sm:p-4 border border-[#f8d3e0]">
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.hours }}
                     </span>
@@ -29,7 +29,7 @@
                     </span>
                 </div>
 
-                <div class="flex flex-col items-center bg-[#faf8f4] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e5dfcd]">
+                <div class="flex flex-col items-center bg-[#fff7fa] rounded-xl py-2.5 px-1 sm:p-4 border border-[#f8d3e0]">
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.minutes }}
                     </span>
@@ -38,7 +38,7 @@
                     </span>
                 </div>
 
-                <div class="flex flex-col items-center bg-[#faf8f4] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e5dfcd]">
+                <div class="flex flex-col items-center bg-[#fff7fa] rounded-xl py-2.5 px-1 sm:p-4 border border-[#f8d3e0]">
                     <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
                         {{ timeLeft.seconds }}
                     </span>

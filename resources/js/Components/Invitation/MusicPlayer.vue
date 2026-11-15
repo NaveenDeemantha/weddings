@@ -3,12 +3,12 @@
         <button
             type="button"
             @click="togglePlay"
-            class="group relative flex items-center gap-1.5 sm:gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-[#d8b878] hover:border-[#c5a059] transition-all transform hover:scale-105 active:scale-95"
+            class="group relative flex items-center gap-1.5 sm:gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-[#F678A4] hover:border-[#C8636F] transition-all transform hover:scale-105 active:scale-95"
             :title="isPlaying ? 'Pause Background Music' : 'Play Wedding Music'"
         >
             <!-- Animated Disc Icon -->
             <div
-                class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#15253b] text-amber-100 flex items-center justify-center text-xs shadow-sm"
+                class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#ad2c51] text-gold-100 flex items-center justify-center text-xs shadow-sm"
                 :class="{ 'animate-spin-slow': isPlaying }"
             >
                 <svg v-if="!isPlaying" class="w-3.5 h-3.5 ml-0.5 fill-current" viewBox="0 0 24 24">

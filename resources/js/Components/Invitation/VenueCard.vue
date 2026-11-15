@@ -13,9 +13,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <!-- Church Venue -->
-            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8b878]/60 shadow-sm flex flex-col justify-between text-left">
+            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#F678A4]/60 shadow-sm flex flex-col justify-between text-left">
                 <div>
-                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#f6f2e8] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#fff0f5] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
                         Church Ceremony
                     </span>
                     <h3 class="font-serif text-xl sm:text-2xl font-semibold text-stone-900 mb-1.5 leading-snug">
@@ -34,7 +34,7 @@
                         :href="`https://maps.google.com/?q=${encodeURIComponent(churchName + ' ' + churchAddress)}`"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
                     >
                         <span>Maps Directions</span> ↗
                     </a>
@@ -42,9 +42,9 @@
             </div>
 
             <!-- Reception Venue -->
-            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#d8b878]/60 shadow-sm flex flex-col justify-between text-left">
+            <div class="bg-[#ffffff] rounded-2xl p-5 sm:p-8 border border-[#F678A4]/60 shadow-sm flex flex-col justify-between text-left">
                 <div>
-                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#f6f2e8] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#fff0f5] text-gold-800 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans font-semibold mb-2">
                         Poruwa &amp; Reception
                     </span>
                     <h3 class="font-serif text-xl sm:text-2xl font-semibold text-stone-900 mb-1.5 leading-snug">
@@ -63,7 +63,7 @@
                         :href="venueMapUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
+                        class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-50 font-serif text-xs tracking-wider transition-colors inline-flex items-center justify-center gap-1.5 active:scale-95"
                     >
                         <span>Maps Directions</span> ↗
                     </a>
@@ -71,7 +71,7 @@
                         :href="googleCalendarLink"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="w-full sm:w-auto px-4 py-2.5 rounded-full bg-[#faf8f4] hover:bg-[#f3ede1] text-stone-700 border border-[#d8b878] font-serif text-xs text-center transition-colors active:scale-95"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-full bg-[#fff7fa] hover:bg-[#f3ede1] text-stone-700 border border-[#F678A4] font-serif text-xs text-center transition-colors active:scale-95"
                     >
                         Add to Calendar
                     </a>

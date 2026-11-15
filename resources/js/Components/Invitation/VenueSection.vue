@@ -5,7 +5,7 @@
             <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
                 The Setting
             </p>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Wedding Venue
             </h2>
             <div class="my-2.5 text-gold-600 text-sm">✝</div>
@@ -13,17 +13,17 @@
 
         <div class="max-w-md lg:max-w-6xl mx-auto space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-stretch">
             <!-- Venue Details Card -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm text-left flex flex-col justify-between hover:border-[#c5a059] transition-all">
+            <div class="p-5 sm:p-6 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm text-left flex flex-col justify-between hover:border-[#C8636F] transition-all">
                 <div>
                     <div class="flex items-center gap-3 mb-3">
-                        <div class="w-11 h-11 rounded-full bg-[#15253b] border-2 border-[#d8b878] flex items-center justify-center text-amber-200 text-lg shadow-sm shrink-0">
+                        <div class="w-11 h-11 rounded-full bg-[#ad2c51] border-2 border-[#F678A4] flex items-center justify-center text-gold-200 text-lg shadow-sm shrink-0">
                             📍
                         </div>
                         <div>
                             <p class="text-sm font-sans uppercase tracking-[0.25em] font-semibold text-gold-700">
                                 Ceremony Venue
                             </p>
-                            <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#15253b]">
+                            <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#ad2c51]">
                                 {{ venueName }}
                             </h3>
                         </div>
@@ -55,7 +55,7 @@
                         :href="venueMapUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-sm uppercase tracking-widest font-semibold shadow transition-all transform active:scale-95"
+                        class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-50 font-serif text-sm uppercase tracking-widest font-semibold shadow transition-all transform active:scale-95"
                     >
                         <span>📍</span>
                         <span>Get Driving Directions ↗</span>
@@ -64,10 +64,10 @@
             </div>
 
             <!-- Map View Card -->
-            <div class="rounded-2xl border border-[#d8b878]/70 shadow-sm overflow-hidden bg-white">
+            <div class="rounded-2xl border border-[#F678A4]/70 shadow-sm overflow-hidden bg-white">
                 <!-- Map Header Link -->
                 <div class="p-3 bg-white border-b border-stone-100 flex items-center justify-between">
-                    <span class="text-sm font-serif font-bold text-[#15253b]">
+                    <span class="text-sm font-serif font-bold text-[#ad2c51]">
                         St. Mary's Church Grand Street Negombo
                     </span>
                     <a
@@ -92,12 +92,12 @@
                 </div>
 
                 <!-- View on Map Button -->
-                <div class="p-2.5 text-center bg-[#faf8f4] border-t border-[#e5dfcd]">
+                <div class="p-2.5 text-center bg-[#fff7fa] border-t border-[#f8d3e0]">
                     <a
                         :href="venueMapUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1.5 text-sm uppercase tracking-[0.2em] font-serif font-bold text-[#15253b] hover:text-gold-700 transition-colors"
+                        class="inline-flex items-center gap-1.5 text-sm uppercase tracking-[0.2em] font-serif font-bold text-[#ad2c51] hover:text-gold-700 transition-colors"
                     >
                         <span>📍</span>
                         <span>Interactive Navigation</span>

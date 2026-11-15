@@ -6,7 +6,7 @@
                 <span class="font-sans text-sm sm:text-base uppercase tracking-[0.25em] font-semibold">Guestbook</span>
                 <span class="text-gold-500 text-sm">✝</span>
             </div>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b]">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51]">
                 Blessings &amp; Prayers
             </h2>
             <p class="text-stone-700 text-sm font-serif italic mt-1 max-w-sm mx-auto">
@@ -16,7 +16,7 @@
 
         <div class="max-w-md mx-auto">
             <!-- Leave a Wish Form -->
-            <form @submit.prevent="submitWish" class="mb-8 bg-[#faf8f4] p-4 sm:p-5 rounded-2xl border border-[#e5dfcd] text-left">
+            <form @submit.prevent="submitWish" class="mb-8 bg-[#fff7fa] p-4 sm:p-5 rounded-2xl border border-[#f8d3e0] text-left">
                 <div class="space-y-3">
                     <div>
                         <label class="block text-sm sm:text-base uppercase tracking-widest font-sans font-semibold text-stone-700 mb-1">
@@ -27,7 +27,7 @@
                             v-model="form.guest_name"
                             required
                             placeholder="Enter your name..."
-                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059] bg-white py-2.5 px-3"
+                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#C8636F] focus:ring-[#C8636F] bg-white py-2.5 px-3"
                         />
                     </div>
                     <div>
@@ -39,7 +39,7 @@
                             required
                             rows="3"
                             placeholder="May the Lord abundantly bless your marriage with endless love, peace, and health..."
-                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#c5a059] focus:ring-[#c5a059] bg-white p-3"
+                            class="w-full text-sm rounded-xl border-stone-200 focus:border-[#C8636F] focus:ring-[#C8636F] bg-white p-3"
                         ></textarea>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="px-6 py-2.5 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-sm uppercase tracking-widest transition-all transform active:scale-95 disabled:opacity-50 shadow"
+                        class="px-6 py-2.5 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-50 font-serif text-sm uppercase tracking-widest transition-all transform active:scale-95 disabled:opacity-50 shadow"
                     >
                         {{ form.processing ? 'Submitting...' : 'Send Blessings' }}
                     </button>
@@ -60,9 +60,9 @@
                 <div
                     v-for="wish in wishes"
                     :key="wish.id"
-                    class="p-4 rounded-xl bg-[#faf8f4] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
+                    class="p-4 rounded-xl bg-[#fff7fa] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
                 >
-                    <div class="w-9 h-9 rounded-full bg-white border border-[#d8b878] text-gold-800 flex items-center justify-center font-serif font-bold text-sm shrink-0 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-white border border-[#F678A4] text-gold-800 flex items-center justify-center font-serif font-bold text-sm shrink-0 shadow-sm">
                         {{ wish.guest_name ? wish.guest_name.charAt(0).toUpperCase() : '✝' }}
                     </div>
                     <div class="flex-1 text-left">

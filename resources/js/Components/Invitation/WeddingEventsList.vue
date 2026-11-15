@@ -5,7 +5,7 @@
             <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
                 Celebrate With Us
             </p>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Wedding Events
             </h2>
             <div class="my-2.5 text-gold-600 text-sm">✝</div>
@@ -16,26 +16,26 @@
             <div
                 v-for="(event, idx) in defaultEvents"
                 :key="idx"
-                class="p-5 sm:p-6 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm text-center flex flex-col items-center hover:border-[#c5a059] transition-all"
+                class="p-5 sm:p-6 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm text-center flex flex-col items-center hover:border-[#C8636F] transition-all"
             >
                 <!-- Circular Dark Navy Badge with Gold Rim & Icon -->
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#15253b] border-2 border-[#d8b878] flex items-center justify-center text-amber-200 text-lg mb-3 shadow-md">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ad2c51] border-2 border-[#F678A4] flex items-center justify-center text-gold-200 text-lg mb-3 shadow-md">
                     <!-- Icon 1: Registration Quill / Monogram -->
-                    <svg v-if="idx === 0" class="w-6 h-6 text-amber-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg v-if="idx === 0" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     <!-- Icon 2: Nuptial Mass Cathedral -->
-                    <svg v-else-if="idx === 1" class="w-6 h-6 text-amber-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg v-else-if="idx === 1" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                     <!-- Icon 3: Reception Toast & Celebration -->
-                    <svg v-else class="w-6 h-6 text-amber-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg v-else class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9V9a2 2 0 00-2-2H8a2 2 0 00-2 2v3h10z" />
                     </svg>
                 </div>
 
                 <!-- Event Title -->
-                <h3 class="font-serif text-sm sm:text-base font-bold tracking-widest text-[#15253b] uppercase">
+                <h3 class="font-serif text-sm sm:text-base font-bold tracking-widest text-[#ad2c51] uppercase">
                     {{ event.name }}
                 </h3>
 

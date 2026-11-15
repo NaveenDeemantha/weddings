@@ -6,7 +6,7 @@
     >
         <!-- Ambient lighting -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <div class="absolute -top-24 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -top-24 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-stone-500/10 rounded-full blur-3xl"></div>
         </div>
 
@@ -18,7 +18,7 @@
             <!-- Heavy Linen Envelope Outer Card -->
             <div class="relative bg-[#f7f5ef] rounded-2xl shadow-2xl border border-stone-300/80 p-1.5 sm:p-2 overflow-hidden card-deckled">
                 <!-- Inner Parchment Layer with Fine Gold Inset Rule -->
-                <div class="relative bg-[#ffffff] rounded-xl p-5 sm:p-10 border border-[#d8b878]/60 text-center flex flex-col items-center">
+                <div class="relative bg-[#ffffff] rounded-xl p-5 sm:p-10 border border-[#F678A4]/60 text-center flex flex-col items-center">
                     <!-- Subtle Cross / Sacred Symbol -->
                     <div class="mb-2 text-gold-700 font-serif text-sm tracking-widest flex items-center gap-1.5">
                         <span class="text-gold-500 text-xs">✝</span>
@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Dedicated Personalized Name Tag -->
-                    <div class="w-full my-2 sm:my-3 p-3.5 sm:p-5 rounded-xl bg-[#faf8f4] border border-[#e5dfcd] shadow-inner text-center">
+                    <div class="w-full my-2 sm:my-3 p-3.5 sm:p-5 rounded-xl bg-[#fff7fa] border border-[#f8d3e0] shadow-inner text-center">
                         <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-sans font-semibold text-gold-700 mb-1">
                             Cordially Invited
                         </p>
@@ -67,14 +67,14 @@
 
                         <!-- 3D Wax Seal with Monogram -->
                         <div
-                            class="relative w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-gradient-to-br from-[#c5a059] via-[#b68f44] to-[#8a682b] p-1 shadow-xl transform transition-transform duration-300 group-hover:scale-105 flex items-center justify-center border border-amber-200/50"
+                            class="relative w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-gradient-to-br from-[#C8636F] via-[#b68f44] to-[#8a682b] p-1 shadow-xl transform transition-transform duration-300 group-hover:scale-105 flex items-center justify-center border border-gold-200/50"
                         >
                             <!-- Wax Stamp Rim Detail -->
-                            <div class="w-full h-full rounded-full bg-gradient-to-tr from-[#9d7830] via-[#be984c] to-[#d4b062] flex flex-col items-center justify-center text-amber-50 shadow-inner border border-yellow-200/40">
-                                <span class="font-display text-lg sm:text-2xl font-normal tracking-wider text-amber-100">
+                            <div class="w-full h-full rounded-full bg-gradient-to-tr from-[#9d7830] via-[#be984c] to-[#d4b062] flex flex-col items-center justify-center text-gold-50 shadow-inner border border-yellow-200/40">
+                                <span class="font-display text-lg sm:text-2xl font-normal tracking-wider text-gold-100">
                                     {{ brideInitials }}&amp;{{ groomInitials }}
                                 </span>
-                                <span class="text-[8px] uppercase tracking-[0.15em] font-sans font-bold text-amber-200/90 -mt-0.5">
+                                <span class="text-[8px] uppercase tracking-[0.15em] font-sans font-bold text-gold-200/90 -mt-0.5">
                                     Break Seal
                                 </span>
                             </div>
@@ -89,7 +89,7 @@
                     <button
                         type="button"
                         @click="handleOpen"
-                        class="w-full sm:w-auto px-7 py-3 rounded-full bg-[#15253b] hover:bg-[#0f1a29] text-amber-50 font-serif text-xs sm:text-sm tracking-wider shadow-md hover:shadow-lg transition-all transform active:scale-95"
+                        class="w-full sm:w-auto px-7 py-3 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-50 font-serif text-xs sm:text-sm tracking-wider shadow-md hover:shadow-lg transition-all transform active:scale-95"
                     >
                         Open Personal Invitation
                     </button>

@@ -5,7 +5,7 @@
             <p class="font-sans text-sm sm:text-base uppercase tracking-[0.25em] font-semibold text-gold-700">
                 Our Story
             </p>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Two Hearts, One Faith
             </h2>
             <div class="my-2.5 text-gold-600 text-sm">✝</div>
@@ -24,8 +24,8 @@
             </div>
 
             <!-- St. Mary's Church Negombo Highlight Box -->
-            <div class="my-3 py-3 px-6 rounded-2xl bg-[#faf8f4] border border-[#e5dfcd] inline-block shadow-sm">
-                <h4 class="font-serif font-bold text-sm sm:text-base tracking-wider text-[#15253b] uppercase">
+            <div class="my-3 py-3 px-6 rounded-2xl bg-[#fff7fa] border border-[#f8d3e0] inline-block shadow-sm">
+                <h4 class="font-serif font-bold text-sm sm:text-base tracking-wider text-[#ad2c51] uppercase">
                     St. Mary's Church
                 </h4>
                 <p class="text-sm sm:text-base font-sans uppercase tracking-[0.2em] font-semibold text-gold-700 mt-0.5">
@@ -42,14 +42,14 @@
                 </p>
             </div>
 
-            <div class="relative border-l border-[#d8b878]/60 ml-10 sm:ml-12 pl-6 sm:pl-7 space-y-6">
+            <div class="relative border-l border-[#F678A4]/60 ml-10 sm:ml-12 pl-6 sm:pl-7 space-y-6">
                 <!-- 2019 -->
-                <div class="relative group bg-[#faf8f4] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#15253b]">
+                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
+                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
                         2019
                     </span>
                     <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#15253b]">
+                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
                         The Beginning
                     </h4>
                     <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
@@ -58,12 +58,12 @@
                 </div>
 
                 <!-- 2021 -->
-                <div class="relative group bg-[#faf8f4] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#15253b]">
+                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
+                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
                         2021
                     </span>
                     <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#15253b]">
+                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
                         Growing Together
                     </h4>
                     <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
@@ -72,12 +72,12 @@
                 </div>
 
                 <!-- 2023 -->
-                <div class="relative group bg-[#faf8f4] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#15253b]">
+                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
+                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
                         2023
                     </span>
                     <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#15253b]">
+                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
                         The Promise
                     </h4>
                     <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
@@ -86,12 +86,12 @@
                 </div>
 
                 <!-- 2025 -->
-                <div class="relative group bg-[#faf8f4] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#15253b]">
+                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm">
+                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
                         2025
                     </span>
                     <div class="w-3 h-3 rounded-full bg-gold-600 border-2 border-white absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#15253b]">
+                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
                         Building a Home
                     </h4>
                     <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
@@ -100,12 +100,12 @@
                 </div>
 
                 <!-- 2026 -->
-                <div class="relative group bg-[#faf8f4] p-3.5 sm:p-4 rounded-xl border border-gold-400 shadow-sm">
-                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#15253b]">
+                <div class="relative group bg-[#fff7fa] p-3.5 sm:p-4 rounded-xl border border-gold-400 shadow-sm">
+                    <span class="absolute -left-[54px] sm:-left-[58px] top-3 font-serif italic font-bold text-sm sm:text-base text-[#ad2c51]">
                         2026
                     </span>
-                    <div class="w-3 h-3 rounded-full bg-[#15253b] border-2 border-[#d8b878] absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
-                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#15253b]">
+                    <div class="w-3 h-3 rounded-full bg-[#ad2c51] border-2 border-[#F678A4] absolute -left-[30.5px] sm:-left-[34.5px] top-4 shadow-sm"></div>
+                    <h4 class="font-serif font-bold text-sm uppercase tracking-wider text-[#ad2c51]">
                         Forever Begins
                     </h4>
                     <p class="font-serif text-sm text-stone-700 mt-1 leading-relaxed">
@@ -120,15 +120,15 @@
             <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
                 The Big Day Awaits
             </p>
-            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-[#15253b] mt-1">
+            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
                 Counting Down
             </h3>
             <div class="my-2.5 text-gold-600 text-sm">✝</div>
 
             <!-- 4 Rounded Squircle Countdown Cards -->
             <div class="grid grid-cols-4 gap-2 sm:gap-3 max-w-xs sm:max-w-sm lg:max-w-xl mx-auto my-5">
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#15253b] leading-none">
+                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
+                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
                         {{ timeLeft.days }}
                     </span>
                     <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
@@ -136,8 +136,8 @@
                     </span>
                 </div>
 
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#15253b] leading-none">
+                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
+                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
                         {{ timeLeft.hours }}
                     </span>
                     <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
@@ -145,8 +145,8 @@
                     </span>
                 </div>
 
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#15253b] leading-none">
+                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
+                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
                         {{ timeLeft.minutes }}
                     </span>
                     <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">
@@ -154,8 +154,8 @@
                     </span>
                 </div>
 
-                <div class="p-3 sm:p-4 rounded-2xl bg-[#faf8f4] border border-[#d8b878]/70 shadow-sm flex flex-col items-center">
-                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#15253b] leading-none">
+                <div class="p-3 sm:p-4 rounded-2xl bg-[#fff7fa] border border-[#F678A4]/70 shadow-sm flex flex-col items-center">
+                    <span class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-none">
                         {{ timeLeft.seconds }}
                     </span>
                     <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1.5">

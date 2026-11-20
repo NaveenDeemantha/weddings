@@ -12,31 +12,32 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-stone-100/70">
-            <nav class="border-b border-amber-200/80 bg-white shadow-sm">
+        <div class="min-h-screen bg-[#F8F6F2] text-stone-800">
+            <!-- Navigation Bar -->
+            <nav class="border-b border-[#E8E4DC] bg-white/95 backdrop-blur-md sticky top-0 z-40 transition-shadow">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between items-center">
-                        <div class="flex items-center">
+                        <div class="flex items-center gap-8">
                             <!-- Logo / Monogram -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')" class="flex items-center gap-2">
-                                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 text-white flex items-center justify-center font-serif font-bold text-base shadow">
-                                        💍
+                                <Link :href="route('dashboard')" class="flex items-center gap-3 group">
+                                    <div class="w-10 h-10 rounded-full bg-[#15253b] ring-1 ring-[#c5a059]/40 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+                                        <span class="font-serif font-bold text-xs tracking-wider text-[#d8ab43]">S &amp; B</span>
                                     </div>
-                                    <div class="hidden md:block">
-                                        <span class="font-serif font-bold text-stone-900 text-sm block leading-none">
-                                            Wedding Invitations
+                                    <div>
+                                        <span class="font-serif font-semibold text-stone-900 text-sm block leading-tight tracking-wide">
+                                            Shavindi &amp; Buddhima
                                         </span>
-                                        <span class="text-[10px] text-amber-700 tracking-wider uppercase font-semibold">
-                                            Host Command Center
+                                        <span class="text-[10px] text-[#8c6d37] tracking-widest uppercase font-semibold block">
+                                            Wedding Administration
                                         </span>
                                     </div>
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-6 sm:-my-px sm:ms-8 sm:flex">
+                            <div class="hidden space-x-7 sm:-my-px sm:flex">
                                 <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
@@ -47,7 +48,7 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('guests.index')"
                                     :active="route().current('guests.*')"
                                 >
-                                    Guests &amp; Invites
+                                    Guests &amp; RSVPs
                                 </NavLink>
                                 <NavLink
                                     :href="route('settings.index')"
@@ -63,24 +64,34 @@ const showingNavigationDropdown = ref(false);
                             <a
                                 :href="route('invitation.preview')"
                                 target="_blank"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-semibold hover:bg-amber-100 transition-colors shadow-sm"
+                                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7F0] text-[#7A5B22] border border-[#E5DAC0] text-xs font-semibold hover:bg-[#F3EBD8] transition-colors shadow-2xs"
                             >
-                                <span>👁️</span> Preview Invitation
+                                <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                <span>Preview Invitation</span>
+                                <svg class="w-3 h-3 opacity-60 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17 17 7M7 7h10v10" />
+                                </svg>
                             </a>
 
                             <!-- Settings Dropdown -->
                             <div class="relative ms-2">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
-                                        <span class="inline-flex rounded-md">
+                                        <span class="inline-flex rounded-lg">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center rounded-md border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 shadow-sm hover:text-stone-900 focus:outline-none"
+                                                class="inline-flex items-center gap-2 rounded-lg border border-[#E8E4DC] bg-white px-3 py-1.5 text-xs font-medium text-stone-700 shadow-2xs hover:bg-stone-50 hover:text-stone-900 focus:outline-none transition-colors"
                                             >
-                                                {{ $page.props.auth.user.name }}
+                                                <span class="w-5 h-5 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-[10px] font-bold text-stone-600">
+                                                    {{ $page.props.auth.user.name?.charAt(0) || 'H' }}
+                                                </span>
+                                                <span>{{ $page.props.auth.user.name }}</span>
 
                                                 <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
+                                                    class="-me-0.5 ms-1 h-3.5 w-3.5 text-stone-400"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -97,7 +108,7 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')">
-                                            Profile
+                                            Account Profile
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
@@ -115,7 +126,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center rounded-md p-2 text-stone-500 hover:bg-stone-100 hover:text-stone-700 focus:outline-none"
+                                class="inline-flex items-center justify-center rounded-lg p-2 text-stone-600 hover:bg-stone-100 hover:text-stone-900 focus:outline-none transition-colors"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -155,7 +166,7 @@ const showingNavigationDropdown = ref(false);
                         block: showingNavigationDropdown,
                         hidden: !showingNavigationDropdown,
                     }"
-                    class="sm:hidden border-t border-stone-200"
+                    class="sm:hidden border-t border-[#E8E4DC] bg-white"
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
@@ -168,7 +179,7 @@ const showingNavigationDropdown = ref(false);
                             :href="route('guests.index')"
                             :active="route().current('guests.*')"
                         >
-                            Guests &amp; Invites
+                            Guests &amp; RSVPs
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             :href="route('settings.index')"
@@ -179,26 +190,29 @@ const showingNavigationDropdown = ref(false);
                         <a
                             :href="route('invitation.preview')"
                             target="_blank"
-                            class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-amber-800 hover:bg-amber-50"
+                            class="flex items-center justify-between w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-sm font-semibold text-[#8c6d37] hover:bg-amber-50"
                         >
-                            👁️ Preview Invitation
+                            <span>Preview Invitation</span>
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17 17 7M7 7h10v10" />
+                            </svg>
                         </a>
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="border-t border-stone-200 pb-1 pt-4">
+                    <div class="border-t border-[#E8E4DC] pb-3 pt-4">
                         <div class="px-4">
-                            <div class="text-base font-medium text-stone-800">
+                            <div class="text-sm font-semibold text-stone-900">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="text-sm font-medium text-stone-500">
+                            <div class="text-xs text-stone-500">
                                 {{ $page.props.auth.user.email }}
                             </div>
                         </div>
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
+                                Account Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
@@ -213,25 +227,31 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white border-b border-stone-200 shadow-sm" v-if="$slots.header">
-                <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <header class="bg-white border-b border-[#E8E4DC]" v-if="$slots.header">
+                <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
 
             <!-- Flash Messages -->
             <div v-if="$page.props.flash?.success" class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
-                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-sm flex items-center justify-between shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <span>✓</span>
+                <div class="p-4 rounded-xl bg-emerald-50/90 border border-emerald-200 text-emerald-900 text-xs font-medium flex items-center justify-between shadow-2xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                         <span>{{ $page.props.flash.success }}</span>
                     </div>
                 </div>
             </div>
             <div v-if="$page.props.flash?.error" class="mx-auto max-w-7xl mt-4 px-4 sm:px-6 lg:px-8">
-                <div class="p-4 rounded-xl bg-rose-50 border border-rose-300 text-rose-800 text-sm flex items-center justify-between shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <span>⚠️</span>
+                <div class="p-4 rounded-xl bg-rose-50/90 border border-rose-200 text-rose-900 text-xs font-medium flex items-center justify-between shadow-2xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
                         <span>{{ $page.props.flash.error }}</span>
                     </div>
                 </div>

@@ -45,7 +45,6 @@
         <!-- Center Stage: The Grand Cathedral Entrance & Double Doors (Directly filling mobile screens) -->
         <main
             class="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-4 transition-transform duration-1000 ease-out"
-            :class="{ 'chapel-camera-zoom': isZoomingIn }"
             :style="mouseParallaxStyle"
         >
             <!-- The Cathedral Portal Structure (Direct mobile edge-to-edge layout, majestic on desktop) -->
@@ -57,101 +56,14 @@
                 title="Push or Click the Cathedral Doors to Open"
             >
                 <!-- ================= THE DOORWAY APERTURE ================= -->
-                <!-- Contains the Revealed Sanctuary behind, the Video Player, and the 3D Doors in front -->
-                <div class="relative w-full h-full overflow-hidden shadow-2xl bg-[#1f0a14]">
+                <!-- Contains the Video Player directly behind the 3D Doors -->
+                <div class="relative w-full h-full overflow-hidden shadow-2xl bg-black">
                     
-                    <!-- ================= BEHIND DOORS: THE ILLUMINATED CATHEDRAL SANCTUARY ================= -->
-                    <div class="absolute inset-0 z-0 bg-[#2b101c] overflow-hidden flex flex-col items-center justify-between p-4 pointer-events-none select-none">
-                        <!-- Divine Golden God-Rays bursting outward -->
-                        <div
-                            class="absolute inset-0 divine-light-flood transition-all duration-1000"
-                            :class="isOpening ? 'opacity-100 scale-125' : 'opacity-0 scale-95'"
-                            style="background: radial-gradient(ellipse at 50% 45%, rgba(255, 248, 225, 0.98) 0%, rgba(245, 220, 138, 0.8) 40%, rgba(216, 171, 67, 0.4) 75%, #180f08 100%);"
-                        ></div>
-
-                        <!-- Sanctuary Aisle & Altar Visuals -->
-                        <div class="relative z-10 w-full h-full flex flex-col items-center justify-between pt-8 pb-10 text-center text-white">
-                            <!-- High Altar & Catholic Crucifix in the distance -->
-                            <div class="flex flex-col items-center pt-8">
-                                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-b from-[#fff6d6] to-[#d4af37] text-[#451020] font-serif font-bold text-lg sm:text-xl flex items-center justify-center shadow-[0_0_25px_#fff] mb-2">
-                                    ✝
-                                </div>
-                                <p class="font-serif italic text-base sm:text-xl text-[#fff7d6] drop-shadow-md">
-                                    St. Sebastian's Church
-                                </p>
-                                <p class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-xs text-[#f5dc8a] font-bold mt-0.5">
-                                    The Nuptial Mass · 4:00 PM
-                                </p>
-                            </div>
-
-                            <!-- Perspective Church Aisle with Candlelight -->
-                            <div class="relative w-52 sm:w-72 h-40 sm:h-52 flex items-end justify-center">
-                                <!-- Central Red Carpet Aisle Runner -->
-                                <div class="w-full h-full [clip-path:polygon(40%_0%,60%_0%,88%_100%,12%_100%)] bg-gradient-to-t from-[#ad2c51] via-[#8c2240] to-[#5a1227] shadow-2xl flex items-center justify-center">
-                                    <div class="w-[85%] h-full [clip-path:polygon(40%_0%,60%_0%,88%_100%,12%_100%)] border-x-2 border-[#f5dc8a]/80"></div>
-                                </div>
-
-                                <!-- Glowing Pew Candles (Professional Fine SVG) -->
-                                <div class="absolute bottom-2 left-2 flex items-end gap-1.5 opacity-90">
-                                    <svg class="w-2.5 h-6 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
-                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
-                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
-                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
-                                    </svg>
-                                    <svg class="w-2 h-4 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
-                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
-                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
-                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
-                                    </svg>
-                                </div>
-                                <div class="absolute bottom-2 right-2 flex items-end gap-1.5 opacity-90">
-                                    <svg class="w-2 h-4 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
-                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
-                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
-                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
-                                    </svg>
-                                    <svg class="w-2.5 h-6 text-[#f5dc8a] overflow-visible" viewBox="0 0 10 24" fill="none">
-                                        <ellipse cx="5" cy="4" rx="2" ry="4" fill="#ffd54f" class="animate-pulse" />
-                                        <line x1="5" y1="8" x2="5" y2="10" stroke="#7a5d2c" stroke-width="0.8" />
-                                        <rect x="2.5" y="10" width="5" height="14" rx="1" fill="#fffdf5" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <p class="font-script text-2xl sm:text-3xl text-[#fff9df] drop-shadow-lg pb-4">
-                                Walking down the aisle…
-                            </p>
-                        </div>
-
-                        <!-- Ambient Floating Jasmine & White Petals -->
-                        <div class="absolute inset-0 pointer-events-none overflow-hidden">
-                            <span
-                                v-for="i in 18"
-                                :key="i"
-                                class="sanctuary-petal"
-                                :style="{
-                                    left: ((i * 5.8) % 100) + '%',
-                                    animationDuration: (7 + (i % 4) * 1.5) + 's',
-                                    animationDelay: (-(i % 6) * 1.2) + 's',
-                                }"
-                            ></span>
-                        </div>
-                    </div>
-
-                    <!-- Center Seam God-Ray Leak (Pulsing Light between the doors) -->
-                    <div
-                        v-if="!isOpening"
-                        class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-4 z-20 pointer-events-none transition-all duration-300"
-                        :class="isHovered ? 'opacity-100 scale-x-150' : 'opacity-70'"
-                        style="background: radial-gradient(ellipse at 50% 50%, rgba(255,248,220,0.95), rgba(247,212,114,0.6) 45%, transparent 80%);"
-                    ></div>
-
                     <!-- ================= THE VIDEO LAYER (PLAYED WHEN DOOR IS OPENED) ================= -->
                     <video
                         ref="doorVideoRef"
                         src="/videos/walkdown.mp4"
-                        class="absolute inset-0 w-full h-full object-cover z-30 transition-opacity duration-1000"
-                        :class="isOpening ? 'opacity-100 pointer-events-auto cursor-pointer' : 'opacity-0 pointer-events-none'"
+                        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-auto cursor-pointer"
                         playsinline
                         muted
                         preload="auto"
@@ -165,7 +77,7 @@
                         
                         <!-- ================= LEFT CATHEDRAL DOOR LEAF ================= -->
                         <div
-                            class="relative w-1/2 h-full [transform-origin:left_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            class="relative w-1/2 h-full [transform-origin:left_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-[#dfd6c6]"
                             :class="[
                                 isOpening ? 'door-left-open' : (isHovered ? 'door-left-ajar' : '')
                             ]"
@@ -185,7 +97,7 @@
 
                         <!-- ================= RIGHT CATHEDRAL DOOR LEAF ================= -->
                         <div
-                            class="relative w-1/2 h-full [transform-origin:right_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            class="relative w-1/2 h-full [transform-origin:right_center] [transform-style:preserve-3d] transition-transform duration-[1850ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-[#dfd6c6]"
                             :class="[
                                 isOpening ? 'door-right-open' : (isHovered ? 'door-right-ajar' : '')
                             ]"
@@ -302,7 +214,6 @@ const emit = defineEmits(['opened']);
 const doorVideoRef = ref(null);
 const isOpening = ref(false);
 const isHovered = ref(false);
-const isZoomingIn = ref(false);
 const isFadingOut = ref(false);
 const hasFinishedIntro = ref(false);
 const isPlayingMusic = ref(false);
@@ -432,42 +343,6 @@ const skipIntro = () => {
 
 .door-right-open {
     transform: rotateY(112deg) !important;
-}
-
-/* Camera walk-through zoom into the church sanctuary */
-.chapel-camera-zoom {
-    transform: scale(2.4) translateY(6%) !important;
-    opacity: 0 !important;
-    transition: transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 1.3s ease-in !important;
-}
-
-/* Floating white flower petals in sanctuary */
-.sanctuary-petal {
-    position: absolute;
-    top: -20px;
-    width: 10px;
-    height: 14px;
-    border-radius: 50% 50% 46% 46% / 88% 88% 14% 14%;
-    background: linear-gradient(to top, #fff8e7, #ffffff);
-    animation: petalFall linear infinite;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
-}
-
-@keyframes petalFall {
-    0% {
-        transform: translateY(-20px) rotate(0deg) scale(0.7);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(105vh) rotate(380deg) scale(1.1);
-        opacity: 0;
-    }
 }
 
 /* Knocker Hint Pulse */

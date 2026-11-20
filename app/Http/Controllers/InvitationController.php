@@ -96,13 +96,13 @@ class InvitationController extends Controller
 
         $validated = $request->validate([
             'status' => 'required|in:attending,declined',
-            'attending_count' => 'required|integer|min:0|max:' . max(1, $guest->max_guests),
+            'attending_count' => 'nullable|integer|min:0',
             'dietary_notes' => 'nullable|string|max:500',
         ]);
 
         $guest->update([
             'status' => $validated['status'],
-            'attending_count' => $validated['status'] === 'attending' ? max(1, $validated['attending_count']) : 0,
+            'attending_count' => $validated['status'] === 'attending' ? ($validated['attending_count'] ?? 1) : 0,
             'dietary_notes' => $validated['dietary_notes'] ?? null,
             'rsvp_at' => now(),
         ]);

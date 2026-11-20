@@ -14,7 +14,7 @@ const search = ref(props.filters.search || '');
 const currentStatus = ref(props.filters.status || 'all');
 
 let searchTimeout = null;
-watch(search, (newVal) => {
+watch(search, () => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
         applyFilters();
@@ -45,7 +45,6 @@ const addForm = useForm({
     name: '',
     phone: '',
     custom_greeting: '',
-    max_guests: 2,
     notes: '',
 });
 
@@ -61,7 +60,6 @@ const submitAdd = () => {
 // Bulk Add Form
 const bulkForm = useForm({
     raw_list: '',
-    default_max_guests: 2,
 });
 
 const submitBulk = () => {
@@ -79,9 +77,7 @@ const editForm = useForm({
     name: '',
     phone: '',
     custom_greeting: '',
-    max_guests: 1,
     status: 'pending',
-    attending_count: 0,
     dietary_notes: '',
     notes: '',
 });
@@ -92,9 +88,7 @@ const openEditModal = (guest) => {
     editForm.name = guest.name;
     editForm.phone = guest.phone || '';
     editForm.custom_greeting = guest.custom_greeting || '';
-    editForm.max_guests = guest.max_guests;
     editForm.status = guest.status;
-    editForm.attending_count = guest.attending_count;
     editForm.dietary_notes = guest.dietary_notes || '';
     editForm.notes = guest.notes || '';
     showEditModal.value = true;
@@ -141,27 +135,39 @@ const formatDate = (dateStr) => {
         <template #header>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h2 class="font-serif text-2xl font-bold leading-tight text-stone-900">
-                        Guest List &amp; Personal Invitations
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#c5a059]"></span>
+                        <span class="text-[11px] font-semibold uppercase tracking-widest text-stone-500">Guest Directory</span>
+                    </div>
+                    <h2 class="font-serif text-2xl font-bold leading-tight text-stone-900 mt-1">
+                        Personal Guest List &amp; Invitations
                     </h2>
                     <p class="text-xs text-stone-500 mt-0.5">
-                        Generate dedicated invitation links, send via WhatsApp, and monitor RSVPs
+                        Create personalized invitation links, send via WhatsApp, and track attendance responses
                     </p>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2.5">
                     <button
                         type="button"
                         @click="showBulkModal = true"
-                        class="px-3.5 py-2 rounded-xl bg-white border border-stone-300 text-stone-700 font-medium text-xs shadow-sm hover:bg-stone-50 transition-colors"
+                        class="px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-stone-700 font-medium text-xs shadow-2xs hover:bg-stone-50 transition-colors flex items-center gap-2"
                     >
-                        📋 Bulk Add Guests
+                        <svg class="w-3.5 h-3.5 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                        </svg>
+                        <span>Bulk Import</span>
                     </button>
                     <button
                         type="button"
                         @click="showAddModal = true"
-                        class="px-4 py-2 rounded-xl bg-amber-600 text-white font-medium text-xs shadow hover:bg-amber-700 transition-colors"
+                        class="px-4 py-2 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium text-xs shadow-2xs transition-colors flex items-center gap-2"
                     >
-                        + Add Guest
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Add New Guest</span>
                     </button>
                 </div>
             </div>
@@ -169,59 +175,77 @@ const formatDate = (dateStr) => {
 
         <div class="py-8">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
-                <!-- Summary Metrics Bar -->
+                <!-- Summary Metrics Bar (Filterable) -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <div
                         @click="setStatus('all')"
-                        class="bg-white p-4 rounded-xl border cursor-pointer transition-all"
-                        :class="currentStatus === 'all' ? 'border-amber-500 ring-2 ring-amber-400/20 shadow-sm' : 'border-stone-200 hover:border-amber-300'"
+                        class="bg-white p-4 rounded-2xl border cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+                        :class="currentStatus === 'all' ? 'border-[#15253b] ring-1 ring-[#15253b]' : 'border-[#EDE8E1] hover:border-stone-400'"
                     >
-                        <span class="text-[11px] uppercase tracking-wider font-semibold text-stone-400">Total Guests</span>
-                        <div class="font-display text-2xl font-bold text-stone-800 mt-1">{{ metrics.total_guests }}</div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider font-semibold text-stone-500">Total Guests</span>
+                            <span v-if="currentStatus === 'all'" class="w-2 h-2 rounded-full bg-[#15253b]"></span>
+                        </div>
+                        <div class="font-serif text-2xl font-bold text-stone-900 mt-2">{{ metrics.total_guests }}</div>
+                        <span class="text-[11px] text-stone-400 mt-0.5 block">All invitations</span>
                     </div>
 
                     <div
                         @click="setStatus('attending')"
-                        class="bg-white p-4 rounded-xl border cursor-pointer transition-all"
-                        :class="currentStatus === 'attending' ? 'border-emerald-500 ring-2 ring-emerald-400/20 shadow-sm' : 'border-stone-200 hover:border-emerald-300'"
+                        class="bg-white p-4 rounded-2xl border cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+                        :class="currentStatus === 'attending' ? 'border-emerald-600 ring-1 ring-emerald-600' : 'border-emerald-100 hover:border-emerald-300'"
                     >
-                        <span class="text-[11px] uppercase tracking-wider font-semibold text-emerald-700">Attending (Headcount)</span>
-                        <div class="font-display text-2xl font-bold text-emerald-800 mt-1">
-                            {{ metrics.total_attending_people }}
-                            <span class="text-xs text-stone-400 font-normal">({{ metrics.attending_count }} invites)</span>
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider font-semibold text-emerald-800">Attending</span>
+                            <span v-if="currentStatus === 'attending'" class="w-2 h-2 rounded-full bg-emerald-600"></span>
                         </div>
+                        <div class="font-serif text-2xl font-bold text-emerald-900 mt-2">
+                            {{ metrics.attending_count }}
+                        </div>
+                        <span class="text-[11px] text-emerald-700 mt-0.5 block">Confirmed attending</span>
                     </div>
 
                     <div
                         @click="setStatus('pending')"
-                        class="bg-white p-4 rounded-xl border cursor-pointer transition-all"
-                        :class="currentStatus === 'pending' ? 'border-amber-500 ring-2 ring-amber-400/20 shadow-sm' : 'border-stone-200 hover:border-amber-300'"
+                        class="bg-white p-4 rounded-2xl border cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+                        :class="currentStatus === 'pending' ? 'border-amber-600 ring-1 ring-amber-600' : 'border-amber-100 hover:border-amber-300'"
                     >
-                        <span class="text-[11px] uppercase tracking-wider font-semibold text-amber-700">Pending</span>
-                        <div class="font-display text-2xl font-bold text-amber-800 mt-1">{{ metrics.pending_count }}</div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider font-semibold text-amber-800">Pending</span>
+                            <span v-if="currentStatus === 'pending'" class="w-2 h-2 rounded-full bg-amber-600"></span>
+                        </div>
+                        <div class="font-serif text-2xl font-bold text-amber-900 mt-2">{{ metrics.pending_count }}</div>
+                        <span class="text-[11px] text-amber-700 mt-0.5 block">Awaiting response</span>
                     </div>
 
                     <div
                         @click="setStatus('declined')"
-                        class="bg-white p-4 rounded-xl border cursor-pointer transition-all"
-                        :class="currentStatus === 'declined' ? 'border-rose-500 ring-2 ring-rose-400/20 shadow-sm' : 'border-stone-200 hover:border-rose-300'"
+                        class="bg-white p-4 rounded-2xl border cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+                        :class="currentStatus === 'declined' ? 'border-stone-600 ring-1 ring-stone-600' : 'border-[#EDE8E1] hover:border-stone-400'"
                     >
-                        <span class="text-[11px] uppercase tracking-wider font-semibold text-rose-600">Declined</span>
-                        <div class="font-display text-2xl font-bold text-rose-800 mt-1">{{ metrics.declined_count }}</div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider font-semibold text-stone-500">Declined</span>
+                            <span v-if="currentStatus === 'declined'" class="w-2 h-2 rounded-full bg-stone-600"></span>
+                        </div>
+                        <div class="font-serif text-2xl font-bold text-stone-800 mt-2">{{ metrics.declined_count }}</div>
+                        <span class="text-[11px] text-stone-400 mt-0.5 block">Cannot attend</span>
                     </div>
                 </div>
 
-                <!-- Search and Filters -->
-                <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="relative w-full sm:w-80">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400 text-sm">
-                            🔍
+                <!-- Search and Filters Bar -->
+                <div class="bg-white p-4 rounded-2xl border border-[#EDE8E1] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="relative w-full sm:w-88">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
                         </span>
                         <input
                             type="text"
                             v-model="search"
-                            placeholder="Search by name, greeting, phone..."
-                            class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            placeholder="Search by name, custom greeting, phone..."
+                            class="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059] transition-colors"
                         />
                     </div>
 
@@ -237,8 +261,8 @@ const formatDate = (dateStr) => {
                             :key="st.val"
                             type="button"
                             @click="setStatus(st.val)"
-                            class="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
-                            :class="currentStatus === st.val ? 'bg-amber-600 text-white shadow-sm' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap"
+                            :class="currentStatus === st.val ? 'bg-[#15253b] text-white shadow-2xs' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
                         >
                             {{ st.label }}
                         </button>
@@ -246,31 +270,30 @@ const formatDate = (dateStr) => {
                 </div>
 
                 <!-- Guests Table -->
-                <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+                <div class="bg-white rounded-3xl border border-[#EDE8E1] shadow-[0_2px_12px_rgba(0,0,0,0.02)] overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="border-b border-stone-200 bg-stone-50/70 text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                                    <th class="py-3.5 px-4">Guest Details</th>
-                                    <th class="py-3.5 px-4">Contact</th>
-                                    <th class="py-3.5 px-4">Party Size</th>
-                                    <th class="py-3.5 px-4">RSVP Status</th>
-                                    <th class="py-3.5 px-4">Card Opened</th>
-                                    <th class="py-3.5 px-4 text-right">Actions</th>
+                                <tr class="border-b border-[#EDE8E1] bg-[#FAF9F6] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
+                                    <th class="py-4 px-5">Guest Details</th>
+                                    <th class="py-4 px-4">Contact</th>
+                                    <th class="py-4 px-4">RSVP Status</th>
+                                    <th class="py-4 px-4">Cathedral Doors</th>
+                                    <th class="py-4 px-5 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100 text-xs text-stone-700">
+                            <tbody class="divide-y divide-[#F0EDE6] text-xs text-stone-700">
                                 <tr
                                     v-for="guest in guests.data"
                                     :key="guest.id"
-                                    class="hover:bg-amber-50/30 transition-colors"
+                                    class="hover:bg-[#FAF9F6]/80 transition-colors"
                                 >
                                     <!-- Guest Name -->
-                                    <td class="py-3.5 px-4">
-                                        <div class="font-bold text-stone-900 text-sm">
+                                    <td class="py-4 px-5">
+                                        <div class="font-semibold text-stone-900 text-sm">
                                             {{ guest.name }}
                                         </div>
-                                        <div v-if="guest.custom_greeting && guest.custom_greeting !== guest.name" class="text-[11px] text-amber-800 italic mt-0.5">
+                                        <div v-if="guest.custom_greeting && guest.custom_greeting !== guest.name" class="text-[11px] text-[#7A5B22] italic mt-0.5">
                                             "{{ guest.custom_greeting }}"
                                         </div>
                                         <div v-if="guest.notes" class="text-[10px] text-stone-400 mt-0.5">
@@ -279,52 +302,64 @@ const formatDate = (dateStr) => {
                                     </td>
 
                                     <!-- Phone -->
-                                    <td class="py-3.5 px-4">
+                                    <td class="py-4 px-4">
                                         <span v-if="guest.phone" class="font-mono text-xs text-stone-800">
                                             {{ guest.phone }}
                                         </span>
                                         <span v-else class="text-stone-400 italic text-[11px]">
-                                            Not provided
+                                            —
                                         </span>
-                                    </td>
-
-                                    <!-- Max & Attending Count -->
-                                    <td class="py-3.5 px-4">
-                                        <div class="font-medium">
-                                            Max: {{ guest.max_guests }}
-                                        </div>
-                                        <div v-if="guest.status === 'attending'" class="text-[11px] text-emerald-700 font-semibold">
-                                            Attending: {{ guest.attending_count }}
-                                        </div>
                                     </td>
 
                                     <!-- Status -->
-                                    <td class="py-3.5 px-4">
+                                    <td class="py-4 px-4">
                                         <span
-                                            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium"
                                             :class="{
-                                                'bg-emerald-100 text-emerald-800': guest.status === 'attending',
-                                                'bg-amber-100 text-amber-800': guest.status === 'pending',
-                                                'bg-rose-100 text-rose-800': guest.status === 'declined',
+                                                'bg-emerald-50 text-emerald-800 border border-emerald-200/60': guest.status === 'attending',
+                                                'bg-amber-50 text-amber-800 border border-amber-200/60': guest.status === 'pending',
+                                                'bg-stone-100 text-stone-600 border border-stone-200': guest.status === 'declined',
                                             }"
                                         >
-                                            <span v-if="guest.status === 'attending'">✓ Attending</span>
-                                            <span v-else-if="guest.status === 'declined'">✕ Declined</span>
-                                            <span v-else>⏳ Pending</span>
+                                            <span v-if="guest.status === 'attending'" class="flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                                Attending
+                                            </span>
+                                            <span v-else-if="guest.status === 'declined'" class="flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                                </svg>
+                                                Declined
+                                            </span>
+                                            <span v-else class="flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <circle cx="12" cy="12" r="10" />
+                                                    <polyline points="12 6 12 12 16 14" />
+                                                </svg>
+                                                Pending
+                                            </span>
                                         </span>
-                                        <div v-if="guest.dietary_notes" class="text-[10px] text-stone-500 mt-1 max-w-[140px] truncate" :title="guest.dietary_notes">
-                                            🍽️ {{ guest.dietary_notes }}
+                                        <div v-if="guest.dietary_notes" class="text-[11px] text-stone-500 mt-1 max-w-[150px] truncate" :title="guest.dietary_notes">
+                                            Diet: {{ guest.dietary_notes }}
                                         </div>
                                     </td>
 
                                     <!-- Opened -->
-                                    <td class="py-3.5 px-4">
+                                    <td class="py-4 px-4">
                                         <span
                                             v-if="guest.opened_at"
-                                            class="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium"
-                                            :title="guest.opened_at"
+                                            class="inline-flex items-center gap-1.5 text-[11px] text-[#7A5B22] font-medium"
+                                            :title="formatDate(guest.opened_at)"
                                         >
-                                            <span>💌 Opened</span>
+                                            <svg class="w-3.5 h-3.5 text-[#c5a059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h9" />
+                                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                                <path d="m16 19 2 2 4-4" />
+                                            </svg>
+                                            <span>Opened</span>
                                         </span>
                                         <span v-else class="text-stone-400 text-[11px] italic">
                                             Unopened
@@ -332,64 +367,83 @@ const formatDate = (dateStr) => {
                                     </td>
 
                                     <!-- Actions -->
-                                    <td class="py-3.5 px-4 text-right">
+                                    <td class="py-4 px-5 text-right">
                                         <div class="inline-flex items-center gap-1.5">
                                             <!-- One-Click WhatsApp Share Button -->
                                             <a
                                                 :href="guest.whatsapp_url"
                                                 target="_blank"
-                                                class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-[11px] shadow-sm transition-all flex items-center gap-1"
+                                                class="px-2.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white font-medium text-[11px] shadow-2xs transition-all flex items-center gap-1.5"
                                                 title="Send WhatsApp invitation message with link"
                                             >
-                                                <span>💬</span> WhatsApp
+                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                                </svg>
+                                                <span>WhatsApp</span>
                                             </a>
 
                                             <!-- Copy Link Button -->
                                             <button
                                                 type="button"
                                                 @click="copyLink(guest)"
-                                                class="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium text-[11px] transition-colors"
+                                                class="px-2.5 py-1.5 rounded-lg border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 font-medium text-[11px] shadow-2xs transition-colors flex items-center gap-1.5"
                                                 :title="guest.invitation_url"
                                             >
-                                                {{ copiedId === guest.id ? '✓ Copied' : '🔗 Link' }}
+                                                <svg v-if="copiedId === guest.id" class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                                <svg v-else class="w-3.5 h-3.5 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                                </svg>
+                                                <span>{{ copiedId === guest.id ? 'Copied' : 'Copy' }}</span>
                                             </button>
 
                                             <!-- Preview Dedicated Card -->
                                             <a
                                                 :href="guest.invitation_url"
                                                 target="_blank"
-                                                class="p-1 rounded-lg hover:bg-stone-100 text-stone-500 hover:text-stone-900"
-                                                title="View card as guest"
+                                                class="p-1.5 rounded-lg border border-transparent hover:border-stone-200 hover:bg-white text-stone-500 hover:text-stone-900 transition-colors"
+                                                title="View card as this guest"
                                             >
-                                                👁️
+                                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
                                             </a>
 
                                             <!-- Edit Button -->
                                             <button
                                                 type="button"
                                                 @click="openEditModal(guest)"
-                                                class="p-1 rounded-lg hover:bg-stone-100 text-stone-500 hover:text-amber-800"
+                                                class="p-1.5 rounded-lg border border-transparent hover:border-stone-200 hover:bg-white text-stone-500 hover:text-[#7A5B22] transition-colors"
                                                 title="Edit guest details"
                                             >
-                                                ✏️
+                                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                                </svg>
                                             </button>
 
                                             <!-- Delete Button -->
                                             <button
                                                 type="button"
                                                 @click="deleteGuest(guest)"
-                                                class="p-1 rounded-lg hover:bg-stone-100 text-stone-400 hover:text-rose-600"
+                                                class="p-1.5 rounded-lg border border-transparent hover:border-rose-200 hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors"
                                                 title="Delete guest"
                                             >
-                                                🗑️
+                                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                </svg>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
 
                                 <tr v-if="guests.data.length === 0">
-                                    <td colspan="6" class="py-12 text-center text-stone-400 text-xs italic">
-                                        No guests found matching your criteria. Click "+ Add Guest" or "Bulk Add" above.
+                                    <td colspan="5" class="py-14 text-center text-stone-400 text-xs italic">
+                                        No guests found matching your filter criteria. Click "+ Add New Guest" above to begin.
                                     </td>
                                 </tr>
                             </tbody>
@@ -399,7 +453,7 @@ const formatDate = (dateStr) => {
                     <!-- Pagination Links -->
                     <div
                         v-if="guests.links && guests.links.length > 3"
-                        class="p-4 border-t border-stone-200 flex items-center justify-between text-xs"
+                        class="p-4 border-t border-[#EDE8E1] flex items-center justify-between text-xs bg-[#FAF9F6]"
                     >
                         <span class="text-stone-500">
                             Showing {{ guests.from || 0 }} to {{ guests.to || 0 }} of {{ guests.total }} guests
@@ -411,10 +465,10 @@ const formatDate = (dateStr) => {
                                 :key="i"
                                 :href="link.url"
                                 v-html="link.label"
-                                class="px-2.5 py-1 rounded-md text-xs font-medium transition-colors"
+                                class="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
                                 :class="{
-                                    'bg-amber-600 text-white': link.active,
-                                    'text-stone-600 hover:bg-stone-100': !link.active && link.url,
+                                    'bg-[#15253b] text-white shadow-2xs': link.active,
+                                    'text-stone-600 hover:bg-stone-200/70': !link.active && link.url,
                                     'text-stone-300 pointer-events-none': !link.url,
                                 }"
                             />
@@ -425,11 +479,19 @@ const formatDate = (dateStr) => {
         </div>
 
         <!-- Add Guest Modal -->
-        <div v-if="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-serif text-lg font-bold text-stone-900">Add New Guest</h3>
-                    <button @click="showAddModal = false" class="text-stone-400 hover:text-stone-600 text-xl font-bold">&times;</button>
+        <div v-if="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+            <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-[#EDE8E1]">
+                <div class="flex items-center justify-between mb-5 pb-3 border-b border-stone-100">
+                    <div>
+                        <h3 class="font-serif text-lg font-bold text-stone-900">Add New Guest</h3>
+                        <p class="text-xs text-stone-400">Generate a personalized digital invitation</p>
+                    </div>
+                    <button @click="showAddModal = false" class="text-stone-400 hover:text-stone-600 p-1 rounded-lg">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
                 </div>
 
                 <form @submit.prevent="submitAdd" class="space-y-4 text-xs">
@@ -440,42 +502,29 @@ const formatDate = (dateStr) => {
                             v-model="addForm.name"
                             required
                             placeholder="e.g. Rahul &amp; Priya Sharma"
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         />
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-stone-700 mb-1">Custom Greeting / Salutation on Card</label>
+                        <label class="block font-semibold text-stone-700 mb-1">Custom Salutation / Greeting on Invitation</label>
                         <input
                             type="text"
                             v-model="addForm.custom_greeting"
                             placeholder="e.g. Respected Sharma Ji &amp; Family"
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         />
                         <p class="text-[10px] text-stone-400 mt-1">Leave blank to use the Guest Name above.</p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block font-semibold text-stone-700 mb-1">Phone / WhatsApp</label>
-                            <input
-                                type="text"
-                                v-model="addForm.phone"
-                                placeholder="+919876543210"
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                            />
-                        </div>
-                        <div>
-                            <label class="block font-semibold text-stone-700 mb-1">Party Limit (Max Guests)</label>
-                            <input
-                                type="number"
-                                v-model="addForm.max_guests"
-                                min="1"
-                                max="20"
-                                required
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                            />
-                        </div>
+                    <div>
+                        <label class="block font-semibold text-stone-700 mb-1">Phone / WhatsApp</label>
+                        <input
+                            type="text"
+                            v-model="addForm.phone"
+                            placeholder="+94771234567"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
+                        />
                     </div>
 
                     <div>
@@ -483,23 +532,23 @@ const formatDate = (dateStr) => {
                         <textarea
                             v-model="addForm.notes"
                             rows="2"
-                            placeholder="e.g. Groom's college friend, requires accommodation..."
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            placeholder="e.g. Bride's colleague, reserved table 4..."
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         ></textarea>
                     </div>
 
-                    <div class="mt-6 flex items-center justify-end gap-2 pt-2 border-t border-stone-100">
+                    <div class="mt-6 flex items-center justify-end gap-2.5 pt-3 border-t border-stone-100">
                         <button
                             type="button"
                             @click="showAddModal = false"
-                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium"
+                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium transition-colors"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             :disabled="addForm.processing"
-                            class="px-5 py-2 rounded-xl bg-amber-600 text-white font-medium shadow hover:bg-amber-700 disabled:opacity-50"
+                            class="px-5 py-2.5 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium shadow-2xs disabled:opacity-50 transition-colors"
                         >
                             {{ addForm.processing ? 'Creating...' : 'Create Invitation' }}
                         </button>
@@ -509,51 +558,48 @@ const formatDate = (dateStr) => {
         </div>
 
         <!-- Bulk Add Modal -->
-        <div v-if="showBulkModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-stone-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-serif text-lg font-bold text-stone-900">Bulk Add Guests</h3>
-                    <button @click="showBulkModal = false" class="text-stone-400 hover:text-stone-600 text-xl font-bold">&times;</button>
+        <div v-if="showBulkModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-[#EDE8E1]">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-100">
+                    <div>
+                        <h3 class="font-serif text-lg font-bold text-stone-900">Bulk Import Guests</h3>
+                        <p class="text-xs text-stone-400">Quickly add multiple guests at once</p>
+                    </div>
+                    <button @click="showBulkModal = false" class="text-stone-400 hover:text-stone-600 p-1 rounded-lg">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
                 </div>
 
-                <p class="text-xs text-stone-600 mb-3">
-                    Paste multiple guests (one per line). Format: <code>Guest Name, Phone, MaxGuests</code>
+                <p class="text-xs text-stone-600 mb-3 leading-relaxed">
+                    Paste one guest per line. Format: <code class="bg-stone-100 px-1.5 py-0.5 rounded text-stone-800">Guest Name, Phone</code>
                 </p>
 
                 <form @submit.prevent="submitBulk" class="space-y-4 text-xs">
                     <div>
                         <textarea
                             v-model="bulkForm.raw_list"
-                            rows="8"
+                            rows="7"
                             required
-                            placeholder="Dr. Rajesh Verma &amp; Family, +919876543210, 4&#10;Amit &amp; Sneha, +919811223344, 2&#10;Suresh Kumar, , 1"
-                            class="w-full font-mono text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500 bg-stone-50"
+                            placeholder="Dr. Rajesh Fernando &amp; Family, +94771234567&#10;Kamal &amp; Nadeesha, +94779876543&#10;Suresh Perera"
+                            class="w-full font-mono text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059] bg-[#FAF9F6]"
                         ></textarea>
                     </div>
 
-                    <div>
-                        <label class="block font-semibold text-stone-700 mb-1">Default Max Guests if not specified</label>
-                        <input
-                            type="number"
-                            v-model="bulkForm.default_max_guests"
-                            min="1"
-                            max="10"
-                            class="w-24 text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                        />
-                    </div>
-
-                    <div class="mt-6 flex items-center justify-end gap-2 pt-2 border-t border-stone-100">
+                    <div class="mt-6 flex items-center justify-end gap-2.5 pt-3 border-t border-stone-100">
                         <button
                             type="button"
                             @click="showBulkModal = false"
-                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium"
+                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium transition-colors"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             :disabled="bulkForm.processing"
-                            class="px-5 py-2 rounded-xl bg-amber-600 text-white font-medium shadow hover:bg-amber-700 disabled:opacity-50"
+                            class="px-5 py-2.5 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium shadow-2xs disabled:opacity-50 transition-colors"
                         >
                             {{ bulkForm.processing ? 'Importing...' : 'Add All Guests' }}
                         </button>
@@ -563,11 +609,19 @@ const formatDate = (dateStr) => {
         </div>
 
         <!-- Edit Guest Modal -->
-        <div v-if="showEditModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-serif text-lg font-bold text-stone-900">Edit Guest</h3>
-                    <button @click="showEditModal = false" class="text-stone-400 hover:text-stone-600 text-xl font-bold">&times;</button>
+        <div v-if="showEditModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+            <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-[#EDE8E1]">
+                <div class="flex items-center justify-between mb-5 pb-3 border-b border-stone-100">
+                    <div>
+                        <h3 class="font-serif text-lg font-bold text-stone-900">Edit Guest Details</h3>
+                        <p class="text-xs text-stone-400">Update RSVP status, salutation, or notes</p>
+                    </div>
+                    <button @click="showEditModal = false" class="text-stone-400 hover:text-stone-600 p-1 rounded-lg">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
                 </div>
 
                 <form @submit.prevent="submitEdit" class="space-y-4 text-xs">
@@ -577,16 +631,16 @@ const formatDate = (dateStr) => {
                             type="text"
                             v-model="editForm.name"
                             required
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         />
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-stone-700 mb-1">Custom Salutation / Greeting on Card</label>
+                        <label class="block font-semibold text-stone-700 mb-1">Custom Salutation / Greeting on Invitation</label>
                         <input
                             type="text"
                             v-model="editForm.custom_greeting"
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         />
                     </div>
 
@@ -596,43 +650,19 @@ const formatDate = (dateStr) => {
                             <input
                                 type="text"
                                 v-model="editForm.phone"
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                             />
                         </div>
-                        <div>
-                            <label class="block font-semibold text-stone-700 mb-1">Max Guests</label>
-                            <input
-                                type="number"
-                                v-model="editForm.max_guests"
-                                min="1"
-                                max="20"
-                                required
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block font-semibold text-stone-700 mb-1">RSVP Status</label>
                             <select
                                 v-model="editForm.status"
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                                class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                             >
                                 <option value="pending">Pending</option>
                                 <option value="attending">Attending</option>
                                 <option value="declined">Declined</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="block font-semibold text-stone-700 mb-1">Headcount Attending</label>
-                            <input
-                                type="number"
-                                v-model="editForm.attending_count"
-                                min="0"
-                                :max="editForm.max_guests"
-                                class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
-                            />
                         </div>
                     </div>
 
@@ -641,32 +671,32 @@ const formatDate = (dateStr) => {
                         <input
                             type="text"
                             v-model="editForm.dietary_notes"
-                            placeholder="e.g. Pure Veg, Jain"
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            placeholder="e.g. Vegetarian, Non-alcoholic"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         />
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-stone-700 mb-1">Notes</label>
+                        <label class="block font-semibold text-stone-700 mb-1">Internal Notes</label>
                         <textarea
                             v-model="editForm.notes"
                             rows="2"
-                            class="w-full text-xs rounded-xl border-stone-200 focus:border-amber-500 focus:ring-amber-500"
+                            class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                         ></textarea>
                     </div>
 
-                    <div class="mt-6 flex items-center justify-end gap-2 pt-2 border-t border-stone-100">
+                    <div class="mt-6 flex items-center justify-end gap-2.5 pt-3 border-t border-stone-100">
                         <button
                             type="button"
                             @click="showEditModal = false"
-                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium"
+                            class="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 font-medium transition-colors"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             :disabled="editForm.processing"
-                            class="px-5 py-2 rounded-xl bg-amber-600 text-white font-medium shadow hover:bg-amber-700 disabled:opacity-50"
+                            class="px-5 py-2.5 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium shadow-2xs disabled:opacity-50 transition-colors"
                         >
                             {{ editForm.processing ? 'Saving...' : 'Save Changes' }}
                         </button>
@@ -676,4 +706,3 @@ const formatDate = (dateStr) => {
         </div>
     </AuthenticatedLayout>
 </template>
-

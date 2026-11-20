@@ -56,9 +56,11 @@ class GuestController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:30',
             'custom_greeting' => 'nullable|string|max:255',
-            'max_guests' => 'required|integer|min:1|max:20',
+            'max_guests' => 'nullable|integer|min:1|max:20',
             'notes' => 'nullable|string|max:1000',
         ]);
+
+        $validated['max_guests'] = $validated['max_guests'] ?? 1;
 
         Guest::create($validated);
 
@@ -111,12 +113,15 @@ class GuestController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:30',
             'custom_greeting' => 'nullable|string|max:255',
-            'max_guests' => 'required|integer|min:1|max:20',
+            'max_guests' => 'nullable|integer|min:1|max:20',
             'status' => 'required|in:pending,attending,declined',
-            'attending_count' => 'required|integer|min:0',
+            'attending_count' => 'nullable|integer|min:0',
             'dietary_notes' => 'nullable|string|max:500',
             'notes' => 'nullable|string|max:1000',
         ]);
+
+        $validated['max_guests'] = $validated['max_guests'] ?? $guest->max_guests ?? 1;
+        $validated['attending_count'] = ($validated['status'] === 'attending') ? 1 : 0;
 
         $guest->update($validated);
 

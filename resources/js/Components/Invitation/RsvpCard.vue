@@ -43,7 +43,7 @@
                 </h3>
                 <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
                     <span v-if="guestStatus === 'attending'">
-                        Attending count: <strong>{{ attendingCount }}</strong> guest(s). We look forward to celebrating together in God's grace!
+                        We are truly honored that you will be joining us. We look forward to celebrating together in God's grace!
                     </span>
                     <span v-else>
                         We regret you cannot be with us in person, but your warm prayers and blessings will remain in our hearts.
@@ -98,43 +98,17 @@
                     </div>
                 </div>
 
-                <!-- Number of Guests -->
-                <div v-if="form.status === 'attending'" class="bg-white/70 p-3 rounded-xl border border-stone-200/60">
-                    <label class="block font-serif font-bold text-sm text-stone-800 mb-1 text-center">
-                        Total Number of Attending Guests
-                    </label>
-                    <div class="flex items-center justify-center gap-6 py-1">
-                        <button
-                            type="button"
-                            @click="form.attending_count = Math.max(1, form.attending_count - 1)"
-                            class="w-10 h-10 rounded-full bg-stone-200/80 hover:bg-stone-300 font-bold text-base text-stone-700 flex items-center justify-center active:scale-90 transition-all shadow-sm"
-                        >
-                            -
-                        </button>
-                        <span class="font-serif text-3xl font-bold text-[#ad2c51] w-14 text-center">
-                            {{ form.attending_count }}
-                        </span>
-                        <button
-                            type="button"
-                            @click="form.attending_count = Math.min(maxGuests, form.attending_count + 1)"
-                            class="w-10 h-10 rounded-full bg-stone-200/80 hover:bg-stone-300 font-bold text-base text-stone-700 flex items-center justify-center active:scale-90 transition-all shadow-sm"
-                        >
-                            +
-                        </button>
-                    </div>
-                    <p class="text-sm text-stone-700 font-serif italic text-center mt-1">
-                        Allocated seats for your invitation: {{ maxGuests }}
-                    </p>
-                </div>
-
-                <!-- Submit Button matching screenshot 12 -->
-                <div class="pt-2">
+                <!-- Submit Button -->
+                <div class="pt-3">
                     <button
                         type="submit" @click="burstAt($event, 48)"
                         :disabled="form.processing"
-                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2.5 disabled:opacity-50"
                     >
-                        <span>✈</span>
+                        <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
                         <span>{{ form.processing ? 'Recording RSVP...' : 'Send RSVP' }}</span>
                     </button>
                 </div>

@@ -39,25 +39,6 @@
                     <p class="text-sm font-serif text-stone-700 leading-relaxed mb-4 border-l-2 border-gold-500 pl-3">
                         We warmly welcome you to St. Sebastian's Church in Moratuwa for the Nuptial Mass at 4:00 PM, followed by the Wedding Reception at Vinrich Lake Resort, Piliyandala from 6:30 PM to 12:00 AM.
                     </p>
-
-                    <!-- Etiquette & Guest Amenities -->
-                    <div class="space-y-2 mb-4">
-                        <div class="flex items-center gap-2.5 text-sm font-serif text-stone-700 bg-white/70 p-2.5 rounded-xl border border-stone-200/60">
-                            <svg class="w-4 h-4 text-[#ad2c51] shrink-0 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
-                            </svg>
-                            <span><strong>Dress Code:</strong> Formal Nuptial Attire / Saree &amp; Lounge Suit</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-sm font-serif text-stone-700 bg-white/70 p-2.5 rounded-xl border border-stone-200/60">
-                            <svg class="w-4 h-4 text-[#ad2c51] shrink-0 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="8" rx="2"></rect>
-                                <path d="M5 11l2-5h10l2 5"></path>
-                                <circle cx="7.5" cy="15.5" r="1.5"></circle>
-                                <circle cx="16.5" cy="15.5" r="1.5"></circle>
-                            </svg>
-                            <span><strong>Parking:</strong> Parking is available near the church premises</span>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="pt-1">

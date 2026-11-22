@@ -20,15 +20,15 @@
                 Together with their families
             </p>
 
-            <!-- 2. Couple's Names -->
-            <h1 class="mt-3 font-serif font-semibold text-[#ad2c51] leading-tight text-4xl sm:text-5xl lg:text-6xl">
+            <!-- 2. Couple's Names (Primary Focus) -->
+            <h1 class="mt-3 font-serif font-bold text-[#ad2c51] leading-tight text-4xl sm:text-5xl lg:text-6xl tracking-wide drop-shadow-xs">
                 {{ groomName }}
                 <span class="block font-script text-[#ad2c51] font-normal text-3xl sm:text-4xl my-0.5">&amp;</span>
                 {{ brideName }}
             </h1>
 
             <!-- 3. Couple Portrait Medallion -->
-            <div class="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 flex items-center justify-center mx-auto my-4 sm:my-5">
+            <div class="relative w-64 h-64 sm:w-76 sm:h-76 lg:w-84 lg:h-84 flex items-center justify-center mx-auto my-3 sm:my-4">
                 <!-- Gold outline floral blooms set to the BACK -->
                 <FlowerCluster class="absolute -bottom-6 -left-8 w-28 sm:w-36 lg:w-44 opacity-75 pointer-events-none z-0" />
                 <FlowerCluster class="absolute -top-6 -right-8 w-28 sm:w-36 lg:w-44 rotate-180 opacity-75 pointer-events-none z-0" />
@@ -50,13 +50,15 @@
                     ></span>
                 </div>
 
-                <!-- Photo medallion in FRONT -->
-                <div class="relative z-10 w-[66%] h-[66%] rounded-full overflow-hidden border-[5px] border-white shadow-[0_15px_40px_rgba(216,171,67,.35)] ring-4 ring-[#d8ab43] bg-stone-100">
+                <!-- Photo medallion in FRONT (Enlarged inner circle + closer zoom so couple is clearly visible) -->
+                <div class="relative z-10 w-[78%] h-[78%] rounded-full overflow-hidden border-4 sm:border-[5px] border-white shadow-[0_16px_40px_rgba(216,171,67,.38)] ring-4 ring-[#d8ab43] bg-stone-100">
                     <img
                         src="/images/wedding/couple_portrait.jpg"
                         :alt="`${groomName} & ${brideName}`"
-                        class="w-full h-full object-cover object-[center_28%] scale-105 select-none pointer-events-none"
+                        class="w-full h-full object-cover object-[center_20%] scale-135 contrast-[1.03] brightness-[1.02] select-none pointer-events-none transition-transform duration-500 hover:scale-140"
                     />
+                    <!-- Subtle warm inner vignette to make the couple pop with depth -->
+                    <div class="absolute inset-0 rounded-full shadow-[inset_0_0_18px_rgba(0,0,0,0.15)] pointer-events-none"></div>
                 </div>
             </div>
 
@@ -119,9 +121,9 @@ defineProps({
 </script>
 
 <style scoped>
-.ring-spin { --r: 7.2rem; animation: spin 70s linear infinite; }
-@media (min-width: 640px) { .ring-spin { --r: 8.8rem; } }
-@media (min-width: 1024px) { .ring-spin { --r: 9.8rem; } }
+.ring-spin { --r: 6.4rem; animation: spin 70s linear infinite; }
+@media (min-width: 640px) { .ring-spin { --r: 7.6rem; } }
+@media (min-width: 1024px) { .ring-spin { --r: 8.4rem; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 

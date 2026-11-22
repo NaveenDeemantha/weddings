@@ -127,36 +127,57 @@
                         class="absolute inset-0 z-20 flex flex-col items-center justify-between pt-[17%] pb-[29%] px-6 text-center pointer-events-none transition-all duration-700 select-none"
                         :class="{ 'opacity-0 scale-95': isOpening }"
                     >
-                        <!-- Top Section: THE WEDDING OF + Delicate Cross -->
+                        <!-- Top Section: Latin Cross & Holy Matrimony -->
                         <div class="flex flex-col items-center">
-                            <p class="font-serif tracking-[0.45em] text-[10px] sm:text-[11.5px] uppercase font-semibold text-[#8a724d] drop-shadow-xs">
-                                The Wedding Of
-                            </p>
-                            
-                            <!-- Delicate Gold Cross with Starlight Glow -->
-                            <div class="my-1.5 flex items-center justify-center">
-                                <svg class="w-4 h-5 text-[#c4a35a] fill-current drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]" viewBox="0 0 24 24">
+                            <div class="my-1 flex items-center justify-center">
+                                <svg class="w-5 h-6 text-[#f5dc8a] fill-current drop-shadow-[0_0_10px_rgba(212,175,55,0.85)]" viewBox="0 0 24 24">
                                     <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
                                 </svg>
                             </div>
+                            <p class="font-display tracking-[0.4em] text-[9.5px] sm:text-[11px] uppercase font-semibold text-[#f5dc8a] drop-shadow-md">
+                                Holy Matrimony
+                            </p>
                         </div>
 
-                        <!-- Middle Section: Couple's Names, Date & Interactive Open Button -->
-                        <div class="flex flex-col items-center -mt-1 sm:-mt-2">
-                            <!-- Buddhima & Shavindi -->
-                            <h1 class="font-serif text-[26px] sm:text-[34px] md:text-[38px] leading-tight font-normal text-[#16253d] tracking-normal drop-shadow-xs">
-                                {{ groomName }}
-                                <span class="font-script text-[32px] sm:text-[42px] text-[#ad2c51] mx-1 align-baseline">&amp;</span>
-                                {{ brideName }}
-                            </h1>
+                        <!-- Middle Section: Lightly Blurred & See-Through Glass Container on Door -->
+                        <div class="flex flex-col items-center -mt-1 sm:-mt-2 w-full">
+                            <!-- Translucent Frosted Glass Plaque (See-Through Wood Texture Beneath with Soft Diffused Blur) -->
+                            <div class="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] px-5 sm:px-7 py-3.5 sm:py-4.5 rounded-3xl bg-black/35 sm:bg-black/40 backdrop-blur-md border border-[#f5dc8a]/35 shadow-[0_12px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/10 text-center transition-transform hover:scale-[1.01]">
+                                
+                                <!-- The Wedding Of -->
+                                <div class="flex items-center justify-center gap-2 mb-1">
+                                    <span class="w-6 sm:w-10 h-px bg-gradient-to-r from-transparent via-[#f5dc8a]/80 to-transparent"></span>
+                                    <p class="font-display tracking-[0.35em] text-[9px] sm:text-[10.5px] uppercase text-[#f5dc8a] font-bold drop-shadow-xs">
+                                        The Wedding Of
+                                    </p>
+                                    <span class="w-6 sm:w-10 h-px bg-gradient-to-l from-transparent via-[#f5dc8a]/80 to-transparent"></span>
+                                </div>
 
-                            <!-- Date -->
-                            <p class="font-serif italic text-xs sm:text-sm text-[#3d3733] mt-1 tracking-wide">
-                                {{ weddingDateText }}
-                            </p>
+                                <!-- 1. PRIMARY HERO: Couple Bride & Groom Names -->
+                                <h1 class="font-serif text-[28px] sm:text-[38px] md:text-[44px] leading-tight font-bold text-white tracking-wide my-1 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
+                                    <span class="inline-block">{{ groomName }}</span>
+                                    <span class="font-script text-[32px] sm:text-[44px] md:text-[50px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]">&amp;</span>
+                                    <span class="inline-block">{{ brideName }}</span>
+                                </h1>
+
+                                <!-- Date -->
+                                <p class="font-serif italic text-xs sm:text-sm text-[#f8f6f0]/90 tracking-wide mb-2.5 drop-shadow-xs">
+                                    {{ weddingDateText }}
+                                </p>
+
+                                <!-- 2. SECONDARY DEDICATION: Invited People / Family Title -->
+                                <div class="pt-2 border-t border-[#f5dc8a]/25">
+                                    <p class="font-display tracking-[0.28em] text-[8.5px] sm:text-[9.5px] uppercase text-[#f5dc8a]/90 font-semibold mb-0.5">
+                                        Cordially Inviting
+                                    </p>
+                                    <h2 class="font-serif font-bold text-sm sm:text-base md:text-lg text-white/95 uppercase tracking-[0.06em] leading-snug drop-shadow-sm">
+                                        {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
+                                    </h2>
+                                </div>
+                            </div>
 
                             <!-- Prominent Interactive Open Button with Golden Glow -->
-                            <div class="mt-4 sm:mt-5 pointer-events-auto">
+                            <div class="mt-3.5 sm:mt-4 pointer-events-auto">
                                 <button
                                     type="button"
                                     @click.stop="openChapelDoors"
@@ -172,16 +193,6 @@
                                     <span class="text-[#c4a35a] group-hover:translate-x-1 transition-transform">→</span>
                                 </button>
                             </div>
-                        </div>
-
-                        <!-- Bottom Section: CORDIALLY INVITING [GUEST NAME & TITLE] -->
-                        <div class="flex flex-col items-center pt-2 w-full px-4 text-center">
-                            <p class="font-display tracking-[0.3em] text-[8.5px] sm:text-[9.5px] uppercase text-[#8a724d] font-semibold">
-                                Cordially Inviting
-                            </p>
-                            <p class="font-serif text-sm sm:text-base md:text-lg text-[#16253d] font-normal tracking-wide mt-0.5">
-                                {{ guestGreeting || guestName || 'Mr & Mrs Silva' }}
-                            </p>
                         </div>
                     </div>
 
@@ -260,13 +271,13 @@
                     {{ churchName }}
                 </p>
 
-                <!-- Posh Invitee Note in Transition -->
-                <div class="mt-4 text-center max-w-md px-4">
-                    <p class="font-display tracking-[0.35em] text-[9.5px] sm:text-[11px] uppercase text-[#f5dc8a]/90 font-medium">
+                <!-- Posh Invitee Card in Transition -->
+                <div class="mt-4 px-6 py-2.5 rounded-2xl bg-white/15 backdrop-blur-md border border-[#f5dc8a]/70 shadow-[0_8px_30px_rgba(0,0,0,0.5)] max-w-md text-center">
+                    <p class="font-display tracking-[0.35em] text-[9.5px] sm:text-[11px] uppercase text-[#f5dc8a] font-bold">
                         Cordially Inviting
                     </p>
-                    <p class="font-serif text-base sm:text-xl font-normal text-white tracking-wide mt-1 drop-shadow-sm">
-                        {{ guestGreeting || guestName || 'Our Honoured Guest' }}
+                    <p class="font-serif text-lg sm:text-2xl font-bold text-white tracking-wider uppercase drop-shadow-md mt-0.5">
+                        {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
                     </p>
                 </div>
 

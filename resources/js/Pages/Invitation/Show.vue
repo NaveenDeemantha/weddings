@@ -19,7 +19,7 @@
             @opened="onDoorsOpened"
         />
 
-        <!-- Floating Music Player Button (Top Right Dark Navy Circle ♪) -->
+        <!-- Floating Music Player Button (Top Right Dark Navy Circle) -->
         <MusicPlayer
             ref="musicPlayerRef"
             :music-url="settings.music_url"
@@ -30,7 +30,12 @@
 
         <!-- Preview Mode Banner (If in Preview) -->
         <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2 px-4 text-center font-serif shadow-inner flex flex-wrap items-center justify-center gap-3">
-            <span>✨ Previewing Invitation Mode</span>
+            <span class="inline-flex items-center gap-1.5 font-sans font-medium tracking-wide">
+                <svg class="w-3.5 h-3.5 fill-current text-gold-200" viewBox="0 0 24 24">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
+                Previewing Invitation For: <strong class="text-white uppercase tracking-wider underline decoration-gold-300 ml-1">{{ guest.custom_greeting || guest.name }}</strong>
+            </span>
             <Link :href="route('invitation.print')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-sans text-[11px] font-semibold transition-colors">
                 <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 6 2 18 2 18 9"></polyline>
@@ -45,75 +50,49 @@
         </div>
 
         <!-- Master Invitation Card (Optimized Luxury Stationery Proportions) -->
-        <main class="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 pt-4 sm:pt-8">
+        <main class="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 pt-2 sm:pt-4">
             <!-- The Elegant Off-White Wedding Card with Rounded Top & Subtle Gold Border -->
             <div ref="cardRef" class="relative bg-[#ffffff] rounded-3xl border border-[#d8ab43]/50 shadow-2xl overflow-hidden card-deckled">
                 <!-- 1. Master Header: Stained Glass Arch, Holy Matrimony, Names, Date, Cute Catholic Couple & Candelabras -->
                 <MasterInvitationHeader
+                    :guest-name="guest.name"
+                    :guest-greeting="guest.custom_greeting"
                     :bride-name="settings.bride_name"
                     :groom-name="settings.groom_name"
                     :bride-parents="settings.bride_parents"
                     :groom-parents="settings.groom_parents"
                 />
 
-                <!-- 2. Our Story & Journey Milestones Timeline & Countdown -->
-                <FloralSection side="left">
-                    <OurStoryTimeline
-                    :wedding-date="settings.wedding_date"
-                />
-                </FloralSection>
-
-                <!-- 3. Wedding Events (Registration, Nuptial Mass, Poruwa & Reception) -->
+                <!-- 2. Wedding Events (Registration, Nuptial Mass, Poruwa & Reception) -->
                 <FloralSection side="both">
                     <WeddingEventsList
-                    :events="settings.events"
-                />
+                        :events="settings.events"
+                    />
                 </FloralSection>
 
-                <!-- 4. Captured Moments Gallery & Calendar Banner -->
-                <FloralSection side="right">
-                    <WeddingGallery
-                    :wedding-date="settings.wedding_date"
-                    :bride-name="settings.bride_name"
-                    :groom-name="settings.groom_name"
-                />
-                </FloralSection>
-
-                <!-- 5. The Setting - Wedding Venue & Google Maps -->
+                <!-- 3. The Setting - Wedding Venue & Google Maps -->
                 <FloralSection side="left">
                     <VenueSection
-                    :venue-name="settings.venue_name"
-                    :venue-address="settings.venue_address"
-                    :venue-map-url="settings.venue_map_url"
-                />
+                        :venue-name="settings.venue_name"
+                        :venue-address="settings.venue_address"
+                        :venue-map-url="settings.venue_map_url"
+                    />
                 </FloralSection>
 
-                <!-- 6. Kindly Reply - RSVP Form -->
-                <FloralSection side="both" top>
+                <!-- 4. Kindly Reply - RSVP Form -->
+                <FloralSection side="right" top>
                     <RsvpCard
-                    :guest-slug="guest.slug"
-                    :guest-name="guest.name"
-                    :guest-greeting="guest.custom_greeting"
-                    :guest-status="guest.status"
-                    :attending-count="guest.attending_count"
-                    :max-guests="guest.max_guests"
-                    :is-preview="isPreview"
-                />
+                        :guest-slug="guest.slug"
+                        :guest-name="guest.name"
+                        :guest-greeting="guest.custom_greeting"
+                        :guest-status="guest.status"
+                        :attending-count="guest.attending_count"
+                        :max-guests="guest.max_guests"
+                        :is-preview="isPreview"
+                    />
                 </FloralSection>
 
-                <!-- 7. Wishes & Blessings Guestbook -->
-                <FloralSection side="right">
-                    <WishesGuestbook
-                    :wishes="wishes"
-                    :guest-slug="guest.slug"
-                    :guest-name="guest.name"
-                    :bride-name="settings.bride_name"
-                    :groom-name="settings.groom_name"
-                    :is-preview="isPreview"
-                />
-                </FloralSection>
-
-                <!-- 8. Midnight Navy Gothic Rose Window Footer (Screen 13) -->
+                <!-- 5. Midnight Navy Gothic Rose Window Footer -->
                 <NavySaveTheDateFooter
                     :bride-name="settings.bride_name"
                     :groom-name="settings.groom_name"
@@ -133,12 +112,9 @@ import ClickBurst from '@/Components/Invitation/ClickBurst.vue';
 import PetalRain from '@/Components/Invitation/PetalRain.vue';
 import CathedralDoorCover from '@/Components/Invitation/CathedralDoorCover.vue';
 import MasterInvitationHeader from '@/Components/Invitation/MasterInvitationHeader.vue';
-import OurStoryTimeline from '@/Components/Invitation/OurStoryTimeline.vue';
 import WeddingEventsList from '@/Components/Invitation/WeddingEventsList.vue';
-import WeddingGallery from '@/Components/Invitation/WeddingGallery.vue';
 import VenueSection from '@/Components/Invitation/VenueSection.vue';
 import RsvpCard from '@/Components/Invitation/RsvpCard.vue';
-import WishesGuestbook from '@/Components/Invitation/WishesGuestbook.vue';
 import NavySaveTheDateFooter from '@/Components/Invitation/NavySaveTheDateFooter.vue';
 import BottomFloatingDock from '@/Components/Invitation/BottomFloatingDock.vue';
 import MusicPlayer from '@/Components/Invitation/MusicPlayer.vue';

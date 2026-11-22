@@ -4,9 +4,13 @@
             <!-- Header -->
             <div class="mb-6 sm:mb-8">
                 <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
-                    <span class="text-gold-500 text-xs">✝</span>
+                    <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                        <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                    </svg>
                     <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold">Response Requested</span>
-                    <span class="text-gold-500 text-xs">✝</span>
+                    <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                        <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                    </svg>
                 </div>
                 <h2 class="font-serif text-2xl sm:text-4xl font-normal text-stone-900 leading-snug">
                     Répondez S'il Vous Plaît

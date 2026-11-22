@@ -96,7 +96,9 @@
         <div class="no-print max-w-4xl mx-auto mt-4 px-4">
             <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 text-xs flex flex-wrap items-center justify-between gap-3 shadow-sm">
                 <div class="flex items-center gap-2.5">
-                    <span class="text-base">✨</span>
+                    <svg class="w-4 h-4 text-amber-600 fill-current shrink-0" viewBox="0 0 24 24">
+                        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                    </svg>
                     <div>
                         <strong>Gold Foil Line-Art Rose Design:</strong> Single-page luxury layout framed with our site's signature gold-outlined roses, soft blush watercolor wash, and fine gold stationery border rules.
                     </div>
@@ -164,10 +166,18 @@
                         <!-- Inner Fine Gold Hairline with Corner Notch Accents -->
                         <div class="absolute inset-1 sm:inset-1.5 border border-[#d8ab43]/30"></div>
                         <!-- Delicate Corner Starburst Jewels -->
-                        <div class="absolute top-1 left-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
-                        <div class="absolute top-1 right-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
-                        <div class="absolute bottom-1 left-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
-                        <div class="absolute bottom-1 right-1 text-[#d8ab43] text-[9px] leading-none opacity-80">✦</div>
+                        <div class="absolute top-1 left-1 opacity-80 flex items-center justify-center">
+                            <svg class="w-2 h-2 text-[#d8ab43] fill-current" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+                        </div>
+                        <div class="absolute top-1 right-1 opacity-80 flex items-center justify-center">
+                            <svg class="w-2 h-2 text-[#d8ab43] fill-current" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+                        </div>
+                        <div class="absolute bottom-1 left-1 opacity-80 flex items-center justify-center">
+                            <svg class="w-2 h-2 text-[#d8ab43] fill-current" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+                        </div>
+                        <div class="absolute bottom-1 right-1 opacity-80 flex items-center justify-center">
+                            <svg class="w-2 h-2 text-[#d8ab43] fill-current" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+                        </div>
                     </div>
 
                     <!-- ================= INNER STATIONERY CONTENT ================= -->
@@ -282,7 +292,7 @@
                         <!-- Gold Filigree Divider -->
                         <div class="flex items-center justify-center gap-2">
                             <span class="h-[1px] w-8 bg-[#d8ab43]/50"></span>
-                            <span class="text-[#d8ab43] text-xs">✦</span>
+                            <svg class="w-2.5 h-2.5 text-[#d8ab43] fill-current" viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
                             <span class="h-[1px] w-8 bg-[#d8ab43]/50"></span>
                         </div>
 

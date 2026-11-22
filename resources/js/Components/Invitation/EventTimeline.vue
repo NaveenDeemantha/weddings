@@ -3,16 +3,22 @@
         <!-- Section Title with Artisan Gold Accent -->
         <div class="text-center mb-8 sm:mb-12">
             <div class="inline-flex items-center gap-1.5 text-gold-700 mb-1.5">
-                <span class="text-gold-500 text-xs">✝</span>
+                <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                </svg>
                 <span class="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold">Liturgy &amp; Order of Events</span>
-                <span class="text-gold-500 text-xs">✝</span>
+                <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                </svg>
             </div>
             <h2 class="font-serif text-2xl sm:text-4xl text-stone-900 font-normal">
                 Order of Celebrations
             </h2>
             <div class="mt-2.5 flex items-center justify-center gap-2.5">
                 <div class="h-px bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent w-20 sm:w-24"></div>
-                <span class="text-gold-600 text-xs sm:text-sm">❦</span>
+                <svg class="w-3 h-3 text-gold-600 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
                 <div class="h-px bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent w-20 sm:w-24"></div>
             </div>
             <p class="mt-1.5 text-stone-600 font-serif italic text-xs sm:text-sm">

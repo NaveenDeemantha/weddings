@@ -41,6 +41,9 @@
                 <h3 class="font-serif text-lg font-bold text-[#ad2c51]">
                     {{ guestStatus === 'attending' ? 'Response Confirmed: Joyfully Accepting' : 'Response Confirmed: Regretfully Declining' }}
                 </h3>
+                <p class="font-serif font-bold text-base sm:text-lg text-[#15253b] uppercase tracking-wider mt-1">
+                    {{ guestDisplayName }}
+                </p>
                 <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
                     <span v-if="guestStatus === 'attending'">
                         We are truly honored that you will be joining us. We look forward to celebrating together in God's grace!
@@ -60,17 +63,17 @@
 
             <!-- Edit / New Form -->
             <form v-else @submit.prevent="submitRsvp" class="space-y-4">
-                <!-- Full Name -->
-                <div>
-                    <label class="block font-serif font-bold text-sm text-stone-800 mb-1">
-                        Full Name / Guest Greeting
-                    </label>
-                    <input
-                        type="text"
-                        v-model="guestDisplayName"
-                        readonly
-                        class="w-full text-sm font-serif font-medium rounded-xl border-stone-200 bg-white py-3 px-3.5 shadow-inner text-stone-800 focus:outline-none"
-                    />
+                <!-- Posh Invitee Presentation -->
+                <div class="py-2 px-4 text-center">
+                    <p class="font-display text-[9.5px] uppercase tracking-[0.25em] font-medium text-[#ad2c51]">
+                        Invitation Reserved For
+                    </p>
+                    <h3 class="font-serif text-lg sm:text-xl font-medium text-[#15253b] tracking-wide mt-0.5">
+                        {{ guestDisplayName }}
+                    </h3>
+                    <p v-if="maxGuests" class="font-serif italic text-xs text-stone-500 mt-0.5">
+                        Reserved for up to {{ maxGuests }} {{ maxGuests > 1 ? 'guests' : 'guest' }}
+                    </p>
                 </div>
 
                 <!-- Will you be attending? -->

@@ -21,9 +21,13 @@
                 <div class="relative bg-[#ffffff] rounded-xl p-5 sm:p-10 border border-[#d8ab43]/50 text-center flex flex-col items-center">
                     <!-- Subtle Cross / Sacred Symbol -->
                     <div class="mb-2 text-gold-700 font-serif text-sm tracking-widest flex items-center gap-1.5">
-                        <span class="text-gold-500 text-xs">✝</span>
+                        <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                            <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                        </svg>
                         <span class="uppercase tracking-[0.2em] text-[9px] sm:text-[10px] font-sans font-semibold text-stone-500">Holy Matrimony</span>
-                        <span class="text-gold-500 text-xs">✝</span>
+                        <svg class="w-3 h-3 text-gold-500 fill-current" viewBox="0 0 24 24">
+                            <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                        </svg>
                     </div>
 
                     <!-- Invitation Header -->
@@ -43,7 +47,9 @@
                     <!-- Thin Gold Leaf Divider -->
                     <div class="my-3 sm:my-4 flex items-center justify-center gap-2 w-36 sm:w-48">
                         <div class="h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent flex-1"></div>
-                        <span class="text-gold-600 text-xs">❦</span>
+                        <svg class="w-3 h-3 text-gold-600 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                        </svg>
                         <div class="h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent flex-1"></div>
                     </div>
 

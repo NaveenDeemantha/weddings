@@ -2,20 +2,20 @@
     <div
         v-if="!hasFinishedIntro"
         data-no-burst
-        class="fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-1000 flex flex-col items-center justify-between bg-[#cbb8a3]"
-        :class="{ 'opacity-0 pointer-events-none': isFadingOut }"
+        class="fixed inset-0 z-50 overflow-hidden select-none transition-all duration-1000 ease-in-out flex flex-col items-center justify-between bg-[#cbb8a3]"
+        :class="{ 'opacity-0 scale-105 pointer-events-none': isFadingOut }"
         @mousemove="onMouseMove"
     >
-        <!-- ================= SKIP VIDEO BUTTON (TOP RIGHT) ================= -->
+        <!-- ================= SKIP / ENTER BUTTON (TOP RIGHT) ================= -->
         <button
             v-if="isOpening && !isFadingOut"
             type="button"
             @click.stop="skipIntro"
             class="fixed top-4 right-16 sm:right-20 z-[70] inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white/95 hover:text-white font-sans text-xs tracking-wider uppercase font-semibold backdrop-blur-md border border-white/30 shadow-2xl transition-all transform active:scale-95 cursor-pointer"
-            aria-label="Skip video"
-            title="Skip Video"
+            :aria-label="isEndingTransition ? 'Enter invitation' : 'Skip video'"
+            :title="isEndingTransition ? 'Enter Invitation' : 'Skip Video'"
         >
-            <span>Skip</span>
+            <span>{{ isEndingTransition ? 'Enter' : 'Skip' }}</span>
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M5.5 4.5l8 6.5-8 6.5V4.5zM15.5 4.5h2v13h-2v-13z" />
             </svg>
@@ -23,7 +23,10 @@
 
         <!-- ================= FULLSCREEN CATHEDRAL FACADE ARCHITECTURAL BACKGROUND ================= -->
         <!-- Authentic French Limestone Cathedral Facade Surround (User Provided Asset) -->
-        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <div
+            class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none transition-all duration-1000 ease-out"
+            :class="{ 'filter blur-md scale-105 brightness-75': isEndingTransition }"
+        >
             <!-- Ambient blurred stone texture to seamlessly fill ultra-wide displays -->
             <div
                 class="absolute inset-0 bg-cover bg-center filter blur-xl scale-110 opacity-70"
@@ -44,7 +47,8 @@
         <!-- ================= MAIN CATHEDRAL PORTAL STAGE ================= -->
         <!-- Center Stage: The Grand Cathedral Entrance & Double Doors (Directly filling mobile screens) -->
         <main
-            class="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-4 transition-transform duration-1000 ease-out"
+            class="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-4 transition-all duration-1000 ease-out"
+            :class="{ 'filter blur-md scale-105 brightness-75': isEndingTransition }"
             :style="mouseParallaxStyle"
         >
             <!-- The Cathedral Portal Structure (Direct mobile edge-to-edge layout, majestic on desktop) -->
@@ -63,7 +67,8 @@
                     <video
                         ref="doorVideoRef"
                         src="/videos/walkdown.mp4"
-                        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-auto cursor-pointer"
+                        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-auto cursor-pointer transition-all duration-1000 ease-out"
+                        :class="{ 'filter blur-sm scale-105': isEndingTransition }"
                         playsinline
                         muted
                         preload="auto"
@@ -130,7 +135,9 @@
                             
                             <!-- Delicate Gold Cross with Starlight Glow -->
                             <div class="my-1.5 flex items-center justify-center">
-                                <span class="text-[#c4a35a] text-sm sm:text-base leading-none drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]">✝</span>
+                                <svg class="w-4 h-5 text-[#c4a35a] fill-current drop-shadow-[0_0_8px_rgba(212,175,55,0.7)]" viewBox="0 0 24 24">
+                                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                                </svg>
                             </div>
                         </div>
 
@@ -167,12 +174,12 @@
                             </div>
                         </div>
 
-                        <!-- Bottom Section: DEAR [GUEST NAME] -->
-                        <div class="flex flex-col items-center pt-2">
-                            <p class="font-serif tracking-[0.4em] text-[9.5px] sm:text-[11px] uppercase text-[#8a724d] font-semibold">
-                                Dear
+                        <!-- Bottom Section: CORDIALLY INVITING [GUEST NAME & TITLE] -->
+                        <div class="flex flex-col items-center pt-2 w-full px-4 text-center">
+                            <p class="font-display tracking-[0.3em] text-[8.5px] sm:text-[9.5px] uppercase text-[#8a724d] font-semibold">
+                                Cordially Inviting
                             </p>
-                            <p class="font-serif font-bold text-sm sm:text-base md:text-lg text-[#16253d] uppercase tracking-[0.12em] mt-1 max-w-[290px] drop-shadow-xs">
+                            <p class="font-serif text-sm sm:text-base md:text-lg text-[#16253d] font-normal tracking-wide mt-0.5">
                                 {{ guestGreeting || guestName || 'Mr & Mrs Silva' }}
                             </p>
                         </div>
@@ -193,11 +200,90 @@
                 </div>
             </div>
         </main>
+
+        <!-- ================= VIDEO END TRANSITION: BLUR & BRIDE & GROOM NAMES ================= -->
+        <div
+            v-if="isEndingTransition"
+            class="fixed inset-0 z-40 flex flex-col items-center justify-center p-6 text-center select-none cursor-pointer transition-all duration-1000 ease-out"
+            :class="[
+                showOutroNames
+                    ? 'opacity-100 backdrop-blur-md sm:backdrop-blur-lg bg-stone-950/70'
+                    : 'opacity-0 backdrop-blur-none bg-stone-950/0 pointer-events-none'
+            ]"
+            @click="skipIntro"
+            title="Click anywhere to proceed to invitation"
+        >
+            <!-- Atmospheric Dark Vignette -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-black/80 pointer-events-none"></div>
+
+            <div
+                class="relative z-10 max-w-xl mx-auto flex flex-col items-center justify-center transition-all duration-1000 transform"
+                :class="[
+                    showOutroNames
+                        ? 'opacity-100 translate-y-0 scale-100'
+                        : 'opacity-0 translate-y-6 scale-95'
+                ]"
+            >
+                <!-- Golden Cross with Soft Sacred Glow -->
+                <div class="mb-3 sm:mb-4 flex items-center justify-center">
+                    <svg class="w-6 h-7 text-[#f5dc8a] fill-current drop-shadow-[0_0_12px_rgba(245,220,138,0.8)]" viewBox="0 0 24 24">
+                        <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                    </svg>
+                </div>
+
+                <!-- The Wedding Of -->
+                <p class="font-display tracking-[0.45em] text-[11px] sm:text-[13px] uppercase font-semibold text-[#f5dc8a] drop-shadow-md">
+                    The Wedding Of
+                </p>
+
+                <!-- Groom & Bride Names -->
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-normal tracking-wide drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-tight my-3 sm:my-4">
+                    <span class="inline-block">{{ groomName }}</span>
+                    <span class="font-script text-4xl sm:text-6xl md:text-7xl text-[#f5dc8a] mx-2 sm:mx-3 inline-block align-baseline drop-shadow-[0_0_15px_rgba(245,220,138,0.6)]">&amp;</span>
+                    <span class="inline-block">{{ brideName }}</span>
+                </h2>
+
+                <!-- Elegant Floral / Golden Ribbon Divider -->
+                <div class="flex items-center justify-center gap-3 my-2 sm:my-3 opacity-90">
+                    <span class="w-12 sm:w-20 h-px bg-gradient-to-r from-transparent via-[#f5dc8a] to-transparent"></span>
+                    <svg class="w-3.5 h-3.5 text-[#f5dc8a] fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                    </svg>
+                    <span class="w-12 sm:w-20 h-px bg-gradient-to-l from-transparent via-[#f5dc8a] to-transparent"></span>
+                </div>
+
+                <!-- Date & Church Venue -->
+                <p class="font-serif italic text-sm sm:text-lg text-[#f8f6f0] tracking-wider drop-shadow-md">
+                    {{ weddingDateText }}
+                </p>
+                <p class="font-display text-[10.5px] sm:text-xs text-[#f5dc8a]/85 tracking-[0.28em] uppercase mt-2 drop-shadow-sm">
+                    {{ churchName }}
+                </p>
+
+                <!-- Posh Invitee Note in Transition -->
+                <div class="mt-4 text-center max-w-md px-4">
+                    <p class="font-display tracking-[0.35em] text-[9.5px] sm:text-[11px] uppercase text-[#f5dc8a]/90 font-medium">
+                        Cordially Inviting
+                    </p>
+                    <p class="font-serif text-base sm:text-xl font-normal text-white tracking-wide mt-1 drop-shadow-sm">
+                        {{ guestGreeting || guestName || 'Our Honoured Guest' }}
+                    </p>
+                </div>
+
+                <!-- Subtle Enter Indicator -->
+                <div class="mt-6 sm:mt-7 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#f8f6f0] text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-sans shadow-lg">
+                    <span>Entering Invitation</span>
+                    <svg class="w-3 h-3 text-[#f5dc8a] fill-current animate-pulse" viewBox="0 0 24 24">
+                        <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onBeforeUnmount } from 'vue';
 
 const props = defineProps({
     guestName: { type: String, default: 'Mr & Mrs Silva' },
@@ -218,6 +304,20 @@ const isFadingOut = ref(false);
 const hasFinishedIntro = ref(false);
 const isPlayingMusic = ref(false);
 
+const isEndingTransition = ref(false);
+const showOutroNames = ref(false);
+const hasTriggeredEnded = ref(false);
+let activeTimers = [];
+
+const clearAllTimers = () => {
+    activeTimers.forEach((timer) => clearTimeout(timer));
+    activeTimers = [];
+};
+
+onBeforeUnmount(() => {
+    clearAllTimers();
+});
+
 const weddingDateText = computed(() => {
     return 'Tuesday, 29th December 2026';
 });
@@ -227,13 +327,13 @@ const mouseX = ref(0);
 const mouseY = ref(0);
 
 const onMouseMove = (e) => {
-    if (isOpening.value) return;
+    if (isOpening.value || isEndingTransition.value) return;
     mouseX.value = (e.clientX / window.innerWidth - 0.5) * 10;
     mouseY.value = (e.clientY / window.innerHeight - 0.5) * 6;
 };
 
 const mouseParallaxStyle = computed(() => {
-    if (isOpening.value) return {};
+    if (isOpening.value || isEndingTransition.value) return {};
     return {
         transform: `translate(${mouseX.value}px, ${mouseY.value}px)`,
         transition: 'transform 0.25s ease-out',
@@ -267,39 +367,66 @@ const openChapelDoors = () => {
             playPromise.catch((err) => {
                 console.warn('Video auto-playback fallback:', err);
                 // Fallback timeout in case video can't play on older browsers
-                setTimeout(() => {
+                const timer = setTimeout(() => {
                     onVideoEnded();
                 }, 10500);
+                activeTimers.push(timer);
             });
         }
     } else {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             onVideoEnded();
         }, 10500);
+        activeTimers.push(timer);
     }
 };
 
-// When the full video finishes playing, smoothly reveal the master invitation in a luxurious transition
+// When the full video finishes playing, smoothly blur the page, reveal Bride & Groom names, and transition smoothly to the invitation
 const onVideoEnded = () => {
-    // Hold the final view momentarily, then smoothly dissolve into the master invitation card
-    setTimeout(() => {
+    if (hasTriggeredEnded.value || isFadingOut.value || hasFinishedIntro.value) return;
+    hasTriggeredEnded.value = true;
+
+    // 1. Hold and pause video at its final frame
+    if (doorVideoRef.value) {
+        try {
+            doorVideoRef.value.pause();
+        } catch (e) {}
+    }
+
+    // 2. Initiate blur on the page & facade
+    isEndingTransition.value = true;
+
+    // 3. Fade in Bride & Groom names overlay with gentle upward glide
+    const timer1 = setTimeout(() => {
+        showOutroNames.value = true;
+    }, 150);
+    activeTimers.push(timer1);
+
+    // 4. Hold names for ~2.8 seconds, then smoothly transition into the main invitation page
+    const timer2 = setTimeout(() => {
         isFadingOut.value = true;
-        setTimeout(() => {
+        const timer3 = setTimeout(() => {
             hasFinishedIntro.value = true;
-        }, 1200);
-    }, 600);
+        }, 1100);
+        activeTimers.push(timer3);
+    }, 3200);
+    activeTimers.push(timer2);
 };
 
-// Skip directly into the invitation
+// Skip directly into the invitation (or click during outro to advance immediately)
 const skipIntro = () => {
     emit('opened');
+    clearAllTimers();
     if (doorVideoRef.value) {
-        doorVideoRef.value.pause();
+        try {
+            doorVideoRef.value.pause();
+        } catch (e) {}
     }
     isFadingOut.value = true;
-    setTimeout(() => {
+    const timer = setTimeout(() => {
         hasFinishedIntro.value = true;
-    }, 400);
+    }, 600);
+    activeTimers.push(timer);
 };
 </script>
 

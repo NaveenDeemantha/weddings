@@ -5,7 +5,7 @@
             <span
                 v-for="h in hearts"
                 :key="h.id"
-                class="absolute transition-all select-none"
+                class="absolute transition-all select-none pointer-events-none"
                 :style="{
                     left: h.left + '%',
                     bottom: h.bottom + '%',
@@ -14,7 +14,37 @@
                     animationDuration: h.duration + 's',
                 }"
             >
-                {{ h.icon }}
+                <!-- Professional Vector SVG Blessing Icons -->
+                <!-- Heart -->
+                <svg v-if="h.icon === 'heart'" class="w-4 h-4 sm:w-5 sm:h-5 text-rose-300 drop-shadow-sm fill-current" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <!-- Sparkle -->
+                <svg v-else-if="h.icon === 'sparkle'" class="w-4 h-4 sm:w-5 sm:h-5 text-[#f5dc8a] drop-shadow-sm fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+                </svg>
+                <!-- Peace Dove -->
+                <svg v-else-if="h.icon === 'dove'" class="w-4 h-4 sm:w-5 sm:h-5 text-white/95 drop-shadow-sm fill-current" viewBox="0 0 24 24">
+                    <path d="M21.5 6.5C20.5 6.5 19.5 7 19 7.5C18.5 6 17 5 15.5 5C13.5 5 11.8 6.3 11.3 8.1C10.2 8.1 9.1 8.5 8.3 9.3L4.2 13.4C3.8 13.8 3.8 14.4 4.2 14.8C4.6 15.2 5.2 15.2 5.6 14.8L9.2 11.2C9.5 11.7 10 12.1 10.6 12.3L8 16H10.5L12.5 13.5C13.2 13.8 14 14 14.8 14C17.5 14 19.8 12.1 20.4 9.5C21.2 9.4 22 8.5 22 7.5C22 7 21.8 6.5 21.5 6.5Z"/>
+                </svg>
+                <!-- Wedding Rings -->
+                <svg v-else-if="h.icon === 'ring'" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 drop-shadow-sm fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
+                    <circle cx="9" cy="13" r="5"/>
+                    <circle cx="15" cy="13" r="5"/>
+                    <path d="M9 8l1-3h4l1 3"/>
+                </svg>
+                <!-- Araliya / Jasmine Flower -->
+                <svg v-else-if="h.icon === 'flower'" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-100 drop-shadow-sm fill-current" viewBox="0 0 24 24">
+                    <circle cx="12" cy="7" r="3.5"/>
+                    <circle cx="17" cy="12" r="3.5"/>
+                    <circle cx="12" cy="17" r="3.5"/>
+                    <circle cx="7" cy="12" r="3.5"/>
+                    <circle cx="12" cy="12" r="2.5" fill="#f59e0b"/>
+                </svg>
+                <!-- Golden Cross -->
+                <svg v-else class="w-3.5 h-4 sm:w-4 sm:h-5 text-[#f5dc8a] drop-shadow-sm fill-current" viewBox="0 0 24 24">
+                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z"/>
+                </svg>
             </span>
         </div>
 
@@ -99,7 +129,9 @@
                 <!-- Center Cross & Golden Rings Emblem -->
                 <div class="flex flex-col items-center justify-center mb-16 sm:mb-20">
                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#15253b] border border-[#d8b878] flex items-center justify-center text-amber-200 shadow-md">
-                        <span class="text-sm">✝</span>
+                        <svg class="w-4 h-4 fill-current text-amber-200" viewBox="0 0 24 24">
+                            <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z"/>
+                        </svg>
                     </div>
                     <span class="text-[10px] font-script text-gold-700 font-bold text-lg -mt-0.5">&amp;</span>
                 </div>
@@ -186,7 +218,13 @@
         </div>
 
         <p class="mt-2 text-[10px] text-stone-500 font-sans uppercase tracking-[0.2em] flex items-center justify-center gap-1.5">
-            <span>✨</span> Tap couple to shower blessings <span>✨</span>
+            <svg class="w-3.5 h-3.5 text-gold-600 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+            </svg>
+            <span>Tap couple to shower blessings</span>
+            <svg class="w-3.5 h-3.5 text-gold-600 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+            </svg>
         </p>
     </div>
 </template>
@@ -200,13 +238,13 @@ const props = defineProps({
 });
 
 const hearts = ref([
-    { id: 1, left: 45, bottom: 45, opacity: 0.8, scale: 0.9, duration: 4, icon: '🤍' },
-    { id: 2, left: 52, bottom: 60, opacity: 0.9, scale: 1.1, duration: 5, icon: '✨' },
-    { id: 3, left: 48, bottom: 75, opacity: 0.7, scale: 0.8, duration: 4.5, icon: '🕊️' },
+    { id: 1, left: 45, bottom: 45, opacity: 0.8, scale: 0.9, duration: 4, icon: 'heart' },
+    { id: 2, left: 52, bottom: 60, opacity: 0.9, scale: 1.1, duration: 5, icon: 'sparkle' },
+    { id: 3, left: 48, bottom: 75, opacity: 0.7, scale: 0.8, duration: 4.5, icon: 'dove' },
 ]);
 
 const showerHearts = () => {
-    const icons = ['🤍', '✨', '🕊️', '💍', '🌸', '💐'];
+    const icons = ['heart', 'sparkle', 'dove', 'ring', 'flower', 'cross'];
     for (let i = 0; i < 7; i++) {
         const id = Date.now() + i;
         hearts.value.push({

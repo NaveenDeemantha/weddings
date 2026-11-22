@@ -2,9 +2,13 @@
     <div id="wishes" class="my-10 sm:my-14 px-4 sm:px-6 scroll-mt-10">
         <div class="text-center mb-6">
             <div class="inline-flex items-center gap-2 text-gold-700 mb-1.5">
-                <span class="text-gold-500 text-sm">✝</span>
+                <svg class="w-3.5 h-3.5 text-gold-500 fill-current" viewBox="0 0 24 24">
+                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                </svg>
                 <span class="font-sans text-sm sm:text-base uppercase tracking-[0.25em] font-semibold">Guestbook</span>
-                <span class="text-gold-500 text-sm">✝</span>
+                <svg class="w-3.5 h-3.5 text-gold-500 fill-current" viewBox="0 0 24 24">
+                    <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                </svg>
             </div>
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51]">
                 Blessings &amp; Prayers
@@ -63,7 +67,10 @@
                     class="p-4 rounded-xl bg-[#faf8f2] border border-stone-200/80 shadow-sm flex items-start gap-3 hover:border-gold-300 transition-colors"
                 >
                     <div class="w-9 h-9 rounded-full bg-white border border-[#d8ab43] text-gold-800 flex items-center justify-center font-serif font-bold text-sm shrink-0 shadow-sm">
-                        {{ wish.guest_name ? wish.guest_name.charAt(0).toUpperCase() : '✝' }}
+                        <span v-if="wish.guest_name">{{ wish.guest_name.charAt(0).toUpperCase() }}</span>
+                        <svg v-else class="w-3.5 h-3.5 text-gold-600 fill-current" viewBox="0 0 24 24">
+                            <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
+                        </svg>
                     </div>
                     <div class="flex-1 text-left">
                         <div class="flex items-center justify-between gap-2">

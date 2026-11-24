@@ -50,7 +50,7 @@ export const translations = {
         requestBlessings: { en: 'Request the honour of your presence and blessings', si: 'ඔබ සැමගේ ආශීර්වාදය සහ සහභාගීත්වය ගෞරවයෙන් අපේක්ෂා කරමු' },
         sonOf: { en: 'SON OF', si: 'පුත්' },
         daughterOf: { en: 'DAUGHTER OF', si: 'දියණිය' },
-        groomParents: { en: '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi', si: '(ස්වර්ගස්ථ) සුමිත් රුද්‍රිගු මහතා සහ බන්දුලතා මහත්මිය' },
+        groomParents: { en: '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi', si: '(ස්වර්ගස්ථ) සුමිත් රුද්‍රිගු මහතා සහ බන්දුවතී මහත්මිය' },
         brideParents: { en: 'Mr. Lalith Fernando & Mrs. Priska Pieris', si: 'ලලිත් ප්‍රනාන්දු මහතා සහ ප්‍රිස්කා පීරිස් මහත්මිය' },
         month: { en: 'DECEMBER', si: 'දෙසැම්බර්' },
         year: { en: '2026', si: '2026' },

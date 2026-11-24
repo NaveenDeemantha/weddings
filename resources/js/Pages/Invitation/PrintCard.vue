@@ -203,7 +203,7 @@
                         <!-- Parents Section (Rodrigo & Fernando Families) -->
                         <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 max-w-md mx-auto w-full pt-1">
                             <div class="text-center font-serif text-[11px] sm:text-[12.5px] leading-tight font-semibold text-stone-900">
-                                <p>Mr. Sumith Rodrigo &amp;</p>
+                                <p>(Late) Mr. Sumith Rodrigo &amp;</p>
                                 <p>Mrs. Banduwathi</p>
                             </div>
                             <div class="flex flex-col items-center justify-center px-1 text-stone-400 font-serif italic text-xs leading-none">

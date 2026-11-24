@@ -199,7 +199,7 @@ const submit = () => {
                         <div class="border-b border-[#F0EDE6] pb-4 flex items-center justify-between">
                             <div>
                                 <h3 class="font-serif text-lg font-bold text-stone-900">
-                                    Church Nuptial Mass &amp; Reception Venues
+                                    Church Wedding Mass &amp; Reception Venues
                                 </h3>
                                 <p class="text-xs text-stone-500 mt-0.5">
                                     Locations, service times, and Google Maps directions

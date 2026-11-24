@@ -13,7 +13,7 @@
 
                 <p class="mt-7 font-serif italic text-2xl sm:text-3xl font-semibold text-[#ad2c51]">Tuesday, 29th December 2026</p>
                 <p class="mt-2 font-serif italic text-lg sm:text-xl text-stone-700 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                    Together with their families request the honour of your presence at the Nuptial Mass and at the celebration of their marriage.
+                    Together with their families request the honour of your presence at the Wedding Mass and at the celebration of their marriage.
                 </p>
 
                 <div class="mt-7 inline-block py-4 px-8 rounded-2xl bg-[#faf8f2] border-2 border-[#d8ab43]/50 shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300">

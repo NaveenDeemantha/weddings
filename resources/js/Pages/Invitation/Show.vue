@@ -97,7 +97,7 @@
                     />
                 </FloralSection>
 
-                <!-- 3. Wedding Events (Nuptial Mass & Reception) -->
+                <!-- 3. Wedding Events (Wedding Mass & Reception) -->
                 <FloralSection side="both">
                     <WeddingEventsList
                         :events="settings.events"

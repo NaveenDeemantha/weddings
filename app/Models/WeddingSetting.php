@@ -54,7 +54,7 @@ class WeddingSetting extends Model
             'music_url' => '/music/wedding.mp3',
             'events' => [
                 [
-                    'name' => 'THE NUPTIAL MASS',
+                    'name' => 'THE WEDDING MASS',
                     'date' => '29th December 2026',
                     'time' => '4:00 PM',
                     'venue' => "St. Sebastian's Church, Moratuwa",
@@ -70,7 +70,7 @@ class WeddingSetting extends Model
                     'icon' => 'reception',
                 ],
             ],
-            'whatsapp_template' => "Dear :greeting,\n\nTogether with our families, we cordially invite you to celebrate the Holy Matrimony of :groom & :bride on Tuesday, 29th December 2026.\n\nNuptial Mass: 4:00 PM at St. Sebastian's Church, Moratuwa.\nFollowed by the Reception from 6:30 PM to 12:00 AM at Vinrich Lake Resort, Piliyandala.\n\nPlease find your exclusive, personalized invitation card here:\n:link\n\nKindly RSVP (Buddhima - 0718626389). We joyfully await your presence and prayers!\n\nWarm regards,\nThe Rodrigo & Fernando Families",
+            'whatsapp_template' => "Dear :greeting,\n\nTogether with our families, we cordially invite you to celebrate the Holy Matrimony of :groom & :bride on Tuesday, 29th December 2026.\n\nWedding Mass: 4:00 PM at St. Sebastian's Church, Moratuwa.\nFollowed by the Reception from 6:30 PM to 12:00 AM at Vinrich Lake Resort, Piliyandala.\n\nPlease find your exclusive, personalized invitation card here:\n:link\n\nKindly RSVP (Buddhima - 0718626389). We joyfully await your presence and prayers!\n\nWarm regards,\nThe Rodrigo & Fernando Families",
         ];
 
         $stored = static::pluck('value', 'key')->toArray();

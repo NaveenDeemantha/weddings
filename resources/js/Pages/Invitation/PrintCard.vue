@@ -276,10 +276,10 @@
                             <span class="h-[1px] w-6 sm:w-10 bg-[#ad2c51]/40"></span>
                         </div>
 
-                        <!-- Nuptial Mass Ceremony -->
+                        <!-- Wedding Mass Ceremony -->
                         <div class="space-y-0.5">
                             <p class="font-display uppercase tracking-[0.22em] text-[10px] sm:text-[11.5px] font-bold text-[#ad2c51]">
-                                THE NUPTIAL MASS
+                                THE WEDDING MASS
                             </p>
                             <p class="font-serif text-[10.5px] sm:text-[12px] font-semibold text-stone-700">
                                 AT 4:00 PM

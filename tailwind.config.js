@@ -14,9 +14,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['"Plus Jakarta Sans"', ...defaultTheme.fontFamily.sans],
-                serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-                display: ['"Cinzel"', 'serif'],
+                serif: ['"Cormorant Garamond"', '"Abhaya Libre"', '"Noto Serif Sinhala"', 'Georgia', 'serif'],
+                display: ['"Cinzel"', '"Abhaya Libre"', '"Noto Serif Sinhala"', 'serif'],
                 script: ['"Alex Brush"', 'cursive'],
+                sinhala: ['"Abhaya Libre"', '"Noto Serif Sinhala"', 'serif'],
             },
             colors: {
                 gold: {

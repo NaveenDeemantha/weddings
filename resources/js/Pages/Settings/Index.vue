@@ -23,6 +23,7 @@ const form = useForm({
     venue_name: props.settings.venue_name || "St. Mary's Church",
     venue_address: props.settings.venue_address || 'Moratuwa, Sri Lanka',
     venue_map_url: props.settings.venue_map_url || 'https://maps.google.com/?q=St.+Mary%27s+Church+Moratuwa+Sri+Lanka',
+    rsvp_phone: props.settings.rsvp_phone || '+94 718626389',
     our_story: props.settings.our_story || '',
     music_url: props.settings.music_url || '',
     whatsapp_template: props.settings.whatsapp_template || '',
@@ -307,6 +308,19 @@ const submit = () => {
                                     placeholder="Piliyandala, Sri Lanka"
                                     class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
                                 />
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label class="block font-semibold text-stone-700 mb-1">RSVP Contact Mobile Phone *</label>
+                                <input
+                                    type="text"
+                                    v-model="form.rsvp_phone"
+                                    placeholder="+94 718626389"
+                                    class="w-full text-xs rounded-xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
+                                />
+                                <p class="text-[11px] text-stone-400 mt-1">
+                                    Guests can tap this number on the invitation to call directly or message via WhatsApp.
+                                </p>
                             </div>
                         </div>
                     </div>

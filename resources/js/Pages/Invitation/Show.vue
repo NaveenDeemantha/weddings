@@ -135,6 +135,7 @@
                         :attending-count="guest.attending_count"
                         :max-guests="guest.max_guests"
                         :is-preview="isPreview"
+                        :rsvp-phone="settings.rsvp_phone || '+94 718626389'"
                     />
                 </FloralSection>
 
@@ -147,7 +148,6 @@
                     :church-time="settings.church_time"
                     :wedding-date="settings.wedding_date"
                     :events="settings.events"
-                />
                 />
             </div>
         </main>
@@ -186,6 +186,14 @@ const musicPlayerRef = ref(null);
 const cardRef = ref(null);
 const showScrollCue = ref(true);
 
+const resetScrollToTop = () => {
+    if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }
+};
+
 const handleScroll = () => {
     if (window.scrollY > 150) {
         showScrollCue.value = false;
@@ -204,6 +212,15 @@ const scrollToNext = () => {
 };
 
 onMounted(() => {
+    if (typeof window !== 'undefined') {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        resetScrollToTop();
+        requestAnimationFrame(() => resetScrollToTop());
+        setTimeout(() => resetScrollToTop(), 100);
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const els = Array.from(cardRef.value?.children || []).slice(1, -1);
@@ -219,6 +236,7 @@ onUnmounted(() => {
 });
 
 const onDoorsOpened = () => {
+    resetScrollToTop();
     if (musicPlayerRef.value) {
         musicPlayerRef.value.playDirectly();
     }

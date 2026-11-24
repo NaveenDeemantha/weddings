@@ -156,7 +156,8 @@
                                 <!-- 1. PRIMARY HERO: Couple Bride & Groom Names (Enlarged) -->
                                 <h1 class="font-serif text-[30px] sm:text-[42px] md:text-[48px] leading-tight font-bold text-white tracking-wide my-1 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
                                     <span class="inline-block">{{ isSinhala ? t('door', 'groomName') : groomName }}</span>
-                                    <span class="font-script text-[36px] sm:text-[48px] md:text-[54px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]">&amp;</span>
+                                    <span class="font-serif text-[22px] sm:text-[32px] text-[#f5dc8a] font-bold mx-1.5 align-baseline" v-if="isSinhala">සහ</span>
+                                    <span class="font-script text-[36px] sm:text-[48px] md:text-[54px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]" v-else>&amp;</span>
                                     <span class="inline-block">{{ isSinhala ? t('door', 'brideName') : brideName }}</span>
                                 </h1>
 
@@ -253,7 +254,8 @@
                 <!-- Groom & Bride Names -->
                 <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-normal tracking-wide drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-tight my-3 sm:my-4">
                     <span class="inline-block">{{ isSinhala ? t('door', 'groomName') : groomName }}</span>
-                    <span class="font-script text-4xl sm:text-6xl md:text-7xl text-[#f5dc8a] mx-2 sm:mx-3 inline-block align-baseline drop-shadow-[0_0_15px_rgba(245,220,138,0.6)]">&amp;</span>
+                    <span class="font-serif text-2xl sm:text-4xl text-[#f5dc8a] font-bold mx-2 inline-block align-baseline" v-if="isSinhala">සහ</span>
+                    <span class="font-script text-4xl sm:text-6xl md:text-7xl text-[#f5dc8a] mx-2 sm:mx-3 inline-block align-baseline drop-shadow-[0_0_15px_rgba(245,220,138,0.6)]" v-else>&amp;</span>
                     <span class="inline-block">{{ isSinhala ? t('door', 'brideName') : brideName }}</span>
                 </h2>
 
@@ -300,7 +302,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeUnmount } from 'vue';
+import { ref, computed, onBeforeUnmount, onMounted, watch } from 'vue';
 import { useLanguage, parseDateParts } from '@/composables/useLanguage';
 
 const { t, isSinhala } = useLanguage();
@@ -334,8 +336,40 @@ const clearAllTimers = () => {
     activeTimers = [];
 };
 
+const resetScrollToTop = () => {
+    if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }
+};
+
+onMounted(() => {
+    if (typeof window !== 'undefined') {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        resetScrollToTop();
+        if (!hasFinishedIntro.value) {
+            document.body.style.overflow = 'hidden';
+        }
+    }
+});
+
+watch(hasFinishedIntro, (finished) => {
+    if (finished && typeof window !== 'undefined') {
+        document.body.style.overflow = '';
+        resetScrollToTop();
+        requestAnimationFrame(() => resetScrollToTop());
+        setTimeout(() => resetScrollToTop(), 150);
+    }
+});
+
 onBeforeUnmount(() => {
     clearAllTimers();
+    if (typeof window !== 'undefined') {
+        document.body.style.overflow = '';
+    }
 });
 
 const parsedDate = computed(() => parseDateParts(props.weddingDate));
@@ -426,8 +460,10 @@ const onVideoEnded = () => {
     // 4. Hold names for ~2.8 seconds, then smoothly transition into the main invitation page
     const timer2 = setTimeout(() => {
         isFadingOut.value = true;
+        resetScrollToTop();
         const timer3 = setTimeout(() => {
             hasFinishedIntro.value = true;
+            resetScrollToTop();
         }, 1100);
         activeTimers.push(timer3);
     }, 3200);
@@ -443,9 +479,11 @@ const skipIntro = () => {
             doorVideoRef.value.pause();
         } catch (e) {}
     }
+    resetScrollToTop();
     isFadingOut.value = true;
     const timer = setTimeout(() => {
         hasFinishedIntro.value = true;
+        resetScrollToTop();
     }, 600);
     activeTimers.push(timer);
 };

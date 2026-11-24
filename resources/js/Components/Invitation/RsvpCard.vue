@@ -117,13 +117,43 @@
                     </button>
                 </div>
             </form>
+
+            <!-- RSVP Contact Number Block (Call & WhatsApp) -->
+            <div v-if="rsvpPhone" class="mt-6 pt-5 border-t border-[#d8ab43]/30 text-center">
+                <p class="font-serif text-xs sm:text-sm text-stone-600 mb-2">
+                    {{ t('rsvp', 'contactInquiries') }}
+                </p>
+                <div class="inline-flex items-center justify-center gap-2.5 flex-wrap">
+                    <a
+                        :href="`tel:${cleanPhone}`"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#ad2c51]/30 hover:border-[#ad2c51] text-[#ad2c51] font-sans text-xs sm:text-sm font-bold shadow-xs hover:shadow transition-all transform active:scale-95"
+                    >
+                        <svg class="w-4 h-4 fill-none stroke-current text-[#ad2c51]" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>{{ rsvpPhone }}</span>
+                    </a>
+                    <a
+                        :href="`https://wa.me/${whatsappDigits}?text=${encodeURIComponent('Hello Buddhima & Shavindi, regarding the wedding invitation:')}`"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-[#128C7E] font-sans text-xs sm:text-sm font-semibold transition-all transform active:scale-95"
+                        title="Chat on WhatsApp"
+                    >
+                        <svg class="w-4 h-4 fill-current text-[#25D366]" viewBox="0 0 24 24">
+                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.311.045-.698.059-2.378-.637-1.748-.725-2.883-2.511-2.97-2.628-.087-.116-.708-.941-.708-1.792s.448-1.272.607-1.446c.159-.175.347-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.174.232-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+                        </svg>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useLanguage } from '@/composables/useLanguage';
 
@@ -137,7 +167,11 @@ const props = defineProps({
     attendingCount: { type: Number, default: 1 },
     maxGuests: { type: Number, default: 2 },
     isPreview: { type: Boolean, default: false },
+    rsvpPhone: { type: String, default: '+94 718626389' },
 });
+
+const cleanPhone = computed(() => (props.rsvpPhone || '+94 718626389').replace(/\s+/g, ''));
+const whatsappDigits = computed(() => (props.rsvpPhone || '+94 718626389').replace(/[^0-9]/g, ''));
 
 const isEditing = ref(false);
 const burstAt = (e, count = 30) => window.dispatchEvent(new CustomEvent('bloom-burst', { detail: { x: e.clientX, y: e.clientY, count } }));

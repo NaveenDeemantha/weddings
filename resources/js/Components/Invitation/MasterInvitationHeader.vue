@@ -23,7 +23,8 @@
             <!-- 2. Couple's Names (Primary Focus) -->
             <h1 class="mt-3 sm:mt-4 font-serif font-bold text-[#ad2c51] leading-none text-5xl sm:text-6xl md:text-7xl lg:text-[5.2rem] tracking-wide drop-shadow-xs">
                 {{ isSinhala ? t('header', 'groomName') : groomName }}
-                <span class="block font-script text-[#ad2c51] font-normal text-4xl sm:text-5xl lg:text-6xl my-1 sm:my-1.5">&amp;</span>
+                <span class="block font-serif text-[#ad2c51] font-bold text-3xl sm:text-4xl my-1 sm:my-1.5" v-if="isSinhala">සහ</span>
+                <span class="block font-script text-[#ad2c51] font-normal text-4xl sm:text-5xl lg:text-6xl my-1 sm:my-1.5" v-else>&amp;</span>
                 {{ isSinhala ? t('header', 'brideName') : brideName }}
             </h1>
 

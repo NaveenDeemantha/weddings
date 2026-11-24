@@ -40,18 +40,21 @@
                     </div>
 
                     <p class="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-white">
-                        {{ isSinhala ? 'බුද්ධිම' : groomName }} <span class="font-script text-2xl text-gold-200 font-normal italic">&amp;</span> {{ isSinhala ? 'ශාවින්දි' : brideName }}
+                        <span>{{ isSinhala ? 'බුද්ධිම' : groomName }}</span>
+                        <span class="font-serif text-base text-gold-200 font-bold mx-1.5" v-if="isSinhala">සහ</span>
+                        <span class="font-script text-2xl text-gold-200 font-normal italic mx-1" v-else>&amp;</span>
+                        <span>{{ isSinhala ? 'ශාවින්දි' : brideName }}</span>
                     </p>
 
                     <p class="text-xs sm:text-sm font-display uppercase tracking-[0.25em] font-semibold text-gold-200/90 mt-1">
-                        {{ isSinhala ? 'ශාන්ත සෙබස්තියන් දේවස්ථානය & වින්රිච් ලේක් රිසෝට්' : venueName }}
+                        {{ isSinhala ? 'ශාන්ත සෙබස්තියන් දේවස්ථානය සහ වින්රිච් ලේක් රිසෝට්' : venueName }}
                     </p>
                 </div>
             </div>
         </div>
 
-        <p class="text-xs sm:text-sm text-stone-600 font-serif italic mt-4">
-            {{ t('footer', 'withBlessings') }} · {{ isSinhala ? 'බුද්ධිම & ශාවින්දි' : `${groomName} & ${brideName}` }}
+        <p class="text-xs sm:text-sm text-amber-200/90 font-serif italic mt-4">
+            {{ t('footer', 'withBlessings') }} · {{ isSinhala ? 'බුද්ධිම සහ ශාවින්දි' : `${groomName} & ${brideName}` }}
         </p>
     </div>
 </template>

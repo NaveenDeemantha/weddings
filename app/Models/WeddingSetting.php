@@ -49,7 +49,7 @@ class WeddingSetting extends Model
             'venue_name' => 'Vinrich Lake Resort',
             'venue_address' => 'No. 18/3, Duwawatta Road, Piliyandala',
             'venue_map_url' => 'https://maps.google.com/?q=Vinrich+Lake+Resort+Piliyandala',
-            'rsvp_phone' => '0718626389',
+            'rsvp_phone' => '+94 718626389',
             'our_story' => 'Two hearts, one faith. We are delighted to invite you to celebrate as we exchange our vows before God and the people we love. Your presence and prayers will make our special day even more memorable.',
             'music_url' => '/music/wedding.mp3',
             'events' => [

@@ -57,7 +57,7 @@ export const translations = {
     },
     events: {
         celebrateWithUs: { en: 'Celebrate With Us', si: 'අප හා එක්වන්න' },
-        weddingEvents: { en: 'Wedding Events', si: 'විවාහ මංගල උත්සව' },
+        weddingEvents: { en: 'Wedding Events', si: 'විවාහ මංගල උත්සවය' },
         weddingMass: { en: 'THE WEDDING MASS', si: 'ශුද්ධ වූ මංගල දිව්‍ය පූජාව' },
         massDate: { en: '29th December 2026', si: '2026 දෙසැම්බර් 29' },
         massTime: { en: '4:00 PM', si: 'පස්වරු 4:00' },
@@ -98,6 +98,9 @@ export const translations = {
         attendingMessage: { en: "We are truly honored that you will be joining us. We look forward to celebrating together in God's grace!", si: 'ඔබ අප හා එක්වීම අපට ඉමහත් ගෞරවයකි. දෙවියන් වහන්සේගේ ආශීර්වාදය මැද ඔබ සමඟ සමරන්නට බලාපොරොත්තු වෙමු!' },
         declinedMessage: { en: 'We regret you cannot be with us in person, but your warm prayers and blessings will remain in our hearts.', si: 'ඔබට අප හා එක්වීමට නොහැකි වීම පිළිබඳ කනගාටු වන අතර, ඔබගේ ආශීර්වාදය සහ ප්‍රාර්ථනා අප හදවත් තුළ සදා රැඳෙනු ඇත.' },
         changeResponse: { en: 'Change RSVP response', si: 'පිළිතුර වෙනස් කරන්න' },
+        contactInquiries: { en: 'For inquiries or RSVP assistance:', si: 'විමසීම් හෝ වැඩිදුර තොරතුරු සඳහා අමතන්න:' },
+        call: { en: 'Call', si: 'ඇමතුම්' },
+        whatsapp: { en: 'WhatsApp', si: 'WhatsApp' },
     },
     footer: {
         saveTheDate: { en: 'SAVE THE DATE', si: 'මංගල දිනය' },
@@ -227,6 +230,46 @@ export const parseDateParts = (dateString = '2026-12-29 16:00:00') => {
     }
 };
 
+export const translateVenueName = (name) => {
+    if (!name) return '';
+    const lower = name.toLowerCase();
+    if (lower.includes('sebastian')) return 'ශාන්ත සෙබස්තියන් දේවස්ථානය';
+    if (lower.includes('vinrich')) return 'වින්රිච් ලේක් රිසෝට්';
+    if (lower.includes('mary')) return 'ශාන්ත මරියා දේවස්ථානය';
+    return name;
+};
+
+export const translateAddress = (addr) => {
+    if (!addr) return '';
+    const lower = addr.toLowerCase();
+    if (lower.includes('moratuwa') && (lower.includes('duwawatta') || lower.includes('piliyandala'))) {
+        return 'මොරටුව, ශ්‍රී ලංකාව සහ නො. 18/3, දූවවත්ත පාර, පිළියන්දල';
+    }
+    if (lower.includes('duwawatta') || lower.includes('piliyandala')) {
+        return 'නො. 18/3, දූවවත්ත පාර, පිළියන්දල';
+    }
+    if (lower.includes('moratuwa')) {
+        return 'මොරටුව, ශ්‍රී ලංකාව';
+    }
+    return addr;
+};
+
+const applyDomLanguage = (lang) => {
+    if (typeof document !== 'undefined') {
+        document.documentElement.lang = lang;
+        if (lang === 'si') {
+            document.documentElement.classList.add('lang-si');
+        } else {
+            document.documentElement.classList.remove('lang-si');
+        }
+    }
+};
+
+// Initialize DOM lang
+if (typeof window !== 'undefined') {
+    applyDomLanguage(currentLang.value);
+}
+
 export function useLanguage() {
     const isSinhala = computed(() => currentLang.value === 'si');
 
@@ -236,6 +279,7 @@ export function useLanguage() {
 
     const setLanguage = (lang) => {
         currentLang.value = lang;
+        applyDomLanguage(lang);
         if (typeof window !== 'undefined' && window.localStorage) {
             window.localStorage.setItem('wedding_lang', lang);
         }

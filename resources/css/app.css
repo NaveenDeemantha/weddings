@@ -50,3 +50,51 @@ html {
 ::-webkit-scrollbar-track { background: #f7f4ed; }
 @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 .animate-floaty { animation: floaty 4s ease-in-out infinite; }
+
+/* ================= BESPOKE SINHALA TYPOGRAPHY & LIGATURE STABILIZER ================= */
+/* When in Sinhala mode or for elements with Sinhala font class */
+.lang-si,
+html[lang="si"],
+[lang="si"],
+.font-sinhala {
+    font-family: 'Abhaya Libre', 'Noto Serif Sinhala', 'Iskoola Pota', 'Nirmala UI', serif !important;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* CRITICAL: Wide tracking/letter-spacing breaks Sinhala vowel kombuwas, al-lakunu and papili!
+   Force letter-spacing to normal so characters and ligatures attach flawlessly without drifting */
+.lang-si [class*="tracking-"],
+html[lang="si"] [class*="tracking-"],
+.font-sinhala [class*="tracking-"],
+.font-sinhala {
+    letter-spacing: normal !important;
+}
+
+/* Sinhala script has no casing; uppercase transforms distort Sinhala glyph tables */
+.lang-si .uppercase,
+html[lang="si"] .uppercase,
+.font-sinhala.uppercase {
+    text-transform: none !important;
+}
+
+/* Ensure generous line-height so diacritics and kombuwas never collide or get clipped */
+.lang-si h1,
+.lang-si h2,
+.lang-si h3,
+.lang-si h4,
+.lang-si p,
+.lang-si span,
+.lang-si button,
+.lang-si a {
+    line-height: 1.5;
+}
+
+/* Specific font fallbacks for Sinhala across all typography helper classes */
+.lang-si .font-serif,
+.lang-si .font-display,
+.lang-si .font-script,
+.lang-si .font-sans {
+    font-family: 'Abhaya Libre', 'Noto Serif Sinhala', 'Iskoola Pota', serif !important;
+}

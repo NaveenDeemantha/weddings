@@ -113,7 +113,7 @@
 <script setup>
 import { computed } from 'vue';
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
-import { useLanguage } from '@/composables/useLanguage';
+import { useLanguage, translateVenueName, translateAddress } from '@/composables/useLanguage';
 
 const { t, isSinhala, formatTimeSinhala } = useLanguage();
 
@@ -136,17 +136,32 @@ const receptionTime = computed(() => {
     return props.events?.find(e => (e.name || '').toLowerCase().includes('reception'))?.time || props.events?.[1]?.time || '6:30 PM to 12:00 AM';
 });
 
-const churchTitle = computed(() => props.churchName || "St. Sebastian's Church");
-const receptionTitle = computed(() => props.venueName || "Vinrich Lake Resort");
+const churchTitle = computed(() => {
+    const rawName = props.churchName || "St. Sebastian's Church";
+    return isSinhala.value ? translateVenueName(rawName) : rawName;
+});
+
+const receptionTitle = computed(() => {
+    const rawName = props.venueName || "Vinrich Lake Resort";
+    return isSinhala.value ? translateVenueName(rawName) : rawName;
+});
 
 const displayVenuesTitle = computed(() => {
     if (churchTitle.value && receptionTitle.value && !churchTitle.value.includes(receptionTitle.value)) {
-        return `${churchTitle.value} & ${receptionTitle.value}`;
+        return isSinhala.value ? `${churchTitle.value} සහ ${receptionTitle.value}` : `${churchTitle.value} & ${receptionTitle.value}`;
     }
     return receptionTitle.value || churchTitle.value;
 });
 
 const displayAddress = computed(() => {
+    if (isSinhala.value) {
+        const churchAddrSi = translateAddress(props.churchAddress);
+        const venueAddrSi = translateAddress(props.venueAddress);
+        if (churchAddrSi && venueAddrSi && churchAddrSi !== venueAddrSi) {
+            return `${churchAddrSi} සහ ${venueAddrSi}`;
+        }
+        return venueAddrSi || churchAddrSi || 'මොරටුව සහ පිළියන්දල, ශ්‍රී ලංකාව';
+    }
     if (props.churchAddress && props.venueAddress && props.churchAddress !== props.venueAddress) {
         return `${props.churchAddress} & ${props.venueAddress}`;
     }
@@ -159,6 +174,8 @@ const dynamicDescription = computed(() => {
     }
     const massSi = formatTimeSinhala(massTime.value);
     const recSi = formatTimeSinhala(receptionTime.value);
-    return `${churchTitle.value} හිදී ${massSi} ට පැවැත්වෙන ශුද්ධ වූ මංගල දිව්‍ය පූජාවටත්, ඉන් අනතුරුව ${receptionTitle.value} හිදී ${recSi} පැවැත්වෙන මංගල සාදයටත් ඔබ සැමට සාදරයෙන් ආරාධනා කරමු.`;
+    const churchVenueNameSi = churchTitle.value;
+    const churchPhrase = churchVenueNameSi.endsWith('දේවස්ථානය') ? `${churchVenueNameSi.slice(0, -1)}යේදී` : `${churchVenueNameSi} හිදී`;
+    return `${churchPhrase} ${massSi} ට පැවැත්වෙන ශුද්ධ වූ මංගල දිව්‍ය පූජාවටත්, ඉන් අනතුරුව ${receptionTitle.value} හිදී ${recSi} පැවැත්වෙන මංගල සාදයටත් ඔබ සැමට සාදරයෙන් ආරාධනා කරමු.`;
 });
 </script>

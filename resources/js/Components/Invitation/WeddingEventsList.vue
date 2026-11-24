@@ -11,26 +11,26 @@
             <FlowerDivider />
         </div>
 
-        <!-- Event Cards Stack (Matching Screenshot 9) -->
-        <div class="max-w-md lg:max-w-6xl mx-auto space-y-4 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-6">
+        <!-- Event Cards Stack (Centered flex container responsive to any count of events) -->
+        <div class="max-w-md lg:max-w-5xl mx-auto flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-6">
             <div
                 v-for="(event, idx) in defaultEvents"
                 :key="idx"
-                class="p-5 sm:p-6 rounded-2xl bg-[#faf8f2] border border-[#d8ab43]/50 shadow-sm text-center flex flex-col items-center hover:border-[#d8ab43] transition-all hover:-translate-y-2 hover:shadow-[0_18px_40px_-12px_rgba(216,171,67,.3)] duration-500 group cursor-pointer"
+                class="w-full sm:w-[22rem] lg:w-[25rem] p-6 sm:p-7 rounded-2xl bg-[#faf8f2] border border-[#d8ab43]/50 shadow-sm text-center flex flex-col items-center justify-between hover:border-[#d8ab43] transition-all hover:-translate-y-2 hover:shadow-[0_18px_40px_-12px_rgba(216,171,67,.3)] duration-500 group cursor-pointer"
             >
-                <!-- Circular Dark Navy Badge with Gold Rim & Icon -->
+                <!-- Circular Dark Burgundy Badge with Gold Rim & Icon -->
                 <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ad2c51] border-2 border-[#d8ab43] flex items-center justify-center text-gold-200 text-lg mb-3 shadow-md group-hover:rotate-[360deg] group-hover:scale-110 transition-transform duration-700">
-                    <!-- Icon 1: Registration Quill / Monogram -->
-                    <svg v-if="idx === 0" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                    <!-- Icon 2: Nuptial Mass Cathedral -->
-                    <svg v-else-if="idx === 1" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <!-- Church / Nuptial Mass Icon -->
+                    <svg v-if="getEventIcon(event.name, idx) === 'church'" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <!-- Icon 3: Reception Toast & Celebration -->
+                    <!-- Reception / Celebration / Toast Icon -->
+                    <svg v-else-if="getEventIcon(event.name, idx) === 'celebration'" class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9V9a2 2 0 00-2-2H8a2 2 0 00-2 2v3h10z" />
+                    </svg>
+                    <!-- Registration Quill / Monogram Icon -->
                     <svg v-else class="w-6 h-6 text-gold-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9V9a2 2 0 00-2-2H8a2 2 0 00-2 2v3h10z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                 </div>
 
@@ -82,6 +82,20 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+const getEventIcon = (name = '', idx = 0) => {
+    const lower = (name || '').toLowerCase();
+    if (lower.includes('church') || lower.includes('mass') || lower.includes('cathedral') || lower.includes('nuptial') || lower.includes('blessing') || lower.includes('ceremony')) {
+        return 'church';
+    }
+    if (lower.includes('reception') || lower.includes('toast') || lower.includes('party') || lower.includes('dinner') || lower.includes('celebrat') || lower.includes('resort')) {
+        return 'celebration';
+    }
+    if (lower.includes('register') || lower.includes('quill') || lower.includes('sign')) {
+        return 'registration';
+    }
+    return idx === 0 ? 'church' : (idx === 1 ? 'celebration' : 'registration');
+};
 
 const defaultEvents = computed(() => {
     if (props.events && props.events.length > 0) {

@@ -1,100 +1,75 @@
 <template>
-    <div class="w-full max-w-xl mx-auto my-6 sm:my-8 px-2 sm:px-4">
-        <div class="relative bg-[#ffffff] rounded-2xl p-4 sm:p-8 border border-[#d8ab43]/40 shadow-sm text-center">
-            <!-- Header -->
-            <p class="text-sm sm:text-base uppercase tracking-[0.2em] sm:tracking-[0.25em] font-sans font-semibold text-gold-700 mb-1">
-                Solemn Celebration In
+    <div id="countdown" class="my-10 sm:my-14 px-4 sm:px-6 scroll-mt-10 text-center">
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto mb-6 text-center">
+            <p class="font-sans text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-gold-700">
+                The Big Day Awaits
             </p>
-            <h3 class="font-serif text-lg sm:text-2xl text-stone-900 font-normal mb-4 sm:mb-6 leading-tight">
-                {{ targetDateFormatted }}
-            </h3>
+            <h2 class="font-serif text-2xl sm:text-4xl font-semibold text-[#ad2c51] mt-1">
+                Counting Down
+            </h2>
+            <FlowerDivider />
+        </div>
 
-            <!-- Timer Grid with fine serif typography -->
-            <div class="grid grid-cols-4 gap-1.5 sm:gap-4">
-                <div class="flex flex-col items-center bg-[#fcfaf5] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e8c86d]/40">
-                    <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
-                        {{ timeLeft.days }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
-                        Days
-                    </span>
-                </div>
-
-                <div class="flex flex-col items-center bg-[#fcfaf5] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e8c86d]/40">
-                    <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
-                        {{ timeLeft.hours }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
-                        Hours
-                    </span>
-                </div>
-
-                <div class="flex flex-col items-center bg-[#fcfaf5] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e8c86d]/40">
-                    <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
-                        {{ timeLeft.minutes }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
-                        Mins
-                    </span>
-                </div>
-
-                <div class="flex flex-col items-center bg-[#fcfaf5] rounded-xl py-2.5 px-1 sm:p-4 border border-[#e8c86d]/40">
-                    <span class="font-serif text-xl sm:text-4xl font-normal text-stone-900 leading-none">
-                        {{ timeLeft.seconds }}
-                    </span>
-                    <span class="text-[11px] sm:text-base uppercase tracking-wider font-sans font-semibold text-stone-700 mt-1">
-                        Secs
-                    </span>
-                </div>
+        <!-- 4 Rounded Squircle Countdown Cards -->
+        <div class="grid grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 max-w-md sm:max-w-xl lg:max-w-2xl mx-auto">
+            <div
+                v-for="u in units"
+                :key="u.label"
+                class="p-3 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white to-[#faf6ec] border border-[#d8ab43]/50 shadow-sm flex flex-col items-center hover:-translate-y-1.5 hover:shadow-lg hover:border-[#d8ab43] transition-all duration-300"
+            >
+                <span class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#ad2c51] leading-none tabular-nums">
+                    {{ String(timeLeft[u.key]).padStart(2, '0') }}
+                </span>
+                <span class="font-display text-[9.5px] sm:text-xs tracking-[0.2em] font-semibold text-stone-700 mt-2 sm:mt-3 uppercase">
+                    {{ u.label }}
+                </span>
             </div>
-
-            <p class="mt-4 sm:mt-5 text-[11px] sm:text-base text-stone-700 font-serif italic px-2">
-                "Two lives, two hearts, joined together in friendship, united forever in Christ."
-            </p>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
+import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 
 const props = defineProps({
-    weddingDate: { type: String, default: '2026-12-29 09:00:00' },
+    weddingDate: {
+        type: String,
+        default: '2026-12-29 16:00:00',
+    },
 });
+
+const units = [
+    { key: 'days', label: 'Days' },
+    { key: 'hours', label: 'Hours' },
+    { key: 'minutes', label: 'Minutes' },
+    { key: 'seconds', label: 'Seconds' },
+];
 
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 let timer = null;
 
-const targetDateFormatted = computed(() => {
-    try {
-        const d = new Date(props.weddingDate.replace(/-/g, '/'));
-        return d.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-    } catch (e) {
-        return props.weddingDate;
-    }
-});
-
 const calculateTime = () => {
-    const target = new Date(props.weddingDate.replace(/-/g, '/')).getTime();
-    const now = new Date().getTime();
-    const diff = target - now;
+    try {
+        const target = new Date(props.weddingDate.replace(/-/g, '/')).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
 
-    if (diff <= 0) {
+        if (diff <= 0) {
+            timeLeft.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+            return;
+        }
+
+        timeLeft.value = {
+            days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((diff % (1000 * 60)) / 1000),
+        };
+    } catch (e) {
         timeLeft.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        return;
     }
-
-    timeLeft.value = {
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((diff % (1000 * 60)) / 1000),
-    };
 };
 
 onMounted(() => {

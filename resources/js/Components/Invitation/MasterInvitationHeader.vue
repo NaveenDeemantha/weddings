@@ -13,17 +13,17 @@
                     <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z" />
                 </svg>
             </div>
-            <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-semibold">
+            <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-bold">
                 HOLY MATRIMONY
             </p>
-            <p class="mt-1 font-serif italic text-base sm:text-lg text-stone-800">
+            <p class="mt-1 font-serif italic text-lg sm:text-xl font-medium text-stone-900">
                 Together with their families
             </p>
 
             <!-- 2. Couple's Names (Primary Focus) -->
-            <h1 class="mt-3 font-serif font-bold text-[#ad2c51] leading-tight text-4xl sm:text-5xl lg:text-6xl tracking-wide drop-shadow-xs">
+            <h1 class="mt-3 sm:mt-4 font-serif font-bold text-[#ad2c51] leading-none text-5xl sm:text-6xl md:text-7xl lg:text-[5.2rem] tracking-wide drop-shadow-xs">
                 {{ groomName }}
-                <span class="block font-script text-[#ad2c51] font-normal text-3xl sm:text-4xl my-0.5">&amp;</span>
+                <span class="block font-script text-[#ad2c51] font-normal text-4xl sm:text-5xl lg:text-6xl my-1 sm:my-1.5">&amp;</span>
                 {{ brideName }}
             </h1>
 
@@ -62,48 +62,60 @@
                 </div>
             </div>
 
-            <!-- 4. Posh Invitee Presentation (Matching luxury stationery theme, refined typography, no outlines) -->
-            <div class="my-3 sm:my-5 max-w-lg mx-auto text-center px-4">
-                <div class="flex items-center justify-center gap-3 mb-1.5">
-                    <span class="w-8 sm:w-14 h-px bg-gradient-to-r from-transparent via-[#d8ab43]/70 to-transparent"></span>
-                    <p class="font-display text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-[#ad2c51] font-semibold">
+            <!-- 4. Posh Invitee Presentation (Enlarged, Bold & High Visibility) -->
+            <div class="my-3 sm:my-5 max-w-xl mx-auto text-center px-4">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                    <span class="w-10 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent"></span>
+                    <p class="font-display text-xs sm:text-sm uppercase tracking-[0.35em] text-[#ad2c51] font-bold">
                         Cordially Inviting
                     </p>
-                    <span class="w-8 sm:w-14 h-px bg-gradient-to-l from-transparent via-[#d8ab43]/70 to-transparent"></span>
+                    <span class="w-10 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent via-[#d8ab43] to-transparent"></span>
                 </div>
-                <h2 class="font-serif text-2xl sm:text-3xl text-stone-900 font-normal tracking-wide">
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] text-stone-950 font-bold tracking-wide leading-tight drop-shadow-xs">
                     {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
                 </h2>
-                <p class="font-serif italic text-xs sm:text-sm text-stone-600 mt-1">
+                <p class="font-serif italic text-sm sm:text-base text-stone-700 font-medium mt-1.5">
                     Request the honour of your presence and blessings
                 </p>
             </div>
 
-            <!-- 5. Parents Section -->
-            <div class="mt-4 sm:mt-5 grid grid-cols-2 gap-4 max-w-md mx-auto w-full text-center">
-                <div class="border-r border-[#C8636F]/50 pr-4">
-                    <p class="font-display text-xs sm:text-sm tracking-[0.2em] text-[#ad2c51] font-semibold">SON OF</p>
-                    <p class="mt-1 font-serif text-base sm:text-lg font-semibold text-stone-900">{{ groomParents }}</p>
+            <!-- 5. Parents Section (Enlarged Bold Typography) -->
+            <div class="mt-5 sm:mt-6 grid grid-cols-2 gap-4 sm:gap-6 max-w-lg mx-auto w-full text-center">
+                <div class="border-r border-[#ad2c51]/30 pr-3 sm:pr-4">
+                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">SON OF</p>
+                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ groomParents }}</p>
                 </div>
-                <div class="pl-4">
-                    <p class="font-display text-xs sm:text-sm tracking-[0.2em] text-[#ad2c51] font-semibold">DAUGHTER OF</p>
-                    <p class="mt-1 font-serif text-base sm:text-lg font-semibold text-stone-900">{{ brideParents }}</p>
+                <div class="pl-3 sm:pl-4">
+                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">DAUGHTER OF</p>
+                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ brideParents }}</p>
                 </div>
             </div>
 
-            <!-- 6. Date & Time -->
-            <div class="mt-5 sm:mt-6 flex items-center justify-center gap-3 sm:gap-5">
-                <span class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-semibold border-y border-[#C8636F] py-1.5 px-2.5">DECEMBER</span>
-                <span class="font-serif text-5xl sm:text-6xl font-bold text-[#ad2c51] leading-none">29</span>
-                <span class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-semibold border-y border-[#C8636F] py-1.5 px-2.5">2026</span>
+            <!-- 6. Date & Time (High-Visibility Ribbons & Bold Numerals) -->
+            <div class="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-5">
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">DECEMBER</span>
+                <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">29</span>
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">2026</span>
             </div>
-            <p class="mt-2 font-display text-[11px] sm:text-xs tracking-[0.3em] text-stone-700 font-medium">TUESDAY · 4:00 PM</p>
+            <p class="mt-2.5 font-display text-xs sm:text-sm tracking-[0.32em] text-stone-900 font-bold uppercase">TUESDAY · 4:00 PM</p>
 
-            <!-- 7. Scripture Verse -->
-            <p class="mt-5 sm:mt-6 font-serif italic text-base sm:text-lg text-stone-800 max-w-lg mx-auto leading-relaxed px-2">
+            <!-- 7. Scripture Verse (Larger, High Legibility) -->
+            <p class="mt-6 sm:mt-7 font-serif italic text-lg sm:text-xl lg:text-[1.35rem] font-medium text-stone-900 max-w-xl mx-auto leading-relaxed px-2">
                 “And now these three remain: faith, hope and love. But the greatest of these is love.”
             </p>
-            <p class="mt-1 font-display text-[10.5px] sm:text-xs tracking-[0.3em] text-[#ad2c51] font-semibold">1 CORINTHIANS 13:13</p>
+            <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-bold uppercase">1 CORINTHIANS 13:13</p>
+
+            <!-- Subtle Scroll Cue at the bottom of the hero -->
+            <a
+                href="#countdown"
+                class="mt-8 inline-flex flex-col items-center justify-center gap-1.5 text-[#ad2c51] hover:text-[#8a2342] transition-colors group cursor-pointer select-none"
+                title="Scroll down to explore"
+            >
+                <span class="font-display text-[10px] sm:text-[11px] uppercase tracking-[0.32em] font-bold">Scroll to Explore</span>
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#ad2c51] animate-bounce fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
         </div>
     </div>
 </template>

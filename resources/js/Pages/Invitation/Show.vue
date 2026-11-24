@@ -28,6 +28,33 @@
         <!-- Floating Dock Navigation (Mobile & Desktop with labels) -->
         <BottomFloatingDock />
 
+        <!-- Floating Scroll Down Indicator (Small arrow on a side, fades as user scrolls down) -->
+        <transition
+            enter-active-class="transition duration-500 ease-out"
+            enter-from-class="opacity-0 translate-y-3"
+            enter-to-class="opacity-100 translate-y-0"
+            leave-active-class="transition duration-300 ease-in"
+            leave-from-class="opacity-100 translate-y-0"
+            leave-to-class="opacity-0 translate-y-3"
+        >
+            <div
+                v-if="showScrollCue"
+                @click="scrollToNext"
+                class="fixed bottom-24 sm:bottom-28 right-3 sm:right-6 z-40 flex flex-col items-center gap-1.5 px-2.5 py-3 rounded-full bg-white/95 hover:bg-white text-stone-700 shadow-xl border border-[#d8ab43]/60 backdrop-blur-md cursor-pointer transition-all duration-300 group transform hover:scale-105 active:scale-95 select-none"
+                title="Scroll down to explore"
+                aria-label="Scroll down to explore wedding invitation"
+            >
+                <span class="font-display text-[8.5px] uppercase tracking-widest text-[#ad2c51] font-bold [writing-mode:vertical-lr] rotate-180">
+                    Scroll
+                </span>
+                <div class="w-6 h-6 rounded-full bg-[#ad2c51]/10 flex items-center justify-center text-[#ad2c51] group-hover:bg-[#ad2c51] group-hover:text-white transition-colors">
+                    <svg class="w-3.5 h-3.5 fill-none stroke-current animate-bounce" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M19 12l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+        </transition>
+
         <!-- Preview Mode Banner (If in Preview) -->
         <div v-if="isPreview" class="bg-[#ad2c51] text-gold-100 text-xs py-2 px-4 text-center font-serif shadow-inner flex flex-wrap items-center justify-center gap-3">
             <span class="inline-flex items-center gap-1.5 font-sans font-medium tracking-wide">
@@ -63,14 +90,21 @@
                     :groom-parents="settings.groom_parents"
                 />
 
-                <!-- 2. Wedding Events (Registration, Nuptial Mass, Poruwa & Reception) -->
+                <!-- 2. The Big Day Awaits: Live Days, Hours, Minutes, Seconds Countdown -->
+                <FloralSection side="both">
+                    <CountdownTimer
+                        :wedding-date="settings.wedding_date"
+                    />
+                </FloralSection>
+
+                <!-- 3. Wedding Events (Nuptial Mass & Reception) -->
                 <FloralSection side="both">
                     <WeddingEventsList
                         :events="settings.events"
                     />
                 </FloralSection>
 
-                <!-- 3. The Setting - Wedding Venue & Google Maps -->
+                <!-- 4. The Setting - Wedding Venue & Google Maps -->
                 <FloralSection side="left">
                     <VenueSection
                         :venue-name="settings.venue_name"
@@ -79,7 +113,7 @@
                     />
                 </FloralSection>
 
-                <!-- 4. Kindly Reply - RSVP Form -->
+                <!-- 5. Kindly Reply - RSVP Form -->
                 <FloralSection side="right" top>
                     <RsvpCard
                         :guest-slug="guest.slug"
@@ -92,7 +126,7 @@
                     />
                 </FloralSection>
 
-                <!-- 5. Midnight Navy Gothic Rose Window Footer -->
+                <!-- 6. Midnight Navy Gothic Rose Window Footer -->
                 <NavySaveTheDateFooter
                     :bride-name="settings.bride_name"
                     :groom-name="settings.groom_name"
@@ -104,7 +138,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import FloralSection from '@/Components/Invitation/FloralSection.vue';
 import SideVines from '@/Components/Invitation/SideVines.vue';
@@ -112,6 +146,7 @@ import ClickBurst from '@/Components/Invitation/ClickBurst.vue';
 import PetalRain from '@/Components/Invitation/PetalRain.vue';
 import CathedralDoorCover from '@/Components/Invitation/CathedralDoorCover.vue';
 import MasterInvitationHeader from '@/Components/Invitation/MasterInvitationHeader.vue';
+import CountdownTimer from '@/Components/Invitation/CountdownTimer.vue';
 import WeddingEventsList from '@/Components/Invitation/WeddingEventsList.vue';
 import VenueSection from '@/Components/Invitation/VenueSection.vue';
 import RsvpCard from '@/Components/Invitation/RsvpCard.vue';
@@ -128,14 +163,38 @@ const props = defineProps({
 
 const musicPlayerRef = ref(null);
 const cardRef = ref(null);
+const showScrollCue = ref(true);
+
+const handleScroll = () => {
+    if (window.scrollY > 150) {
+        showScrollCue.value = false;
+    } else {
+        showScrollCue.value = true;
+    }
+};
+
+const scrollToNext = () => {
+    const el = document.getElementById('countdown') || document.getElementById('events');
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollBy({ top: 500, behavior: 'smooth' });
+    }
+};
 
 onMounted(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const els = Array.from(cardRef.value?.children || []).slice(1, -1);
     els.forEach((el) => el.classList.add('reveal'));
     const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('reveal-in'); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
     els.forEach((el) => io.observe(el));
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
 });
 
 const onDoorsOpened = () => {

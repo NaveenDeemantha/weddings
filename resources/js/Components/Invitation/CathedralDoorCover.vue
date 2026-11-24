@@ -153,10 +153,10 @@
                                     <span class="w-6 sm:w-10 h-px bg-gradient-to-l from-transparent via-[#f5dc8a]/80 to-transparent"></span>
                                 </div>
 
-                                <!-- 1. PRIMARY HERO: Couple Bride & Groom Names -->
-                                <h1 class="font-serif text-[28px] sm:text-[38px] md:text-[44px] leading-tight font-bold text-white tracking-wide my-1 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
+                                <!-- 1. PRIMARY HERO: Couple Bride & Groom Names (Enlarged) -->
+                                <h1 class="font-serif text-[30px] sm:text-[42px] md:text-[48px] leading-tight font-bold text-white tracking-wide my-1 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
                                     <span class="inline-block">{{ groomName }}</span>
-                                    <span class="font-script text-[32px] sm:text-[44px] md:text-[50px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]">&amp;</span>
+                                    <span class="font-script text-[36px] sm:text-[48px] md:text-[54px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]">&amp;</span>
                                     <span class="inline-block">{{ brideName }}</span>
                                 </h1>
 

@@ -36,7 +36,7 @@
                             ? 'inline-block text-gold-100'
                             : 'hidden md:inline text-stone-700 group-hover:text-[#ad2c51]'
                     ]"
-                >Home</span>
+                >{{ t('nav', 'home') }}</span>
             </a>
 
             <!-- Events -->
@@ -73,7 +73,7 @@
                             ? 'inline-block text-gold-100'
                             : 'hidden md:inline text-stone-700 group-hover:text-[#ad2c51]'
                     ]"
-                >Events</span>
+                >{{ t('nav', 'events') }}</span>
             </a>
 
             <!-- Venue -->
@@ -108,7 +108,7 @@
                             ? 'inline-block text-gold-100'
                             : 'hidden md:inline text-stone-700 group-hover:text-[#ad2c51]'
                     ]"
-                >Venue</span>
+                >{{ t('nav', 'venue') }}</span>
             </a>
 
             <!-- RSVP -->
@@ -143,7 +143,7 @@
                             ? 'inline-block text-gold-100'
                             : 'hidden sm:inline text-[#ad2c51]'
                     ]"
-                >RSVP</span>
+                >{{ t('nav', 'rsvp') }}</span>
             </a>
         </div>
     </nav>
@@ -151,6 +151,9 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 const activeSection = ref('hero');
 const sectionIds = ['rsvp', 'venue', 'events', 'hero'];

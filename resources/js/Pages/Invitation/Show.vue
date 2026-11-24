@@ -19,6 +19,9 @@
             @opened="onDoorsOpened"
         />
 
+        <!-- Floating Language Switcher (EN | සිංහල) -->
+        <LanguageToggle />
+
         <!-- Floating Music Player Button (Top Right Dark Navy Circle) -->
         <MusicPlayer
             ref="musicPlayerRef"
@@ -45,7 +48,7 @@
                 aria-label="Scroll down to explore wedding invitation"
             >
                 <span class="font-display text-[8.5px] uppercase tracking-widest text-[#ad2c51] font-bold [writing-mode:vertical-lr] rotate-180">
-                    Scroll
+                    {{ isSinhala ? 'පහළට' : 'Scroll' }}
                 </span>
                 <div class="w-6 h-6 rounded-full bg-[#ad2c51]/10 flex items-center justify-center text-[#ad2c51] group-hover:bg-[#ad2c51] group-hover:text-white transition-colors">
                     <svg class="w-3.5 h-3.5 fill-none stroke-current animate-bounce" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -153,6 +156,10 @@ import RsvpCard from '@/Components/Invitation/RsvpCard.vue';
 import NavySaveTheDateFooter from '@/Components/Invitation/NavySaveTheDateFooter.vue';
 import BottomFloatingDock from '@/Components/Invitation/BottomFloatingDock.vue';
 import MusicPlayer from '@/Components/Invitation/MusicPlayer.vue';
+import LanguageToggle from '@/Components/Invitation/LanguageToggle.vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { isSinhala } = useLanguage();
 
 const props = defineProps({
     guest: { type: Object, required: true },

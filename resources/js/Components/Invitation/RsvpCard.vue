@@ -3,18 +3,18 @@
         <!-- Section Header -->
         <div class="text-center mb-6">
             <p class="font-sans text-sm uppercase tracking-[0.25em] font-semibold text-gold-700">
-                Kindly Reply
+                {{ t('rsvp', 'kindlyReply') }}
             </p>
             <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-[#ad2c51] mt-1">
-                Will You Join Us?
+                {{ t('rsvp', 'willYouJoin') }}
             </h2>
             <FlowerDivider />
 
             <p class="font-serif text-sm sm:text-base text-stone-700 max-w-sm mx-auto leading-relaxed mt-2">
-                We joyfully await your presence. Please let us know if you will be celebrating with us.
+                {{ t('rsvp', 'subtitle') }}
             </p>
             <p class="font-serif italic text-sm text-stone-900 font-semibold mt-1">
-                Kindly respond by 1st December 2026
+                {{ t('rsvp', 'respondBy') }}
             </p>
         </div>
 
@@ -39,25 +39,20 @@
                     </svg>
                 </div>
                 <h3 class="font-serif text-lg font-bold text-[#ad2c51]">
-                    {{ guestStatus === 'attending' ? 'Response Confirmed: Joyfully Accepting' : 'Response Confirmed: Regretfully Declining' }}
+                    {{ guestStatus === 'attending' ? t('rsvp', 'confirmedAttending') : t('rsvp', 'confirmedDeclined') }}
                 </h3>
                 <p class="font-serif font-bold text-base sm:text-lg text-[#15253b] uppercase tracking-wider mt-1">
-                    {{ guestDisplayName }}
+                    {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestDisplayName }}
                 </p>
                 <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
-                    <span v-if="guestStatus === 'attending'">
-                        We are truly honored that you will be joining us. We look forward to celebrating together in God's grace!
-                    </span>
-                    <span v-else>
-                        We regret you cannot be with us in person, but your warm prayers and blessings will remain in our hearts.
-                    </span>
+                    {{ guestStatus === 'attending' ? t('rsvp', 'attendingMessage') : t('rsvp', 'declinedMessage') }}
                 </p>
                 <button
                     type="button"
                     @click="isEditing = true"
-                    class="mt-4 text-sm font-serif italic text-gold-700 underline hover:text-gold-900"
+                    class="mt-4 text-sm font-serif italic text-gold-700 underline hover:text-gold-900 cursor-pointer"
                 >
-                    Change RSVP response
+                    {{ t('rsvp', 'changeResponse') }}
                 </button>
             </div>
 
@@ -66,37 +61,37 @@
                 <!-- Posh Invitee Presentation -->
                 <div class="py-2 px-4 text-center">
                     <p class="font-display text-[9.5px] uppercase tracking-[0.25em] font-medium text-[#ad2c51]">
-                        Invitation Reserved For
+                        {{ t('rsvp', 'reservedFor') }}
                     </p>
                     <h3 class="font-serif text-lg sm:text-xl font-medium text-[#15253b] tracking-wide mt-0.5">
-                        {{ guestDisplayName }}
+                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestDisplayName }}
                     </h3>
                     <p v-if="maxGuests" class="font-serif italic text-xs text-stone-500 mt-0.5">
-                        Reserved for up to {{ maxGuests }} {{ maxGuests > 1 ? 'guests' : 'guest' }}
+                        {{ t('rsvp', 'reservedForCount', maxGuests) }}
                     </p>
                 </div>
 
                 <!-- Will you be attending? -->
                 <div>
                     <label class="block font-serif font-bold text-sm text-stone-800 mb-1">
-                        Will you be attending?
+                        {{ t('rsvp', 'willYouAttend') }}
                     </label>
                     <div class="grid grid-cols-2 gap-3">
                         <button
                             type="button"
                             @click="form.status = 'attending'; burstAt($event, 36)"
-                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
+                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95 cursor-pointer"
                             :class="form.status === 'attending' ? 'bg-[#ad2c51] text-gold-50 border-[#ad2c51] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
-                            Joyfully Accept
+                            {{ t('rsvp', 'joyfullyAccept') }}
                         </button>
                         <button
                             type="button"
                             @click="form.status = 'declined'"
-                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95"
+                            class="py-3 px-2 rounded-xl border text-center font-serif text-sm font-semibold transition-all transform active:scale-95 cursor-pointer"
                             :class="form.status === 'declined' ? 'bg-[#ad2c51] text-gold-50 border-[#ad2c51] shadow-sm' : 'bg-white text-stone-700 border-stone-200 hover:border-stone-400'"
                         >
-                            Regretfully Decline
+                            {{ t('rsvp', 'regretfullyDecline') }}
                         </button>
                     </div>
                 </div>
@@ -106,13 +101,13 @@
                     <button
                         type="submit" @click="burstAt($event, 48)"
                         :disabled="form.processing"
-                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2.5 disabled:opacity-50"
+                        class="w-full py-3.5 px-6 rounded-full border border-stone-800 bg-white hover:bg-stone-100 text-[#ad2c51] text-sm uppercase tracking-[0.2em] font-serif font-bold shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                     >
                         <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </svg>
-                        <span>{{ form.processing ? 'Recording RSVP...' : 'Send RSVP' }}</span>
+                        <span>{{ form.processing ? t('rsvp', 'recording') : t('rsvp', 'sendRsvp') }}</span>
                     </button>
                 </div>
             </form>
@@ -124,6 +119,9 @@
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 const props = defineProps({
     guestSlug: { type: String, default: '' },

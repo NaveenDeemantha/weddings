@@ -14,17 +14,17 @@
                 </svg>
             </div>
             <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-bold">
-                HOLY MATRIMONY
+                {{ t('header', 'holyMatrimony') }}
             </p>
             <p class="mt-1 font-serif italic text-lg sm:text-xl font-medium text-stone-900">
-                Together with their families
+                {{ isSinhala ? 'දෙවියන් වහන්සේ ඉදිරියේ ප්‍රේමය සහ විශ්වාසය එක්තැන් කරමින්' : 'Together with their families' }}
             </p>
 
             <!-- 2. Couple's Names (Primary Focus) -->
             <h1 class="mt-3 sm:mt-4 font-serif font-bold text-[#ad2c51] leading-none text-5xl sm:text-6xl md:text-7xl lg:text-[5.2rem] tracking-wide drop-shadow-xs">
-                {{ groomName }}
+                {{ isSinhala ? t('header', 'groomName') : groomName }}
                 <span class="block font-script text-[#ad2c51] font-normal text-4xl sm:text-5xl lg:text-6xl my-1 sm:my-1.5">&amp;</span>
-                {{ brideName }}
+                {{ isSinhala ? t('header', 'brideName') : brideName }}
             </h1>
 
             <!-- 3. Couple Portrait Medallion -->
@@ -67,43 +67,43 @@
                 <div class="flex items-center justify-center gap-3 mb-2">
                     <span class="w-10 sm:w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#d8ab43] to-transparent"></span>
                     <p class="font-display text-xs sm:text-sm uppercase tracking-[0.35em] text-[#ad2c51] font-bold">
-                        Cordially Inviting
+                        {{ t('header', 'cordiallyInviting') }}
                     </p>
                     <span class="w-10 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent via-[#d8ab43] to-transparent"></span>
                 </div>
                 <h2 class="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] text-stone-950 font-bold tracking-wide leading-tight drop-shadow-xs">
-                    {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
+                    {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
                 </h2>
                 <p class="font-serif italic text-sm sm:text-base text-stone-700 font-medium mt-1.5">
-                    Request the honour of your presence and blessings
+                    {{ t('header', 'requestBlessings') }}
                 </p>
             </div>
 
             <!-- 5. Parents Section (Enlarged Bold Typography) -->
             <div class="mt-5 sm:mt-6 grid grid-cols-2 gap-4 sm:gap-6 max-w-lg mx-auto w-full text-center">
                 <div class="border-r border-[#ad2c51]/30 pr-3 sm:pr-4">
-                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">SON OF</p>
-                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ groomParents }}</p>
+                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">{{ t('header', 'sonOf') }}</p>
+                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ isSinhala ? t('header', 'groomParents') : groomParents }}</p>
                 </div>
                 <div class="pl-3 sm:pl-4">
-                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">DAUGHTER OF</p>
-                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ brideParents }}</p>
+                    <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">{{ t('header', 'daughterOf') }}</p>
+                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ isSinhala ? t('header', 'brideParents') : brideParents }}</p>
                 </div>
             </div>
 
             <!-- 6. Date & Time (High-Visibility Ribbons & Bold Numerals) -->
             <div class="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-5">
-                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">DECEMBER</span>
-                <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">29</span>
-                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">2026</span>
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">{{ t('header', 'month') }}</span>
+                <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">{{ t('header', 'day') }}</span>
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">{{ t('header', 'year') }}</span>
             </div>
-            <p class="mt-2.5 font-display text-xs sm:text-sm tracking-[0.32em] text-stone-900 font-bold uppercase">TUESDAY · 4:00 PM</p>
+            <p class="mt-2.5 font-display text-xs sm:text-sm tracking-[0.32em] text-stone-900 font-bold uppercase">{{ t('header', 'time') }}</p>
 
             <!-- 7. Scripture Verse (Larger, High Legibility) -->
             <p class="mt-6 sm:mt-7 font-serif italic text-lg sm:text-xl lg:text-[1.35rem] font-medium text-stone-900 max-w-xl mx-auto leading-relaxed px-2">
-                “And now these three remain: faith, hope and love. But the greatest of these is love.”
+                {{ t('header', 'scriptureVerse') }}
             </p>
-            <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-bold uppercase">1 CORINTHIANS 13:13</p>
+            <p class="mt-2 font-display text-xs sm:text-sm tracking-[0.35em] text-[#ad2c51] font-bold uppercase">{{ t('header', 'scriptureCitation') }}</p>
 
             <!-- Subtle Scroll Cue at the bottom of the hero -->
             <a
@@ -111,7 +111,7 @@
                 class="mt-8 inline-flex flex-col items-center justify-center gap-1.5 text-[#ad2c51] hover:text-[#8a2342] transition-colors group cursor-pointer select-none"
                 title="Scroll down to explore"
             >
-                <span class="font-display text-[10px] sm:text-[11px] uppercase tracking-[0.32em] font-bold">Scroll to Explore</span>
+                <span class="font-display text-[10px] sm:text-[11px] uppercase tracking-[0.32em] font-bold">{{ t('header', 'scrollToExplore') }}</span>
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#ad2c51] animate-bounce fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
@@ -122,6 +122,10 @@
 
 <script setup>
 import FlowerCluster from '@/Components/Invitation/FlowerCluster.vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
+
 defineProps({
     guestName: { type: String, default: 'Mr & Mrs Silva' },
     guestGreeting: { type: String, default: '' },

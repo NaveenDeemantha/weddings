@@ -3,10 +3,10 @@
         <!-- Header -->
         <div class="max-w-3xl mx-auto mb-6 text-center">
             <p class="font-sans text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-gold-700">
-                The Big Day Awaits
+                {{ t('countdown', 'theBigDay') }}
             </p>
             <h2 class="font-serif text-2xl sm:text-4xl font-semibold text-[#ad2c51] mt-1">
-                Counting Down
+                {{ isSinhala ? 'මංගල දිනය උදාවන තෙක්' : 'Counting Down' }}
             </h2>
             <FlowerDivider />
         </div>
@@ -15,14 +15,14 @@
         <div class="grid grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 max-w-md sm:max-w-xl lg:max-w-2xl mx-auto">
             <div
                 v-for="u in units"
-                :key="u.label"
+                :key="u.key"
                 class="p-3 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white to-[#faf6ec] border border-[#d8ab43]/50 shadow-sm flex flex-col items-center hover:-translate-y-1.5 hover:shadow-lg hover:border-[#d8ab43] transition-all duration-300"
             >
                 <span class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#ad2c51] leading-none tabular-nums">
                     {{ String(timeLeft[u.key]).padStart(2, '0') }}
                 </span>
                 <span class="font-display text-[9.5px] sm:text-xs tracking-[0.2em] font-semibold text-stone-700 mt-2 sm:mt-3 uppercase">
-                    {{ u.label }}
+                    {{ t('countdown', u.key) }}
                 </span>
             </div>
         </div>
@@ -32,6 +32,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 const props = defineProps({
     weddingDate: {

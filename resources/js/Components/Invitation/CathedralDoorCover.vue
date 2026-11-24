@@ -11,11 +11,11 @@
             v-if="isOpening && !isFadingOut"
             type="button"
             @click.stop="skipIntro"
-            class="fixed top-4 right-16 sm:right-20 z-[70] inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white/95 hover:text-white font-sans text-xs tracking-wider uppercase font-semibold backdrop-blur-md border border-white/30 shadow-2xl transition-all transform active:scale-95 cursor-pointer"
+            class="fixed top-4 right-16 sm:right-20 z-[70] inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#ad2c51] hover:bg-[#8a2342] text-gold-100 font-serif text-xs sm:text-sm tracking-wider uppercase font-bold backdrop-blur-md border border-[#f5dc8a]/60 shadow-2xl transition-all transform hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-[#d8ab43]/50"
             :aria-label="isEndingTransition ? 'Enter invitation' : 'Skip video'"
             :title="isEndingTransition ? 'Enter Invitation' : 'Skip Video'"
         >
-            <span>{{ isEndingTransition ? 'Enter' : 'Skip' }}</span>
+            <span>{{ isEndingTransition ? t('door', 'enter') : t('door', 'skip') }}</span>
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M5.5 4.5l8 6.5-8 6.5V4.5zM15.5 4.5h2v13h-2v-13z" />
             </svg>
@@ -135,7 +135,7 @@
                                 </svg>
                             </div>
                             <p class="font-display tracking-[0.4em] text-[9.5px] sm:text-[11px] uppercase font-semibold text-[#f5dc8a] drop-shadow-md">
-                                Holy Matrimony
+                                {{ t('door', 'holyMatrimony') }}
                             </p>
                         </div>
 
@@ -148,30 +148,30 @@
                                 <div class="flex items-center justify-center gap-2 mb-1">
                                     <span class="w-6 sm:w-10 h-px bg-gradient-to-r from-transparent via-[#f5dc8a]/80 to-transparent"></span>
                                     <p class="font-display tracking-[0.35em] text-[9px] sm:text-[10.5px] uppercase text-[#f5dc8a] font-bold drop-shadow-xs">
-                                        The Wedding Of
+                                        {{ t('door', 'theWeddingOf') }}
                                     </p>
                                     <span class="w-6 sm:w-10 h-px bg-gradient-to-l from-transparent via-[#f5dc8a]/80 to-transparent"></span>
                                 </div>
 
                                 <!-- 1. PRIMARY HERO: Couple Bride & Groom Names (Enlarged) -->
                                 <h1 class="font-serif text-[30px] sm:text-[42px] md:text-[48px] leading-tight font-bold text-white tracking-wide my-1 drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
-                                    <span class="inline-block">{{ groomName }}</span>
+                                    <span class="inline-block">{{ isSinhala ? t('door', 'groomName') : groomName }}</span>
                                     <span class="font-script text-[36px] sm:text-[48px] md:text-[54px] text-[#f5dc8a] font-normal mx-1.5 align-baseline drop-shadow-[0_0_12px_rgba(245,220,138,0.6)]">&amp;</span>
-                                    <span class="inline-block">{{ brideName }}</span>
+                                    <span class="inline-block">{{ isSinhala ? t('door', 'brideName') : brideName }}</span>
                                 </h1>
 
                                 <!-- Date -->
                                 <p class="font-serif italic text-xs sm:text-sm text-[#f8f6f0]/90 tracking-wide mb-2.5 drop-shadow-xs">
-                                    {{ weddingDateText }}
+                                    {{ isSinhala ? t('door', 'dateText') : weddingDateText }}
                                 </p>
 
                                 <!-- 2. SECONDARY DEDICATION: Invited People / Family Title -->
                                 <div class="pt-2 border-t border-[#f5dc8a]/25">
                                     <p class="font-display tracking-[0.28em] text-[8.5px] sm:text-[9.5px] uppercase text-[#f5dc8a]/90 font-semibold mb-0.5">
-                                        Cordially Inviting
+                                        {{ t('door', 'cordiallyInviting') }}
                                     </p>
                                     <h2 class="font-serif font-bold text-sm sm:text-base md:text-lg text-white/95 uppercase tracking-[0.06em] leading-snug drop-shadow-sm">
-                                        {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
+                                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
                                     </h2>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v4m-2-2h4M12 6L4 12v9h16v-9l-8-6z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 21v-5a2 2 0 014 0v5" />
                                     </svg>
-                                    <span>Push to Open Doors</span>
+                                    <span>{{ t('door', 'openDoors') }}</span>
                                     <span class="text-[#c4a35a] group-hover:translate-x-1 transition-transform">→</span>
                                 </button>
                             </div>
@@ -203,7 +203,7 @@
                     >
                         <div class="w-12 h-12 rounded-full border border-[#c4a35a]/60 knocker-hint-pulse flex items-center justify-center">
                             <span class="text-[10px] text-[#8a724d] font-serif bg-white/80 px-2 py-0.5 rounded-full shadow-xs">
-                                Knock
+                                {{ t('door', 'knock') }}
                             </span>
                         </div>
                     </div>
@@ -244,14 +244,14 @@
 
                 <!-- The Wedding Of -->
                 <p class="font-display tracking-[0.45em] text-[11px] sm:text-[13px] uppercase font-semibold text-[#f5dc8a] drop-shadow-md">
-                    The Wedding Of
+                    {{ t('door', 'theWeddingOf') }}
                 </p>
 
                 <!-- Groom & Bride Names -->
                 <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-normal tracking-wide drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-tight my-3 sm:my-4">
-                    <span class="inline-block">{{ groomName }}</span>
+                    <span class="inline-block">{{ isSinhala ? t('door', 'groomName') : groomName }}</span>
                     <span class="font-script text-4xl sm:text-6xl md:text-7xl text-[#f5dc8a] mx-2 sm:mx-3 inline-block align-baseline drop-shadow-[0_0_15px_rgba(245,220,138,0.6)]">&amp;</span>
-                    <span class="inline-block">{{ brideName }}</span>
+                    <span class="inline-block">{{ isSinhala ? t('door', 'brideName') : brideName }}</span>
                 </h2>
 
                 <!-- Elegant Floral / Golden Ribbon Divider -->
@@ -265,25 +265,25 @@
 
                 <!-- Date & Church Venue -->
                 <p class="font-serif italic text-sm sm:text-lg text-[#f8f6f0] tracking-wider drop-shadow-md">
-                    {{ weddingDateText }}
+                    {{ isSinhala ? t('door', 'dateText') : weddingDateText }}
                 </p>
                 <p class="font-display text-[10.5px] sm:text-xs text-[#f5dc8a]/85 tracking-[0.28em] uppercase mt-2 drop-shadow-sm">
-                    {{ churchName }}
+                    {{ isSinhala ? 'මොරටුව ශාන්ත සෙබස්තියන් දේවස්ථානය' : churchName }}
                 </p>
 
                 <!-- Posh Invitee Card in Transition -->
                 <div class="mt-4 px-6 py-2.5 rounded-2xl bg-white/15 backdrop-blur-md border border-[#f5dc8a]/70 shadow-[0_8px_30px_rgba(0,0,0,0.5)] max-w-md text-center">
                     <p class="font-display tracking-[0.35em] text-[9.5px] sm:text-[11px] uppercase text-[#f5dc8a] font-bold">
-                        Cordially Inviting
+                        {{ t('door', 'cordiallyInviting') }}
                     </p>
                     <p class="font-serif text-lg sm:text-2xl font-bold text-white tracking-wider uppercase drop-shadow-md mt-0.5">
-                        {{ guestGreeting || guestName || 'Respected Guest & Beloved Family' }}
+                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
                     </p>
                 </div>
 
                 <!-- Subtle Enter Indicator -->
                 <div class="mt-6 sm:mt-7 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#f8f6f0] text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-sans shadow-lg">
-                    <span>Entering Invitation</span>
+                    <span>{{ isSinhala ? 'ආරාධනා පත්‍රයට ඇතුල් වන්න' : 'Entering Invitation' }}</span>
                     <svg class="w-3 h-3 text-[#f5dc8a] fill-current animate-pulse" viewBox="0 0 24 24">
                         <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" />
                     </svg>
@@ -295,6 +295,9 @@
 
 <script setup>
 import { ref, computed, onBeforeUnmount } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 const props = defineProps({
     guestName: { type: String, default: 'Mr & Mrs Silva' },

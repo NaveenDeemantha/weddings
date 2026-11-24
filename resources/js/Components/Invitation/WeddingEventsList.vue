@@ -3,10 +3,10 @@
         <!-- Header -->
         <div class="text-center mb-8">
             <p class="font-sans text-sm sm:text-base uppercase tracking-[0.3em] font-bold text-gold-700">
-                Celebrate With Us
+                {{ t('events', 'celebrateWithUs') }}
             </p>
             <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ad2c51] mt-1.5 tracking-wide">
-                Wedding Events
+                {{ t('events', 'weddingEvents') }}
             </h2>
             <FlowerDivider />
         </div>
@@ -36,7 +36,7 @@
 
                 <!-- Event Title (Enlarged, Bold Burgundy) -->
                 <h3 class="font-serif text-xl sm:text-2xl font-bold tracking-[0.14em] text-[#ad2c51] uppercase mb-1">
-                    {{ event.name }}
+                    {{ getDisplayEventName(event, idx) }}
                 </h3>
 
                 <!-- Date (Enlarged, Bold Black) -->
@@ -47,7 +47,7 @@
                         <line x1="8" y1="2" x2="8" y2="6" />
                         <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
-                    <span>{{ event.date || '29th December 2026' }}</span>
+                    <span>{{ getDisplayEventDate(event) }}</span>
                 </div>
 
                 <!-- Time (Enlarged, Bold Black) -->
@@ -56,7 +56,7 @@
                         <circle cx="12" cy="12" r="10" />
                         <polyline points="12 6 12 12 16 14" />
                     </svg>
-                    <span>{{ event.time }}</span>
+                    <span>{{ getDisplayEventTime(event) }}</span>
                 </div>
 
                 <!-- Venue (Enlarged, Bold Black) -->
@@ -65,7 +65,7 @@
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                         <circle cx="12" cy="10" r="3" />
                     </svg>
-                    <span>{{ event.venue }}</span>
+                    <span>{{ getDisplayEventVenue(event) }}</span>
                 </div>
             </div>
         </div>
@@ -75,6 +75,9 @@
 <script setup>
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 import { computed } from 'vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 const props = defineProps({
     events: {
@@ -82,6 +85,41 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+const getDisplayEventName = (event, idx) => {
+    if (!isSinhala.value) return event.name;
+    const lower = (event.name || '').toLowerCase();
+    if (lower.includes('mass') || lower.includes('church') || idx === 0) {
+        return t('events', 'weddingMass');
+    }
+    if (lower.includes('reception') || idx === 1) {
+        return t('events', 'reception');
+    }
+    return event.name;
+};
+
+const getDisplayEventDate = (event) => {
+    if (!isSinhala.value) return event.date || '29th December 2026';
+    return t('events', 'massDate');
+};
+
+const getDisplayEventTime = (event) => {
+    if (!isSinhala.value) return event.time;
+    const lower = (event.name || '').toLowerCase();
+    if (lower.includes('reception')) {
+        return t('events', 'receptionTime');
+    }
+    return t('events', 'massTime');
+};
+
+const getDisplayEventVenue = (event) => {
+    if (!isSinhala.value) return event.venue;
+    const lower = (event.venue || event.name || '').toLowerCase();
+    if (lower.includes('vinrich') || lower.includes('reception')) {
+        return t('events', 'receptionVenue');
+    }
+    return t('events', 'massVenue');
+};
 
 const getEventIcon = (name = '', idx = 0) => {
     const lower = (name || '').toLowerCase();

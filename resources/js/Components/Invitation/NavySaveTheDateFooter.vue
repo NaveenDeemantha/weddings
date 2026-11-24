@@ -21,7 +21,7 @@
                 <!-- Foreground Text Content: Dynamic Props Only -->
                 <div class="relative z-10 flex flex-col items-center justify-center text-center px-4">
                     <p class="font-display text-xs sm:text-sm uppercase tracking-[0.35em] font-semibold text-gold-200">
-                        SAVE THE DATE
+                        {{ t('footer', 'saveTheDate') }}
                     </p>
 
                     <h3 class="font-serif text-3xl sm:text-4xl font-normal tracking-widest text-[#fffdf5] my-2 drop-shadow">
@@ -29,7 +29,7 @@
                     </h3>
 
                     <p class="font-serif italic text-sm text-amber-100/90 max-w-[210px] leading-relaxed">
-                        Thank you for being part of our special day.
+                        {{ t('footer', 'thankYou') }}
                     </p>
 
                     <!-- Delicate Heart Icon -->
@@ -40,24 +40,27 @@
                     </div>
 
                     <p class="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-white">
-                        {{ groomName }} <span class="font-script text-2xl text-gold-200 font-normal italic">&amp;</span> {{ brideName }}
+                        {{ isSinhala ? 'බුද්ධිම' : groomName }} <span class="font-script text-2xl text-gold-200 font-normal italic">&amp;</span> {{ isSinhala ? 'ශාවින්දි' : brideName }}
                     </p>
 
                     <p class="text-xs sm:text-sm font-display uppercase tracking-[0.25em] font-semibold text-gold-200/90 mt-1">
-                        {{ venueName }}
+                        {{ isSinhala ? 'ශාන්ත සෙබස්තියන් දේවස්ථානය & වින්රිච් ලේක් රිසෝට්' : venueName }}
                     </p>
                 </div>
             </div>
         </div>
 
         <p class="text-xs sm:text-sm text-stone-600 font-serif italic mt-4">
-            With blessings and gratitude · {{ groomName }} &amp; {{ brideName }}
+            {{ t('footer', 'withBlessings') }} · {{ isSinhala ? 'බුද්ධිම & ශාවින්දි' : `${groomName} & ${brideName}` }}
         </p>
     </div>
 </template>
 
 <script setup>
 import FlowerCluster from '@/Components/Invitation/FlowerCluster.vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 defineProps({
     brideName: { type: String, default: 'Shavindi' },

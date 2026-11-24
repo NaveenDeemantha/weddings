@@ -3,10 +3,10 @@
         <!-- Section Title (Enlarged to match Wedding Events) -->
         <div class="text-center mb-8">
             <p class="font-sans text-sm sm:text-base uppercase tracking-[0.3em] font-bold text-gold-700">
-                The Setting
+                {{ t('venue', 'theSetting') }}
             </p>
             <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ad2c51] mt-1">
-                Wedding Venue
+                {{ t('venue', 'weddingVenue') }}
             </h2>
             <FlowerDivider />
         </div>
@@ -24,10 +24,10 @@
                         </div>
                         <div>
                             <p class="text-xs sm:text-sm font-sans uppercase tracking-[0.25em] font-bold text-gold-700">
-                                Ceremony &amp; Reception
+                                {{ t('venue', 'ceremonyReception') }}
                             </p>
                             <h3 class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-tight">
-                                {{ venueName }}
+                                {{ isSinhala ? t('venue', 'venueName') : venueName }}
                             </h3>
                         </div>
                     </div>
@@ -37,11 +37,11 @@
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                             <circle cx="12" cy="10" r="3" />
                         </svg>
-                        <span>{{ venueAddress }}</span>
+                        <span>{{ isSinhala ? t('venue', 'venueAddress') : venueAddress }}</span>
                     </p>
 
                     <p class="text-base sm:text-lg font-serif text-stone-950 font-medium leading-relaxed mb-6 border-l-4 border-gold-500 pl-4 bg-white/60 py-3 rounded-r-xl shadow-xs">
-                        We warmly welcome you to St. Sebastian's Church in Moratuwa for the Wedding Mass at 4:00 PM, followed by the Wedding Reception at Vinrich Lake Resort, Piliyandala from 6:30 PM to 12:00 AM.
+                        {{ t('venue', 'description') }}
                     </p>
                 </div>
 
@@ -56,7 +56,7 @@
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
-                        <span>Get Driving Directions ↗</span>
+                        <span>{{ t('venue', 'getDirections') }}</span>
                     </a>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <!-- Map Header Link -->
                 <div class="p-4 bg-white border-b border-stone-100 flex items-center justify-between gap-3">
                     <span class="text-base sm:text-lg font-serif font-bold text-[#ad2c51] leading-snug">
-                        St. Sebastian's Church &amp; Vinrich Lake Resort
+                        {{ isSinhala ? t('venue', 'venueName') : "St. Sebastian's Church & Vinrich Lake Resort" }}
                     </span>
                     <a
                         :href="venueMapUrl"
@@ -74,7 +74,7 @@
                         rel="noopener noreferrer"
                         class="text-sm sm:text-base font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 shrink-0"
                     >
-                        <span>Open in Maps</span> ↗
+                        <span>{{ t('venue', 'openInMaps') }}</span> ↗
                     </a>
                 </div>
 
@@ -102,7 +102,7 @@
                             <line x1="8" y1="2" x2="8" y2="18"></line>
                             <line x1="16" y1="6" x2="16" y2="22"></line>
                         </svg>
-                        <span>Interactive Navigation</span>
+                        <span>{{ t('venue', 'interactiveNav') }}</span>
                     </a>
                 </div>
             </div>
@@ -112,6 +112,9 @@
 
 <script setup>
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
+import { useLanguage } from '@/composables/useLanguage';
+
+const { t, isSinhala } = useLanguage();
 
 defineProps({
     venueName: { type: String, default: "St. Sebastian's Church & Vinrich Lake Resort" },

@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
     settings: { type: Object, required: true },
@@ -12,8 +12,8 @@ const form = useForm({
     groom_name: props.settings.groom_name || 'Buddhima',
     bride_full_name: props.settings.bride_full_name || 'Shavindi',
     groom_full_name: props.settings.groom_full_name || 'Buddhima',
-    bride_parents: props.settings.bride_parents || 'Mr. & Mrs. Perera',
-    groom_parents: props.settings.groom_parents || 'Mr. & Mrs. Fernando',
+    bride_parents: props.settings.bride_parents || 'Mr. Lalith Fernando & Mrs. Priska Pieris',
+    groom_parents: props.settings.groom_parents || '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi',
     wedding_title: props.settings.wedding_title || 'Holy Matrimony - Buddhima & Shavindi',
     wedding_date: props.settings.wedding_date || '2026-12-29 09:00:00',
     scripture_verse: props.settings.scripture_verse || 'Therefore what God has joined together, let no one separate. — Matthew 19:6',
@@ -27,8 +27,11 @@ const form = useForm({
     our_story: props.settings.our_story || '',
     music_url: props.settings.music_url || '',
     whatsapp_template: props.settings.whatsapp_template || '',
+    whatsapp_template_si: props.settings.whatsapp_template_si || "ආදරණීය :greeting,\n\nඅප දෙපාර්ශවයේ දෙමාපියන්ගේ ආශීර්වාදය ඇතිව, :groom සහ :bride වන අපගේ ශුද්ධ වූ විවාහ මංගලෝත්සවය සඳහා ඔබ සැමට සාදරයෙන් ඇරයුම් කරමු.\n\nශුද්ධ වූ මංගල දිව්‍ය පූජාව: 2026 දෙසැම්බර් 29 වන අඟහරුවාදා පස්වරු 4:00 ට මොරටුව ශාන්ත සෙබස්තියන් දේවස්ථානයේදී.\nඉන් අනතුරුව මංගල සාදය: පස්වරු 6:30 සිට පිළියන්දල වින්රිච් ලේක් රිසෝට් හිදී.\n\nඔබ වෙනුවෙන්ම වෙන් කළ විශේෂ ඩිජිටල් ආරාධනා පත්‍රය මෙතැනින් විවෘත කරන්න:\n:link\n\nඔබගේ පැමිණීම කාරුණිකව දන්වන්න (බුද්ධිම - 0718626389). ඔබ සැමගේ ආශීර්වාදය සහ සහභාගීත්වය ඉමහත් සතුටින් අපේක්ෂා කරමු!\n\nමෙත් සිතින්,\nරුද්‍රිගු සහ ප්‍රනාන්දු පවුල්වල සැම",
     events: Array.isArray(props.settings.events) ? JSON.parse(JSON.stringify(props.settings.events)) : [],
 });
+
+const activeTemplateTab = ref('en');
 
 const addEvent = () => {
     form.events.push({
@@ -115,7 +118,35 @@ const submit = () => {
 
         <div class="py-8">
             <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-7">
-                <form @submit.prevent="submit" class="space-y-7">
+                <form @submit.prevent="submit" novalidate class="space-y-7">
+                    <!-- Feedback Notifications -->
+                    <div
+                        v-if="form.recentlySuccessful"
+                        class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-3 text-sm shadow-xs transition-all animate-fadeIn"
+                    >
+                        <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p class="font-medium">All wedding settings have been saved successfully!</p>
+                    </div>
+
+                    <div
+                        v-if="form.hasErrors"
+                        class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 space-y-1 text-xs shadow-xs"
+                    >
+                        <div class="flex items-center gap-2 font-bold text-sm text-rose-800">
+                            <svg class="w-4 h-4 text-rose-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            <span>Unable to save settings. Please review the errors below:</span>
+                        </div>
+                        <ul class="list-disc list-inside space-y-0.5 pl-2 text-rose-700">
+                            <li v-for="(err, key) in form.errors" :key="key">
+                                {{ err }}
+                            </li>
+                        </ul>
+                    </div>
+
                     <!-- Couple & Family Details -->
                     <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#EDE8E1] shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-5">
                         <div class="border-b border-[#F0EDE6] pb-4 flex items-center justify-between">
@@ -423,36 +454,88 @@ const submit = () => {
                         </div>
                     </div>
 
-                    <!-- WhatsApp Message Template -->
-                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#EDE8E1] shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-4">
-                        <div class="border-b border-[#F0EDE6] pb-4 flex items-center justify-between">
+                    <!-- WhatsApp Message Templates (Expanded High-Visibility Container) -->
+                    <div class="bg-gradient-to-b from-[#fafcf9] to-white p-6 sm:p-8 rounded-3xl border-2 border-emerald-500/30 shadow-[0_4px_20px_rgba(37,211,102,0.08)] space-y-5">
+                        <div class="border-b border-emerald-100 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
-                                <h3 class="font-serif text-lg font-bold text-stone-900">
-                                    WhatsApp Invitation Message Template
+                                <h3 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center gap-2.5">
+                                    <span class="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-xs">
+                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                        </svg>
+                                    </span>
+                                    <span>WhatsApp Invitation Message Templates</span>
                                 </h3>
-                                <p class="text-xs text-stone-500 mt-0.5">
-                                    Sent via the one-click WhatsApp button on the guest list
+                                <p class="text-xs sm:text-sm text-stone-600 mt-1">
+                                    Configure messages sent to guests via WhatsApp. Choose which language to send on the guest list!
                                 </p>
                             </div>
-                            <span class="text-[10px] font-semibold uppercase tracking-widest text-[#25D366] bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
-                                Messaging
-                            </span>
+
+                            <!-- Language Template Tabs -->
+                            <div class="flex items-center gap-1.5 p-1 bg-stone-100 rounded-2xl border border-stone-200 shrink-0 self-start sm:self-auto">
+                                <button
+                                    type="button"
+                                    @click="activeTemplateTab = 'en'"
+                                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all"
+                                    :class="activeTemplateTab === 'en' ? 'bg-white text-stone-900 shadow-sm border border-stone-200' : 'text-stone-600 hover:text-stone-900'"
+                                >
+                                    🇬🇧 English Template
+                                </button>
+                                <button
+                                    type="button"
+                                    @click="activeTemplateTab = 'si'"
+                                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all"
+                                    :class="activeTemplateTab === 'si' ? 'bg-[#25D366] text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'"
+                                >
+                                    🇱🇰 සිංහල Template
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="text-xs text-stone-600 bg-[#FAF9F6] p-3.5 rounded-2xl border border-[#EDE8E1] flex flex-wrap items-center gap-2">
-                            <span class="font-semibold text-stone-700">Supported placeholders:</span>
-                            <code class="px-2 py-0.5 bg-white rounded-md border border-stone-200 text-stone-800 font-mono">:greeting</code>
-                            <code class="px-2 py-0.5 bg-white rounded-md border border-stone-200 text-stone-800 font-mono">:bride</code>
-                            <code class="px-2 py-0.5 bg-white rounded-md border border-stone-200 text-stone-800 font-mono">:groom</code>
-                            <code class="px-2 py-0.5 bg-white rounded-md border border-stone-200 text-stone-800 font-mono">:link</code>
+                        <!-- Placeholders Guide & Tokens -->
+                        <div class="text-xs text-stone-700 bg-white p-4 rounded-2xl border border-emerald-200 shadow-xs space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="font-bold text-stone-800 text-xs">Supported placeholders (automatically replaced):</span>
+                                <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-mono font-bold text-xs">:greeting</span>
+                                <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-mono font-bold text-xs">:name</span>
+                                <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-mono font-bold text-xs">:bride</span>
+                                <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-mono font-bold text-xs">:groom</span>
+                                <span class="px-2.5 py-1 bg-amber-50 text-amber-900 border border-amber-300 rounded-lg font-mono font-bold text-xs">:link</span>
+                            </div>
+                            <p class="text-[11.5px] text-stone-500">
+                                💡 Note: The <code class="font-mono text-amber-700 bg-amber-50 px-1 rounded font-bold">:link</code> in the English template automatically opens the site in <strong>English</strong>. The <code class="font-mono text-amber-700 bg-amber-50 px-1 rounded font-bold">:link</code> in the Sinhala template automatically opens the site in <strong>සිංහල (Sinhala)</strong>!
+                            </p>
                         </div>
 
-                        <div>
+                        <!-- English Template Editor -->
+                        <div v-show="activeTemplateTab === 'en'" class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="block font-bold text-xs uppercase tracking-wider text-stone-700">
+                                    English Message Content (Default)
+                                </label>
+                                <span class="text-xs text-stone-400 font-mono">{{ (form.whatsapp_template || '').length }} characters</span>
+                            </div>
                             <textarea
                                 v-model="form.whatsapp_template"
-                                rows="6"
-                                required
-                                class="w-full font-mono text-xs rounded-2xl border border-stone-200 focus:border-[#c5a059] focus:ring-1 focus:ring-[#c5a059]"
+                                rows="12"
+                                placeholder="Type your English WhatsApp invitation message here..."
+                                class="w-full font-mono text-xs sm:text-sm leading-relaxed p-4 rounded-2xl border-2 border-stone-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-white text-stone-900 shadow-inner"
+                            ></textarea>
+                        </div>
+
+                        <!-- Sinhala Template Editor -->
+                        <div v-show="activeTemplateTab === 'si'" class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="block font-bold text-xs uppercase tracking-wider text-emerald-800">
+                                    සිංහල ආරාධනා පණිවිඩය (Sinhala Message Content)
+                                </label>
+                                <span class="text-xs text-stone-400 font-mono">{{ (form.whatsapp_template_si || '').length }} characters</span>
+                            </div>
+                            <textarea
+                                v-model="form.whatsapp_template_si"
+                                rows="12"
+                                placeholder="Type your Sinhala WhatsApp invitation message here..."
+                                class="w-full font-mono text-xs sm:text-sm leading-relaxed p-4 rounded-2xl border-2 border-emerald-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-white text-stone-900 shadow-inner"
                             ></textarea>
                         </div>
                     </div>

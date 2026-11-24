@@ -6,11 +6,29 @@
 
         <title inertia>{{ config('app.name', 'Wedding Invitation') }}</title>
 
-        <!-- Favicons -->
-        <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <!-- Social Media & WhatsApp Link Preview (Open Graph) -->
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Wedding of Buddhima &amp; Shavindi">
+        <meta property="og:title" content="Holy Matrimony — Buddhima &amp; Shavindi">
+        <meta property="og:description" content="Together with our families, we joyfully invite you to celebrate our Holy Matrimony on Tuesday, 29th December 2026.">
+        <meta property="og:image" content="{{ asset('images/wedding/og_whatsapp.jpg') }}">
+        <meta property="og:image:secure_url" content="{{ asset('images/wedding/og_whatsapp.jpg') }}">
+        <meta property="og:image:type" content="image/jpeg">
+        <meta property="og:image:width" content="600">
+        <meta property="og:image:height" content="600">
+        <meta property="og:image:alt" content="Buddhima &amp; Shavindi">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Holy Matrimony — Buddhima &amp; Shavindi">
+        <meta name="twitter:description" content="Together with our families, we joyfully invite you to celebrate our Holy Matrimony on Tuesday, 29th December 2026.">
+        <meta name="twitter:image" content="{{ asset('images/wedding/og_whatsapp.jpg') }}">
+
+        <!-- Favicons (Couple Portrait Icon) -->
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=3">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-32x32.png') }}?v=3">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=3">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=3">
 
         <!-- Bespoke Wedding Typography: Abhaya Libre, Noto Serif Sinhala, Cormorant Garamond, Cinzel, Alex Brush, Plus Jakarta Sans -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

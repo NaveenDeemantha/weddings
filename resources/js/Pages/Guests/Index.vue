@@ -108,10 +108,31 @@ const deleteGuest = (guest) => {
     }
 };
 
+// WhatsApp Invitation Language mode: 'en' | 'si'
+const inviteLanguage = ref(
+    typeof window !== 'undefined' && window.localStorage
+        ? window.localStorage.getItem('admin_invite_lang') || 'en'
+        : 'en'
+);
+
+const setInviteLanguage = (lang) => {
+    inviteLanguage.value = lang;
+    if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('admin_invite_lang', lang);
+    }
+};
+
+const getGuestWhatsappUrl = (guest, lang = null) => {
+    const target = lang || inviteLanguage.value;
+    return target === 'si' ? (guest.whatsapp_url_si || guest.whatsapp_url) : guest.whatsapp_url;
+};
+
 // Copy link helper
 const copiedId = ref(null);
-const copyLink = (guest) => {
-    navigator.clipboard.writeText(guest.invitation_url).then(() => {
+const copyLink = (guest, lang = null) => {
+    const target = lang || inviteLanguage.value;
+    const url = `${guest.invitation_url}?lang=${target}`;
+    navigator.clipboard.writeText(url).then(() => {
         copiedId.value = guest.id;
         setTimeout(() => (copiedId.value = null), 2000);
     });
@@ -326,6 +347,42 @@ const formatDate = (dateStr) => {
                     </div>
                 </div>
 
+                <!-- WhatsApp Invitation Language Toggle Bar -->
+                <div class="bg-gradient-to-r from-emerald-50 via-[#fafcf9] to-white p-3 rounded-2xl border border-emerald-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="text-xs font-bold text-stone-800">WhatsApp Invitation Language:</span>
+                            <span class="text-[11px] text-stone-500 ml-1.5 hidden sm:inline">
+                                Sets message template and opens the invitation website in that language
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-1 bg-white p-1 rounded-xl border border-emerald-200 self-start sm:self-auto shadow-2xs">
+                        <button
+                            type="button"
+                            @click="setInviteLanguage('en')"
+                            class="px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5"
+                            :class="inviteLanguage === 'en' ? 'bg-[#15253b] text-white shadow-xs' : 'text-stone-600 hover:text-stone-900'"
+                        >
+                            <span>🇬🇧 English</span>
+                        </button>
+                        <button
+                            type="button"
+                            @click="setInviteLanguage('si')"
+                            class="px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5"
+                            :class="inviteLanguage === 'si' ? 'bg-[#25D366] text-white shadow-xs' : 'text-stone-600 hover:text-stone-900'"
+                        >
+                            <span>🇱🇰 සිංහල</span>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Mobile Guest Cards View (Shown on mobile screens < md) -->
                 <div class="block md:hidden space-y-3">
                     <div
@@ -410,14 +467,16 @@ const formatDate = (dateStr) => {
                         <!-- Primary Action Row: WhatsApp + Copy Link -->
                         <div class="grid grid-cols-5 gap-2 pt-0.5">
                             <a
-                                :href="guest.whatsapp_url"
+                                :href="getGuestWhatsappUrl(guest)"
                                 target="_blank"
-                                class="col-span-3 h-11 rounded-xl bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white font-bold text-xs shadow-xs flex items-center justify-center gap-2 transition-all"
+                                class="col-span-3 h-11 rounded-xl bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all px-2"
+                                :title="`Send WhatsApp invitation in ${inviteLanguage === 'si' ? 'Sinhala' : 'English'}`"
                             >
                                 <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                                 </svg>
                                 <span>Send WhatsApp</span>
+                                <span class="text-[9.5px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-black/20 text-white">{{ inviteLanguage === 'si' ? 'සිං' : 'EN' }}</span>
                             </a>
 
                             <button
@@ -434,6 +493,29 @@ const formatDate = (dateStr) => {
                                 </svg>
                                 <span>{{ copiedId === guest.id ? 'Copied!' : 'Copy Link' }}</span>
                             </button>
+                        </div>
+
+                        <!-- Per-Guest Quick Alternate Language Row -->
+                        <div class="flex items-center justify-between text-[11px] px-1 text-stone-500">
+                            <span>Alternative:</span>
+                            <div class="flex items-center gap-2">
+                                <a
+                                    :href="getGuestWhatsappUrl(guest, 'en')"
+                                    target="_blank"
+                                    class="px-2 py-0.5 rounded-md border text-[10.5px] font-semibold transition-colors flex items-center gap-1"
+                                    :class="inviteLanguage === 'en' ? 'bg-stone-100 text-stone-400 border-stone-200' : 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'"
+                                >
+                                    <span>🇬🇧 English</span>
+                                </a>
+                                <a
+                                    :href="getGuestWhatsappUrl(guest, 'si')"
+                                    target="_blank"
+                                    class="px-2 py-0.5 rounded-md border text-[10.5px] font-semibold transition-colors flex items-center gap-1"
+                                    :class="inviteLanguage === 'si' ? 'bg-stone-100 text-stone-400 border-stone-200' : 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'"
+                                >
+                                    <span>🇱🇰 සිංහල</span>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Quick 1-Tap RSVP Status Switcher -->
@@ -622,17 +704,28 @@ const formatDate = (dateStr) => {
                                     <!-- Actions -->
                                     <td class="py-4 px-5 text-right">
                                         <div class="inline-flex items-center gap-1.5">
-                                            <!-- One-Click WhatsApp Share Button -->
+                                            <!-- One-Click WhatsApp Share Button with Active Language -->
                                             <a
-                                                :href="guest.whatsapp_url"
+                                                :href="getGuestWhatsappUrl(guest)"
                                                 target="_blank"
                                                 class="px-2.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white font-medium text-[11px] shadow-2xs transition-all flex items-center gap-1.5"
-                                                title="Send WhatsApp invitation message with link"
+                                                :title="`Send WhatsApp invitation in ${inviteLanguage === 'si' ? 'Sinhala' : 'English'}`"
                                             >
                                                 <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                                                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                                                 </svg>
                                                 <span>WhatsApp</span>
+                                                <span class="text-[9px] uppercase font-bold px-1 rounded bg-black/20">{{ inviteLanguage === 'si' ? 'සිං' : 'EN' }}</span>
+                                            </a>
+
+                                            <!-- Direct Switch Button for Alternate Language -->
+                                            <a
+                                                :href="getGuestWhatsappUrl(guest, inviteLanguage === 'en' ? 'si' : 'en')"
+                                                target="_blank"
+                                                class="px-2 py-1.5 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[10px] font-bold transition-colors"
+                                                :title="`Send WhatsApp invitation in ${inviteLanguage === 'en' ? 'Sinhala' : 'English'}`"
+                                            >
+                                                {{ inviteLanguage === 'en' ? 'සිං' : 'EN' }}
                                             </a>
 
                                             <!-- Copy Link Button -->

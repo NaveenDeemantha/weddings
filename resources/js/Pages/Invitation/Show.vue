@@ -1,5 +1,11 @@
 <template>
-    <Head :title="`${settings.wedding_title || 'Holy Matrimony'} - ${settings.groom_name} & ${settings.bride_name}`" />
+    <Head>
+        <title>{{ `${settings.wedding_title || 'Holy Matrimony'} - ${settings.groom_name} & ${settings.bride_name}` }}</title>
+        <meta property="og:title" :content="`Wedding Invitation: ${guest.name || 'Honored Guest'} | ${settings.groom_name} & ${settings.bride_name}`" />
+        <meta property="og:description" content="Together with our families, we joyfully invite you to celebrate our Holy Matrimony on Tuesday, 29th December 2026." />
+        <meta property="og:image" content="/images/wedding/og_whatsapp.jpg" />
+        <meta name="twitter:image" content="/images/wedding/og_whatsapp.jpg" />
+    </Head>
 
     <div class="relative min-h-screen bg-gradient-to-b from-[#faf8f5] via-[#f7f4ed] to-[#f2ece1] text-stone-800 font-sans selection:bg-[#f5dc8a]/60 selection:text-stone-900 pb-28 md:pb-36 overflow-x-hidden">
         <!-- Floating Falling White Araliya & Jasmine Petals -->

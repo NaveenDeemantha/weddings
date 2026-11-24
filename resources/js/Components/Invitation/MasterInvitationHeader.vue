@@ -88,7 +88,7 @@
             <div class="mt-5 sm:mt-6 grid grid-cols-2 gap-4 sm:gap-6 max-w-lg mx-auto w-full text-center">
                 <div class="border-r border-[#ad2c51]/30 pr-3 sm:pr-4">
                     <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">{{ t('header', 'sonOf') }}</p>
-                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ isSinhala ? t('header', 'groomParents') : groomParents }}</p>
+                    <p class="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-bold text-stone-950 leading-snug">{{ isSinhala ? t('header', 'groomParents') : displayGroomParents }}</p>
                 </div>
                 <div class="pl-3 sm:pl-4">
                     <p class="font-display text-xs sm:text-sm tracking-[0.25em] text-[#ad2c51] font-bold uppercase">{{ t('header', 'daughterOf') }}</p>
@@ -145,14 +145,25 @@ const props = defineProps({
     guestGreeting: { type: String, default: '' },
     brideName: { type: String, default: 'Shavindi' },
     groomName: { type: String, default: 'Buddhima' },
-    brideParents: { type: String, default: 'Mr. & Mrs. Perera' },
-    groomParents: { type: String, default: 'Mr. & Mrs. Fernando' },
+    brideParents: { type: String, default: 'Mr. Lalith Fernando & Mrs. Priska Pieris' },
+    groomParents: { type: String, default: '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi' },
     weddingDate: { type: String, default: '2026-12-29 16:00:00' },
     churchTime: { type: String, default: '4:00 PM' },
     events: { type: Array, default: () => [] },
 });
 
 const parsedDate = computed(() => parseDateParts(props.weddingDate));
+
+const displayGroomParents = computed(() => {
+    if (isSinhala.value) {
+        return t('header', 'groomParents');
+    }
+    const raw = props.groomParents || t('header', 'groomParents');
+    if (raw && !raw.toLowerCase().includes('late')) {
+        return `(Late) ${raw}`;
+    }
+    return raw;
+});
 
 const displayMassTime = computed(() => {
     const massEvent = props.events?.find(e => (e.name || '').toLowerCase().includes('mass')) || props.events?.[0];

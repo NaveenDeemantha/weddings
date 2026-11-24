@@ -48,7 +48,7 @@
         <!-- Center Stage: The Grand Cathedral Entrance & Double Doors (Directly filling mobile screens) -->
         <main
             class="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-4 transition-all duration-1000 ease-out"
-            :class="{ 'filter blur-md scale-105 brightness-75': isEndingTransition }"
+            :class="{ 'opacity-90 scale-[1.02] sm:filter sm:blur-md sm:scale-105 sm:brightness-75': isEndingTransition }"
             :style="mouseParallaxStyle"
         >
             <!-- The Cathedral Portal Structure (Direct mobile edge-to-edge layout, majestic on desktop) -->
@@ -67,15 +67,22 @@
                     <video
                         ref="doorVideoRef"
                         src="/videos/walkdown.mp4"
-                        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-auto cursor-pointer transition-all duration-1000 ease-out"
-                        :class="{ 'filter blur-sm scale-105': isEndingTransition }"
+                        class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-auto cursor-pointer transition-opacity duration-1000 ease-out [transform:translateZ(0)] [backface-visibility:hidden]"
+                        :class="{ 'opacity-90': isEndingTransition }"
                         playsinline
+                        webkit-playsinline
                         muted
                         preload="auto"
                         @click.stop="skipIntro"
                         @ended="onVideoEnded"
                         title="Click or tap to skip video"
                     ></video>
+
+                    <!-- Gentle vignette overlay during outro without heavy GPU blur -->
+                    <div
+                        class="absolute inset-0 bg-black/45 transition-opacity duration-1000 pointer-events-none z-[1]"
+                        :class="isEndingTransition ? 'opacity-100' : 'opacity-0'"
+                    ></div>
 
                     <!-- ================= 3D DOUBLE DOORS VIEWPORT ================= -->
                     <div class="absolute inset-0 z-10 flex [perspective:1400px] pointer-events-auto">

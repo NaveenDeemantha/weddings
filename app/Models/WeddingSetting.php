@@ -38,7 +38,7 @@ class WeddingSetting extends Model
             'groom_name' => 'Buddhima',
             'bride_full_name' => 'Shavindi',
             'groom_full_name' => 'Buddhima',
-            'groom_parents' => 'Mr. Sumith Rodrigo & Mrs. Banduwathi',
+            'groom_parents' => '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi',
             'bride_parents' => 'Mr. Lalith Fernando & Mrs. Priska Pieris',
             'wedding_date' => '2026-12-29 16:00:00',
             'wedding_title' => 'The Wedding of Buddhima & Shavindi',
@@ -71,6 +71,7 @@ class WeddingSetting extends Model
                 ],
             ],
             'whatsapp_template' => "Dear :greeting,\n\nTogether with our families, we cordially invite you to celebrate the Holy Matrimony of :groom & :bride on Tuesday, 29th December 2026.\n\nWedding Mass: 4:00 PM at St. Sebastian's Church, Moratuwa.\nFollowed by the Reception from 6:30 PM to 12:00 AM at Vinrich Lake Resort, Piliyandala.\n\nPlease find your exclusive, personalized invitation card here:\n:link\n\nKindly RSVP (Buddhima - 0718626389). We joyfully await your presence and prayers!\n\nWarm regards,\nThe Rodrigo & Fernando Families",
+            'whatsapp_template_si' => "ආදරණීය :greeting,\n\nඅප දෙපාර්ශවයේ දෙමාපියන්ගේ ආශීර්වාදය ඇතිව, :groom සහ :bride වන අපගේ ශුද්ධ වූ විවාහ මංගලෝත්සවය සඳහා ඔබ සැමට සාදරයෙන් ඇරයුම් කරමු.\n\nශුද්ධ වූ මංගල දිව්‍ය පූජාව: 2026 දෙසැම්බර් 29 වන අඟහරුවාදා පස්වරු 4:00 ට මොරටුව ශාන්ත සෙබස්තියන් දේවස්ථානයේදී.\nඉන් අනතුරුව මංගල සාදය: පස්වරු 6:30 සිට පිළියන්දල වින්රිච් ලේක් රිසෝට් හිදී.\n\nඔබ වෙනුවෙන්ම වෙන් කළ විශේෂ ඩිජිටල් ආරාධනා පත්‍රය මෙතැනින් විවෘත කරන්න:\n:link\n\nඔබගේ පැමිණීම කාරුණිකව දන්වන්න (බුද්ධිම - 0718626389). ඔබ සැමගේ ආශීර්වාදය සහ සහභාගීත්වය ඉමහත් සතුටින් අපේක්ෂා කරමු!\n\nමෙත් සිතින්,\nරුද්‍රිගු සහ ප්‍රනාන්දු පවුල්වල සැම",
         ];
 
         $stored = static::pluck('value', 'key')->toArray();

@@ -1,10 +1,26 @@
 import { ref, computed } from 'vue';
 
-const currentLang = ref(
-    typeof window !== 'undefined' && window.localStorage
-        ? window.localStorage.getItem('wedding_lang') || 'en'
-        : 'en'
-);
+const getInitialLang = () => {
+    if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        if (urlLang === 'si' || urlLang === 'en') {
+            if (window.localStorage) {
+                window.localStorage.setItem('wedding_lang', urlLang);
+            }
+            return urlLang;
+        }
+        if (window.localStorage) {
+            const stored = window.localStorage.getItem('wedding_lang');
+            if (stored === 'si' || stored === 'en') {
+                return stored;
+            }
+        }
+    }
+    return 'en';
+};
+
+const currentLang = ref(getInitialLang());
 
 export const translations = {
     nav: {
@@ -34,7 +50,7 @@ export const translations = {
         requestBlessings: { en: 'Request the honour of your presence and blessings', si: 'ඔබ සැමගේ ආශීර්වාදය සහ සහභාගීත්වය ගෞරවයෙන් අපේක්ෂා කරමු' },
         sonOf: { en: 'SON OF', si: 'පුත්' },
         daughterOf: { en: 'DAUGHTER OF', si: 'දියණිය' },
-        groomParents: { en: 'Mr. Sumith Rodrigo & Mrs. Banduwathi', si: 'සුමිත් රුද්‍රිගු මහතා සහ බන්දුලතා මහත්මිය' },
+        groomParents: { en: '(Late) Mr. Sumith Rodrigo & Mrs. Banduwathi', si: '(ස්වර්ගස්ථ) සුමිත් රුද්‍රිගු මහතා සහ බන්දුලතා මහත්මිය' },
         brideParents: { en: 'Mr. Lalith Fernando & Mrs. Priska Pieris', si: 'ලලිත් ප්‍රනාන්දු මහතා සහ ප්‍රිස්කා පීරිස් මහත්මිය' },
         month: { en: 'DECEMBER', si: 'දෙසැම්බර්' },
         year: { en: '2026', si: '2026' },

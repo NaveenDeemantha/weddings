@@ -42,7 +42,10 @@
                     {{ guestStatus === 'attending' ? t('rsvp', 'confirmedAttending') : t('rsvp', 'confirmedDeclined') }}
                 </h3>
                 <p class="font-serif font-bold text-base sm:text-lg text-[#15253b] uppercase tracking-wider mt-1">
-                    {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestDisplayName }}
+                    {{ isSinhala && (!guestName || guestName === 'Mr & Mrs Silva') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestName }}
+                </p>
+                <p v-if="guestGreeting && guestGreeting !== guestName" class="text-xs text-[#7A5B22] italic font-serif mt-0.5">
+                    "{{ guestGreeting }}"
                 </p>
                 <p class="text-sm text-stone-700 font-serif mt-1 max-w-sm mx-auto">
                     {{ guestStatus === 'attending' ? t('rsvp', 'attendingMessage') : t('rsvp', 'declinedMessage') }}
@@ -64,8 +67,11 @@
                         {{ t('rsvp', 'reservedFor') }}
                     </p>
                     <h3 class="font-serif text-lg sm:text-xl font-medium text-[#15253b] tracking-wide mt-0.5">
-                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestDisplayName }}
+                        {{ isSinhala && (!guestName || guestName === 'Mr & Mrs Silva') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : guestName }}
                     </h3>
+                    <p v-if="guestGreeting && guestGreeting !== guestName" class="text-xs text-[#7A5B22] italic font-serif mt-0.5">
+                        "{{ guestGreeting }}"
+                    </p>
                     <p v-if="maxGuests" class="font-serif italic text-xs text-stone-500 mt-0.5">
                         {{ t('rsvp', 'reservedForCount', maxGuests) }}
                     </p>
@@ -135,7 +141,7 @@ const props = defineProps({
 
 const isEditing = ref(false);
 const burstAt = (e, count = 30) => window.dispatchEvent(new CustomEvent('bloom-burst', { detail: { x: e.clientX, y: e.clientY, count } }));
-const guestDisplayName = ref(props.guestGreeting || props.guestName);
+const guestDisplayName = ref(props.guestName);
 
 const form = useForm({
     status: props.guestStatus === 'pending' ? 'attending' : props.guestStatus,

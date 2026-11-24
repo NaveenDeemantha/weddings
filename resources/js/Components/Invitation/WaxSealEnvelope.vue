@@ -59,8 +59,11 @@
                             Cordially Invited
                         </p>
                         <h2 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900 leading-snug break-words">
-                            {{ guestGreeting || guestName }}
+                            {{ guestName || guestGreeting }}
                         </h2>
+                        <p v-if="guestGreeting && guestGreeting !== guestName" class="text-xs sm:text-sm text-[#7A5B22] font-serif italic mt-0.5">
+                            "{{ guestGreeting }}"
+                        </p>
                         <p v-if="maxGuests > 1" class="text-[11px] sm:text-xs font-serif text-stone-500 mt-1 italic">
                             Reserved for up to {{ maxGuests }} guests
                         </p>

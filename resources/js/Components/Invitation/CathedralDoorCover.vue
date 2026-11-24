@@ -171,8 +171,11 @@
                                         {{ t('door', 'cordiallyInviting') }}
                                     </p>
                                     <h2 class="font-serif font-bold text-sm sm:text-base md:text-lg text-white/95 uppercase tracking-[0.06em] leading-snug drop-shadow-sm">
-                                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
+                                        {{ isSinhala && (!guestName || guestName === 'Mr & Mrs Silva') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestName || 'Respected Guest & Beloved Family') }}
                                     </h2>
+                                    <p v-if="guestGreeting && guestGreeting !== guestName" class="text-[11px] sm:text-xs text-[#f5dc8a] italic font-serif mt-0.5">
+                                        {{ guestGreeting }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -265,7 +268,7 @@
 
                 <!-- Date & Church Venue -->
                 <p class="font-serif italic text-sm sm:text-lg text-[#f8f6f0] tracking-wider drop-shadow-md">
-                    {{ isSinhala ? t('door', 'dateText') : weddingDateText }}
+                    {{ weddingDateText }}
                 </p>
                 <p class="font-display text-[10.5px] sm:text-xs text-[#f5dc8a]/85 tracking-[0.28em] uppercase mt-2 drop-shadow-sm">
                     {{ isSinhala ? 'මොරටුව ශාන්ත සෙබස්තියන් දේවස්ථානය' : churchName }}
@@ -277,7 +280,10 @@
                         {{ t('door', 'cordiallyInviting') }}
                     </p>
                     <p class="font-serif text-lg sm:text-2xl font-bold text-white tracking-wider uppercase drop-shadow-md mt-0.5">
-                        {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
+                        {{ isSinhala && (!guestName || guestName === 'Mr & Mrs Silva') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestName || 'Respected Guest & Beloved Family') }}
+                    </p>
+                    <p v-if="guestGreeting && guestGreeting !== guestName" class="text-xs sm:text-sm text-[#f5dc8a] italic font-serif mt-0.5">
+                        {{ guestGreeting }}
                     </p>
                 </div>
 
@@ -295,7 +301,7 @@
 
 <script setup>
 import { ref, computed, onBeforeUnmount } from 'vue';
-import { useLanguage } from '@/composables/useLanguage';
+import { useLanguage, parseDateParts } from '@/composables/useLanguage';
 
 const { t, isSinhala } = useLanguage();
 
@@ -332,8 +338,9 @@ onBeforeUnmount(() => {
     clearAllTimers();
 });
 
+const parsedDate = computed(() => parseDateParts(props.weddingDate));
 const weddingDateText = computed(() => {
-    return 'Tuesday, 29th December 2026';
+    return isSinhala.value ? parsedDate.value.fullSi : parsedDate.value.fullEn;
 });
 
 // Interactive subtle mouse parallax across the facade
@@ -341,7 +348,7 @@ const mouseX = ref(0);
 const mouseY = ref(0);
 
 const onMouseMove = (e) => {
-    if (isOpening.value || isEndingTransition.value) return;
+    if (isOpening.value || isEndingTransition.value || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     mouseX.value = (e.clientX / window.innerWidth - 0.5) * 10;
     mouseY.value = (e.clientY / window.innerHeight - 0.5) * 6;
 };

@@ -27,7 +27,7 @@
                                 {{ t('venue', 'ceremonyReception') }}
                             </p>
                             <h3 class="font-serif text-2xl sm:text-3xl font-bold text-[#ad2c51] leading-tight">
-                                {{ isSinhala ? t('venue', 'venueName') : venueName }}
+                                {{ displayVenuesTitle }}
                             </h3>
                         </div>
                     </div>
@@ -37,11 +37,11 @@
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                             <circle cx="12" cy="10" r="3" />
                         </svg>
-                        <span>{{ isSinhala ? t('venue', 'venueAddress') : venueAddress }}</span>
+                        <span>{{ displayAddress }}</span>
                     </p>
 
                     <p class="text-base sm:text-lg font-serif text-stone-950 font-medium leading-relaxed mb-6 border-l-4 border-gold-500 pl-4 bg-white/60 py-3 rounded-r-xl shadow-xs">
-                        {{ t('venue', 'description') }}
+                        {{ dynamicDescription }}
                     </p>
                 </div>
 
@@ -66,7 +66,7 @@
                 <!-- Map Header Link -->
                 <div class="p-4 bg-white border-b border-stone-100 flex items-center justify-between gap-3">
                     <span class="text-base sm:text-lg font-serif font-bold text-[#ad2c51] leading-snug">
-                        {{ isSinhala ? t('venue', 'venueName') : "St. Sebastian's Church & Vinrich Lake Resort" }}
+                        {{ displayVenuesTitle }}
                     </span>
                     <a
                         :href="venueMapUrl"
@@ -111,14 +111,54 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 import { useLanguage } from '@/composables/useLanguage';
 
-const { t, isSinhala } = useLanguage();
+const { t, isSinhala, formatTimeSinhala } = useLanguage();
 
-defineProps({
-    venueName: { type: String, default: "St. Sebastian's Church & Vinrich Lake Resort" },
-    venueAddress: { type: String, default: 'Moratuwa & Piliyandala, Sri Lanka' },
-    venueMapUrl: { type: String, default: "https://maps.google.com/?q=St.+Sebastian%27s+Church+Moratuwa+Sri+Lanka" },
+const props = defineProps({
+    venueName: { type: String, default: "Vinrich Lake Resort" },
+    venueAddress: { type: String, default: 'No. 18/3, Duwawatta Road, Piliyandala' },
+    venueMapUrl: { type: String, default: "https://maps.google.com/?q=Vinrich+Lake+Resort+Piliyandala" },
+    churchName: { type: String, default: "St. Sebastian's Church" },
+    churchAddress: { type: String, default: 'Moratuwa, Sri Lanka' },
+    churchTime: { type: String, default: '4:00 PM' },
+    weddingDate: { type: String, default: '2026-12-29 16:00:00' },
+    events: { type: Array, default: () => [] },
+});
+
+const massTime = computed(() => {
+    return props.churchTime || props.events?.find(e => (e.name || '').toLowerCase().includes('mass'))?.time || props.events?.[0]?.time || '4:00 PM';
+});
+
+const receptionTime = computed(() => {
+    return props.events?.find(e => (e.name || '').toLowerCase().includes('reception'))?.time || props.events?.[1]?.time || '6:30 PM to 12:00 AM';
+});
+
+const churchTitle = computed(() => props.churchName || "St. Sebastian's Church");
+const receptionTitle = computed(() => props.venueName || "Vinrich Lake Resort");
+
+const displayVenuesTitle = computed(() => {
+    if (churchTitle.value && receptionTitle.value && !churchTitle.value.includes(receptionTitle.value)) {
+        return `${churchTitle.value} & ${receptionTitle.value}`;
+    }
+    return receptionTitle.value || churchTitle.value;
+});
+
+const displayAddress = computed(() => {
+    if (props.churchAddress && props.venueAddress && props.churchAddress !== props.venueAddress) {
+        return `${props.churchAddress} & ${props.venueAddress}`;
+    }
+    return props.venueAddress || props.churchAddress || 'Moratuwa & Piliyandala, Sri Lanka';
+});
+
+const dynamicDescription = computed(() => {
+    if (!isSinhala.value) {
+        return `We warmly welcome you to ${churchTitle.value} for the Wedding Mass at ${massTime.value}, followed by the Wedding Reception at ${receptionTitle.value} from ${receptionTime.value}.`;
+    }
+    const massSi = formatTimeSinhala(massTime.value);
+    const recSi = formatTimeSinhala(receptionTime.value);
+    return `${churchTitle.value} හිදී ${massSi} ට පැවැත්වෙන ශුද්ධ වූ මංගල දිව්‍ය පූජාවටත්, ඉන් අනතුරුව ${receptionTitle.value} හිදී ${recSi} පැවැත්වෙන මංගල සාදයටත් ඔබ සැමට සාදරයෙන් ආරාධනා කරමු.`;
 });
 </script>

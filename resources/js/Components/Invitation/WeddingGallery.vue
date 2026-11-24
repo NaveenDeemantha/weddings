@@ -79,6 +79,9 @@ const props = defineProps({
     weddingDate: { type: String, default: '2026-12-29 09:00:00' },
     brideName: { type: String, default: 'Shavindi' },
     groomName: { type: String, default: 'Buddhima' },
+    churchName: { type: String, default: "St. Sebastian's Church, Moratuwa" },
+    churchTime: { type: String, default: '4:00 PM' },
+    venueName: { type: String, default: 'Vinrich Lake Resort, Piliyandala' },
 });
 
 const photo = ref(null);
@@ -93,8 +96,8 @@ const openPhoto = (e) => {
 const calendarLink = computed(() => {
     try {
         const title = encodeURIComponent(`The Wedding of ${props.groomName} & ${props.brideName}`);
-        const details = encodeURIComponent(`Holy Matrimony of ${props.groomName} & ${props.brideName} at St. Sebastian's Church, Moratuwa, Sri Lanka at 4:00 PM, followed by Reception at Vinrich Lake Resort, Piliyandala.`);
-        const location = encodeURIComponent("St. Sebastian's Church, Moratuwa, Sri Lanka");
+        const details = encodeURIComponent(`Holy Matrimony of ${props.groomName} & ${props.brideName} at ${props.churchName} at ${props.churchTime}, followed by Reception at ${props.venueName}.`);
+        const location = encodeURIComponent(props.churchName);
         return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
     } catch {
         return '#';

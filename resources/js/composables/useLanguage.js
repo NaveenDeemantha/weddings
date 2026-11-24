@@ -109,6 +109,124 @@ export const translations = {
     }
 };
 
+export const sinhalaMonths = {
+    1: 'ජනවාරි', 2: 'පෙබරවාරි', 3: 'මාර්තු', 4: 'අප්‍රේල්',
+    5: 'මැයි', 6: 'ජූනි', 7: 'ජූලි', 8: 'අගෝස්තු',
+    9: 'සැප්තැම්බර්', 10: 'ඔක්තෝබර්', 11: 'නොවැම්බර්', 12: 'දෙසැම්බර්'
+};
+
+export const englishMonths = {
+    1: 'JANUARY', 2: 'FEBRUARY', 3: 'MARCH', 4: 'APRIL',
+    5: 'MAY', 6: 'JUNE', 7: 'JULY', 8: 'AUGUST',
+    9: 'SEPTEMBER', 10: 'OCTOBER', 11: 'NOVEMBER', 12: 'DECEMBER'
+};
+
+export const sinhalaDays = {
+    0: 'ඉරිදා', 1: 'සඳුදා', 2: 'අඟහරුවාදා', 3: 'බදාදා',
+    4: 'බ්‍රහස්පතින්දා', 5: 'සිකුරාදා', 6: 'සෙනසුරාදා'
+};
+
+export const englishDays = {
+    0: 'SUNDAY', 1: 'MONDAY', 2: 'TUESDAY', 3: 'WEDNESDAY',
+    4: 'THURSDAY', 5: 'FRIDAY', 6: 'SATURDAY'
+};
+
+const formatSingleTimeSinhala = (str) => {
+    if (!str) return '';
+    const s = str.trim();
+    if (/12(?::00)?\s*AM/i.test(s)) return 'මධ්‍යම රාත්‍රී 12:00';
+    if (/12(?::00)?\s*PM/i.test(s)) return 'මධ්‍යාහ්න 12:00';
+
+    const pmMatch = s.match(/(\d{1,2}(?::\d{2})?)\s*PM/i);
+    if (pmMatch) {
+        const hour = parseInt(pmMatch[1], 10);
+        const prefix = hour >= 7 && hour < 12 ? 'රාත්‍රී' : 'පස්වරු';
+        return `${prefix} ${pmMatch[1]}`;
+    }
+
+    const amMatch = s.match(/(\d{1,2}(?::\d{2})?)\s*AM/i);
+    if (amMatch) {
+        return `පෙරවරු ${amMatch[1]}`;
+    }
+
+    return s.replace(/PM/gi, 'පස්වරු').replace(/AM/gi, 'පෙරවරු');
+};
+
+export const formatTimeSinhala = (timeStr) => {
+    if (!timeStr) return '';
+    const res = timeStr.trim();
+    if (/\s+(?:to|-)\s+/i.test(res)) {
+        const parts = res.split(/\s+(?:to|-)\s+/i);
+        if (parts.length === 2) {
+            return `${formatSingleTimeSinhala(parts[0])} සිට ${formatSingleTimeSinhala(parts[1])} දක්වා`;
+        }
+    }
+    return formatSingleTimeSinhala(res);
+};
+
+export const parseDateParts = (dateString = '2026-12-29 16:00:00') => {
+    try {
+        const cleaned = (dateString || '2026-12-29').replace(/-/g, '/');
+        const d = new Date(cleaned);
+        if (isNaN(d.getTime())) {
+            return {
+                day: '29',
+                year: '2026',
+                monthEn: 'DECEMBER',
+                monthSi: 'දෙසැම්බර්',
+                dayOfWeekEn: 'TUESDAY',
+                dayOfWeekSi: 'අඟහරුවාදා',
+                fullEn: 'Tuesday, 29th December 2026',
+                fullSi: '2026 දෙසැම්බර් 29 අඟහරුවාදා',
+            };
+        }
+        const day = String(d.getDate());
+        const year = String(d.getFullYear());
+        const mIdx = d.getMonth() + 1;
+        const wIdx = d.getDay();
+        const monthEn = englishMonths[mIdx] || 'DECEMBER';
+        const monthSi = sinhalaMonths[mIdx] || 'දෙසැම්බර්';
+        const dayOfWeekEn = englishDays[wIdx] || 'TUESDAY';
+        const dayOfWeekSi = sinhalaDays[wIdx] || 'අඟහරුවාදා';
+
+        const suffix = (n) => {
+            if (n >= 11 && n <= 13) return 'th';
+            switch (n % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        };
+
+        const monthNameProper = ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getMonth()];
+        const fullEn = `${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][wIdx]}, ${day}${suffix(d.getDate())} ${monthNameProper} ${year}`;
+        const fullSi = `${year} ${monthSi} ${day} ${dayOfWeekSi}`;
+
+        return {
+            day,
+            year,
+            monthEn,
+            monthSi,
+            dayOfWeekEn,
+            dayOfWeekSi,
+            fullEn,
+            fullSi,
+        };
+    } catch (_) {
+        return {
+            day: '29',
+            year: '2026',
+            monthEn: 'DECEMBER',
+            monthSi: 'දෙසැම්බර්',
+            dayOfWeekEn: 'TUESDAY',
+            dayOfWeekSi: 'අඟහරුවාදා',
+            fullEn: 'Tuesday, 29th December 2026',
+            fullSi: '2026 දෙසැම්බර් 29 අඟහරුවාදා',
+        };
+    }
+};
+
 export function useLanguage() {
     const isSinhala = computed(() => currentLang.value === 'si');
 
@@ -141,5 +259,7 @@ export function useLanguage() {
         setLanguage,
         t,
         translations,
+        formatTimeSinhala,
+        parseDateParts,
     };
 }

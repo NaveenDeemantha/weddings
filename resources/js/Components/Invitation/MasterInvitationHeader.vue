@@ -33,8 +33,8 @@
                 <FlowerCluster class="absolute -bottom-6 -left-8 w-28 sm:w-36 lg:w-44 opacity-75 pointer-events-none z-0" />
                 <FlowerCluster class="absolute -top-6 -right-8 w-28 sm:w-36 lg:w-44 rotate-180 opacity-75 pointer-events-none z-0" />
 
-                <!-- Rotating ring of golden sunburst petals behind the medallion -->
-                <div class="absolute inset-0 ring-spin pointer-events-none z-0">
+                <!-- Rotating ring of golden sunburst petals behind the medallion (Hardware accelerated) -->
+                <div class="absolute inset-0 ring-spin pointer-events-none z-0 [will-change:transform] [transform:translateZ(0)]">
                     <span
                         v-for="i in 18"
                         :key="i"
@@ -42,7 +42,6 @@
                         :style="{
                             background: i % 3 === 0 ? 'linear-gradient(to top,#d8ab43,#f5dc8a)' : (i % 3 === 1 ? 'linear-gradient(to top,#e8c86d,#fff4d4)' : 'linear-gradient(to top,#f5dc8a,#fff)'),
                             border: '1px solid rgba(245,220,138,0.7)',
-                            boxShadow: '0 0 6px rgba(216,171,67,0.25)',
                             transform: `rotate(${i * 20}deg) translateY(calc(-1 * var(--r)))`,
                             transformOrigin: '0 0',
                             marginLeft: '-0.5rem'
@@ -71,9 +70,14 @@
                     </p>
                     <span class="w-10 sm:w-16 h-[1.5px] bg-gradient-to-l from-transparent via-[#d8ab43] to-transparent"></span>
                 </div>
+                <!-- Guest Name (Always Visible) -->
                 <h2 class="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] text-stone-950 font-bold tracking-wide leading-tight drop-shadow-xs">
-                    {{ isSinhala && (!guestGreeting || guestGreeting === 'Respected Guest & Beloved Family') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestGreeting || guestName || 'Respected Guest & Beloved Family') }}
+                    {{ isSinhala && (!guestName || guestName === 'Mr & Mrs Silva') ? 'ගරුකටයුතු අමුත්තන් සහ හිතවත් පවුලේ සැම' : (guestName || 'Respected Guest & Beloved Family') }}
                 </h2>
+                <!-- Custom Greeting / Salutation (shown as subtitle if set) -->
+                <p v-if="guestGreeting && guestGreeting !== guestName" class="font-serif italic text-base sm:text-lg text-[#7A5B22] font-semibold mt-1">
+                    {{ guestGreeting }}
+                </p>
                 <p class="font-serif italic text-sm sm:text-base text-stone-700 font-medium mt-1.5">
                     {{ t('header', 'requestBlessings') }}
                 </p>
@@ -93,11 +97,19 @@
 
             <!-- 6. Date & Time (High-Visibility Ribbons & Bold Numerals) -->
             <div class="mt-6 sm:mt-7 flex items-center justify-center gap-3 sm:gap-5">
-                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">{{ t('header', 'month') }}</span>
-                <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">{{ t('header', 'day') }}</span>
-                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">{{ t('header', 'year') }}</span>
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">
+                    {{ isSinhala ? parsedDate.monthSi : parsedDate.monthEn }}
+                </span>
+                <span class="font-serif text-6xl sm:text-7xl font-bold text-[#ad2c51] leading-none">
+                    {{ parsedDate.day }}
+                </span>
+                <span class="font-display text-sm sm:text-base tracking-[0.28em] text-[#ad2c51] font-bold border-y-2 border-[#ad2c51]/60 py-2 px-3 sm:px-4">
+                    {{ parsedDate.year }}
+                </span>
             </div>
-            <p class="mt-2.5 font-display text-xs sm:text-sm tracking-[0.32em] text-stone-900 font-bold uppercase">{{ t('header', 'time') }}</p>
+            <p class="mt-2.5 font-display text-xs sm:text-sm tracking-[0.32em] text-stone-900 font-bold uppercase">
+                {{ displayMassTime }}
+            </p>
 
             <!-- 7. Scripture Verse (Larger, High Legibility) -->
             <p class="mt-6 sm:mt-7 font-serif italic text-lg sm:text-xl lg:text-[1.35rem] font-medium text-stone-900 max-w-xl mx-auto leading-relaxed px-2">
@@ -121,18 +133,33 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import FlowerCluster from '@/Components/Invitation/FlowerCluster.vue';
 import { useLanguage } from '@/composables/useLanguage';
 
-const { t, isSinhala } = useLanguage();
+const { t, isSinhala, parseDateParts, formatTimeSinhala } = useLanguage();
 
-defineProps({
+const props = defineProps({
     guestName: { type: String, default: 'Mr & Mrs Silva' },
     guestGreeting: { type: String, default: '' },
     brideName: { type: String, default: 'Shavindi' },
     groomName: { type: String, default: 'Buddhima' },
     brideParents: { type: String, default: 'Mr. & Mrs. Perera' },
     groomParents: { type: String, default: 'Mr. & Mrs. Fernando' },
+    weddingDate: { type: String, default: '2026-12-29 16:00:00' },
+    churchTime: { type: String, default: '4:00 PM' },
+    events: { type: Array, default: () => [] },
+});
+
+const parsedDate = computed(() => parseDateParts(props.weddingDate));
+
+const displayMassTime = computed(() => {
+    const massEvent = props.events?.find(e => (e.name || '').toLowerCase().includes('mass')) || props.events?.[0];
+    const rawTime = props.churchTime || massEvent?.time || '4:00 PM';
+    if (!isSinhala.value) {
+        return `${parsedDate.value.dayOfWeekEn} · ${rawTime}`;
+    }
+    return `${parsedDate.value.dayOfWeekSi} · ${formatTimeSinhala(rawTime)}`;
 });
 </script>
 

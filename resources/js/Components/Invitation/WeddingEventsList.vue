@@ -75,7 +75,7 @@
 <script setup>
 import FlowerDivider from '@/Components/Invitation/FlowerDivider.vue';
 import { computed } from 'vue';
-import { useLanguage } from '@/composables/useLanguage';
+import { useLanguage, formatTimeSinhala, parseDateParts } from '@/composables/useLanguage';
 
 const { t, isSinhala } = useLanguage();
 
@@ -100,16 +100,14 @@ const getDisplayEventName = (event, idx) => {
 
 const getDisplayEventDate = (event) => {
     if (!isSinhala.value) return event.date || '29th December 2026';
-    return t('events', 'massDate');
+    const parsed = parseDateParts(event.date);
+    return parsed.fullSi || t('events', 'massDate');
 };
 
 const getDisplayEventTime = (event) => {
+    if (!event.time) return '';
     if (!isSinhala.value) return event.time;
-    const lower = (event.name || '').toLowerCase();
-    if (lower.includes('reception')) {
-        return t('events', 'receptionTime');
-    }
-    return t('events', 'massTime');
+    return formatTimeSinhala(event.time);
 };
 
 const getDisplayEventVenue = (event) => {
@@ -118,7 +116,10 @@ const getDisplayEventVenue = (event) => {
     if (lower.includes('vinrich') || lower.includes('reception')) {
         return t('events', 'receptionVenue');
     }
-    return t('events', 'massVenue');
+    if (lower.includes('sebastian') || lower.includes('church') || lower.includes('mass')) {
+        return t('events', 'massVenue');
+    }
+    return event.venue;
 };
 
 const getEventIcon = (name = '', idx = 0) => {

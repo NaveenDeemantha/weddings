@@ -64,7 +64,8 @@
                 <svg class="w-3.5 h-3.5 fill-current text-gold-200" viewBox="0 0 24 24">
                     <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
                 </svg>
-                Previewing Invitation For: <strong class="text-white uppercase tracking-wider underline decoration-gold-300 ml-1">{{ guest.custom_greeting || guest.name }}</strong>
+                Previewing Invitation For: <strong class="text-white uppercase tracking-wider underline decoration-gold-300 ml-1">{{ guest.name }}</strong>
+                <span v-if="guest.custom_greeting && guest.custom_greeting !== guest.name" class="text-gold-200 text-xs ml-1 font-serif italic">("{{ guest.custom_greeting }}")</span>
             </span>
             <Link :href="route('invitation.print')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-sans text-[11px] font-semibold transition-colors">
                 <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -91,6 +92,9 @@
                     :groom-name="settings.groom_name"
                     :bride-parents="settings.bride_parents"
                     :groom-parents="settings.groom_parents"
+                    :wedding-date="settings.wedding_date"
+                    :church-time="settings.church_time"
+                    :events="settings.events"
                 />
 
                 <!-- 2. The Big Day Awaits: Live Days, Hours, Minutes, Seconds Countdown -->
@@ -113,6 +117,11 @@
                         :venue-name="settings.venue_name"
                         :venue-address="settings.venue_address"
                         :venue-map-url="settings.venue_map_url"
+                        :church-name="settings.church_name"
+                        :church-time="settings.church_time"
+                        :church-address="settings.church_address"
+                        :wedding-date="settings.wedding_date"
+                        :events="settings.events"
                     />
                 </FloralSection>
 
@@ -134,6 +143,11 @@
                     :bride-name="settings.bride_name"
                     :groom-name="settings.groom_name"
                     :venue-name="settings.venue_name"
+                    :church-name="settings.church_name"
+                    :church-time="settings.church_time"
+                    :wedding-date="settings.wedding_date"
+                    :events="settings.events"
+                />
                 />
             </div>
         </main>

@@ -157,6 +157,17 @@ const { t, isSinhala } = useLanguage();
 
 const activeSection = ref('hero');
 const sectionIds = ['rsvp', 'venue', 'events', 'hero'];
+let sectionTops = {};
+
+const measureSectionTops = () => {
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+            sectionTops[id] = el.getBoundingClientRect().top + scrollY;
+        }
+    }
+};
 
 const updateActiveSection = () => {
     const scrollY = window.scrollY || window.pageYOffset || 0;
@@ -179,14 +190,10 @@ const updateActiveSection = () => {
     const viewportTrigger = scrollY + windowHeight * 0.4;
 
     for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-            const rect = el.getBoundingClientRect();
-            const top = rect.top + scrollY;
-            if (viewportTrigger >= top - 60) {
-                activeSection.value = id;
-                return;
-            }
+        const top = sectionTops[id];
+        if (top !== undefined && viewportTrigger >= top - 60) {
+            activeSection.value = id;
+            return;
         }
     }
 
@@ -216,15 +223,21 @@ const handleScroll = () => {
     }
 };
 
+const handleResize = () => {
+    measureSectionTops();
+    updateActiveSection();
+};
+
 onMounted(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    // Initial check after DOM mounts
-    setTimeout(updateActiveSection, 150);
+    window.addEventListener('resize', handleResize, { passive: true });
+    // Initial measure after DOM mounts and after fonts/images load
+    setTimeout(handleResize, 150);
+    setTimeout(handleResize, 1200);
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', handleScroll);
+    window.removeEventListener('resize', handleResize);
 });
 </script>

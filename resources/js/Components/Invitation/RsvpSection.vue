@@ -25,7 +25,10 @@
                         Invitation Extended To:
                     </p>
                     <p class="font-serif text-sm sm:text-lg font-semibold text-stone-800 break-words">
-                        {{ guestGreeting || guestName }}
+                        {{ guestName || guestGreeting }}
+                    </p>
+                    <p v-if="guestGreeting && guestGreeting !== guestName" class="text-xs text-[#7A5B22] italic font-serif mt-0.5">
+                        "{{ guestGreeting }}"
                     </p>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import { watch } from 'vue';
 
 const props = defineProps({
     settings: { type: Object, required: true },
@@ -42,6 +43,31 @@ const addEvent = () => {
 const removeEvent = (index) => {
     form.events.splice(index, 1);
 };
+
+// Keep Mass / Church time & venue in sync with church inputs
+watch(() => form.church_time, (newTime) => {
+    if (!newTime || !form.events?.length) return;
+    const massEvent = form.events.find(e => (e.name || '').toLowerCase().includes('mass') || (e.name || '').toLowerCase().includes('church')) || form.events[0];
+    if (massEvent) {
+        massEvent.time = newTime;
+    }
+});
+
+watch(() => form.church_name, (newName) => {
+    if (!newName || !form.events?.length) return;
+    const massEvent = form.events.find(e => (e.name || '').toLowerCase().includes('mass') || (e.name || '').toLowerCase().includes('church')) || form.events[0];
+    if (massEvent) {
+        massEvent.venue = newName;
+    }
+});
+
+watch(() => form.venue_name, (newName) => {
+    if (!newName || !form.events?.length) return;
+    const recEvent = form.events.find(e => (e.name || '').toLowerCase().includes('reception'));
+    if (recEvent) {
+        recEvent.venue = newName;
+    }
+});
 
 const submit = () => {
     form.post(route('settings.update'), {
@@ -422,7 +448,7 @@ const submit = () => {
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-8 py-3 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium text-xs tracking-wider shadow-2xs disabled:opacity-50 transition-all active:scale-98 flex items-center gap-2"
+                            class="w-full sm:w-auto px-8 py-3.5 sm:py-3 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium text-xs tracking-wider shadow-2xs disabled:opacity-50 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                         >
                             <svg class="w-4 h-4 text-[#c5a059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>

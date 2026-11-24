@@ -263,15 +263,15 @@
                         <div class="flex items-center justify-center gap-2 sm:gap-3 my-0.5 w-full max-w-md mx-auto text-stone-800 border-y border-[#d8ab43]/40 py-1.5">
                             <span class="h-[1px] w-6 sm:w-10 bg-[#ad2c51]/40"></span>
                             <span class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-[11.5px] font-bold text-stone-800">
-                                TUESDAY
+                                {{ dateParts.dayOfWeekEn }}
                             </span>
                             <span class="h-6 w-[1.5px] bg-[#d8ab43]"></span>
                             <span class="font-serif text-3xl sm:text-4xl font-bold text-[#ad2c51] leading-none px-1">
-                                29
+                                {{ dateParts.day }}
                             </span>
                             <span class="h-6 w-[1.5px] bg-[#d8ab43]"></span>
                             <span class="font-display uppercase tracking-[0.25em] text-[10px] sm:text-[11.5px] font-bold text-stone-800">
-                                DECEMBER 2026
+                                {{ dateParts.monthEn }} {{ dateParts.year }}
                             </span>
                             <span class="h-[1px] w-6 sm:w-10 bg-[#ad2c51]/40"></span>
                         </div>
@@ -281,11 +281,11 @@
                             <p class="font-display uppercase tracking-[0.22em] text-[10px] sm:text-[11.5px] font-bold text-[#ad2c51]">
                                 THE WEDDING MASS
                             </p>
-                            <p class="font-serif text-[10.5px] sm:text-[12px] font-semibold text-stone-700">
-                                AT 4:00 PM
+                            <p class="font-serif text-[10.5px] sm:text-[12px] font-semibold text-stone-700 uppercase">
+                                AT {{ massTime }}
                             </p>
-                            <p class="font-display uppercase tracking-[0.16em] text-[10px] sm:text-[11.5px] font-bold text-stone-900">
-                                AT ST SEBASTIAN'S CHURCH, MORATUWA
+                            <p class="font-display uppercase tracking-[0.16em] text-[10px] sm:text-[11.5px] font-bold text-stone-900 uppercase">
+                                AT {{ churchName }}
                             </p>
                         </div>
 
@@ -301,14 +301,14 @@
                             <p class="font-display uppercase tracking-[0.18em] text-[9px] sm:text-[10.5px] font-bold text-[#ad2c51]">
                                 FOLLOWED BY THE RECEPTION
                             </p>
-                            <p class="font-serif text-[10.5px] sm:text-[12px] font-bold text-stone-900">
-                                FROM 6:30 PM TO 12.00 PM
+                            <p class="font-serif text-[10.5px] sm:text-[12px] font-bold text-stone-900 uppercase">
+                                FROM {{ receptionTime }}
                             </p>
-                            <p class="font-display uppercase tracking-[0.16em] text-[9.5px] sm:text-[11px] font-bold text-stone-900">
-                                AT VINRICH LAKE RESORT
+                            <p class="font-display uppercase tracking-[0.16em] text-[9.5px] sm:text-[11px] font-bold text-stone-900 uppercase">
+                                AT {{ receptionVenue }}
                             </p>
-                            <p class="font-serif text-[9.5px] sm:text-[11px] text-stone-600 italic">
-                                No. 18/3, Duwawatta Road, Piliyandala
+                            <p v-if="receptionAddress" class="font-serif text-[9.5px] sm:text-[11px] text-stone-600 italic">
+                                {{ receptionAddress }}
                             </p>
                         </div>
 
@@ -320,7 +320,7 @@
                                     We look forward to celebrating with you.
                                 </p>
                                 <p class="font-display text-[9.5px] sm:text-[11px] font-bold text-stone-800 tracking-wider mt-0.5">
-                                    RSVP: <span class="font-sans font-semibold text-[#ad2c51]">Buddhima - 0718626389</span>
+                                    RSVP: <span class="font-sans font-semibold text-[#ad2c51]">{{ settings.groom_name || 'Buddhima' }} - {{ rsvpPhone }}</span>
                                 </p>
                             </div>
 
@@ -353,12 +353,47 @@ import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import CornerFlower from '@/Components/Invitation/CornerFlower.vue';
 import { generateQrSvgPath } from '@/Utils/qrcode.js';
+import { parseDateParts } from '@/composables/useLanguage';
 
 const props = defineProps({
     settings: { type: Object, required: true },
     guest: { type: Object, default: null },
     invitationUrl: { type: String, default: '' },
     backUrl: { type: String, default: '/preview' },
+});
+
+const dateParts = computed(() => parseDateParts(props.settings?.wedding_date));
+
+const massEvent = computed(() => {
+    return props.settings?.events?.find(e => (e.name || '').toLowerCase().includes('mass') || (e.name || '').toLowerCase().includes('church')) || props.settings?.events?.[0];
+});
+
+const receptionEvent = computed(() => {
+    return props.settings?.events?.find(e => (e.name || '').toLowerCase().includes('reception')) || props.settings?.events?.[1];
+});
+
+const massTime = computed(() => {
+    return props.settings?.church_time || massEvent.value?.time || '4:00 PM';
+});
+
+const churchName = computed(() => {
+    return props.settings?.church_name || massEvent.value?.venue || "ST. SEBASTIAN'S CHURCH, MORATUWA";
+});
+
+const receptionTime = computed(() => {
+    return receptionEvent.value?.time || '6:30 PM TO 12:00 AM';
+});
+
+const receptionVenue = computed(() => {
+    return props.settings?.venue_name || receptionEvent.value?.venue || 'VINRICH LAKE RESORT';
+});
+
+const receptionAddress = computed(() => {
+    return props.settings?.venue_address || 'No. 18/3, Duwawatta Road, Piliyandala';
+});
+
+const rsvpPhone = computed(() => {
+    return props.settings?.rsvp_phone || '0718626389';
 });
 
 const cardFormat = ref('5x7'); // '5x7' or 'a5'

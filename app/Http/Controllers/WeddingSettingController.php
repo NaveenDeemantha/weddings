@@ -52,6 +52,34 @@ class WeddingSettingController extends Controller
             'events.*.tag' => 'nullable|string|max:50',
         ]);
 
+        // Synchronize Church Time & Church Name with the Mass event
+        if (!empty($validated['events'])) {
+            $massIndex = null;
+            foreach ($validated['events'] as $idx => $ev) {
+                $name = strtolower($ev['name'] ?? '');
+                if (str_contains($name, 'mass') || str_contains($name, 'church') || str_contains($name, 'service')) {
+                    $massIndex = $idx;
+                    break;
+                }
+            }
+            if ($massIndex === null && count($validated['events']) > 0) {
+                $massIndex = 0;
+            }
+
+            if ($massIndex !== null) {
+                $currentChurchTime = WeddingSetting::get('church_time');
+                if (!empty($validated['church_time']) && $validated['church_time'] !== $currentChurchTime) {
+                    $validated['events'][$massIndex]['time'] = $validated['church_time'];
+                } elseif (!empty($validated['events'][$massIndex]['time'])) {
+                    $validated['church_time'] = $validated['events'][$massIndex]['time'];
+                }
+
+                if (!empty($validated['church_name'])) {
+                    $validated['events'][$massIndex]['venue'] = $validated['church_name'];
+                }
+            }
+        }
+
         foreach ($validated as $key => $value) {
             WeddingSetting::set($key, $value);
         }

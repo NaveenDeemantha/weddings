@@ -51,84 +51,97 @@ const formatWeddingDate = (dateStr) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="inline-block w-2 h-2 rounded-full bg-[#c5a059]"></span>
-                        <span class="text-[11px] font-semibold uppercase tracking-widest text-stone-500">Live Wedding Suite</span>
+                        <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-stone-500">Live Wedding Suite</span>
                     </div>
-                    <h2 class="font-serif text-2xl font-bold leading-tight text-stone-900 mt-1">
-                        {{ settings.bride_name }} &amp; {{ settings.groom_name }}'s Wedding Dashboard
+                    <h2 class="font-serif text-xl sm:text-2xl font-bold leading-tight text-stone-900 mt-0.5 sm:mt-1">
+                        {{ settings.bride_name }} &amp; {{ settings.groom_name }}'s Dashboard
                     </h2>
-                    <p class="text-xs text-stone-500 mt-0.5">
+                    <p class="text-xs text-stone-500 mt-0.5 hidden sm:block">
                         Real-time overview of guest invitations, RSVPs, attendance and liturgy settings
                     </p>
                 </div>
-                <div class="flex items-center gap-2.5">
-                    <a
-                        :href="route('invitation.print')"
-                        target="_blank"
-                        class="px-3.5 py-2 rounded-xl bg-white border border-[#E5DAC0] text-[#7A5B22] font-semibold text-xs shadow-2xs hover:bg-[#FAF7F0] transition-colors flex items-center gap-2"
-                    >
-                        <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                            <rect x="6" y="14" width="12" height="8"></rect>
-                        </svg>
-                        <span>Print Invitation</span>
-                    </a>
+                <div class="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-2.5">
                     <Link
                         :href="route('guests.index')"
-                        class="px-4 py-2 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] text-white font-medium text-xs shadow-2xs transition-colors flex items-center gap-2"
+                        class="col-span-2 sm:col-span-1 px-4 py-2.5 sm:py-2 rounded-xl bg-[#15253b] hover:bg-[#0f1b2b] active:scale-[0.98] text-white font-medium text-xs shadow-2xs transition-all flex items-center justify-center gap-2"
                     >
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <line x1="19" y1="8" x2="19" y2="14" />
-                            <line x1="22" y1="11" x2="16" y2="11" />
+                        <svg class="w-3.5 h-3.5 text-[#25D366] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                         </svg>
-                        <span>Manage Guests</span>
+                        <span>Send WhatsApp Invites</span>
                     </Link>
                     <a
                         :href="previewUrl"
                         target="_blank"
-                        class="px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-stone-700 font-medium text-xs shadow-2xs hover:bg-stone-50 transition-colors flex items-center gap-1.5"
+                        class="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl bg-white border border-stone-200 text-stone-700 font-medium text-xs shadow-2xs hover:bg-stone-50 active:bg-stone-100 transition-colors flex items-center justify-center gap-1.5"
                     >
                         <span>Preview Card</span>
                         <svg class="w-3 h-3 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M7 17 17 7M7 7h10v10" />
                         </svg>
                     </a>
+                    <a
+                        :href="route('invitation.print')"
+                        target="_blank"
+                        class="px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl bg-white border border-[#E5DAC0] text-[#7A5B22] font-semibold text-xs shadow-2xs hover:bg-[#FAF7F0] active:bg-[#F3EBD8] transition-colors flex items-center justify-center gap-1.5"
+                    >
+                        <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="1.8">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        <span>Print Card</span>
+                    </a>
                 </div>
             </div>
         </template>
 
-        <div class="py-8">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-7">
+        <div class="py-5 sm:py-8">
+            <div class="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-8 space-y-4 sm:space-y-7">
+                <!-- Mobile Quick Action Alert -->
+                <div class="sm:hidden bg-[#15253b] text-white rounded-2xl p-4 shadow-lg ring-1 ring-[#c5a059]/40 flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-widest text-[#d8ab43] font-bold">Mobile Actions</p>
+                        <h4 class="font-serif font-bold text-base mt-0.5">Guest Invites &amp; RSVPs</h4>
+                        <p class="text-[11px] text-stone-300 mt-0.5">Send links via WhatsApp with 1 tap</p>
+                    </div>
+                    <Link
+                        :href="route('guests.index')"
+                        class="px-3.5 py-2.5 rounded-xl bg-[#25D366] active:scale-95 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs shrink-0 transition-transform"
+                    >
+                        <span>Open Guests</span>
+                        <span>&rarr;</span>
+                    </Link>
+                </div>
+
                 <!-- Executive Metrics Bar -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4">
                     <!-- Total Invited -->
-                    <div class="bg-white p-5 rounded-2xl border border-[#EDE8E1] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-white p-3.5 sm:p-5 rounded-2xl border border-[#EDE8E1] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-stone-500">Invitations</span>
-                            <div class="w-7 h-7 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600">
+                            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-stone-500">Invitations</span>
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-stone-100 flex items-center justify-center text-stone-600">
                                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="font-serif text-3xl font-bold text-stone-900 block leading-tight">{{ metrics.total_guests }}</span>
-                            <span class="text-[11px] text-stone-500 mt-1 block">Dedicated links created</span>
+                        <div class="mt-2 sm:mt-3">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 block leading-tight">{{ metrics.total_guests }}</span>
+                            <span class="text-[10px] sm:text-[11px] text-stone-500 mt-0.5 block truncate">Dedicated links</span>
                         </div>
                     </div>
 
                     <!-- Attending -->
-                    <div class="bg-white p-5 rounded-2xl border border-emerald-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-white p-3.5 sm:p-5 rounded-2xl border border-emerald-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-emerald-800">Attending</span>
-                            <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-emerald-800">Attending</span>
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
                                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                                     <circle cx="9" cy="7" r="4" />
@@ -137,51 +150,51 @@ const formatWeddingDate = (dateStr) => {
                                 </svg>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="font-serif text-3xl font-bold text-emerald-900 block leading-tight">{{ metrics.attending_count }}</span>
-                            <span class="text-[11px] text-emerald-700 mt-1 block">Confirmed guests</span>
+                        <div class="mt-2 sm:mt-3">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-emerald-900 block leading-tight">{{ metrics.attending_count }}</span>
+                            <span class="text-[10px] sm:text-[11px] text-emerald-700 mt-0.5 block truncate">Confirmed guests</span>
                         </div>
                     </div>
 
                     <!-- Pending Responses -->
-                    <div class="bg-white p-5 rounded-2xl border border-amber-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-white p-3.5 sm:p-5 rounded-2xl border border-amber-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-amber-800">Pending RSVP</span>
-                            <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+                            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-amber-800">Pending</span>
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
                                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10" />
                                     <polyline points="12 6 12 12 16 14" />
                                 </svg>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="font-serif text-3xl font-bold text-amber-900 block leading-tight">{{ metrics.pending_count }}</span>
-                            <span class="text-[11px] text-amber-700 mt-1 block">Awaiting confirmation</span>
+                        <div class="mt-2 sm:mt-3">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-amber-900 block leading-tight">{{ metrics.pending_count }}</span>
+                            <span class="text-[10px] sm:text-[11px] text-amber-700 mt-0.5 block truncate">Awaiting RSVP</span>
                         </div>
                     </div>
 
                     <!-- Declined -->
-                    <div class="bg-white p-5 rounded-2xl border border-[#EDE8E1] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-white p-3.5 sm:p-5 rounded-2xl border border-[#EDE8E1] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-stone-500">Declined</span>
-                            <div class="w-7 h-7 rounded-lg bg-stone-100 text-stone-600 flex items-center justify-center">
+                            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-stone-500">Declined</span>
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-stone-100 text-stone-600 flex items-center justify-center">
                                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <line x1="18" y1="6" x2="6" y2="18" />
                                     <line x1="6" y1="6" x2="18" y2="18" />
                                 </svg>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="font-serif text-3xl font-bold text-stone-800 block leading-tight">{{ metrics.declined_count }}</span>
-                            <span class="text-[11px] text-stone-500 mt-1 block">Cannot attend</span>
+                        <div class="mt-2 sm:mt-3">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-stone-800 block leading-tight">{{ metrics.declined_count }}</span>
+                            <span class="text-[10px] sm:text-[11px] text-stone-500 mt-0.5 block truncate">Cannot attend</span>
                         </div>
                     </div>
 
                     <!-- Cathedral Doors Opened -->
-                    <div class="bg-white p-5 rounded-2xl border border-[#E5DAC0] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between col-span-2 sm:col-span-1">
+                    <div class="bg-white p-3.5 sm:p-5 rounded-2xl border border-[#E5DAC0] shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col justify-between col-span-2 sm:col-span-1">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-[#7A5B22]">Doors Opened</span>
-                            <div class="w-7 h-7 rounded-lg bg-[#FAF7F0] text-[#7A5B22] flex items-center justify-center">
+                            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-[#7A5B22]">Doors Opened</span>
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-[#FAF7F0] text-[#7A5B22] flex items-center justify-center">
                                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M3 21h18" />
                                     <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
@@ -189,9 +202,9 @@ const formatWeddingDate = (dateStr) => {
                                 </svg>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="font-serif text-3xl font-bold text-[#7A5B22] block leading-tight">{{ metrics.opened_count }}</span>
-                            <span class="text-[11px] text-[#8c6d37] mt-1 block">Cathedral doors opened</span>
+                        <div class="mt-2 sm:mt-3">
+                            <span class="font-serif text-2xl sm:text-3xl font-bold text-[#7A5B22] block leading-tight">{{ metrics.opened_count }}</span>
+                            <span class="text-[10px] sm:text-[11px] text-[#8c6d37] mt-0.5 block truncate">Cathedral doors opened</span>
                         </div>
                     </div>
                 </div>

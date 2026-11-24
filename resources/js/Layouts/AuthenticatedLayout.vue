@@ -258,9 +258,79 @@ const showingNavigationDropdown = ref(false);
             </div>
 
             <!-- Page Content -->
-            <main>
+            <main class="pb-24 sm:pb-8">
                 <slot />
             </main>
+
+            <!-- Mobile Bottom App Dock -->
+            <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#EDE8E1] px-2 py-1 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] pb-[max(0.4rem,env(safe-area-inset-bottom))]">
+                <div class="grid grid-cols-4 items-center gap-1 max-w-md mx-auto">
+                    <!-- Dashboard -->
+                    <Link
+                        :href="route('dashboard')"
+                        class="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all"
+                        :class="route().current('dashboard') ? 'text-[#15253b] font-bold' : 'text-stone-400 hover:text-stone-700'"
+                    >
+                        <div class="relative">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span v-if="route().current('dashboard')" class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#c5a059]"></span>
+                        </div>
+                        <span class="text-[10px] mt-1 tracking-tight">Overview</span>
+                    </Link>
+
+                    <!-- Guests -->
+                    <Link
+                        :href="route('guests.index')"
+                        class="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all"
+                        :class="route().current('guests.*') ? 'text-[#15253b] font-bold' : 'text-stone-400 hover:text-stone-700'"
+                    >
+                        <div class="relative">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span v-if="route().current('guests.*')" class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#c5a059]"></span>
+                        </div>
+                        <span class="text-[10px] mt-1 tracking-tight">Guests &amp; Invites</span>
+                    </Link>
+
+                    <!-- Settings -->
+                    <Link
+                        :href="route('settings.index')"
+                        class="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all"
+                        :class="route().current('settings.*') ? 'text-[#15253b] font-bold' : 'text-stone-400 hover:text-stone-700'"
+                    >
+                        <div class="relative">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span v-if="route().current('settings.*')" class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#c5a059]"></span>
+                        </div>
+                        <span class="text-[10px] mt-1 tracking-tight">Settings</span>
+                    </Link>
+
+                    <!-- Preview -->
+                    <a
+                        :href="route('invitation.preview')"
+                        target="_blank"
+                        class="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-stone-400 hover:text-stone-700 transition-all"
+                    >
+                        <svg class="w-5 h-5 text-[#c5a059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <span class="text-[10px] mt-1 text-[#8c6d37] font-medium tracking-tight">Preview</span>
+                    </a>
+                </div>
+            </nav>
         </div>
     </div>
 </template>
